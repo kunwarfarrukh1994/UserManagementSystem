@@ -1,0 +1,15 @@
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.deps.json
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.runtimeconfig.json
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.runtimeconfig.dev.json
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.dll
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.pdb
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\BussinessModels.dll
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\BussinessModels.pdb
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.csprojAssemblyReference.cache
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.AssemblyInfoInputs.cache
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.AssemblyInfo.cs
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.csproj.CoreCompileInputs.cache
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.csproj.CopyComplete
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.dll
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.pdb
+D:\SampleWebApi\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.genruntimeconfig.cache

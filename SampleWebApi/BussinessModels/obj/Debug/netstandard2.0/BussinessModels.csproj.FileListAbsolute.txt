@@ -1,0 +1,8 @@
+D:\SampleWebApi\SampleWebAPI\BussinessModels\bin\Debug\netstandard2.0\BussinessModels.deps.json
+D:\SampleWebApi\SampleWebAPI\BussinessModels\bin\Debug\netstandard2.0\BussinessModels.dll
+D:\SampleWebApi\SampleWebAPI\BussinessModels\bin\Debug\netstandard2.0\BussinessModels.pdb
+D:\SampleWebApi\SampleWebAPI\BussinessModels\obj\Debug\netstandard2.0\BussinessModels.AssemblyInfoInputs.cache
+D:\SampleWebApi\SampleWebAPI\BussinessModels\obj\Debug\netstandard2.0\BussinessModels.AssemblyInfo.cs
+D:\SampleWebApi\SampleWebAPI\BussinessModels\obj\Debug\netstandard2.0\BussinessModels.csproj.CoreCompileInputs.cache
+D:\SampleWebApi\SampleWebAPI\BussinessModels\obj\Debug\netstandard2.0\BussinessModels.dll
+D:\SampleWebApi\SampleWebAPI\BussinessModels\obj\Debug\netstandard2.0\BussinessModels.pdb

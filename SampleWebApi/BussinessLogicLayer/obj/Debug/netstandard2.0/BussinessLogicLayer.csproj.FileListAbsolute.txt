@@ -1,0 +1,4 @@
+D:\SampleWebApi\SampleWebAPI\BussinessLogicLayer\obj\Debug\netstandard2.0\BussinessLogicLayer.csprojAssemblyReference.cache
+D:\SampleWebApi\SampleWebAPI\BussinessLogicLayer\obj\Debug\netstandard2.0\BussinessLogicLayer.AssemblyInfoInputs.cache
+D:\SampleWebApi\SampleWebAPI\BussinessLogicLayer\obj\Debug\netstandard2.0\BussinessLogicLayer.AssemblyInfo.cs
+D:\SampleWebApi\SampleWebAPI\BussinessLogicLayer\obj\Debug\netstandard2.0\BussinessLogicLayer.csproj.CoreCompileInputs.cache

@@ -1,0 +1,12 @@
+D:\SampleWebApi\SampleWebAPI\DataAccessLayer\bin\Debug\netstandard2.0\DataAccessLayer.deps.json
+D:\SampleWebApi\SampleWebAPI\DataAccessLayer\bin\Debug\netstandard2.0\DataAccessLayer.dll
+D:\SampleWebApi\SampleWebAPI\DataAccessLayer\bin\Debug\netstandard2.0\DataAccessLayer.pdb
+D:\SampleWebApi\SampleWebAPI\DataAccessLayer\bin\Debug\netstandard2.0\BussinessModels.dll
+D:\SampleWebApi\SampleWebAPI\DataAccessLayer\bin\Debug\netstandard2.0\BussinessModels.pdb
+D:\SampleWebApi\SampleWebAPI\DataAccessLayer\obj\Debug\netstandard2.0\DataAccessLayer.csprojAssemblyReference.cache
+D:\SampleWebApi\SampleWebAPI\DataAccessLayer\obj\Debug\netstandard2.0\DataAccessLayer.AssemblyInfoInputs.cache
+D:\SampleWebApi\SampleWebAPI\DataAccessLayer\obj\Debug\netstandard2.0\DataAccessLayer.AssemblyInfo.cs
+D:\SampleWebApi\SampleWebAPI\DataAccessLayer\obj\Debug\netstandard2.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+D:\SampleWebApi\SampleWebAPI\DataAccessLayer\obj\Debug\netstandard2.0\DataAccessLayer.csproj.CopyComplete
+D:\SampleWebApi\SampleWebAPI\DataAccessLayer\obj\Debug\netstandard2.0\DataAccessLayer.dll
+D:\SampleWebApi\SampleWebAPI\DataAccessLayer\obj\Debug\netstandard2.0\DataAccessLayer.pdb

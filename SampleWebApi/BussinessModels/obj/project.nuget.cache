@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "W2vIMLPOrqYMWgCKYqRuSVJLD+bQLwNP9L3pKxlvx9cJmMp3t1CQ2Wb+oTN/a6RVav3FrvDMGosf1mVduk2/0w==",
+  "success": true,
+  "projectFilePath": "D:\\SampleWebApi\\SampleWebAPI\\BussinessModels\\BussinessModels.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Farrukh khan\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

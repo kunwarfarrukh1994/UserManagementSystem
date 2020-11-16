@@ -1,0 +1,8 @@
+D:\SampleWebApi\SampleWebAPI\UserManagement\bin\Debug\netstandard2.0\UserManagement.deps.json
+D:\SampleWebApi\SampleWebAPI\UserManagement\bin\Debug\netstandard2.0\UserManagement.dll
+D:\SampleWebApi\SampleWebAPI\UserManagement\bin\Debug\netstandard2.0\UserManagement.pdb
+D:\SampleWebApi\SampleWebAPI\UserManagement\obj\Debug\netstandard2.0\UserManagement.AssemblyInfoInputs.cache
+D:\SampleWebApi\SampleWebAPI\UserManagement\obj\Debug\netstandard2.0\UserManagement.AssemblyInfo.cs
+D:\SampleWebApi\SampleWebAPI\UserManagement\obj\Debug\netstandard2.0\UserManagement.csproj.CoreCompileInputs.cache
+D:\SampleWebApi\SampleWebAPI\UserManagement\obj\Debug\netstandard2.0\UserManagement.dll
+D:\SampleWebApi\SampleWebAPI\UserManagement\obj\Debug\netstandard2.0\UserManagement.pdb
