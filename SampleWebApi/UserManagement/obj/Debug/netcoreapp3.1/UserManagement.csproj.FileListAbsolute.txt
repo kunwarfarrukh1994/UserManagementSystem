@@ -1,8 +1,0 @@
-D:\SampleWebApi\SampleWebApi\UserManagement\bin\Debug\netcoreapp3.1\UserManagement.deps.json
-D:\SampleWebApi\SampleWebApi\UserManagement\bin\Debug\netcoreapp3.1\UserManagement.dll
-D:\SampleWebApi\SampleWebApi\UserManagement\bin\Debug\netcoreapp3.1\UserManagement.pdb
-D:\SampleWebApi\SampleWebApi\UserManagement\obj\Debug\netcoreapp3.1\UserManagement.AssemblyInfoInputs.cache
-D:\SampleWebApi\SampleWebApi\UserManagement\obj\Debug\netcoreapp3.1\UserManagement.AssemblyInfo.cs
-D:\SampleWebApi\SampleWebApi\UserManagement\obj\Debug\netcoreapp3.1\UserManagement.csproj.CoreCompileInputs.cache
-D:\SampleWebApi\SampleWebApi\UserManagement\obj\Debug\netcoreapp3.1\UserManagement.dll
-D:\SampleWebApi\SampleWebApi\UserManagement\obj\Debug\netcoreapp3.1\UserManagement.pdb

@@ -5,10 +5,13 @@ using DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UserManagement.DBContext;
+using UserManagement.UserModels;
 
 namespace SampleWebApi
 {
@@ -41,8 +44,11 @@ namespace SampleWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddIdentity()
-
+            services.AddDbContext<UsersDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<UsersDBContext>()  //   bridge to connect identity with our database
+                .AddDefaultTokenProviders();  
+ 
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
 

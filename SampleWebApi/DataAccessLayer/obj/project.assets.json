@@ -7784,11 +7784,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SampleWebApi\\SampleWebAPI\\DataAccessLayer\\DataAccessLayer.csproj",
+      "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj",
       "projectName": "DataAccessLayer",
-      "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\DataAccessLayer\\DataAccessLayer.csproj",
+      "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj",
       "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
-      "outputPath": "D:\\SampleWebApi\\SampleWebAPI\\DataAccessLayer\\obj\\",
+      "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -7803,9 +7803,10 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\SampleWebApi\\SampleWebAPI\\BussinessModels\\BussinessModels.csproj": {
-              "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\BussinessModels\\BussinessModels.csproj"
+            "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {
+              "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj"
             }
           }
         }
@@ -7818,6 +7819,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.AspNet.WebApi.Core": {
             "target": "Package",
@@ -7863,7 +7865,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   },

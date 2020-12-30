@@ -6,3 +6,12 @@ D:\SampleWebApi\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessMo
 D:\SampleWebApi\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.csproj.CoreCompileInputs.cache
 D:\SampleWebApi\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.dll
 D:\SampleWebApi\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.pdb
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\bin\Debug\netcoreapp3.1\BussinessModels.deps.json
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\bin\Debug\netcoreapp3.1\BussinessModels.dll
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\bin\Debug\netcoreapp3.1\BussinessModels.pdb
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.AssemblyInfoInputs.cache
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.AssemblyInfo.cs
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.csproj.CoreCompileInputs.cache
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.dll
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.pdb
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.csprojAssemblyReference.cache

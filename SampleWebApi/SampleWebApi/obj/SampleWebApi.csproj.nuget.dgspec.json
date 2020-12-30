@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SampleWebApi\\SampleWebAPI\\SampleWebApi\\SampleWebApi.csproj": {}
+    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\SampleWebApi\\SampleWebApi.csproj": {}
   },
   "projects": {
-    "D:\\SampleWebApi\\SampleWebAPI\\BussinessLogicLayer\\BussinessLogicLayer.csproj": {
+    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SampleWebApi\\SampleWebAPI\\BussinessLogicLayer\\BussinessLogicLayer.csproj",
+        "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj",
         "projectName": "BussinessLogicLayer",
-        "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\BussinessLogicLayer\\BussinessLogicLayer.csproj",
+        "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj",
         "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
-        "outputPath": "D:\\SampleWebApi\\SampleWebAPI\\BussinessLogicLayer\\obj\\",
+        "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -26,9 +26,10 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\SampleWebApi\\SampleWebAPI\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\DataAccessLayer\\DataAccessLayer.csproj"
+              "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj"
               }
             }
           }
@@ -41,6 +42,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",
@@ -56,18 +58,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SampleWebApi\\SampleWebAPI\\BussinessModels\\BussinessModels.csproj": {
+    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SampleWebApi\\SampleWebAPI\\BussinessModels\\BussinessModels.csproj",
+        "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
         "projectName": "BussinessModels",
-        "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\BussinessModels\\BussinessModels.csproj",
+        "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
         "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
-        "outputPath": "D:\\SampleWebApi\\SampleWebAPI\\BussinessModels\\obj\\",
+        "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -82,6 +84,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -93,6 +96,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "System.ComponentModel.Annotations": {
               "target": "Package",
@@ -114,18 +118,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SampleWebApi\\SampleWebAPI\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SampleWebApi\\SampleWebAPI\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj",
         "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
-        "outputPath": "D:\\SampleWebApi\\SampleWebAPI\\DataAccessLayer\\obj\\",
+        "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -140,9 +144,10 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\SampleWebApi\\SampleWebAPI\\BussinessModels\\BussinessModels.csproj": {
-                "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\BussinessModels\\BussinessModels.csproj"
+              "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {
+                "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj"
               }
             }
           }
@@ -155,6 +160,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNet.WebApi.Core": {
               "target": "Package",
@@ -200,18 +206,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SampleWebApi\\SampleWebAPI\\SampleWebApi\\SampleWebApi.csproj": {
+    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\SampleWebApi\\SampleWebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SampleWebApi\\SampleWebAPI\\SampleWebApi\\SampleWebApi.csproj",
+        "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\SampleWebApi\\SampleWebApi.csproj",
         "projectName": "SampleWebApi",
-        "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\SampleWebApi\\SampleWebApi.csproj",
+        "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\SampleWebApi\\SampleWebApi.csproj",
         "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
-        "outputPath": "D:\\SampleWebApi\\SampleWebAPI\\SampleWebApi\\obj\\",
+        "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\SampleWebApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -226,18 +232,19 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\SampleWebApi\\SampleWebAPI\\BussinessLogicLayer\\BussinessLogicLayer.csproj": {
-                "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\BussinessLogicLayer\\BussinessLogicLayer.csproj"
+              "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj": {
+                "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj"
               },
-              "D:\\SampleWebApi\\SampleWebAPI\\BussinessModels\\BussinessModels.csproj": {
-                "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\BussinessModels\\BussinessModels.csproj"
+              "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {
+                "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj"
               },
-              "D:\\SampleWebApi\\SampleWebAPI\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\DataAccessLayer\\DataAccessLayer.csproj"
+              "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj"
               },
-              "D:\\SampleWebApi\\SampleWebAPI\\UserManagement\\UserManagement.csproj": {
-                "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\UserManagement\\UserManagement.csproj"
+              "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj": {
+                "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj"
               }
             }
           }
@@ -250,6 +257,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -280,32 +288,33 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SampleWebApi\\SampleWebAPI\\UserManagement\\UserManagement.csproj": {
+    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SampleWebApi\\SampleWebAPI\\UserManagement\\UserManagement.csproj",
+        "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj",
         "projectName": "UserManagement",
-        "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\UserManagement\\UserManagement.csproj",
+        "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj",
         "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
-        "outputPath": "D:\\SampleWebApi\\SampleWebAPI\\UserManagement\\obj\\",
+        "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "netstandard2.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
             "projectReferences": {}
           }
         },
@@ -316,7 +325,18 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Microsoft.Extensions.Identity.Core": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -328,11 +348,11 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.NETCore.App": {
+            "NETStandard.Library": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
