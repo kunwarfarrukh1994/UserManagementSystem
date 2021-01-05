@@ -110,19 +110,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Farrukh khan\\.nuget\\packages\\": {}
+    "C:\\Users\\Farrukh Khan\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
+      "projectUniqueName": "D:\\GitProjects\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
       "projectName": "BussinessModels",
-      "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
-      "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
-      "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\obj\\",
+      "projectPath": "D:\\GitProjects\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
+      "packagesPath": "C:\\Users\\Farrukh Khan\\.nuget\\packages\\",
+      "outputPath": "D:\\GitProjects\\UserManagementSystem\\SampleWebApi\\BussinessModels\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Farrukh Khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -168,7 +172,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

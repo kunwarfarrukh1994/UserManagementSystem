@@ -7,3 +7,12 @@ D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netsta
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netstandard2.1\UserManagement.csproj.CoreCompileInputs.cache
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netstandard2.1\UserManagement.dll
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netstandard2.1\UserManagement.pdb
+D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\bin\Debug\netstandard2.1\UserManagement.deps.json
+D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\bin\Debug\netstandard2.1\UserManagement.dll
+D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\bin\Debug\netstandard2.1\UserManagement.pdb
+D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netstandard2.1\UserManagement.AssemblyInfoInputs.cache
+D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netstandard2.1\UserManagement.AssemblyInfo.cs
+D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netstandard2.1\UserManagement.csproj.CoreCompileInputs.cache
+D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netstandard2.1\UserManagement.dll
+D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netstandard2.1\UserManagement.pdb
+D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netstandard2.1\UserManagement.csprojAssemblyReference.cache

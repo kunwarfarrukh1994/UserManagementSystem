@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj": {}
+    "D:\\GitProjects\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj": {}
   },
   "projects": {
-    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj": {
+    "D:\\GitProjects\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj",
+        "projectUniqueName": "D:\\GitProjects\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj",
         "projectName": "UserManagement",
-        "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj",
-        "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
-        "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\obj\\",
+        "projectPath": "D:\\GitProjects\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj",
+        "packagesPath": "C:\\Users\\Farrukh Khan\\.nuget\\packages\\",
+        "outputPath": "D:\\GitProjects\\UserManagementSystem\\SampleWebApi\\UserManagement\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Farrukh Khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -64,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UserManagement.DBContext;
 using UserManagement.UserModels;
+using NSwag;
+using Swashbuckle.Swagger;
 
 namespace SampleWebApi
 {
@@ -31,11 +33,21 @@ namespace SampleWebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                // Enable middleware to serve generated Swagger as a JSON endpoint.
+                app.UseOpenApi();
+                app.UseSwaggerUI(c =>
+                {
+                    c.DocumentTitle = "User Management System-API";
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                    c.RoutePrefix = string.Empty;
+                });
             }
-
             app.UseFileServer();
-           app.UseMvc();
-          
+            app.UseMvc();
+
+         
+
+
         }
 
 
@@ -47,15 +59,17 @@ namespace SampleWebApi
             services.AddDbContext<UsersDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<UsersDBContext>()  //   bridge to connect identity with our database
-                .AddDefaultTokenProviders();  
- 
+                .AddDefaultTokenProviders();
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
+            services.AddSwaggerDocument();
 
 
-        
+
+
+
         }
 
-       
+
     }
 }

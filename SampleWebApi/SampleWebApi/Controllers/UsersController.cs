@@ -11,6 +11,7 @@ namespace SampleWebApi.Controllers
 {
     [Route("api/users")]
     [ApiController]
+
     public class UsersController : ControllerBase
     {
 
@@ -22,21 +23,25 @@ namespace SampleWebApi.Controllers
             this._userManger = userManager;
             this._signInManger = signinManager;
         }
+        [HttpPost("login")]
         [Route("login")]
-        [HttpPost]
+
+        //  [HttpPost]
         public IActionResult Login([FromBody]dynamic obj)
         {
-            return Ok();
+            return Ok("");
         }
 
+        [HttpPost("register")]
         [Route("register")]
-        [HttpPost]
-        
+
+        // [HttpPost]
+
         public IActionResult Register(ApplicationUser user)
         {
 
             this._userManger.CreateAsync(user);
-            return Ok(); 
+            return Ok(""); 
         }
 
     }
