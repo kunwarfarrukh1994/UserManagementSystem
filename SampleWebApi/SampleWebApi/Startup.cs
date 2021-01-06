@@ -14,6 +14,8 @@ using UserManagement.DBContext;
 using UserManagement.UserModels;
 using NSwag;
 using Swashbuckle.Swagger;
+using SampleWebApi.ActionFilters;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SampleWebApi
 {
@@ -42,6 +44,7 @@ namespace SampleWebApi
                     c.RoutePrefix = string.Empty;
                 });
             }
+            app.UseCustomExceptionMiddleware();
             app.UseFileServer();
             app.UseMvc();
 
@@ -60,7 +63,15 @@ namespace SampleWebApi
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<UsersDBContext>()  //   bridge to connect identity with our database
                 .AddDefaultTokenProviders();
-            services.AddMvc(option => option.EnableEndpointRouting = false);
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+            services.AddMvc(option => {
+                option.EnableEndpointRouting = false;
+                option. Filters.Add(new validationFilter());
+            });
             services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
             services.AddSwaggerDocument();
 
