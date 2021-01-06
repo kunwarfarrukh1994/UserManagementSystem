@@ -16,6 +16,7 @@ using NSwag;
 using Swashbuckle.Swagger;
 using SampleWebApi.ActionFilters;
 using Microsoft.AspNetCore.Mvc;
+using SampleWebApi.CustumExceptionMiddelware;
 
 namespace SampleWebApi
 {
@@ -63,15 +64,35 @@ namespace SampleWebApi
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<UsersDBContext>()  //   bridge to connect identity with our database
                 .AddDefaultTokenProviders();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequiredLength = 4;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
 
+
+
+                options.ClaimsIdentity.EmailClaimType.EndsWith("gmail.com");
+
+
+
+
+            });
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
+            
             services.AddMvc(option => {
                 option.EnableEndpointRouting = false;
-                option. Filters.Add(new validationFilter());
+                option. Filters.Add(new ValidationModelFilter());
             });
+           
             services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
             services.AddSwaggerDocument();
 

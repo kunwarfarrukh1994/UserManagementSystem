@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SampleWebApi.ActionFilters;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UserManagement.UserModels;
 
 namespace SampleWebApi.Controllers
@@ -39,20 +35,16 @@ namespace SampleWebApi.Controllers
 
         // [HttpPost]
 
-        [validationFilter]
         public IActionResult Register(ApplicationUser user)
         {
                 var result = this._userManger.CreateAsync(user);
                 if (result.Result.Succeeded)
                 {
-
                     return Ok("");
                 }
                 else
                 {
-                // throw new Exception(result.Result.Errors.Select(op=>op.Description).First<string>());
-
-                var err = new HttpResponseException();
+                var err = new HttpResponseExceptionModel();
                 err.ErrorMessages.Add(result.Result.Errors.Select(op => op.Description).First<string>());
                    return BadRequest(JsonConvert.SerializeObject(err));
                 }

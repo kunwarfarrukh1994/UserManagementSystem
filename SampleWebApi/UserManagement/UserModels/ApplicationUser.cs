@@ -7,7 +7,7 @@ namespace UserManagement.UserModels
 {
     public class ApplicationUser:IdentityUser
     {
-        [Required(ErrorMessage = "Email address is required")]
+        [Required(ErrorMessage = "Address is Required")]
         public string Address { get; set; }
 
         public ApplicationUser() 
