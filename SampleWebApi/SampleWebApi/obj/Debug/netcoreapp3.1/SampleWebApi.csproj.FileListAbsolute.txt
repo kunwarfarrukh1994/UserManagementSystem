@@ -175,3 +175,7 @@ D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\netcorea
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\netcoreapp3.1\SampleWebApi.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\netcoreapp3.1\SampleWebApi.pdb
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\netcoreapp3.1\SampleWebApi.genruntimeconfig.cache
+D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\netcoreapp3.1\MailKit.dll
+D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\netcoreapp3.1\MimeKit.dll
+D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\netcoreapp3.1\NETCore.MailKit.dll
+D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll

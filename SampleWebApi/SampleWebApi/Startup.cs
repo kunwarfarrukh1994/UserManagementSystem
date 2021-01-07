@@ -17,6 +17,8 @@ using Swashbuckle.Swagger;
 using SampleWebApi.ActionFilters;
 using Microsoft.AspNetCore.Mvc;
 using SampleWebApi.CustumExceptionMiddelware;
+using NETCore.MailKit.Extensions;
+using NETCore.MailKit.Infrastructure.Internal;
 
 namespace SampleWebApi
 {
@@ -66,7 +68,9 @@ namespace SampleWebApi
                 .AddDefaultTokenProviders();
             services.Configure<IdentityOptions>(options =>
             {
+
                 options.User.RequireUniqueEmail = true;
+                // passsword
                 options.Password.RequiredLength = 4;
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
@@ -74,7 +78,9 @@ namespace SampleWebApi
                 options.Password.RequireUppercase = true;
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 1;
+                // email varification 
 
+                options.SignIn.RequireConfirmedEmail = true;
 
 
                 options.ClaimsIdentity.EmailClaimType.EndsWith("gmail.com");
@@ -83,6 +89,10 @@ namespace SampleWebApi
 
 
             });
+
+            //mailkit
+
+            services.AddMailKit(config=>  config.UseMailKit(this.Configuration.GetSection("Email").Get<MailKitOptions>()));
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
