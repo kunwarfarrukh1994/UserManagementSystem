@@ -39,6 +39,9 @@ namespace SampleWebApi
             {
                 app.UseDeveloperExceptionPage();
                 // Enable middleware to serve generated Swagger as a JSON endpoint.
+
+
+                // swagger
                 app.UseOpenApi();
                 app.UseSwaggerUI(c =>
                 {
@@ -47,7 +50,11 @@ namespace SampleWebApi
                     c.RoutePrefix = string.Empty;
                 });
             }
+
+            // custum exception handler for globalizing error handling and expections 
             app.UseCustomExceptionMiddleware();
+
+            // file server and mvc 
             app.UseFileServer();
             app.UseMvc();
 
@@ -61,11 +68,12 @@ namespace SampleWebApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // database context
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<UsersDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<UsersDBContext>()  //   bridge to connect identity with our database
-                .AddDefaultTokenProviders();
+
+            //identity
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<UsersDBContext>().AddDefaultTokenProviders();  //   bridge to connect identity with our database.AddDefaultTokenProviders();
             services.Configure<IdentityOptions>(options =>
             {
 
@@ -97,13 +105,19 @@ namespace SampleWebApi
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
-            
-            services.AddMvc(option => {
+
+
+            // mvc 
+            services.AddMvc(option =>
+            {
                 option.EnableEndpointRouting = false;
-                option. Filters.Add(new ValidationModelFilter());
+                option.Filters.Add(new ValidationModelFilter());
             });
            
+            // dependency injection
             services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
+
+            //swagger 
             services.AddSwaggerDocument();
 
 

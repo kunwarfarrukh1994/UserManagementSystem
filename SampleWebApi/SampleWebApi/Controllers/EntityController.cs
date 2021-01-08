@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SampleWebApi.Controllers
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
+    //[ApiExplorerSettings(IgnoreApi = true)]
     public class EntityController<T>: ControllerBase where T :class
     {
         protected readonly IGenericRepository<T> repository;

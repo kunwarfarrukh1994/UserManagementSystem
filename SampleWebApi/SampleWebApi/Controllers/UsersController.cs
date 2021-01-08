@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace SampleWebApi.Controllers
         public UsersController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signinManager,
-            RoleManager<IdentityRole> roleManager, 
+            RoleManager<IdentityRole> roleManager,
             IConfiguration configuration,
             IEmailService emailservice
             )
@@ -44,53 +45,64 @@ namespace SampleWebApi.Controllers
             this._emailservice = emailservice;
         }
         [HttpPost("login")]
-        [Route("login")]
 
         //  [HttpPost]
         public async Task<IActionResult> Login([FromBody] UserSignInModel usermodel)
         {
 
-            var user= await this._userManager.FindByNameAsync(usermodel.UserName);
-
-            if (user != null && await _userManager.CheckPasswordAsync(user, usermodel.Password))
+            var user = await this._userManager.FindByNameAsync(usermodel.UserName);
+            if (user != null)
             {
-                var userRoles = await _userManager.GetRolesAsync(user);
+                if (await _userManager.CheckPasswordAsync(user, usermodel.Password))
+                {
+                    var userRoles = await _userManager.GetRolesAsync(user);
 
-                var authClaims = new List<Claim>
+                    var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 
-                foreach (var userRole in userRoles)
-                {
-                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                    foreach (var userRole in userRoles)
+                    {
+                        authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                    }
+
+                    var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+
+                    var token = new JwtSecurityToken(
+                        issuer: _configuration["JWT:ValidIssuer"],
+                        audience: _configuration["JWT:ValidAudience"],
+                        expires: DateTime.Now.AddHours(3),
+                        claims: authClaims,
+                        signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                        );
+
+                    return Ok(new
+                    {
+                        token = new JwtSecurityTokenHandler().WriteToken(token),
+                        expiration = token.ValidTo,
+                        User = user,
+                        UserRoles = userRoles,
+                    });
                 }
-
-                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-
-                var token = new JwtSecurityToken(
-                    issuer: _configuration["JWT:ValidIssuer"],
-                    audience: _configuration["JWT:ValidAudience"],
-                    expires: DateTime.Now.AddHours(3),
-                    claims: authClaims,
-                    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                    );
-
-                return Ok(new
+                else
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo,
-                    User=user,
-                    UserRoles= userRoles,
-                });
-            }
+                    var err = new HttpResponseExceptionModel();
+                    err.ErrorMessages.Add("Incorrect Password");
+                    return BadRequest(JsonConvert.SerializeObject(err));
 
-            return BadRequest("try again ");
+                }
+            }
+            else
+            {
+                var err = new HttpResponseExceptionModel();
+                err.ErrorMessages.Add("UserName or Email Not exists.. Try Registering Again...");
+                return BadRequest(JsonConvert.SerializeObject(err));
+            }
         }
 
         [HttpPost("register")]
-        [Route("register")]
 
         // [HttpPost]
 
@@ -98,37 +110,68 @@ namespace SampleWebApi.Controllers
         {
             //var TempPassword = RandomPasswordGenerator.GenerateRandomPassword();
             var TempPassword = "P@ssword123";
-                var result = await this._userManager.CreateAsync(user, TempPassword); // no password 
-             // var result = await this._userManger.CreateAsync(user,"Password"); // With password 
+            var result = await this._userManager.CreateAsync(user, TempPassword); // no password 
+                                                                                  // var result = await this._userManger.CreateAsync(user,"Password"); // With password 
 
             if (result.Succeeded)
-                {
+            {
 
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var confirmationLink =Url.Action("VerifyEmail", "api/users", new { token=token, email = user.Email }, Request.Scheme);
+                var confirmationLink = Url.Action("VerifyEmail", "Users", new { token = token, userid = user.Id }, Request.Scheme);
 
 
                 // var message = new string[] { user.Email }, "Confirmation email link", confirmationLink, null;
+                var message = confirmationLink + "\n\n" + "Password :" + TempPassword;
+                //await this._emailservice.SendAsync(user.Email, "Confirmation-Email", message, true);
 
-                //var message = confirmationLink + "\n\n" + "Password :" + TempPassword;
-                //await this._emailservice.SendAsync(user.Email,"Confirmation-Email", message, true);
-                await _userManager.AddToRoleAsync(user,UserRoles.User);
-                return Ok("Email Sent Successfully ..Check Your Email to Verify ...");
-                }
-                else
+                MailMessage mailMessage = new MailMessage("farrukhraj20@gmail.com", "farrukhraj20@gmail.com");
+                mailMessage.Subject = "Registration Link";
+                mailMessage.Body = message;
+
+
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+
+                client.Credentials = new System.Net.NetworkCredential()
                 {
+                    UserName = "farrukhraj20@gmail.com",
+                    Password = "Farrukh@200"
+                };
+                client.EnableSsl = true;
+                await client.SendMailAsync(mailMessage);
+                await _userManager.AddToRoleAsync(user, UserRoles.User);
+                return Ok("Email Sent Successfully ..Check Your Email to Verify ...");
+            }
+            else
+            {
                 var err = new HttpResponseExceptionModel();
                 err.ErrorMessages.Add(result.Errors.Select(op => op.Description).First<string>());
-                   return BadRequest(JsonConvert.SerializeObject(err));
-                }
-         }
+                return BadRequest(JsonConvert.SerializeObject(err));
+            }
+        }
 
 
 
-        public async Task<IActionResult> VerifyEmail()
+        [HttpGet("VerifyEmail")]
+        public async Task<IActionResult> VerifyEmail([FromQuery] string userid, [FromQuery] string token)
         {
+            if (userid == null || token == null)
+            {
+                return BadRequest("Invalid Request");
+            }
+            var user = await this._userManager.FindByIdAsync(userid);
 
-            return Ok("");
+            if (user != null)
+            {
+                var result = await this._userManager.ConfirmEmailAsync(user,token);
+                if (result.Succeeded)
+                {
+                    return Ok("Emial Vrified Successfully login now ");
+                }
+            }
+            var err = new HttpResponseExceptionModel();
+            err.ErrorMessages.Add("User Email is invalid");
+            return BadRequest(JsonConvert.SerializeObject(err));
+           // return BadRequest("User Email is invalid");
         }
 
 

@@ -20,7 +20,6 @@ namespace SampleWebApi.Controllers
 
         }
         [HttpPost("Create")]
-        [Route("Create")]
         //[HttpPost]
         public async Task<IActionResult> CreateEmployee([FromBody] Employee emp)
         {
@@ -31,7 +30,6 @@ namespace SampleWebApi.Controllers
 
 
         [HttpGet("GetAll")]
-        [Route("GetAll")]
 
         // [HttpGet]
         public async Task<IActionResult> GetAllEmployee()
@@ -43,7 +41,6 @@ namespace SampleWebApi.Controllers
 
         }
         [HttpGet("GetByID/{id?}")]
-        [Route("GetByID/{id?}")]
 
         // [HttpGet]
 
@@ -55,7 +52,6 @@ namespace SampleWebApi.Controllers
         }
 
         [HttpPost("Update")]
-        [Route("Update")]
 
         // [HttpPost]
         public async Task<IActionResult> UpdateEmployee(Employee emp)
@@ -65,7 +61,6 @@ namespace SampleWebApi.Controllers
 
 
         [HttpDelete("Delete/{id?}")]
-        [Route("Delete/{id?}")]
 
         //[HttpDelete]
         public async Task<IActionResult> DeleteEmployee([FromQuery] Guid id)
