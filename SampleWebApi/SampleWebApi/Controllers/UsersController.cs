@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using NETCore.MailKit.Core;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -28,21 +27,18 @@ namespace SampleWebApi.Controllers
         private readonly SignInManager<ApplicationUser> _signInManger;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
-        private readonly IEmailService _emailservice;
 
         public UsersController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signinManager,
             RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration,
-            IEmailService emailservice
+            IConfiguration config
             )
         {
             this._userManager = userManager;
             this._signInManger = signinManager;
             this._roleManager = roleManager;
-            this._configuration = configuration;
-            this._emailservice = emailservice;
+            this._configuration = config;
         }
         [HttpPost("login")]
 

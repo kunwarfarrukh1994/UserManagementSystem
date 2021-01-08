@@ -15,4 +15,3 @@ D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netsta
 D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netstandard2.1\UserManagement.csproj.CoreCompileInputs.cache
 D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netstandard2.1\UserManagement.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netstandard2.1\UserManagement.pdb
-D:\GitProjects\UserManagementSystem\SampleWebApi\UserManagement\obj\Debug\netstandard2.1\UserManagement.csprojAssemblyReference.cache

@@ -53,8 +53,9 @@ namespace SampleWebApi.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
-
+                //  throw ex;
+                return BadRequest(ex.Message);
+                   
 
             }
         }
@@ -75,7 +76,7 @@ namespace SampleWebApi.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return BadRequest(ex.Message);
 
 
             }
@@ -105,7 +106,7 @@ namespace SampleWebApi.Controllers
 
         protected virtual async Task<IActionResult> DeleteEntity(Guid id)
         {
-            if (id == null || Guid.Empty.Equals(id))
+            if (Guid.Empty.Equals(id))
             {
                 ModelState.AddModelError("Delete", "ID is null");
                 return BadRequest(ModelState);
@@ -128,7 +129,7 @@ namespace SampleWebApi.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return BadRequest(ex.Message);
             }
 
         }

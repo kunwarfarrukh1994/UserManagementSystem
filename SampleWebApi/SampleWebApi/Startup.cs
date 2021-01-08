@@ -17,8 +17,6 @@ using Swashbuckle.Swagger;
 using SampleWebApi.ActionFilters;
 using Microsoft.AspNetCore.Mvc;
 using SampleWebApi.CustumExceptionMiddelware;
-using NETCore.MailKit.Extensions;
-using NETCore.MailKit.Infrastructure.Internal;
 
 namespace SampleWebApi
 {
@@ -98,9 +96,7 @@ namespace SampleWebApi
 
             });
 
-            //mailkit
-
-            services.AddMailKit(config=>  config.UseMailKit(this.Configuration.GetSection("Email").Get<MailKitOptions>()));
+           
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
