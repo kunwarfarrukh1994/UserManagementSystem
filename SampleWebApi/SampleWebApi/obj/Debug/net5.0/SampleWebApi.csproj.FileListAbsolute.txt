@@ -20,7 +20,9 @@ D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\M
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.Design.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.Design.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll

@@ -2,3 +2,6 @@
 
 # CS8618: Non-nullable field is uninitialized. Consider declaring as nullable.
 dotnet_diagnostic.CS8618.severity = none
+
+# CS0649: Field 'UsersController._userSevice' is never assigned to, and will always have its default value null
+dotnet_diagnostic.CS0649.severity = warning

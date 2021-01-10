@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UserManagement.UserModels;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace UserManagement.DBContext
 {
@@ -13,8 +15,15 @@ namespace UserManagement.DBContext
     public class UsersDBContext:IdentityDbContext<ApplicationUser>
     {
         public UsersDBContext(DbContextOptions<UsersDBContext> options):base(options)
-        { 
-                
+        {
+
+            this.ChangeTracker.LazyLoadingEnabled = false;
+          
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
+        {
+         
+            optionBuilder.ConfigureWarnings(warn => warn.Ignore(CoreEventId.InvalidIncludePathError));
         }
     }
 }

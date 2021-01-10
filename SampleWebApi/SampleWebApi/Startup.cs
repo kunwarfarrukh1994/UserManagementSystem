@@ -17,6 +17,8 @@ using Swashbuckle.Swagger;
 using SampleWebApi.ActionFilters;
 using Microsoft.AspNetCore.Mvc;
 using SampleWebApi.CustumExceptionMiddelware;
+using UserManagement.Interfaces;
+using UserManagement.Services;
 
 namespace SampleWebApi
 {
@@ -112,6 +114,7 @@ namespace SampleWebApi
            
             // dependency injection
             services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
+            services.AddSingleton<IUserService, UserService>();
 
             //swagger 
             services.AddSwaggerDocument();
