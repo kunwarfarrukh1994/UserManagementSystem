@@ -67,7 +67,7 @@ namespace UserManagement.Services
                 await client.SendMailAsync(mailMessage);
 
 
-                await _userManager.AddToRoleAsync(user, UserRoles.User);
+                await _userManager.AddToRoleAsync(user,"dfsdfsdfs");
                 return "Email Sent Successfully ..Check Your Email to Verify ...";
             }
             else

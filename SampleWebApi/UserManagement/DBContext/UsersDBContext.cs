@@ -6,6 +6,7 @@ using System.Text;
 using UserManagement.UserModels;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using UserManagement.Models;
 
 namespace UserManagement.DBContext
 {
@@ -17,13 +18,15 @@ namespace UserManagement.DBContext
         public UsersDBContext(DbContextOptions<UsersDBContext> options):base(options)
         {
 
-            this.ChangeTracker.LazyLoadingEnabled = false;
+           // this.ChangeTracker.LazyLoadingEnabled = false;
           
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {
          
-            optionBuilder.ConfigureWarnings(warn => warn.Ignore(CoreEventId.InvalidIncludePathError));
+           
         }
+        public DbSet<LogApiError> LogApiErrors { get; set; }
     }
 }

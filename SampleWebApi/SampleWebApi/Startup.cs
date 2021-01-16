@@ -115,7 +115,7 @@ namespace SampleWebApi
             // dependency injection
             services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
             services.AddTransient<IUserService, UserService>();
-
+            services.AddTransient<IDbLogger, DbLogger>();
             //swagger 
             services.AddSwaggerDocument();
 
