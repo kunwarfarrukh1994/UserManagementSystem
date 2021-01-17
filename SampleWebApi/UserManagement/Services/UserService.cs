@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using UserManagement.Interfaces;
 using System.Net.Mail;
 using System.Linq;
+using System.Web;
 
 namespace UserManagement.Services
 {
@@ -45,7 +46,10 @@ namespace UserManagement.Services
             if (result.Succeeded)
             {
 
-                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+
+                var token = HttpUtility.UrlEncode(code);
                 //var confirmationLink = Url.Action("VerifyEmail", "Users", new { token = token, userid = user.Id }, Request.Scheme);
                 var confirmationLink = this._configuration["App:ClientRootAddress"] + "/VerifyEmail?token=" + token + "&userid=" + user.Id;
 
@@ -67,7 +71,7 @@ namespace UserManagement.Services
                 await client.SendMailAsync(mailMessage);
 
 
-                await _userManager.AddToRoleAsync(user,"dfsdfsdfs");
+                await _userManager.AddToRoleAsync(user,UserRoles.User);
                 return "Email Sent Successfully ..Check Your Email to Verify ...";
             }
             else
@@ -137,7 +141,11 @@ namespace UserManagement.Services
             if (user != null)
             {
                 var TempPassword = GenerateRandomPassword();
-                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+
+                var token = HttpUtility.UrlEncode(code);
+
                 //var confirmationLink = Url.Action("ResetPassword", "Users", new { token = token, email = user.Email }, Request.Scheme);
                 var confirmationLink =this._configuration["App:ClientRootAddress"]+ "/ResetPassword?token="+token+"&email="+user.Email;
 

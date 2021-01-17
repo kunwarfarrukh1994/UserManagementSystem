@@ -39,50 +39,58 @@ namespace SampleWebApi.CustumExceptionMiddelware
         }
         private  Task HandleExceptionAsync(HttpContext context, Exception exception, IDbLogger log )
         {
-            context.Response.ContentType = "application/json";
 
-            var result = new HttpResponseExceptionModel();
-            var LogErrors = new LogApiError();
-
-
-            result.Status = HttpStatusCode.InternalServerError;
-            result.ErrorMessages.Add(exception.Message);
-
-            //log error to db 
-            LogErrors.StatusCode = 500;
-            LogErrors.Message = result.ErrorMessages[0];
-            LogErrors.TimeUtc = DateTime.Now;
-            LogErrors.RequestUri = context.Request.Path;
-            LogErrors.QueryParams = context.Request.QueryString.ToString();
-            if(!context.Request.Path.Value.Contains("/register"))
+            if (context.Response.StatusCode != 401)
             {
-                LogErrors.UserName = context.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-               
+
+                context.Response.ContentType = "application/json";
+
+                var result = new HttpResponseExceptionModel();
+                var LogErrors = new LogApiError();
+
+
+                result.Status = HttpStatusCode.InternalServerError;
+                result.ErrorMessages.Add(exception.Message);
+
+                //log error to db 
+                LogErrors.StatusCode = 500;
+                LogErrors.Message = result.ErrorMessages[0];
+                LogErrors.TimeUtc = DateTime.Now;
+                LogErrors.RequestUri = context.Request.Path;
+                LogErrors.QueryParams = context.Request.QueryString.ToString();
+                if (!context.Request.Path.Value.Contains("/register"))
+                {
+
+                    LogErrors.UserName = context.User.FindFirstValue(ClaimTypes.NameIdentifier);// (ClaimTypes.NameIdentifier).Value;
+
+                }
+
+                // return principal.FindFirst(ClaimTypes.NameIdentifier);
+
+                try
+                {
+                    //  var db = (DbLogger)context.RequestServices.GetService(typeof(IDbLogger));
+
+                    log.LogToDB(LogErrors);
+
+
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex.InnerException;
+                }
+
+
+
+                context.Response.ContentType = "application/json";
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                return context.Response.WriteAsync(JsonConvert.SerializeObject(result));
             }
 
-            // return principal.FindFirst(ClaimTypes.NameIdentifier);
-
-            try
-            {
-              //  var db = (DbLogger)context.RequestServices.GetService(typeof(IDbLogger));
-
-                log.LogToDB(LogErrors);
-                
-                
-
-                   
-                
-            }
-            catch (Exception ex)
-            {
-                throw ex.InnerException;
-            }
-            
-
-
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            return context.Response.WriteAsync(JsonConvert.SerializeObject(result));
+            return context.Response.WriteAsync(JsonConvert.SerializeObject(context.Response.StatusCode));
         }
 
 

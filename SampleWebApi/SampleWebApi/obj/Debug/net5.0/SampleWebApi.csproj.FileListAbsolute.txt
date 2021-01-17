@@ -87,3 +87,4 @@ D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\S
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\ref\SampleWebApi.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.pdb
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.genruntimeconfig.cache
+D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
