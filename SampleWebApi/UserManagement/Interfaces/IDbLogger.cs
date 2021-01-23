@@ -8,6 +8,7 @@ namespace UserManagement.Interfaces
 {
     public interface IDbLogger
     {
+        void ROLLBACK_Transaction();
         Task LogToDB(LogApiError error);
     }
 }

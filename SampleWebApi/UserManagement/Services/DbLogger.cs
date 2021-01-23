@@ -19,7 +19,10 @@ namespace UserManagement.Services
 
         public async Task LogToDB(LogApiError error)
         {
+          //  await this._dbContext.Database.RollbackTransactionAsync();
+
             this._dbContext.LogApiErrors.Add(error);
+            //this._dbContext.Database.AutoTransactionsEnabled = true;
 
             //var uu = new ApplicationUser();
             //uu.Address = "llllllllllllllll";
@@ -27,6 +30,12 @@ namespace UserManagement.Services
             //uu.Email = "llllllllllllllllll";
             //this._dbContext.Users.Add(uu);
             this._dbContext.SaveChanges();        
+        }
+
+        public async void ROLLBACK_Transaction()
+        {
+            await this._dbContext.Database.CurrentTransaction.RollbackAsync(); ;
+        
         }
     }
 }

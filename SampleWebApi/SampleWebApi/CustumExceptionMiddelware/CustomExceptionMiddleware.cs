@@ -1,24 +1,19 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using UserManagement.DBContext;
 using UserManagement.Interfaces;
 using UserManagement.Models;
-using UserManagement.Services;
-using UserManagement.UserModels;
 
 namespace SampleWebApi.CustumExceptionMiddelware
 {
     public class CustomExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IDbLogger _log;
         public CustomExceptionMiddleware(RequestDelegate next)
         {
             _next = next;
@@ -70,6 +65,7 @@ namespace SampleWebApi.CustumExceptionMiddelware
                 try
                 {
                     //  var db = (DbLogger)context.RequestServices.GetService(typeof(IDbLogger));
+
 
                     log.LogToDB(LogErrors);
 

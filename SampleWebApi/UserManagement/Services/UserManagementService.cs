@@ -14,16 +14,22 @@ using UserManagement.Interfaces;
 using System.Net.Mail;
 using System.Linq;
 using System.Web;
+using UserManagement.DBContext;
+using System.ComponentModel;
+using System.Collections;
 
 namespace UserManagement.Services
 {
-   public class UserService :IUserService
+   public class UserManagementService :IUserManagementService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManger;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
-        public UserService(
+        private readonly UsersDBContext _dbcontext;
+
+        public UserManagementService(
+            UsersDBContext dbcontext,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signinManager,
             RoleManager<IdentityRole> roleManager,
@@ -33,58 +39,157 @@ namespace UserManagement.Services
             this._signInManger = signinManager;
             this._roleManager = roleManager;
             this._configuration = config;
+            this._dbcontext = dbcontext;
         }
 
+
+        public object[] GetAllClaims()
+        {
+            UserClaimTypes c = new UserClaimTypes();
+
+            var fieldValues = c.GetType()
+                     .GetFields()
+                     .Select(field => field.GetValue(c))
+                     .ToArray();
+
+            return fieldValues;
+            //var properties = TypeDescriptor.GetProperties(c.GetType());
+            //var list = new ArrayList();
+            //foreach (PropertyDescriptor property in properties)
+            //{
+            //    var value = property.GetValue(c);
+            //    list.Add(value);
+            //}
+
+            //return list;
+            //UserClaimTypes
+        }
+        public async Task<UserWithRolesAndClaimsDto> GetUserWithRolesANDClaims(string UserID)
+        {
+            var user = await this._userManager.FindByIdAsync(UserID);
+
+            if (user != null)
+            {
+                var claims = await this._userManager.GetClaimsAsync(user);
+                var roles = await this._userManager.GetRolesAsync(user);
+                return new UserWithRolesAndClaimsDto
+                {
+                    //  Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    // expiration = token.ValidTo,
+                    User = user,
+                    UserRoles = roles,
+                    UserClaims = claims
+                };
+            }
+            throw new Exception("Something Went Wrong");
+        }
+        public IList<ApplicationUser> GetAllUsers()
+        {
+
+            return this._userManager.Users.ToList();
+
+        }
+
+        public async Task<IList<UserWithRolesAndClaimsDto>> GetUsersWithRolesAndClaims()
+        {
+
+
+            List<UserWithRolesAndClaimsDto> userdata = new List<UserWithRolesAndClaimsDto>();
+
+            var AllUsers = this._userManager.Users.ToList();
+
+            foreach (var user in AllUsers)
+            {
+                if (user != null)
+                {
+                    var claims = await this._userManager.GetClaimsAsync(user);
+                    var roles = await this._userManager.GetRolesAsync(user);
+
+                    userdata.Add(
+                     new UserWithRolesAndClaimsDto
+                     {
+                         User = user,
+                         UserRoles = roles,
+                         UserClaims = claims
+                     });
+
+                }
+            }
+            return userdata;
+
+
+        }
 
         public async Task<string> Register(ApplicationUser user)
         {
-            var TempPassword = GenerateRandomPassword();
-            // var TempPassword = "P@ssword123";
-            var result = await this._userManager.CreateAsync(user, TempPassword); // no password 
-                                                                                  // var result = await this._userManger.CreateAsync(user,"Password"); // With password 
 
-            if (result.Succeeded)
+            using (var transaction = this._dbcontext.Database.BeginTransaction())
             {
-
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-
-
-                var token = HttpUtility.UrlEncode(code);
-                //var confirmationLink = Url.Action("VerifyEmail", "Users", new { token = token, userid = user.Id }, Request.Scheme);
-                var confirmationLink = this._configuration["App:ClientRootAddress"] + "/VerifyEmail?token=" + token + "&userid=" + user.Id;
-
-
-                var message = confirmationLink + "\n\n" + "Password :" + TempPassword;
-                MailMessage mailMessage = new MailMessage(this._configuration["Email:From"], this._configuration["Email:To"]);
-                mailMessage.Subject = "Registration Link";
-                mailMessage.Body = message;
-
-
-                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-
-                client.Credentials = new System.Net.NetworkCredential()
+                try
                 {
-                    UserName = this._configuration["Email:UserName"],
-                    Password = this._configuration["Email:Password"]
-                };
-                client.EnableSsl = true;
-                await client.SendMailAsync(mailMessage);
+                    var TempPassword = GenerateRandomPassword();
+                    // var TempPassword = "P@ssword123";
+                    var result = await this._userManager.CreateAsync(user, TempPassword); // no password 
+                                                                                          // var result = await this._userManger.CreateAsync(user,"Password"); // With password 
+
+                    if (result.Succeeded)
+                    {
+
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
 
-                await _userManager.AddToRoleAsync(user,UserRoles.User);
-                return "Email Sent Successfully ..Check Your Email to Verify ...";
+                        var token = HttpUtility.UrlEncode(code);
+                        //var confirmationLink = Url.Action("VerifyEmail", "Users", new { token = token, userid = user.Id }, Request.Scheme);
+                        var confirmationLink = this._configuration["App:ClientRootAddress"] + "/VerifyEmail?token=" + token + "&userid=" + user.Id;
+
+
+                        var message = confirmationLink + "\n\n" + "Password :" + TempPassword;
+                        MailMessage mailMessage = new MailMessage(this._configuration["Email:From"], user.Email);
+                        mailMessage.Subject = "Registration Link";
+                        mailMessage.Body = message;
+
+
+                        SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+
+                        client.Credentials = new System.Net.NetworkCredential()
+                        {
+                            UserName = this._configuration["Email:UserName"],
+                            Password = this._configuration["Email:Password"]
+                        };
+                        client.EnableSsl = true;
+                        await client.SendMailAsync(mailMessage);
+
+
+                        await _userManager.AddToRoleAsync(user, UserRoles.SuperAdmin);
+
+                        Claim c =new Claim(UserClaimTypes.SuperAdmin, UserClaimTypes.SuperAdmin);
+                        await _userManager.AddClaimAsync(user,c);
+
+                        await transaction.CommitAsync();
+                        
+                        return "Email Sent Successfully ..Check Your Email to Verify ...";
+                    }
+                    else
+                    {
+                        //var err = new HttpResponseExceptionModel();
+                        //err.ErrorMessages.Add(result.Errors.Select(op => op.Description).First<string>());
+                        //return BadRequest(JsonConvert.SerializeObject(err));
+
+                        throw new Exception(result.Errors.Select(op => op.Description).First<string>());
+                    }
+                }
+                catch(Exception ex)
+                {
+                    await this._dbcontext.Database.RollbackTransactionAsync();
+                    throw ex;
+              }
+           
             }
-            else
-            {
-                //var err = new HttpResponseExceptionModel();
-                //err.ErrorMessages.Add(result.Errors.Select(op => op.Description).First<string>());
-                //return BadRequest(JsonConvert.SerializeObject(err));
 
-                throw new Exception(result.Errors.Select(op => op.Description).First<string>());
-            }
+              
         }
 
-        public async Task<UserWithRolesDto> Login(UserSignInModel usermodel)
+        public async Task<UserWithRolesAndClaimsDto> Login(UserSignInModel usermodel)
         {
             var user = await this._userManager.FindByNameAsync(usermodel.UserName);
 
@@ -93,6 +198,7 @@ namespace UserManagement.Services
                 if (await _userManager.CheckPasswordAsync(user, usermodel.Password))
                 {
                     var userRoles = await _userManager.GetRolesAsync(user);
+                    var userClaims = await _userManager.GetClaimsAsync(user);
 
                     var authClaims = new List<Claim>
                 {
@@ -100,9 +206,9 @@ namespace UserManagement.Services
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 
-                    foreach (var userRole in userRoles)
+                    foreach (var claim in userClaims)
                     {
-                        authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                        authClaims.Add(new Claim(claim.Type,claim.Value));
                     }
 
                     var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
@@ -115,12 +221,13 @@ namespace UserManagement.Services
                         signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                         );
 
-                    return new UserWithRolesDto
+                    return new UserWithRolesAndClaimsDto
                     {
                         Token = new JwtSecurityTokenHandler().WriteToken(token),
                         expiration = token.ValidTo,
                         User = user,
                         UserRoles = userRoles,
+                        UserClaims= userClaims
                     };
                 }
                 else
@@ -299,6 +406,89 @@ namespace UserManagement.Services
             }
             throw new Exception("User Email is invalid");
         }
+
+
+        public async Task<string> CreateRole(string role)
+        {
+            IdentityRole Role = new IdentityRole { Name = role };
+            var result = await this._roleManager.CreateAsync(Role);
+
+            if (result.Succeeded)
+            {
+                return "Role Created Successfully";
+            }
+            throw new Exception("Something Went Wrong.. Try Again Later");
+
+        }
+
+        public async Task<string> AddClaimsToRole(AddClaimsToRoleDto RoleWithClaims)
+        {
+            var role = await this._roleManager.FindByIdAsync(RoleWithClaims.RoleID.ToString());
+            if (role != null)
+            {
+                foreach (var claim in RoleWithClaims.ClaimTypes)
+                {
+
+                   // if(claim)
+                   // this._roleManager.AddClaimAsync(role,);
+                }
+            }
+            throw new Exception("");
+
+        }
+
+
+        public async Task<string> AssignClaimsToUser(AssignClaimsToUserDto userWithClaims)
+        {
+            Claim claim = new Claim(UserClaimTypes.SuperAdmin,"true");
+            var user = await this._userManager.FindByIdAsync(userWithClaims.UserID.ToString());
+
+            if (user != null)
+            {
+              var result= await  this._userManager.AddClaimsAsync(user,userWithClaims.Claims);
+
+                if (result.Succeeded) 
+                {
+                    return "Claims Assigned Successfully...";
+                }
+
+                throw new Exception("Something Went Wrong");
+                //foreach (var claim in userWithClaims.ClaimTypes)
+                //{
+
+
+                //    // if(claim)
+                //    this._userManager.AddClaimAsync(role);
+                //}
+            }
+
+            throw new Exception("Something Went Wrong");
+        }
+
+        public async Task AssignRoles(AssignRolesToUserDto userWithRoles)
+        {
+            var user = await this._userManager.FindByIdAsync(userWithRoles.UserID.ToString());
+
+            if (user != null)
+            {
+                foreach (var role in userWithRoles.Roles)
+                {
+                    if (!(await this._userManager.IsInRoleAsync(user, role))) // already added to the role
+                    {
+                        await this._userManager.AddToRoleAsync(user, role);
+                    }
+                }
+                
+            }
+            else
+            {
+                throw new Exception("User Not Exists");
+            }
+
+
+        }
+
+        
     }
 
 

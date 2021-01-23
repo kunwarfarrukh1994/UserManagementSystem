@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using SampleWebApi.AuthorizationHandlers;
 
 namespace SampleWebApi
 {
@@ -121,6 +122,7 @@ namespace SampleWebApi
             });
 
 
+
             services.AddAuthentication(opt =>
             {
                 opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -143,13 +145,16 @@ namespace SampleWebApi
                 };
             });
 
-            services.AddAuthorization(options =>
+            services.AddAuthorization(
+                options =>
             {
                 options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser()
-                    .RequireRole(UserRoles.User)
+                   // .RequireRole(UserRoles.User)
                     .Build();
-            });
+            }
+
+            );
 
             
 
@@ -161,10 +166,12 @@ namespace SampleWebApi
                 option.EnableEndpointRouting = false;
                 option.Filters.Add(new ValidationModelFilter());
             });
-           
+
             // dependency injection
+            services.AddScoped<IAuthorizationHandler, UserAuthorizationHandler>();
             services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
-            services.AddTransient<IUserService, UserService>();
+           // services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationHandler>();
+            services.AddTransient<IUserManagementService, UserManagementService>();
             services.AddTransient<IDbLogger, DbLogger>();
             //swagger 
             services.AddSwaggerDocument();
