@@ -15,8 +15,6 @@ using System.Net.Mail;
 using System.Linq;
 using System.Web;
 using UserManagement.DBContext;
-using System.ComponentModel;
-using System.Collections;
 
 namespace UserManagement.Services
 {
@@ -42,83 +40,7 @@ namespace UserManagement.Services
             this._dbcontext = dbcontext;
         }
 
-
-        public object[] GetAllClaims()
-        {
-            UserClaimTypes c = new UserClaimTypes();
-
-            var fieldValues = c.GetType()
-                     .GetFields()
-                     .Select(field => field.GetValue(c))
-                     .ToArray();
-
-            return fieldValues;
-            //var properties = TypeDescriptor.GetProperties(c.GetType());
-            //var list = new ArrayList();
-            //foreach (PropertyDescriptor property in properties)
-            //{
-            //    var value = property.GetValue(c);
-            //    list.Add(value);
-            //}
-
-            //return list;
-            //UserClaimTypes
-        }
-        public async Task<UserWithRolesAndClaimsDto> GetUserWithRolesANDClaims(string UserID)
-        {
-            var user = await this._userManager.FindByIdAsync(UserID);
-
-            if (user != null)
-            {
-                var claims = await this._userManager.GetClaimsAsync(user);
-                var roles = await this._userManager.GetRolesAsync(user);
-                return new UserWithRolesAndClaimsDto
-                {
-                    //  Token = new JwtSecurityTokenHandler().WriteToken(token),
-                    // expiration = token.ValidTo,
-                    User = user,
-                    UserRoles = roles,
-                    UserClaims = claims
-                };
-            }
-            throw new Exception("Something Went Wrong");
-        }
-        public IList<ApplicationUser> GetAllUsers()
-        {
-
-            return this._userManager.Users.ToList();
-
-        }
-
-        public async Task<IList<UserWithRolesAndClaimsDto>> GetUsersWithRolesAndClaims()
-        {
-
-
-            List<UserWithRolesAndClaimsDto> userdata = new List<UserWithRolesAndClaimsDto>();
-
-            var AllUsers = this._userManager.Users.ToList();
-
-            foreach (var user in AllUsers)
-            {
-                if (user != null)
-                {
-                    var claims = await this._userManager.GetClaimsAsync(user);
-                    var roles = await this._userManager.GetRolesAsync(user);
-
-                    userdata.Add(
-                     new UserWithRolesAndClaimsDto
-                     {
-                         User = user,
-                         UserRoles = roles,
-                         UserClaims = claims
-                     });
-
-                }
-            }
-            return userdata;
-
-
-        }
+        #region Core Application user Implementation
 
         public async Task<string> Register(ApplicationUser user)
         {
@@ -162,11 +84,11 @@ namespace UserManagement.Services
 
                         await _userManager.AddToRoleAsync(user, UserRoles.SuperAdmin);
 
-                        Claim c =new Claim(UserClaimTypes.SuperAdmin, UserClaimTypes.SuperAdmin);
-                        await _userManager.AddClaimAsync(user,c);
+                        Claim c = new Claim(UserClaimTypes.SuperAdmin, UserClaimTypes.SuperAdmin);
+                        await _userManager.AddClaimAsync(user, c);
 
                         await transaction.CommitAsync();
-                        
+
                         return "Email Sent Successfully ..Check Your Email to Verify ...";
                     }
                     else
@@ -178,17 +100,16 @@ namespace UserManagement.Services
                         throw new Exception(result.Errors.Select(op => op.Description).First<string>());
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     await this._dbcontext.Database.RollbackTransactionAsync();
                     throw ex;
-              }
-           
+                }
+
             }
 
-              
-        }
 
+        }
         public async Task<UserWithRolesAndClaimsDto> Login(UserSignInModel usermodel)
         {
             var user = await this._userManager.FindByNameAsync(usermodel.UserName);
@@ -208,7 +129,7 @@ namespace UserManagement.Services
 
                     foreach (var claim in userClaims)
                     {
-                        authClaims.Add(new Claim(claim.Type,claim.Value));
+                        authClaims.Add(new Claim(claim.Type, claim.Value));
                     }
 
                     var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
@@ -227,7 +148,7 @@ namespace UserManagement.Services
                         expiration = token.ValidTo,
                         User = user,
                         UserRoles = userRoles,
-                        UserClaims= userClaims
+                        UserClaims = userClaims
                     };
                 }
                 else
@@ -241,7 +162,6 @@ namespace UserManagement.Services
             }
 
         }
-
         public async Task<string> ForgotPassword(string email)
         {
             var user = await this._userManager.FindByEmailAsync(email);
@@ -254,7 +174,7 @@ namespace UserManagement.Services
                 var token = HttpUtility.UrlEncode(code);
 
                 //var confirmationLink = Url.Action("ResetPassword", "Users", new { token = token, email = user.Email }, Request.Scheme);
-                var confirmationLink =this._configuration["App:ClientRootAddress"]+ "/ResetPassword?token="+token+"&email="+user.Email;
+                var confirmationLink = this._configuration["App:ClientRootAddress"] + "/ResetPassword?token=" + token + "&email=" + user.Email;
 
                 var message = confirmationLink + "Password :" + TempPassword;
                 MailMessage mailMessage = new MailMessage("farrukhraj20@gmail.com", "farrukhraj20@gmail.com");
@@ -281,56 +201,6 @@ namespace UserManagement.Services
             }
         }
 
-
-        private static string GenerateRandomPassword(PasswordOptions opts = null)
-        {
-            if (opts == null) opts = new PasswordOptions()
-            {
-                RequiredLength = 8,
-                RequiredUniqueChars = 4,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireNonAlphanumeric = true,
-                RequireUppercase = true
-            };
-
-            string[] randomChars = new[] {
-            "ABCDEFGHJKLMNOPQRSTUVWXYZ",    // uppercase 
-            "abcdefghijkmnopqrstuvwxyz",    // lowercase
-            "0123456789",                   // digits
-            "!@$?_-"                        // non-alphanumeric
-        };
-
-            Random rand = new Random(Environment.TickCount);
-            List<char> chars = new List<char>();
-
-            if (opts.RequireUppercase)
-                chars.Insert(rand.Next(0, chars.Count),
-                    randomChars[0][rand.Next(0, randomChars[0].Length)]);
-
-            if (opts.RequireLowercase)
-                chars.Insert(rand.Next(0, chars.Count),
-                    randomChars[1][rand.Next(0, randomChars[1].Length)]);
-
-            if (opts.RequireDigit)
-                chars.Insert(rand.Next(0, chars.Count),
-                    randomChars[2][rand.Next(0, randomChars[2].Length)]);
-
-            if (opts.RequireNonAlphanumeric)
-                chars.Insert(rand.Next(0, chars.Count),
-                    randomChars[3][rand.Next(0, randomChars[3].Length)]);
-
-            for (int i = chars.Count; i < opts.RequiredLength
-                || chars.Distinct().Count() < opts.RequiredUniqueChars; i++)
-            {
-                string rcs = randomChars[rand.Next(0, randomChars.Length)];
-                chars.Insert(rand.Next(0, chars.Count),
-                    rcs[rand.Next(0, rcs.Length)]);
-            }
-
-            return new string(chars.ToArray());
-        }
-
         public async Task<string> ResetPassword(ResetPasswordViewModel model)
         {
             if (model.token != null)
@@ -354,7 +224,7 @@ namespace UserManagement.Services
                 }
                 else
                 {
-                   throw new Exception("Something Went Wrong please try again later ");
+                    throw new Exception("Something Went Wrong please try again later ");
                 }
 
             }
@@ -406,8 +276,36 @@ namespace UserManagement.Services
             }
             throw new Exception("User Email is invalid");
         }
+        public IList<ApplicationUser> GetAllUsers()
+        {
+            return this._userManager.Users.ToList();
+        }
+
+        public async void DeleteUser(Guid UserID)
+        {
+            var user = await this._userManager.FindByIdAsync(UserID.ToString());
+            if (user != null)
+            {
+                var result = await this._userManager.DeleteAsync(user);
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Something Went Wrong..");
+                }
+            }
+        }
+
+        public void DeleteUsers(List<string> UserIDs)
+        {
+            foreach (var id in UserIDs)
+            {
+                this.DeleteUser(new Guid(id));
+            }
+        }
 
 
+
+        #endregion
+        #region implementation CRUD User-Roles And CRUD User-Claims
         public async Task<string> CreateRole(string role)
         {
             IdentityRole Role = new IdentityRole { Name = role };
@@ -420,7 +318,6 @@ namespace UserManagement.Services
             throw new Exception("Something Went Wrong.. Try Again Later");
 
         }
-
         public async Task<string> AddClaimsToRole(AddClaimsToRoleDto RoleWithClaims)
         {
             var role = await this._roleManager.FindByIdAsync(RoleWithClaims.RoleID.ToString());
@@ -429,25 +326,45 @@ namespace UserManagement.Services
                 foreach (var claim in RoleWithClaims.ClaimTypes)
                 {
 
-                   // if(claim)
-                   // this._roleManager.AddClaimAsync(role,);
+                    // if(claim)
+                    // this._roleManager.AddClaimAsync(role,);
                 }
             }
             throw new Exception("");
 
         }
+        public async Task AssignRolesToUser(AssignRolesToUserDto userWithRoles)
+        {
+            var user = await this._userManager.FindByIdAsync(userWithRoles.UserID.ToString());
+
+            if (user != null)
+            {
+                foreach (var role in userWithRoles.Roles)
+                {
+                    if (!(await this._userManager.IsInRoleAsync(user, role))) // already added to the role
+                    {
+                        await this._userManager.AddToRoleAsync(user, role);
+                    }
+                }
+
+            }
+            else
+            {
+                throw new Exception("Sothing went wrong ...");
+            }
 
 
+        }
         public async Task<string> AssignClaimsToUser(AssignClaimsToUserDto userWithClaims)
         {
-            Claim claim = new Claim(UserClaimTypes.SuperAdmin,"true");
+            Claim claim = new Claim(UserClaimTypes.SuperAdmin, "true");
             var user = await this._userManager.FindByIdAsync(userWithClaims.UserID.ToString());
 
             if (user != null)
             {
-              var result= await  this._userManager.AddClaimsAsync(user,userWithClaims.Claims);
+                var result = await this._userManager.AddClaimsAsync(user, userWithClaims.Claims);
 
-                if (result.Succeeded) 
+                if (result.Succeeded)
                 {
                     return "Claims Assigned Successfully...";
                 }
@@ -464,33 +381,185 @@ namespace UserManagement.Services
 
             throw new Exception("Something Went Wrong");
         }
-
-        public async Task AssignRoles(AssignRolesToUserDto userWithRoles)
+        public async Task<IList<UserWithRolesAndClaimsDto>> GetUsersWithRolesAndClaims()
         {
-            var user = await this._userManager.FindByIdAsync(userWithRoles.UserID.ToString());
 
-            if (user != null)
+
+            List<UserWithRolesAndClaimsDto> userdata = new List<UserWithRolesAndClaimsDto>();
+
+            var AllUsers = this._userManager.Users.ToList();
+
+            foreach (var user in AllUsers)
             {
-                foreach (var role in userWithRoles.Roles)
+                if (user != null)
                 {
-                    if (!(await this._userManager.IsInRoleAsync(user, role))) // already added to the role
-                    {
-                        await this._userManager.AddToRoleAsync(user, role);
-                    }
+                    var claims = await this._userManager.GetClaimsAsync(user);
+                    var roles = await this._userManager.GetRolesAsync(user);
+
+                    userdata.Add(
+                     new UserWithRolesAndClaimsDto
+                     {
+                         User = user,
+                         UserRoles = roles,
+                         UserClaims = claims
+                     });
+
                 }
-                
             }
-            else
-            {
-                throw new Exception("User Not Exists");
-            }
+            return userdata;
 
 
         }
+        public async Task<UserWithRolesAndClaimsDto> GetUserWithRolesANDClaims(string UserID)
+        {
+            var user = await this._userManager.FindByIdAsync(UserID);
 
-        
+            if (user != null)
+            {
+                var claims = await this._userManager.GetClaimsAsync(user);
+                var roles = await this._userManager.GetRolesAsync(user);
+                return new UserWithRolesAndClaimsDto
+                {
+                    //  Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    // expiration = token.ValidTo,
+                    User = user,
+                    UserRoles = roles,
+                    UserClaims = claims
+                };
+            }
+            throw new Exception("Something Went Wrong");
+        }
+        public object[] GetAllClaims()
+        {
+            UserClaimTypes c = new UserClaimTypes();
+
+            var fieldValues = c.GetType()
+                     .GetFields()
+                     .Select(field => field.GetValue(c))
+                     .ToArray();
+
+            return fieldValues;
+            //var properties = TypeDescriptor.GetProperties(c.GetType());
+            //var list = new ArrayList();
+            //foreach (PropertyDescriptor property in properties)
+            //{
+            //    var value = property.GetValue(c);
+            //    list.Add(value);
+            //}
+
+            //return list;
+            //UserClaimTypes
+        }
+        public async Task UpdateUserRoles(AssignRolesToUserDto userWithRoles)
+        {
+            using (var transaction = this._dbcontext.Database.BeginTransaction())
+            {
+                var user = await this._userManager.FindByIdAsync(userWithRoles.UserID.ToString());
+                if (user != null)
+                {
+                    // delete existing 
+                    var existingroles = await this._userManager.GetRolesAsync(user);
+                    var result = await this._userManager.RemoveFromRolesAsync(user, existingroles);
+                    if (result.Succeeded)
+                    {
+                        //add new roles 
+                        await this.AssignRolesToUser(userWithRoles);
+                        await transaction.CommitAsync();
+                    }
+                    else
+                    {
+                        await this._dbcontext.Database.RollbackTransactionAsync();
+                    }
+                }
+                else
+                {
+                    throw new Exception("Sothing went wrong ...");
+                }
+            }
+
+
+
+        }
+        public async Task UpdateUserClaims(AssignClaimsToUserDto userWithClaims)
+        {
+            using (var transaction = this._dbcontext.Database.BeginTransaction())
+            {
+                var user = await this._userManager.FindByIdAsync(userWithClaims.UserID.ToString());
+                if (user != null)
+                {
+                    // delete existing 
+                    var existingclaims = await this._userManager.GetClaimsAsync(user);
+                    var result = await this._userManager.RemoveClaimsAsync(user, existingclaims);
+                    if (result.Succeeded)
+                    {
+                        //add new claims 
+                        await this.AssignClaimsToUser(userWithClaims);
+                        await transaction.CommitAsync();
+                    }
+                    else
+                    {
+
+                        await this._dbcontext.Database.RollbackTransactionAsync();
+                    }
+                }
+                else
+                {
+                    throw new Exception("Sothing went wrong ...");
+                }
+            }
+        }
+        public IList<IdentityRole> GetAllRoles()
+        {
+            return this._roleManager.Roles.ToList();
+        }
+        private static string GenerateRandomPassword(PasswordOptions opts = null)
+        {
+            if (opts == null) opts = new PasswordOptions()
+            {
+                RequiredLength = 8,
+                RequiredUniqueChars = 4,
+                RequireDigit = true,
+                RequireLowercase = true,
+                RequireNonAlphanumeric = true,
+                RequireUppercase = true
+            };
+
+            string[] randomChars = new[] {
+            "ABCDEFGHJKLMNOPQRSTUVWXYZ",    // uppercase 
+            "abcdefghijkmnopqrstuvwxyz",    // lowercase
+            "0123456789",                   // digits
+            "!@$?_-"                        // non-alphanumeric
+        };
+
+            Random rand = new Random(Environment.TickCount);
+            List<char> chars = new List<char>();
+
+            if (opts.RequireUppercase)
+                chars.Insert(rand.Next(0, chars.Count),
+                    randomChars[0][rand.Next(0, randomChars[0].Length)]);
+
+            if (opts.RequireLowercase)
+                chars.Insert(rand.Next(0, chars.Count),
+                    randomChars[1][rand.Next(0, randomChars[1].Length)]);
+
+            if (opts.RequireDigit)
+                chars.Insert(rand.Next(0, chars.Count),
+                    randomChars[2][rand.Next(0, randomChars[2].Length)]);
+
+            if (opts.RequireNonAlphanumeric)
+                chars.Insert(rand.Next(0, chars.Count),
+                    randomChars[3][rand.Next(0, randomChars[3].Length)]);
+
+            for (int i = chars.Count; i < opts.RequiredLength
+                || chars.Distinct().Count() < opts.RequiredUniqueChars; i++)
+            {
+                string rcs = randomChars[rand.Next(0, randomChars.Length)];
+                chars.Insert(rand.Next(0, chars.Count),
+                    rcs[rand.Next(0, rcs.Length)]);
+            }
+
+            return new string(chars.ToArray());
+        }
+        #endregion
     }
-
-
-
 }
