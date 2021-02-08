@@ -9,6 +9,6 @@ namespace UserManagement.DTOs
     {
         public Guid UserID {get;set;}
 
-        public IList<Claim> Claims { get; set; }
+        public IList<string> Claims { get; set; }
     }
 }

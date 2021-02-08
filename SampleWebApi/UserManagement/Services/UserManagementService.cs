@@ -162,7 +162,7 @@ namespace UserManagement.Services
             }
 
         }
-        public async Task<string> ForgotPassword(string email)
+        public async Task<string> Forgot_Password(string email)
         {
             var user = await this._userManager.FindByEmailAsync(email);
             if (user != null)
@@ -201,7 +201,7 @@ namespace UserManagement.Services
             }
         }
 
-        public async Task<string> ResetPassword(ResetPasswordViewModel model)
+        public async Task<string> Reset_Password(ResetPasswordViewModel model)
         {
             if (model.token != null)
             {
@@ -234,7 +234,7 @@ namespace UserManagement.Services
             }
         }
 
-        public async Task<string> ChangePassword(ChangePasswordViewModel model)
+        public async Task<string> Change_Password(ChangePasswordViewModel model)
         {
             var user = await this._userManager.FindByIdAsync(model.UserId);
 
@@ -258,7 +258,7 @@ namespace UserManagement.Services
             }
         }
 
-        public async Task<string> VerifyEmail(string userid, string token)
+        public async Task<string> Verify_Email(string userid, string token)
         {
             if (userid == null || token == null)
             {
@@ -276,77 +276,131 @@ namespace UserManagement.Services
             }
             throw new Exception("User Email is invalid");
         }
-        public IList<ApplicationUser> GetAllUsers()
+        public IList<ApplicationUser> Get_All_Users()
         {
-            return this._userManager.Users.ToList();
+            try
+            {
+                return this._userManager.Users.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public async void DeleteUser(Guid UserID)
+        public async Task<string> Delete_User(Guid UserID)
         {
-            var user = await this._userManager.FindByIdAsync(UserID.ToString());
-            if (user != null)
+            try
             {
-                var result = await this._userManager.DeleteAsync(user);
-                if (!result.Succeeded)
+                var user = await this._userManager.FindByIdAsync(UserID.ToString());
+                if (user != null)
                 {
-                    throw new Exception("Something Went Wrong..");
+                    var result = await this._userManager.DeleteAsync(user);
+                    if (result.Succeeded)
+                    {
+                        return "Deleted Successfuly...";
+                    }
+                    else
+                    {
+                        throw new Exception("Something Went Wrong...");
+                    }
+                }
+                else
+                { 
+                        throw new Exception("Something Went Wrong...");
+
                 }
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
-        public void DeleteUsers(List<string> UserIDs)
+        public async Task<string> Delete_Users(List<string> UserIDs)
         {
-            foreach (var id in UserIDs)
+            try
             {
-                this.DeleteUser(new Guid(id));
+                foreach (var id in UserIDs)
+                {
+                   var result= await this.Delete_User(new Guid(id));
+                }
+                return "Deleted Successfully..";
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
 
 
         #endregion
         #region implementation CRUD User-Roles And CRUD User-Claims
-        public async Task<string> CreateRole(string role)
+        public async Task<string> Create_Role(string role)
         {
-            IdentityRole Role = new IdentityRole { Name = role };
-            var result = await this._roleManager.CreateAsync(Role);
-
-            if (result.Succeeded)
+            try
             {
-                return "Role Created Successfully";
-            }
-            throw new Exception("Something Went Wrong.. Try Again Later");
-
-        }
-        public async Task<string> AddClaimsToRole(AddClaimsToRoleDto RoleWithClaims)
-        {
-            var role = await this._roleManager.FindByIdAsync(RoleWithClaims.RoleID.ToString());
-            if (role != null)
-            {
-                foreach (var claim in RoleWithClaims.ClaimTypes)
+                IdentityRole Role = new IdentityRole { Name = role };
+                var result=await this._roleManager.CreateAsync(Role);
+                if (result.Succeeded)
                 {
-
-                    // if(claim)
-                    // this._roleManager.AddClaimAsync(role,);
+                    return "Created Successfully...";
+                }
+                else
+                {
+                    throw new Exception("Something Went Wrong...");
                 }
             }
-            throw new Exception("");
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
 
         }
-        public async Task AssignRolesToUser(AssignRolesToUserDto userWithRoles)
+        public async void Add_Claims_To_Role(AddClaimsToRoleDto RoleWithClaims)
         {
-            var user = await this._userManager.FindByIdAsync(userWithRoles.UserID.ToString());
-
-            if (user != null)
+            try
             {
-                foreach (var role in userWithRoles.Roles)
+                var role = await this._roleManager.FindByIdAsync(RoleWithClaims.RoleID.ToString());
+                if (role != null)
                 {
-                    if (!(await this._userManager.IsInRoleAsync(user, role))) // already added to the role
+                    foreach (var claimtype in RoleWithClaims.ClaimTypes)
                     {
-                        await this._userManager.AddToRoleAsync(user, role);
+                        Claim claimobj = new Claim(claimtype, claimtype);
+                        var result =await this._roleManager.AddClaimAsync(role, claimobj);
                     }
                 }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
 
+        }
+        public async void Assign_Roles_To_User(AssignRolesToUserDto userWithRoles)
+        {
+            var user = await this._userManager.FindByIdAsync(userWithRoles.UserID.ToString());
+            if (user != null)
+            {
+                try
+                {
+                    foreach (var role in userWithRoles.Roles)
+                    {
+                        if (!(await this._userManager.IsInRoleAsync(user, role))) // already added to the role
+                        {
+                            await this._userManager.AddToRoleAsync(user, role);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
             else
             {
@@ -355,40 +409,33 @@ namespace UserManagement.Services
 
 
         }
-        public async Task<string> AssignClaimsToUser(AssignClaimsToUserDto userWithClaims)
+        public async void Assign_Claims_To_User(AssignClaimsToUserDto userWithClaims)
         {
-            Claim claim = new Claim(UserClaimTypes.SuperAdmin, "true");
-            var user = await this._userManager.FindByIdAsync(userWithClaims.UserID.ToString());
-
-            if (user != null)
+            
+            try
             {
-                var result = await this._userManager.AddClaimsAsync(user, userWithClaims.Claims);
-
-                if (result.Succeeded)
+                var user = await this._userManager.FindByIdAsync(userWithClaims.UserID.ToString());
+                if (user != null)
                 {
-                    return "Claims Assigned Successfully...";
+                    List<Claim> claimslist = new List<Claim>();
+                    foreach (var claims in userWithClaims.Claims)
+                    {
+                        Claim claimobj = new Claim(claims, claims);
+                        claimslist.Add(claimobj);
+                    }
+                    var result = await this._userManager.AddClaimsAsync(user, claimslist);
+
                 }
-
-                throw new Exception("Something Went Wrong");
-                //foreach (var claim in userWithClaims.ClaimTypes)
-                //{
-
-
-                //    // if(claim)
-                //    this._userManager.AddClaimAsync(role);
-                //}
             }
-
-            throw new Exception("Something Went Wrong");
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-        public async Task<IList<UserWithRolesAndClaimsDto>> GetUsersWithRolesAndClaims()
+        public async Task<IList<UserWithRolesAndClaimsDto>> Get_Users_With_Roles_And_Claims()
         {
-
-
             List<UserWithRolesAndClaimsDto> userdata = new List<UserWithRolesAndClaimsDto>();
-
             var AllUsers = this._userManager.Users.ToList();
-
             foreach (var user in AllUsers)
             {
                 if (user != null)
@@ -410,7 +457,7 @@ namespace UserManagement.Services
 
 
         }
-        public async Task<UserWithRolesAndClaimsDto> GetUserWithRolesANDClaims(string UserID)
+        public async Task<UserWithRolesAndClaimsDto> Get_User_With_Roles_And_Claims(string UserID)
         {
             var user = await this._userManager.FindByIdAsync(UserID);
 
@@ -429,7 +476,7 @@ namespace UserManagement.Services
             }
             throw new Exception("Something Went Wrong");
         }
-        public object[] GetAllClaims()
+        public object[] Get_All_Claims()
         {
             UserClaimTypes c = new UserClaimTypes();
 
@@ -450,65 +497,81 @@ namespace UserManagement.Services
             //return list;
             //UserClaimTypes
         }
-        public async Task UpdateUserRoles(AssignRolesToUserDto userWithRoles)
+        public async void Update_User_Roles(AssignRolesToUserDto userWithRoles)
         {
             using (var transaction = this._dbcontext.Database.BeginTransaction())
             {
-                var user = await this._userManager.FindByIdAsync(userWithRoles.UserID.ToString());
-                if (user != null)
+                try
                 {
-                    // delete existing 
-                    var existingroles = await this._userManager.GetRolesAsync(user);
-                    var result = await this._userManager.RemoveFromRolesAsync(user, existingroles);
-                    if (result.Succeeded)
+                    var user = await this._userManager.FindByIdAsync(userWithRoles.UserID.ToString());
+                    if (user != null)
                     {
-                        //add new roles 
-                        await this.AssignRolesToUser(userWithRoles);
-                        await transaction.CommitAsync();
+                        // delete existing 
+                        var existingroles = await this._userManager.GetRolesAsync(user);
+                        var result = await this._userManager.RemoveFromRolesAsync(user, existingroles);
+                        if (result.Succeeded)
+                        {
+                            //add new roles 
+                            this.Assign_Roles_To_User(userWithRoles);
+                            await transaction.CommitAsync();
+                        }
+                        else
+                        {
+                            await this._dbcontext.Database.RollbackTransactionAsync();
+                        }
                     }
                     else
                     {
-                        await this._dbcontext.Database.RollbackTransactionAsync();
+                        throw new Exception("Sothing went wrong ...");
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    throw new Exception("Sothing went wrong ...");
+                    throw ex;
                 }
+                
             }
 
 
 
         }
-        public async Task UpdateUserClaims(AssignClaimsToUserDto userWithClaims)
+        public async void Update_User_Claims(AssignClaimsToUserDto userWithClaims)
         {
             using (var transaction = this._dbcontext.Database.BeginTransaction())
             {
-                var user = await this._userManager.FindByIdAsync(userWithClaims.UserID.ToString());
-                if (user != null)
+                try
                 {
-                    // delete existing 
-                    var existingclaims = await this._userManager.GetClaimsAsync(user);
-                    var result = await this._userManager.RemoveClaimsAsync(user, existingclaims);
-                    if (result.Succeeded)
+                    var user = await this._userManager.FindByIdAsync(userWithClaims.UserID.ToString());
+                    if (user != null)
                     {
-                        //add new claims 
-                        await this.AssignClaimsToUser(userWithClaims);
-                        await transaction.CommitAsync();
+                        // delete existing 
+                        var existingclaims = await this._userManager.GetClaimsAsync(user);
+                        var result = await this._userManager.RemoveClaimsAsync(user, existingclaims);
+                        if (result.Succeeded)
+                        {
+                            //add new claims 
+                            this.Assign_Claims_To_User(userWithClaims);
+                            await transaction.CommitAsync();
+                        }
+                        else
+                        {
+
+                            await this._dbcontext.Database.RollbackTransactionAsync();
+                        }
                     }
                     else
                     {
-
-                        await this._dbcontext.Database.RollbackTransactionAsync();
+                        throw new Exception("Sothing went wrong ...");
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    throw new Exception("Sothing went wrong ...");
+                    throw ex;
                 }
+                
             }
         }
-        public IList<IdentityRole> GetAllRoles()
+        public IList<IdentityRole> Get_All_Roles()
         {
             return this._roleManager.Roles.ToList();
         }

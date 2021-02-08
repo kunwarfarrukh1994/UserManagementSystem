@@ -15,28 +15,28 @@ namespace UserManagement.Interfaces
         Task<string> Register(ApplicationUser user);
 
         Task<UserWithRolesAndClaimsDto> Login(UserSignInModel usermodel);
-        Task<string> ForgotPassword(string email);
+        Task<string> Forgot_Password(string email);
 
-        Task<string> ResetPassword(ResetPasswordViewModel model);
+        Task<string> Reset_Password(ResetPasswordViewModel model);
 
-        Task<string> ChangePassword(ChangePasswordViewModel model);
+        Task<string> Change_Password(ChangePasswordViewModel model);
 
-        Task<string> VerifyEmail(string userid, string token);
-        IList<ApplicationUser> GetAllUsers();
-        void DeleteUser(Guid id);
-        void DeleteUsers(List<string> UserIDs);
+        Task<string> Verify_Email(string userid, string token);
+        IList<ApplicationUser> Get_All_Users();
+        Task<string> Delete_User(Guid id);
+        Task<string> Delete_Users(List<string> UserIDs);
         #endregion
         #region CRUD User-Roles And CRUD User-Claims
-        Task<string> CreateRole(string role);
-        Task<string> AddClaimsToRole(AddClaimsToRoleDto RoleWithClaims);
-        Task AssignRolesToUser(AssignRolesToUserDto userWithRoles);
-        Task<string> AssignClaimsToUser(AssignClaimsToUserDto userWithClaims);
-        Task<IList<UserWithRolesAndClaimsDto>> GetUsersWithRolesAndClaims();
-        Task<UserWithRolesAndClaimsDto> GetUserWithRolesANDClaims(string UserID);
-        object[] GetAllClaims();
-        Task UpdateUserRoles(AssignRolesToUserDto userWithRoles);
-        Task UpdateUserClaims(AssignClaimsToUserDto userWithClaims);
-        IList<IdentityRole> GetAllRoles();
+        Task<string> Create_Role(string role);
+        void Add_Claims_To_Role(AddClaimsToRoleDto RoleWithClaims);
+        void Assign_Roles_To_User(AssignRolesToUserDto userWithRoles);
+        void Assign_Claims_To_User(AssignClaimsToUserDto userWithClaims);
+        Task<IList<UserWithRolesAndClaimsDto>> Get_Users_With_Roles_And_Claims();
+        Task<UserWithRolesAndClaimsDto> Get_User_With_Roles_And_Claims(string UserID);
+        object[] Get_All_Claims();
+        void Update_User_Roles(AssignRolesToUserDto userWithRoles);
+        void Update_User_Claims(AssignClaimsToUserDto userWithClaims);
+        IList<IdentityRole> Get_All_Roles();
         #endregion
     }
 }
