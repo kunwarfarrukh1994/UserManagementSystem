@@ -10,6 +10,7 @@ D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\S
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Humanizer.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\System.Net.Http.Formatting.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\System.Web.Http.dll
+D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -87,4 +88,3 @@ D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\S
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\ref\SampleWebApi.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.pdb
 D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.genruntimeconfig.cache
-D:\GitProjects\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
