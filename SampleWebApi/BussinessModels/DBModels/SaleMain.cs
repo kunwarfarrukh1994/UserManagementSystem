@@ -41,7 +41,7 @@ namespace BussinessModels.DBModels
         public int Post { get; set; }
         public int CompanyID { get; set; }
         public int OperatorID { get; set; }
-        public Int32 BrachID { get; set; }
+        public Int32 BranchID { get; set; }
         public Int32 LocationID { get; set; }
         public int Del { get; set; }
         public int Sync { get; set; }

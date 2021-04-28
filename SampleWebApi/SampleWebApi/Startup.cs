@@ -170,7 +170,7 @@ namespace SampleWebApi
 
             // dependency injection
             services.AddScoped<IAuthorizationHandler, UserAuthorizationHandler>();
-            services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
+           // services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
            // services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationHandler>();
             services.AddTransient<IUserManagementService, UserManagementService>();
             services.AddTransient<IDbLogger, DbLogger>();
