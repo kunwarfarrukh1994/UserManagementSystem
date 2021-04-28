@@ -29,8 +29,6 @@ D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Debug\netco
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.pdb
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.genruntimeconfig.cache
 D:\GitProjects\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.deps.json
-D:\GitProjects\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.runtimeconfig.json
-D:\GitProjects\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.runtimeconfig.dev.json
 D:\GitProjects\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.pdb
 D:\GitProjects\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\BussinessModels.dll
@@ -42,4 +40,3 @@ D:\GitProjects\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Debug\netco
 D:\GitProjects\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.csproj.CopyComplete
 D:\GitProjects\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.pdb
-D:\GitProjects\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.genruntimeconfig.cache

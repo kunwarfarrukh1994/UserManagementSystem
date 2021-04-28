@@ -86,7 +86,8 @@ namespace SampleWebApi
             // database context
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<UsersDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            
+           // services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             //identity
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<UsersDBContext>().AddDefaultTokenProviders();  //   bridge to connect identity with our database.AddDefaultTokenProviders();
             services.Configure<IdentityOptions>(options =>
