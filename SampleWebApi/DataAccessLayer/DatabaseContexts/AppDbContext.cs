@@ -19,8 +19,8 @@ namespace DataAccessLayer
 
             model_builder.HasDefaultSchema("dbo");
 
-            model_builder.Entity<SaleSub>().HasNoKey();
-            model_builder.Entity<SaleMain>().HasNoKey();
+            model_builder.Entity<SaleSub>().HasNoKey().HasIndex(S=> S.ID).IsUnique();
+            model_builder.Entity<SaleMain>().HasNoKey().HasIndex(S => S.ID).IsUnique();
             model_builder.Entity<SaleSubWarehouse>().HasNoKey();
 
             model_builder.Entity<SaleParty>().HasNoKey();

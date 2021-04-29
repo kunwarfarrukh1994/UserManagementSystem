@@ -2240,6 +2240,7 @@
       },
       "BussinessModels/1.0.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.1",
           "System.ComponentModel.Annotations": "5.0.0"
         },
         "runtime": {
@@ -2254,6 +2255,7 @@
           "BussinessModels": "1.0.0",
           "Microsoft.AspNet.WebApi.Core": "5.2.7",
           "Microsoft.AspNetCore.Mvc.Formatters.Json": "2.2.0",
+          "Microsoft.EntityFrameworkCore": "5.0.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.1"
         },
         "runtime": {

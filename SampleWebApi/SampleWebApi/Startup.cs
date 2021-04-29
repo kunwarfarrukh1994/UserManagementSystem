@@ -25,6 +25,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using SampleWebApi.AuthorizationHandlers;
 
+
 namespace SampleWebApi
 {
     public class Startup
@@ -87,8 +88,7 @@ namespace SampleWebApi
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<UsersDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
-           // services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //identity
+           //identity
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<UsersDBContext>().AddDefaultTokenProviders();  //   bridge to connect identity with our database.AddDefaultTokenProviders();
             services.Configure<IdentityOptions>(options =>
             {
@@ -173,6 +173,10 @@ namespace SampleWebApi
            // services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
            // services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationHandler>();
             services.AddTransient<IUserManagementService, UserManagementService>();
+            services.AddTransient<ISalesRepository, SalesRepository >();
+
+
+
             services.AddTransient<IDbLogger, DbLogger>();
             //swagger 
             services.AddSwaggerDocument();
