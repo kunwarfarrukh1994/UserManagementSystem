@@ -29,11 +29,13 @@ namespace BussinessModels.ViewModels
 
 
 		public List<SaleSubVm> SaleDetail { get; set; }
+		
 
 
 		public SalesMainVM()
 		{
 			SaleDetail = new List<SaleSubVm>();
+			
 		}
 	}
 }

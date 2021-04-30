@@ -20,5 +20,13 @@ namespace BussinessModels.ViewModels
 		public string STRG { get; set; }
 		public int CompanyID { get; set; }
 		public int BranchID { get; set; }
+
+		public IList<SaleSubWarehouseVM> SaleDetailWarehouse { get; set; }
+
+		public SaleSubVm()
+		{
+			SaleDetailWarehouse = new List<SaleSubWarehouseVM>();
+		}
+
 	}
 }

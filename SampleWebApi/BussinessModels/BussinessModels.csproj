@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="DBModels\Employee.cs" />
+    <Compile Remove="ViewModels\SaleSubWarehouse.cs" />
     <Compile Remove="ViewModels\SalesVM.cs" />
   </ItemGroup>
 

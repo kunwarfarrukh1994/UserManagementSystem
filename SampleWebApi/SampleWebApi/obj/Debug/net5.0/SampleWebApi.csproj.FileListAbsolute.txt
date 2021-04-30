@@ -178,3 +178,4 @@ D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\S
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\ref\SampleWebApi.dll
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.pdb
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.genruntimeconfig.cache
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\AutoMapper.dll

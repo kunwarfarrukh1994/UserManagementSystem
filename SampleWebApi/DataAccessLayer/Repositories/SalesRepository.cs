@@ -1,7 +1,10 @@
-﻿using BussinessModels.ViewModels;
+﻿using AutoMapper;
+using BussinessModels.DBModels;
+using BussinessModels.ViewModels;
 using DataAccessLayer.ReposiotryInterfaces;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,7 +16,7 @@ namespace DataAccessLayer.Repositories
     public class SalesRepository : ISalesRepository
     {
         private readonly AppDbContext _context;
-        DataTable dtSalesMain, dtSalesSub;
+        DataTable dtSalesMain, dtSalesSub, dtSaleSubWarehouse;
         public SalesRepository(AppDbContext context)
         {
             this._context = context;
@@ -59,15 +62,18 @@ namespace DataAccessLayer.Repositories
             dtSalesSub.Columns.Add("CompanyID", typeof(int));
             dtSalesSub.Columns.Add("BranchID", typeof(int));
 
+            dtSaleSubWarehouse = new DataTable();
+            dtSaleSubWarehouse.Columns.Add("GodownID", typeof(int));
+            dtSaleSubWarehouse.Columns.Add("ItemID", typeof(int));
+            dtSaleSubWarehouse.Columns.Add("Qty", typeof(int));
+            dtSaleSubWarehouse.Columns.Add("CompanyID", typeof(int));
+            dtSaleSubWarehouse.Columns.Add("BranchID", typeof(int));
+
+
+
         }
 
-
-        public void GetSale()
-        {
-
-        }
-
-        public async Task<string> InsertSales(SalesMainVM salesmain)
+        public async Task<string> SaveSales(SalesMainVM salesmain)
         {
             initDT();
             if (dtSalesMain.Rows.Count > 0)
@@ -127,8 +133,26 @@ namespace DataAccessLayer.Repositories
 
                         dtSalesSub.Rows.InsertAt(srow, i);
 
+                        for (int index = 0; index < detail.SaleDetailWarehouse.Count; index++)
+                        {
+
+                            DataRow rr = dtSaleSubWarehouse.NewRow();
+
+                            rr["GodownID"] = detail.SaleDetailWarehouse[index].GodownID;
+                            rr["ItemID"] = detail.SaleDetailWarehouse[index].ItemID;
+                            rr["Qty"] = detail.SaleDetailWarehouse[index].Qty;
+                            rr["CompanyID"] = detail.SaleDetailWarehouse[index].CompanyID;
+                            rr["BranchID"] = detail.SaleDetailWarehouse[index].BranchID;
+
+
+                            dtSaleSubWarehouse.Rows.InsertAt(rr, index);
+                        }
+                     
                         i++;
                     }
+
+
+                    
 
 
 
@@ -137,7 +161,7 @@ namespace DataAccessLayer.Repositories
                         //string CS = @"Data Source=CYBERSPACE\EAS;Initial Catalog=Vanya-bak;Persist Security Info=True;User ID=sa;Password=risay";
                         //SqlConnection cn = null;
                         SqlCommand cmd = null;
-                        
+
                         //cn = new SqlConnection(CS);
 
 
@@ -145,21 +169,22 @@ namespace DataAccessLayer.Repositories
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@SMain", SqlDbType.Structured).Value = dtSalesMain;
                         cmd.Parameters.Add("@SSub", SqlDbType.Structured).Value = dtSalesSub;
+                        cmd.Parameters.Add("@SSubWarehouse", SqlDbType.Structured).Value = dtSaleSubWarehouse;
                         cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = DateTime.Now;
                         cmd.Parameters.Add("@SmId", SqlDbType.BigInt).Value = salesmain.SMID;
 
-                        
+
 
                         var returnParameter = cmd.Parameters.Add("@SmId", SqlDbType.BigInt);
                         returnParameter.Direction = ParameterDirection.ReturnValue;
 
                         con.Open();
-                        cmd.ExecuteNonQuery();
+                        await cmd.ExecuteNonQueryAsync();
                         var result = returnParameter.Value;
                         con.Close();
 
 
-                        return "Record Saved Successfully";
+                        return "Record Saved Successfully for ID:" + salesmain.SMID;
 
 
 
@@ -180,6 +205,28 @@ namespace DataAccessLayer.Repositories
 
             return "Enter Valid Data First";
 
+        }
+
+        public async Task<IList<SalesMainVM>> GetAllSales()
+        {
+            var list=  await this._context.SaleMain.ToListAsync();
+
+            string json = JsonConvert.SerializeObject(list);
+
+            IList<SalesMainVM> salesList = JsonConvert.DeserializeObject<IList<SalesMainVM>>(json);
+
+            return salesList;
+        }
+
+        public async Task<SalesMainVM> GetSaleByID(int Id) 
+        {
+            
+            return new SalesMainVM();
+        }
+
+        public async Task<string> DeleteSale(int Id)
+        {
+            return "Deleted Succesfully";
         }
     }
 }

@@ -8,9 +8,12 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface ISalesRepository
     {
-        void GetSale();
+        Task <IList<SalesMainVM>> GetAllSales();
+        Task<SalesMainVM> GetSaleByID(int Id);
 
-        Task<string> InsertSales(SalesMainVM salesmain);
+        Task<string> SaveSales(SalesMainVM salesmain);
+
+        Task<string> DeleteSale(int Id);
 
 
 
