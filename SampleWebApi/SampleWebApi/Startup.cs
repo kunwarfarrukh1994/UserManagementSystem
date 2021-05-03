@@ -168,7 +168,7 @@ namespace SampleWebApi
            // services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
            // services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationHandler>();
            // services.AddTransient<IUserManagementService, UserManagementService>();
-           // services.AddTransient<ISalesRepository, SalesRepository >();
+            services.AddTransient<ISalesRepository, SalesRepository >();
 
 
 
