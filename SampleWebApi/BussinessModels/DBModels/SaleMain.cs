@@ -7,7 +7,7 @@ namespace BussinessModels.DBModels
 {
     public class SaleMain
     {
-        //[Index(IsUnique = true)]
+        
         public int? ID { get; set; }
         public int? SMID { get; set; }
         public DateTime EDate { get; set; }

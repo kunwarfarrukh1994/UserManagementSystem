@@ -31,7 +31,7 @@
     <ProjectReference Include="..\BussinessLogicLayer\BussinessLogicLayer.csproj" />
     <ProjectReference Include="..\BussinessModels\BussinessModels.csproj" />
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
-    <ProjectReference Include="..\UserManagement\UserManagement.csproj" />
+    <!--<ProjectReference Include="..\UserManagement\UserManagement.csproj" />-->
   </ItemGroup>
 
 </Project>

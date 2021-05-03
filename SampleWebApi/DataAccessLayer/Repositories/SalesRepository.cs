@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,6 +48,7 @@ namespace DataAccessLayer.Repositories
             dtSalesMain.Columns.Add("LocationID", typeof(int));
 
             dtSalesSub = new DataTable();
+            dtSalesSub.Columns.Add("SSID", typeof(int));
             dtSalesSub.Columns.Add("ItemID", typeof(int));
             dtSalesSub.Columns.Add("ItemDescription", typeof(string));
             dtSalesSub.Columns.Add("Unit", typeof(string));
@@ -62,7 +64,10 @@ namespace DataAccessLayer.Repositories
             dtSalesSub.Columns.Add("CompanyID", typeof(int));
             dtSalesSub.Columns.Add("BranchID", typeof(int));
 
+            
             dtSaleSubWarehouse = new DataTable();
+            dtSaleSubWarehouse.Columns.Add("SSID", typeof(int));
+            dtSaleSubWarehouse.Columns.Add("SWID", typeof(int));
             dtSaleSubWarehouse.Columns.Add("GodownID", typeof(int));
             dtSaleSubWarehouse.Columns.Add("ItemID", typeof(int));
             dtSaleSubWarehouse.Columns.Add("Qty", typeof(int));
@@ -75,10 +80,28 @@ namespace DataAccessLayer.Repositories
 
         public async Task<string> SaveSales(SalesMainVM salesmain)
         {
+            var maxSWID=new SaleSubWarehouse();
+            var maxSSID = new SaleSub();
             initDT();
             if (dtSalesMain.Rows.Count > 0)
             {
                 dtSalesMain.Rows.Clear();
+            }
+            if (salesmain.SMID == 0) 
+            {
+                maxSWID = this._context.SaleSubWarehouse.OrderByDescending(x => x.SWID).FirstOrDefault();
+                if (maxSWID == null)
+                {
+                    maxSWID = new SaleSubWarehouse();
+                    maxSWID.SWID = 0;
+                }
+
+                maxSSID = this._context.SaleSub.OrderByDescending(x => x.SSID).FirstOrDefault();
+                if (maxSSID == null)
+                {
+                    maxSSID = new SaleSub();
+                    maxSSID.SSID = 0;
+                }
             }
 
             if (salesmain.SaleDetail.Count > 0)
@@ -109,12 +132,25 @@ namespace DataAccessLayer.Repositories
 
                     dtSalesMain.Rows.InsertAt(row, 0);
 
+                    int swid = 0;
+                    int ssid = 0;
+                    swid = maxSWID.SWID;
+                    ssid = maxSSID.SSID;
 
                     int i = 0;
                     foreach (var detail in salesmain.SaleDetail)
                     {
 
                         DataRow srow = dtSalesSub.NewRow();
+                        if (salesmain.SMID == 0)
+                        {
+                            ssid = ssid + 1;
+                            srow["SSID"] = ssid;
+                        }
+                        else
+                        {
+                            srow["SSID"] = detail.SSID;
+                        }
 
                         srow["ItemID"] = detail.ItemID;
                         srow["ItemDescription"] = detail.ItemDescription;
@@ -137,9 +173,24 @@ namespace DataAccessLayer.Repositories
                         {
 
                             DataRow rr = dtSaleSubWarehouse.NewRow();
+                            if (salesmain.SMID == 0)
+                            {
+                                
+                                
+                                swid = swid + 1;
+                                rr["SWID"] =swid;
+                                rr["SSID"] = ssid;
+                            }
+                            else 
+                            {
+                                rr["SWID"] = detail.SaleDetailWarehouse[index].SWID;
+                                rr["SSID"] = detail.SaleDetailWarehouse[index].SSID;
 
+                            }
+
+                            
                             rr["GodownID"] = detail.SaleDetailWarehouse[index].GodownID;
-                            rr["ItemID"] = detail.SaleDetailWarehouse[index].ItemID;
+                            rr["ItemID"] = detail.ItemID;
                             rr["Qty"] = detail.SaleDetailWarehouse[index].Qty;
                             rr["CompanyID"] = detail.SaleDetailWarehouse[index].CompanyID;
                             rr["BranchID"] = detail.SaleDetailWarehouse[index].BranchID;
@@ -209,7 +260,7 @@ namespace DataAccessLayer.Repositories
 
         public async Task<IList<SalesMainVM>> GetAllSales()
         {
-            var list=  await this._context.SaleMain.ToListAsync();
+            var list=  await this._context.SaleMain.Where(x => x.Del == 0).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -220,13 +271,74 @@ namespace DataAccessLayer.Repositories
 
         public async Task<SalesMainVM> GetSaleByID(int Id) 
         {
-            
-            return new SalesMainVM();
+            SalesMainVM salemainobj = new SalesMainVM();
+
+           
+            var mainsale  = this._context.SaleMain.Where(x => x.SMID == Id).FirstOrDefault();
+
+            var mainjson = JsonConvert.SerializeObject(mainsale);
+
+            salemainobj = JsonConvert.DeserializeObject<SalesMainVM>(mainjson);
+
+            if (salemainobj != null)
+            {
+                var subsale = await  this._context.SaleSub.Where(x => x.SMID == salemainobj.SMID).ToListAsync();
+                var subjson = JsonConvert.SerializeObject(subsale);
+                salemainobj.SaleDetail = JsonConvert.DeserializeObject<List<SaleSubVm>>(subjson);
+
+                foreach (var subsaleitem in salemainobj.SaleDetail)
+                {
+                    var house = await this._context.SaleSubWarehouse.Where(x => x.SSID == subsaleitem.SSID).ToListAsync();
+
+                    var housejson = JsonConvert.SerializeObject(house);
+                    subsaleitem.SaleDetailWarehouse = JsonConvert.DeserializeObject<IList<SaleSubWarehouseVM>>(housejson);
+
+                }
+
+            }
+
+            return salemainobj;
         }
 
         public async Task<string> DeleteSale(int Id)
         {
-            return "Deleted Succesfully";
+            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            {
+              
+                SqlCommand cmd = null;
+
+                cmd = new SqlCommand("dbo.Del_Sales", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+              
+                cmd.Parameters.Add("@SmId", SqlDbType.BigInt).Value = Id;
+
+                con.Open();
+                await cmd.ExecuteNonQueryAsync();
+                
+                con.Close();
+
+
+                return "Record Deleted Successfully";
+
+
+
+            }
+            //var mainsale = await this._context.SaleMain.Where(x => x.SMID == Id).FirstOrDefaultAsync();
+
+            //mainsale.Del = 1;
+            //this._context.SaleMain.Update(mainsale);
+            //var subsale = await this._context.SaleSub.Where(x => x.SMID == Id).FirstOrDefaultAsync();
+            //subsale.Del = 1;
+            //this._context.SaleSub.Update(subsale);
+
+            //var subsalewarehouse = await this._context.SaleSubWarehouse.Where(x => x.SMID == Id).FirstOrDefaultAsync();
+            //subsalewarehouse.Del = 1;
+
+            //this._context.SaleSubWarehouse.Update(subsalewarehouse);
+            //this._context.SaveChanges();
+
+
+            //return "Deleted Succesfully";
         }
     }
 }

@@ -11,6 +11,7 @@ namespace BussinessModels.DBModels
     
         public int? ID { get; set; }
         public int? SMID { get; set; }
+        public int SSID { get; set; }
         public int? ItemID { get; set; }
         public string? ItemDescription { get; set; }
         public string? Unit { get; set; }

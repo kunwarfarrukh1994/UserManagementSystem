@@ -6,30 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\**" />
-    <EmbeddedResource Remove="Migrations\**" />
-    <None Remove="Migrations\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Migrations\20210428152731_init.cs" />
-    <Compile Include="Migrations\20210428152731_init.Designer.cs" />
-    <Compile Include="Migrations\20210428153953_changeBranchId.cs" />
-    <Compile Include="Migrations\20210428153953_changeBranchId.Designer.cs" />
-    <Compile Include="Migrations\20210429182136_autoid-nullable.cs" />
-    <Compile Include="Migrations\20210429182136_autoid-nullable.Designer.cs" />
-    <Compile Include="Migrations\20210429182509_nullid.cs" />
-    <Compile Include="Migrations\20210429182509_nullid.Designer.cs" />
-    <Compile Include="Migrations\20210430170953_changenullableWarehouse.cs" />
-    <Compile Include="Migrations\20210430170953_changenullableWarehouse.Designer.cs" />
-    <Compile Include="Migrations\20210430172138_addItemID.cs" />
-    <Compile Include="Migrations\20210430172138_addItemID.Designer.cs" />
-    <Compile Include="Migrations\20210430173002_addItemIDOrder.cs" />
-    <Compile Include="Migrations\20210430173002_addItemIDOrder.Designer.cs" />
-    <Compile Include="Migrations\AppDbContextModelSnapshot.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />

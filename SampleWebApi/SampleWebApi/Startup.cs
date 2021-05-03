@@ -10,15 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using UserManagement.DBContext;
-using UserManagement.UserModels;
 using NSwag;
 using Swashbuckle.Swagger;
 using SampleWebApi.ActionFilters;
 using Microsoft.AspNetCore.Mvc;
-using SampleWebApi.CustumExceptionMiddelware;
-using UserManagement.Interfaces;
-using UserManagement.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -59,7 +54,7 @@ namespace SampleWebApi
 
 
             // custum exception handler for globalizing error handling and expections 
-            app.UseCustomExceptionMiddleware();
+           // app.UseCustomExceptionMiddleware();
 
             // file server and mvc 
             app.UseFileServer();
@@ -86,10 +81,10 @@ namespace SampleWebApi
 
             // database context
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<UsersDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+           // services.AddDbContext<UsersDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
            //identity
-            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<UsersDBContext>().AddDefaultTokenProviders();  //   bridge to connect identity with our database.AddDefaultTokenProviders();
+           // services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<UsersDBContext>().AddDefaultTokenProviders();  //   bridge to connect identity with our database.AddDefaultTokenProviders();
             services.Configure<IdentityOptions>(options =>
             {
 
@@ -172,12 +167,12 @@ namespace SampleWebApi
             services.AddScoped<IAuthorizationHandler, UserAuthorizationHandler>();
            // services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
            // services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationHandler>();
-            services.AddTransient<IUserManagementService, UserManagementService>();
-            services.AddTransient<ISalesRepository, SalesRepository >();
+           // services.AddTransient<IUserManagementService, UserManagementService>();
+           // services.AddTransient<ISalesRepository, SalesRepository >();
 
 
 
-            services.AddTransient<IDbLogger, DbLogger>();
+           // services.AddTransient<IDbLogger, DbLogger>();
             //swagger 
             services.AddSwaggerDocument();
 

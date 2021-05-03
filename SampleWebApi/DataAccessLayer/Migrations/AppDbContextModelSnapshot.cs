@@ -492,6 +492,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<int?>("SMID")
                         .HasColumnType("int");
 
+                    b.Property<int>("SSID")
+                        .HasColumnType("int");
+
                     b.Property<string>("STRG")
                         .HasColumnType("nvarchar(max)");
 
@@ -540,7 +543,13 @@ namespace DataAccessLayer.Migrations
                     b.Property<float?>("Qty")
                         .HasColumnType("real");
 
-                    b.Property<int?>("SMID")
+                    b.Property<int>("SMID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SSID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SWID")
                         .HasColumnType("int");
 
                     b.Property<int?>("Sync")

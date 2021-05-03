@@ -23,4 +23,3 @@ D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netco
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.csproj.CoreCompileInputs.cache
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.dll
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.pdb
-D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.csprojAssemblyReference.cache

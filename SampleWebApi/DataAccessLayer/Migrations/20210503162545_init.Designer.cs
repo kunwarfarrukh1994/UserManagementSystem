@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210430170953_changenullableWarehouse")]
-    partial class changenullableWarehouse
+    [Migration("20210503162545_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -494,6 +494,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<int?>("SMID")
                         .HasColumnType("int");
 
+                    b.Property<int>("SSID")
+                        .HasColumnType("int");
+
                     b.Property<string>("STRG")
                         .HasColumnType("nvarchar(max)");
 
@@ -530,6 +533,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<int?>("ID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ItemID")
+                        .HasColumnType("int");
+
                     b.Property<float?>("Packet")
                         .HasColumnType("real");
 
@@ -539,7 +545,13 @@ namespace DataAccessLayer.Migrations
                     b.Property<float?>("Qty")
                         .HasColumnType("real");
 
-                    b.Property<int?>("SMID")
+                    b.Property<int>("SMID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SSID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SWID")
                         .HasColumnType("int");
 
                     b.Property<int?>("Sync")

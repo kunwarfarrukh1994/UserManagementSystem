@@ -7,8 +7,9 @@ namespace BussinessModels.ViewModels
 {
     public class SaleSubWarehouseVM
     {
+		public int SWID { get; set; }
+		public int SSID { get; set; }
 		public int GodownID { get; set; }
-		[Column(Order = 4)]
 		public int ItemID { get; set; }
 		public Single Packet { get; set; }
 		public Single PktQty { get; set; }
