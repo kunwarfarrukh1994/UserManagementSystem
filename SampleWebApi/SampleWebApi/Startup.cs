@@ -19,6 +19,11 @@ using Microsoft.AspNetCore.Mvc;
 using SampleWebApi.CustumExceptionMiddelware;
 using UserManagement.Interfaces;
 using UserManagement.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using SampleWebApi.AuthorizationHandlers;
 
 namespace SampleWebApi
 {
@@ -51,11 +56,15 @@ namespace SampleWebApi
                 });
             }
 
+
             // custum exception handler for globalizing error handling and expections 
             app.UseCustomExceptionMiddleware();
 
             // file server and mvc 
             app.UseFileServer();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseMvc();
 
          
@@ -68,6 +77,12 @@ namespace SampleWebApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+            string issuer = Configuration.GetValue<string>("Jwt:ValidAudience");
+
+            string signingKey = Configuration.GetValue<string>("Jwt:Secret");
+            byte[] signingKeyBytes = Encoding.UTF8.GetBytes(signingKey);
+
             // database context
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<UsersDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -98,24 +113,66 @@ namespace SampleWebApi
 
             });
 
-           
+            //  services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
+
+
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
 
 
+
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+
+
+            }).AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = Configuration.GetValue<string>("Jwt:ValidIssuer"),
+                    ValidateAudience = true,
+                    ValidAudience = Configuration.GetValue<string>("Jwt:ValidAudience"),
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ClockSkew = System.TimeSpan.Zero,
+                    IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
+                };
+            });
+
+            services.AddAuthorization(
+                options =>
+            {
+                options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser()
+                   // .RequireRole(UserRoles.User)
+                    .Build();
+            }
+
+            );
+
+            
+
+            
             // mvc 
+
             services.AddMvc(option =>
             {
                 option.EnableEndpointRouting = false;
                 option.Filters.Add(new ValidationModelFilter());
             });
-           
-            // dependency injection
-            services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
-            services.AddTransient<IUserService, UserService>();
 
+            // dependency injection
+            services.AddScoped<IAuthorizationHandler, UserAuthorizationHandler>();
+            services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
+           // services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationHandler>();
+            services.AddTransient<IUserManagementService, UserManagementService>();
+            services.AddTransient<IDbLogger, DbLogger>();
             //swagger 
             services.AddSwaggerDocument();
 

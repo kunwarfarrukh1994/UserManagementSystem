@@ -22,4 +22,3 @@ D:\GitProjects\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netco
 D:\GitProjects\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.csproj.CoreCompileInputs.cache
 D:\GitProjects\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.dll
 D:\GitProjects\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.pdb
-D:\GitProjects\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.csprojAssemblyReference.cache

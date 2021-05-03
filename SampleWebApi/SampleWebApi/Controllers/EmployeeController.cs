@@ -5,14 +5,19 @@ using System.Threading.Tasks;
 using BussinessModels;
 using DataAccessLayer;
 using DataAccessLayer.ReposiotryInterfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UserManagement.UserModels;
 
 namespace SampleWebApi.Controllers
 {
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
+    [ApiController]
 
     [Route("api/[controller]")]
-    [ApiController]
     public class EmployeeController : EntityController<Employee>
     {
         public EmployeeController(IGenericRepository<Employee> employeeRepo) : base(employeeRepo)
