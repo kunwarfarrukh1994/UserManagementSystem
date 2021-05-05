@@ -1,31 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SampleWebApi\\SampleWebAPI\\UserManagement\\UserManagement.csproj": {}
+    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj": {}
   },
   "projects": {
-    "D:\\SampleWebApi\\SampleWebAPI\\UserManagement\\UserManagement.csproj": {
+    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SampleWebApi\\SampleWebAPI\\UserManagement\\UserManagement.csproj",
+        "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj",
         "projectName": "UserManagement",
-        "projectPath": "D:\\SampleWebApi\\SampleWebAPI\\UserManagement\\UserManagement.csproj",
+        "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj",
         "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
-        "outputPath": "D:\\SampleWebApi\\SampleWebAPI\\UserManagement\\obj\\",
+        "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "netstandard2.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
             "projectReferences": {}
           }
         },
@@ -36,7 +37,46 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Microsoft.Extensions.Identity.Core": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -48,11 +88,11 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.NETCore.App": {
+            "NETStandard.Library": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
