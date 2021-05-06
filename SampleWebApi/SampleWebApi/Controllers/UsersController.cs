@@ -84,7 +84,7 @@ namespace SampleWebApi.Controllers
             return Forbid();
         }
 
-        [HttpDelete]
+        [HttpDelete("DeleteUsers")]
         public async Task<IActionResult> DeleteUsers([FromBody] List<string> UserIds)
         {
             var IsUserAuthorize = await this._authSevice.AuthorizeAsync(User, null, UserOperations.SuperAdmin);
@@ -98,7 +98,7 @@ namespace SampleWebApi.Controllers
                 return Forbid("Dont have Access");
             }
         }
-        [HttpDelete]
+        [HttpDelete("DeleteUser/{id?}")]
         public async Task<IActionResult> DeleteUser([FromBody] Guid userID)
         {
             var IsUserAuthorize = await this._authSevice.AuthorizeAsync(User, null, UserOperations.SuperAdmin);
@@ -126,7 +126,7 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("AddClaimsToRole")]
         public async Task<IActionResult> AddClaimsToRole([FromBody] AddClaimsToRoleDto RoleWithClaims)
         {
             var IsUserAuthorize = await this._authSevice.AuthorizeAsync(User, null, UserOperations.SuperAdmin);
@@ -141,7 +141,7 @@ namespace SampleWebApi.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("AssignRolesToUser")]
         public async Task<IActionResult> AssignRolesToUser([FromBody] AssignRolesToUserDto userWithRoles)
         {
             var result = await this._authSevice.AuthorizeAsync(User, null, UserOperations.SuperAdmin);
@@ -193,7 +193,7 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpPut]
+        [HttpPut("UpdateUserRoles")]
         public async Task<IActionResult> UpdateUserRoles([FromBody]AssignRolesToUserDto userWithRoles)
         {
             var result = await this._authSevice.AuthorizeAsync(User, null, UserOperations.SuperAdmin);
@@ -208,7 +208,7 @@ namespace SampleWebApi.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("UpdateUserClaims")]
         public async Task<IActionResult> UpdateUserClaims([FromBody]AssignClaimsToUserDto userWithClaims)
         {
             var result = await this._authSevice.AuthorizeAsync(User, null, UserOperations.SuperAdmin);
@@ -223,7 +223,7 @@ namespace SampleWebApi.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("GetAllRoles")]
         public async Task<IActionResult> GetAllRoles()
         {
             var result = await this._authSevice.AuthorizeAsync(User, null, UserOperations.SuperAdmin);
