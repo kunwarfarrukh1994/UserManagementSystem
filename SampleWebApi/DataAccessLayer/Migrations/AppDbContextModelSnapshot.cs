@@ -20,6 +20,64 @@ namespace DataAccessLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
 
+            modelBuilder.Entity("BussinessModels.DBModels.Agents", b =>
+                {
+                    b.Property<string>("AgentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("CID")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OperatorID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReferBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("ID")
+                        .IsUnique()
+                        .HasFilter("[ID] IS NOT NULL");
+
+                    b.ToTable("Agents");
+                });
+
             modelBuilder.Entity("BussinessModels.DBModels.CodeCodingMain", b =>
                 {
                     b.Property<float>("BCID")
@@ -85,7 +143,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<DateTime>("GRNDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ID")
+                    b.Property<int?>("ID")
                         .HasColumnType("int");
 
                     b.Property<string>("IRange")
@@ -107,6 +165,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<short>("OpeningBit")
                         .HasColumnType("smallint");
+
+                    b.Property<int>("OperatorID")
+                        .HasColumnType("int");
 
                     b.Property<float>("PCostRate")
                         .HasColumnType("real");
@@ -172,7 +233,77 @@ namespace DataAccessLayer.Migrations
                     b.Property<float>("VolumeCID")
                         .HasColumnType("real");
 
+                    b.HasIndex("ID")
+                        .IsUnique()
+                        .HasFilter("[ID] IS NOT NULL");
+
                     b.ToTable("CodeCodingMain");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.CodeCodingProduction", b =>
+                {
+                    b.Property<float>("Astar")
+                        .HasColumnType("real");
+
+                    b.Property<float>("CID")
+                        .HasColumnType("real");
+
+                    b.Property<float>("CPID")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Gatta")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("InnerMaterial")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Pages")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Printing")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<float>("TitleMaterial")
+                        .HasColumnType("real");
+
+                    b.HasIndex("ID")
+                        .IsUnique()
+                        .HasFilter("[ID] IS NOT NULL");
+
+                    b.ToTable("CodeCodingProduction");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.CodeCodingWarehouse", b =>
+                {
+                    b.Property<float>("CID")
+                        .HasColumnType("real");
+
+                    b.Property<float>("CWID")
+                        .HasColumnType("real");
+
+                    b.Property<int>("GodownID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Qty")
+                        .HasColumnType("real");
+
+                    b.HasIndex("ID")
+                        .IsUnique()
+                        .HasFilter("[ID] IS NOT NULL");
+
+                    b.ToTable("CodeCodingWarehouse");
                 });
 
             modelBuilder.Entity("BussinessModels.DBModels.GoDown", b =>
@@ -191,8 +322,12 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("id")
+                    b.Property<int?>("ID")
                         .HasColumnType("int");
+
+                    b.HasIndex("ID")
+                        .IsUnique()
+                        .HasFilter("[ID] IS NOT NULL");
 
                     b.ToTable("GoDown");
                 });
@@ -374,8 +509,8 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("ID")
-                        .HasColumnType("real");
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
 
                     b.Property<string>("MobileNo")
                         .IsRequired()
@@ -432,6 +567,10 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<int>("Sync")
                         .HasColumnType("int");
+
+                    b.HasIndex("ID")
+                        .IsUnique()
+                        .HasFilter("[ID] IS NOT NULL");
 
                     b.ToTable("SaleParty");
                 });
@@ -555,7 +694,51 @@ namespace DataAccessLayer.Migrations
                     b.Property<int?>("Sync")
                         .HasColumnType("int");
 
+                    b.HasIndex("ID")
+                        .IsUnique()
+                        .HasFilter("[ID] IS NOT NULL");
+
                     b.ToTable("SaleSubWarehouse");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.SalesOutSourceItems", b =>
+                {
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
+
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ItemDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ItemID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SMID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SOID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.HasIndex("ID")
+                        .IsUnique()
+                        .HasFilter("[ID] IS NOT NULL");
+
+                    b.ToTable("SalesOutSourceItems");
                 });
 
             modelBuilder.Entity("BussinessModels.DBModels.SubAccount", b =>
@@ -575,6 +758,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AgentID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Area")
                         .IsRequired()
@@ -597,8 +783,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("FinID")
                         .HasColumnType("int");
 
-                    b.Property<long>("ID")
-                        .HasColumnType("bigint");
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
 
                     b.Property<float>("OpBal")
                         .HasColumnType("real");
@@ -610,8 +796,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<DateTime>("SAccDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("SAccID")
-                        .HasColumnType("bigint");
+                    b.Property<int>("SAccID")
+                        .HasColumnType("int");
 
                     b.Property<string>("SAccName")
                         .IsRequired()
@@ -636,6 +822,10 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("url")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("ID")
+                        .IsUnique()
+                        .HasFilter("[ID] IS NOT NULL");
 
                     b.ToTable("subAccount");
                 });

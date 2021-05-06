@@ -7,7 +7,7 @@ namespace BussinessModels.DBModels
 {
     public class SaleParty
     {
-		public Single ID { get; set; }
+		public int? ID { get; set; }
 		public Single CID { get; set; }
 		public DateTime EDate { get; set; }
 		public string PartyName { get; set; }

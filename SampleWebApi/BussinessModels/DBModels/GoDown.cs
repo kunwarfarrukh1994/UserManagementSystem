@@ -6,7 +6,7 @@ namespace BussinessModels.DBModels
 {
     public class GoDown
     {
-        public int id { get; set; }
+        public int? ID { get; set; }
         public int GoCid { get; set; }
         public string GoName { get; set; }
         public string GoType { get; set; }

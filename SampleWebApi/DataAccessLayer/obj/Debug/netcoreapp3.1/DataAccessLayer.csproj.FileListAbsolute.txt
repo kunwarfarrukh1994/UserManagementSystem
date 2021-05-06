@@ -52,3 +52,6 @@ C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\DataAccessLayer\
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.runtimeconfig.json
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.runtimeconfig.dev.json
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.genruntimeconfig.cache
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.runtimeconfig.json
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Debug\netcoreapp3.1\DataAccessLayer.runtimeconfig.dev.json
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Debug\netcoreapp3.1\DataAccessLayer.genruntimeconfig.cache

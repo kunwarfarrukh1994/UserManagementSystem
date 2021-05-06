@@ -158,7 +158,6 @@ D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\S
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.AssemblyInfoInputs.cache
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.AssemblyInfo.cs
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.csproj.CoreCompileInputs.cache
-D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.MvcApplicationPartsAssemblyInfo.cs
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.MvcApplicationPartsAssemblyInfo.cache
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\staticwebassets\SampleWebApi.StaticWebAssets.Manifest.cache
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\staticwebassets\SampleWebApi.StaticWebAssets.xml

@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -340,5 +341,42 @@ namespace DataAccessLayer.Repositories
 
             //return "Deleted Succesfully";
         }
+
+        public async  Task<SalesLookUpsVM> GetLookUpsforSale()
+        {
+            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            {
+                SqlParameter[] @params =
+                    {
+                       new SqlParameter("@SubAccountLookUp", SqlDbType.NVarChar,5000) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@ItemLookUp", SqlDbType.NVarChar,5000) {Direction = ParameterDirection.Output}
+
+                };
+
+                
+                var sql = "EXEC[SalesGetSearchLookUps] @SubAccountLookUp OUTPUT, @ItemLookUp OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql,@params[0],@params[1]);
+
+
+                var s =@params[1].Value;
+                SalesLookUpsVM lookups = new SalesLookUpsVM();
+
+
+
+
+                lookups.salepartylookup = JsonConvert.DeserializeObject<IList<SalePartyLookUp>>(@params[0].Value.ToString());
+                lookups.saleitemlookup = JsonConvert.DeserializeObject<IList<SaleItemLookupVM>>(@params[1].Value.ToString());
+
+
+                con.Close();
+
+
+                return lookups;
+
+
+
+            }
+        }
+
     }
 }

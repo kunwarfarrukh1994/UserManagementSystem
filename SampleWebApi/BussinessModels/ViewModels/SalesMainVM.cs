@@ -15,6 +15,9 @@ namespace BussinessModels.ViewModels
 		public Single CashRece { get; set; }
 		public Single ChangeReturn { get; set; }
 		public int AgentID { get; set; }
+		public string? txt1 { get; set; }
+		public int? N1 { get; set; }
+		public int? N2 { get; set; }
 		public string Goods { get; set; }
 		public string ContactNo { get; set; }
 		public string CashAddress { get; set; }

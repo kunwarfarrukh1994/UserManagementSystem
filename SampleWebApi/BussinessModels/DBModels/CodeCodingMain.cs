@@ -6,7 +6,7 @@ namespace BussinessModels.DBModels
 {
     public class CodeCodingMain
     {
-		public int ID { get; set; }
+		public int? ID { get; set; }
 		public Single CID { get; set; }
 		public DateTime EDate { get; set; }
 		public string CodeName { get; set; }
@@ -53,6 +53,8 @@ namespace BussinessModels.DBModels
 		public DateTime GRNDate { get; set; }
 		public Single PCostRate { get; set; }
 		public Single PSaleRate { get; set; }
+		public int OperatorID { get; set; }
+
 
 
 

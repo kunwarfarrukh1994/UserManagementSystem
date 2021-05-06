@@ -6,6 +6,8 @@ namespace BussinessModels.DBModels
 {
     public class SubAccount
     {
+		public int? ID { get; set; }
+		public int SAccID { get; set; }
 		public string SAccName { get; set; }
 		public int FinID { get; set; }
 		public DateTime SAccDate { get; set; }
@@ -23,10 +25,11 @@ namespace BussinessModels.DBModels
 		public string Baltype { get; set; }
 		public short Active { get; set; }
 		public int BranchID { get; set; }
-		public long ID { get; set; }
+		
 		public string SAccNameU { get; set; }
 		public string Area { get; set; }
 		public string VendorCode { get; set; }
-		public long SAccID { get; set; }
+		public int AgentID { get; set; }
+
 	}
 }
