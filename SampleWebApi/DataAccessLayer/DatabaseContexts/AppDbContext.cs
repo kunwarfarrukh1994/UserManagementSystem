@@ -25,6 +25,7 @@ namespace DataAccessLayer
             model_builder.Entity<CodeCodingWarehouse>().HasNoKey().HasIndex(S => S.ID).IsUnique();
 
             model_builder.Entity<GoDown>().HasNoKey().HasIndex(S => S.ID).IsUnique();
+            model_builder.Entity<Pandi>().HasNoKey().HasIndex(S => S.ID).IsUnique();
 
             model_builder.Entity<SaleMain>().HasNoKey().HasIndex(S => S.ID).IsUnique();
             model_builder.Entity<SaleSub>().HasNoKey().HasIndex(S=> S.ID).IsUnique();
@@ -35,6 +36,7 @@ namespace DataAccessLayer
 
 
             model_builder.Entity<SubAccount>().HasNoKey().HasIndex(S => S.ID).IsUnique();
+            
 
 
 
@@ -46,6 +48,7 @@ namespace DataAccessLayer
         public DbSet<CodeCodingMain> CodeCodingMain { get; set; }
         public DbSet<CodeCodingWarehouse> CodeCodingWarehouse { get; set; }
         public DbSet<GoDown> GoDown { get; set; }
+        public DbSet<Pandi> Pandi { get; set; }
         public DbSet<SaleSub> SaleSub { get; set; }
         public DbSet<SaleMain> SaleMain { get; set; }
         public DbSet<SaleSubWarehouse> SaleSubWarehouse { get; set; }

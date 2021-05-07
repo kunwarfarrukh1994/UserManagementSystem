@@ -36,6 +36,9 @@ namespace DataAccessLayer.Repositories
             dtSalesMain.Columns.Add("CashRece", typeof(Single));
             dtSalesMain.Columns.Add("ChangeReturn", typeof(Single));
             dtSalesMain.Columns.Add("AgentID", typeof(int));
+            dtSalesMain.Columns.Add("txt1", typeof(string));
+            dtSalesMain.Columns.Add("N1", typeof(int));
+            dtSalesMain.Columns.Add("N2", typeof(int));
             dtSalesMain.Columns.Add("Goods", typeof(string));
             dtSalesMain.Columns.Add("ContactNo", typeof(string));
             dtSalesMain.Columns.Add("CashAddress", typeof(string));
@@ -119,6 +122,9 @@ namespace DataAccessLayer.Repositories
                     row["CashRece"] = salesmain.CashRece;
                     row["ChangeReturn"] = salesmain.ChangeReturn;
                     row["AgentID"] = salesmain.AgentID;
+                    row["txt1"] = salesmain.txt1;
+                    row["N1"] = salesmain.N1;
+                    row["N2"] = salesmain.N2;
                     row["Goods"] = salesmain.Goods;
                     row["ContactNo"] = salesmain.ContactNo;
                     row["CashAddress"] = salesmain.CashAddress;
@@ -236,7 +242,7 @@ namespace DataAccessLayer.Repositories
                         con.Close();
 
 
-                        return "Record Saved Successfully for ID:" + salesmain.SMID;
+                        return "Record Saved Successfully for ID:" + result;
 
 
 
@@ -324,22 +330,7 @@ namespace DataAccessLayer.Repositories
 
 
             }
-            //var mainsale = await this._context.SaleMain.Where(x => x.SMID == Id).FirstOrDefaultAsync();
-
-            //mainsale.Del = 1;
-            //this._context.SaleMain.Update(mainsale);
-            //var subsale = await this._context.SaleSub.Where(x => x.SMID == Id).FirstOrDefaultAsync();
-            //subsale.Del = 1;
-            //this._context.SaleSub.Update(subsale);
-
-            //var subsalewarehouse = await this._context.SaleSubWarehouse.Where(x => x.SMID == Id).FirstOrDefaultAsync();
-            //subsalewarehouse.Del = 1;
-
-            //this._context.SaleSubWarehouse.Update(subsalewarehouse);
-            //this._context.SaveChanges();
-
-
-            //return "Deleted Succesfully";
+        
         }
 
         public async  Task<SalesLookUpsVM> GetLookUpsforSale()
@@ -348,17 +339,19 @@ namespace DataAccessLayer.Repositories
             {
                 SqlParameter[] @params =
                     {
-                       new SqlParameter("@SubAccountLookUp", SqlDbType.NVarChar,5000) {Direction = ParameterDirection.Output},
-                       new SqlParameter("@ItemLookUp", SqlDbType.NVarChar,5000) {Direction = ParameterDirection.Output}
+                       new SqlParameter("@SubAccountLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@ItemLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@PandiLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@AddaLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
 
                 };
 
                 
-                var sql = "EXEC[SalesGetSearchLookUps] @SubAccountLookUp OUTPUT, @ItemLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql,@params[0],@params[1]);
+                var sql = "EXEC[SalesGetSearchLookUps] @SubAccountLookUp OUTPUT, @ItemLookUp OUTPUT, @PandiLookUp OUTPUT, @AddaLookUp OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql,@params[0],@params[1], @params[2], @params[3]);
 
 
-                var s =@params[1].Value;
+                
                 SalesLookUpsVM lookups = new SalesLookUpsVM();
 
 
@@ -366,6 +359,9 @@ namespace DataAccessLayer.Repositories
 
                 lookups.salepartylookup = JsonConvert.DeserializeObject<IList<SalePartyLookUp>>(@params[0].Value.ToString());
                 lookups.saleitemlookup = JsonConvert.DeserializeObject<IList<SaleItemLookupVM>>(@params[1].Value.ToString());
+                lookups.salepandilookup = JsonConvert.DeserializeObject<IList<SalePandiLookUpVM>>(@params[2].Value.ToString());
+                lookups.saleaddalookup = JsonConvert.DeserializeObject<IList<SaleAddaLookUpVM>>(@params[3].Value.ToString());
+                
 
 
                 con.Close();

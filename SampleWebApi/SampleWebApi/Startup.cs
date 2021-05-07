@@ -61,6 +61,12 @@ namespace SampleWebApi
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors(x => x
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+
             app.UseMvc();
 
          
@@ -139,6 +145,12 @@ namespace SampleWebApi
                     ClockSkew = System.TimeSpan.Zero,
                     IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
                 };
+            });
+
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
             });
 
             services.AddAuthorization(
