@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj": {}
+    "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj": {}
   },
   "projects": {
-    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj": {
+    "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj",
+        "projectUniqueName": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj",
         "projectName": "BussinessLogicLayer",
-        "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj",
-        "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
-        "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\obj\\",
+        "projectPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj",
+        "packagesPath": "C:\\Users\\EAS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\EAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +31,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj"
+              "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj"
               }
             }
           }
@@ -58,21 +61,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {
+    "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
+        "projectUniqueName": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
         "projectName": "BussinessModels",
-        "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
-        "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
-        "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\obj\\",
+        "projectPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
+        "packagesPath": "C:\\Users\\EAS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessModels\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\EAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -122,21 +128,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj",
-        "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
-        "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\obj\\",
+        "projectPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj",
+        "packagesPath": "C:\\Users\\EAS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\EAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -150,8 +159,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {
-                "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj"
+              "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {
+                "projectPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj"
               }
             }
           }
@@ -208,7 +217,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

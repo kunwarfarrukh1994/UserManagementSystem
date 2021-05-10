@@ -8001,19 +8001,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Farrukh khan\\.nuget\\packages\\": {}
+    "C:\\Users\\EAS\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj",
+      "projectUniqueName": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj",
       "projectName": "BussinessLogicLayer",
-      "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj",
-      "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
-      "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\obj\\",
+      "projectPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj",
+      "packagesPath": "C:\\Users\\EAS\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\EAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8027,8 +8031,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj"
+            "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj"
             }
           }
         }
@@ -8057,7 +8061,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   },

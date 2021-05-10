@@ -36,7 +36,9 @@ namespace DataAccessLayer
 
 
             model_builder.Entity<SubAccount>().HasNoKey().HasIndex(S => S.ID).IsUnique();
-            
+            model_builder.Entity<Customers>().HasNoKey().HasIndex(S => S.ID).IsUnique();
+            model_builder.Entity<City>().HasNoKey().HasIndex(S => S.ID).IsUnique();
+
 
 
 
@@ -57,6 +59,8 @@ namespace DataAccessLayer
 
         public DbSet<SaleParty> SaleParty  { get; set; }
         public DbSet<SubAccount> subAccount { get; set; }
+        public DbSet<Customers> Customers { get; set; }
+        public DbSet<City> City { get; set; }
 
     }
 }

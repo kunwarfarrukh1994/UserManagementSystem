@@ -11,11 +11,50 @@ namespace DataAccessLayer.Migrations
                 name: "dbo");
 
             migrationBuilder.CreateTable(
+                name: "Agents",
+                schema: "dbo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: true),
+                    CID = table.Column<float>(type: "real", nullable: false),
+                    AgentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReferBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CompanyID = table.Column<int>(type: "int", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    OperatorID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "City",
+                schema: "dbo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: true),
+                    CityId = table.Column<int>(type: "int", nullable: false),
+                    CityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FinID = table.Column<int>(type: "int", nullable: false),
+                    CityNameU = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CodeCodingMain",
                 schema: "dbo",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: true),
                     CID = table.Column<float>(type: "real", nullable: false),
                     EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CodeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -60,7 +99,78 @@ namespace DataAccessLayer.Migrations
                     SuitLength = table.Column<float>(type: "real", nullable: false),
                     GRNDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PCostRate = table.Column<float>(type: "real", nullable: false),
-                    PSaleRate = table.Column<float>(type: "real", nullable: false)
+                    PSaleRate = table.Column<float>(type: "real", nullable: false),
+                    OperatorID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CodeCodingProduction",
+                schema: "dbo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: true),
+                    CID = table.Column<float>(type: "real", nullable: false),
+                    CPID = table.Column<float>(type: "real", nullable: false),
+                    Gatta = table.Column<float>(type: "real", nullable: false),
+                    TitleMaterial = table.Column<float>(type: "real", nullable: false),
+                    Astar = table.Column<float>(type: "real", nullable: false),
+                    InnerMaterial = table.Column<float>(type: "real", nullable: false),
+                    Pages = table.Column<float>(type: "real", nullable: false),
+                    Printing = table.Column<float>(type: "real", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CodeCodingWarehouse",
+                schema: "dbo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: true),
+                    CID = table.Column<float>(type: "real", nullable: false),
+                    CWID = table.Column<float>(type: "real", nullable: false),
+                    GodownID = table.Column<int>(type: "int", nullable: false),
+                    Qty = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Customers",
+                schema: "dbo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: true),
+                    CID = table.Column<int>(type: "int", nullable: false),
+                    EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerCategory = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WhatsappNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CityID = table.Column<int>(type: "int", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AgentID1 = table.Column<int>(type: "int", nullable: false),
+                    AgentID2 = table.Column<int>(type: "int", nullable: true),
+                    CreditLimit = table.Column<float>(type: "real", nullable: false),
+                    OpBal = table.Column<float>(type: "real", nullable: false),
+                    SAccID = table.Column<int>(type: "int", nullable: true),
+                    LocationID = table.Column<int>(type: "int", nullable: true),
+                    CompanyID = table.Column<int>(type: "int", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    OperatorID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,11 +181,26 @@ namespace DataAccessLayer.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: true),
                     GoCid = table.Column<int>(type: "int", nullable: false),
                     GoName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GoType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FinId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pandi",
+                schema: "dbo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: true),
+                    CID = table.Column<int>(type: "int", nullable: false),
+                    PandiName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -135,7 +260,7 @@ namespace DataAccessLayer.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
-                    ID = table.Column<float>(type: "real", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: true),
                     CID = table.Column<float>(type: "real", nullable: false),
                     EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PartyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -166,6 +291,26 @@ namespace DataAccessLayer.Migrations
                     N3 = table.Column<short>(type: "smallint", nullable: false),
                     N4 = table.Column<short>(type: "smallint", nullable: false),
                     PartyType = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SalesOutSourceItems",
+                schema: "dbo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: true),
+                    SMID = table.Column<int>(type: "int", nullable: false),
+                    SOID = table.Column<int>(type: "int", nullable: false),
+                    ItemID = table.Column<int>(type: "int", nullable: false),
+                    ItemDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Amount = table.Column<float>(type: "real", nullable: false),
+                    CompanyID = table.Column<int>(type: "int", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -232,6 +377,8 @@ namespace DataAccessLayer.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
+                    ID = table.Column<int>(type: "int", nullable: true),
+                    SAccID = table.Column<int>(type: "int", nullable: false),
                     SAccName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FinID = table.Column<int>(type: "int", nullable: false),
                     SAccDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -249,20 +396,99 @@ namespace DataAccessLayer.Migrations
                     Baltype = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Active = table.Column<short>(type: "smallint", nullable: false),
                     BranchID = table.Column<int>(type: "int", nullable: false),
-                    ID = table.Column<long>(type: "bigint", nullable: false),
                     SAccNameU = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Area = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VendorCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SAccID = table.Column<long>(type: "bigint", nullable: false)
+                    AgentID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Agents_ID",
+                schema: "dbo",
+                table: "Agents",
+                column: "ID",
+                unique: true,
+                filter: "[ID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_City_ID",
+                schema: "dbo",
+                table: "City",
+                column: "ID",
+                unique: true,
+                filter: "[ID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CodeCodingMain_ID",
+                schema: "dbo",
+                table: "CodeCodingMain",
+                column: "ID",
+                unique: true,
+                filter: "[ID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CodeCodingProduction_ID",
+                schema: "dbo",
+                table: "CodeCodingProduction",
+                column: "ID",
+                unique: true,
+                filter: "[ID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CodeCodingWarehouse_ID",
+                schema: "dbo",
+                table: "CodeCodingWarehouse",
+                column: "ID",
+                unique: true,
+                filter: "[ID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customers_ID",
+                schema: "dbo",
+                table: "Customers",
+                column: "ID",
+                unique: true,
+                filter: "[ID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GoDown_ID",
+                schema: "dbo",
+                table: "GoDown",
+                column: "ID",
+                unique: true,
+                filter: "[ID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pandi_ID",
+                schema: "dbo",
+                table: "Pandi",
+                column: "ID",
+                unique: true,
+                filter: "[ID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SaleMain_ID",
                 schema: "dbo",
                 table: "SaleMain",
+                column: "ID",
+                unique: true,
+                filter: "[ID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SaleParty_ID",
+                schema: "dbo",
+                table: "SaleParty",
+                column: "ID",
+                unique: true,
+                filter: "[ID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SalesOutSourceItems_ID",
+                schema: "dbo",
+                table: "SalesOutSourceItems",
                 column: "ID",
                 unique: true,
                 filter: "[ID] IS NOT NULL");
@@ -274,16 +500,56 @@ namespace DataAccessLayer.Migrations
                 column: "ID",
                 unique: true,
                 filter: "[ID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SaleSubWarehouse_ID",
+                schema: "dbo",
+                table: "SaleSubWarehouse",
+                column: "ID",
+                unique: true,
+                filter: "[ID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_subAccount_ID",
+                schema: "dbo",
+                table: "subAccount",
+                column: "ID",
+                unique: true,
+                filter: "[ID] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Agents",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "City",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
                 name: "CodeCodingMain",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
+                name: "CodeCodingProduction",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "CodeCodingWarehouse",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Customers",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
                 name: "GoDown",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Pandi",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
@@ -292,6 +558,10 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "SaleParty",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "SalesOutSourceItems",
                 schema: "dbo");
 
             migrationBuilder.DropTable(

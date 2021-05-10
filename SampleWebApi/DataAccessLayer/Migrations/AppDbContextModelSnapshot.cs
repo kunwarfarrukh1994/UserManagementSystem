@@ -78,6 +78,32 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Agents");
                 });
 
+            modelBuilder.Entity("BussinessModels.DBModels.City", b =>
+                {
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CityNameU")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FinID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.HasIndex("ID")
+                        .IsUnique()
+                        .HasFilter("[ID] IS NOT NULL");
+
+                    b.ToTable("City");
+                });
+
             modelBuilder.Entity("BussinessModels.DBModels.CodeCodingMain", b =>
                 {
                     b.Property<float>("BCID")
@@ -304,6 +330,92 @@ namespace DataAccessLayer.Migrations
                         .HasFilter("[ID] IS NOT NULL");
 
                     b.ToTable("CodeCodingWarehouse");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.Customers", b =>
+                {
+                    b.Property<int>("AgentID1")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AgentID2")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CityID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContactPerson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("CreditLimit")
+                        .HasColumnType("real");
+
+                    b.Property<string>("CustType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerCategory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LocationID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("OpBal")
+                        .HasColumnType("real");
+
+                    b.Property<int>("OperatorID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhoneNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SAccID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WhatsappNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("ID")
+                        .IsUnique()
+                        .HasFilter("[ID] IS NOT NULL");
+
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("BussinessModels.DBModels.GoDown", b =>
