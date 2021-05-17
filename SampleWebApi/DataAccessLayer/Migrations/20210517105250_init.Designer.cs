@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210510110249_customerchange")]
-    partial class customerchange
+    [Migration("20210517105250_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,8 +31,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("BranchID")
                         .HasColumnType("int");
 
-                    b.Property<float>("CID")
-                        .HasColumnType("real");
+                    b.Property<int>("CID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -880,93 +880,393 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("SalesOutSourceItems");
                 });
 
-            modelBuilder.Entity("BussinessModels.DBModels.SubAccount", b =>
+            modelBuilder.Entity("BussinessModels.DBModels.adAccounts", b =>
                 {
-                    b.Property<int>("AccCodeCr")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AccCodeDr")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AccCodeID")
-                        .HasColumnType("int");
-
-                    b.Property<short>("Active")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("Address")
+                    b.Property<string>("AccFlexCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AgentID")
+                    b.Property<int>("AccID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Area")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AccTransTypeID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Baltype")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AccTypeID")
+                        .HasColumnType("int");
 
                     b.Property<int>("BranchID")
                         .HasColumnType("int");
 
-                    b.Property<int>("CityID")
+                    b.Property<int>("CateAccID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Fax")
+                    b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FinID")
+                    b.Property<int>("CtrlAccID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ID")
+                    b.Property<int>("Del")
                         .HasColumnType("int");
 
-                    b.Property<float>("OpBal")
+                    b.Property<int>("GroupAccID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MainGroupID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("accAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("accCodeCr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("accCodeDr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("accCodeID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("accCreditLimit")
                         .HasColumnType("real");
 
-                    b.Property<string>("RegID")
+                    b.Property<float>("accOpenBal")
+                        .HasColumnType("real");
+
+                    b.Property<string>("accURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("SAccDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("SAccID")
+                    b.Property<int>("areaID")
                         .HasColumnType("int");
 
-                    b.Property<string>("SAccName")
+                    b.Property<int>("cityID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("compID")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isAutoOpenBal")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeptAcc")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isFreeze")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isLocationAcc")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isNtnActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ntNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SAccNameU")
+                    b.Property<int>("opBalType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("stNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Tel")
+                    b.Property<string>("telephone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("VendorCode")
+                    b.ToTable("adAccounts");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.adCategoryAccounts", b =>
+                {
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CateAccID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("email")
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FinStatementTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("url")
+                    b.Property<int>("accHeadID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("accHeadName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("ID")
-                        .IsUnique()
-                        .HasFilter("[ID] IS NOT NULL");
+                    b.Property<int>("compID")
+                        .HasColumnType("int");
 
-                    b.ToTable("subAccount");
+                    b.ToTable("adCategoryAccounts");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.adControlAccounts", b =>
+                {
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CateAccID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CompID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CtrlAccID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("accCodeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("accCodeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("adControlAccounts");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.adFinancialStatementCategories", b =>
+                {
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FinStatementCateID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("compID")
+                        .HasColumnType("int");
+
+                    b.ToTable("adFinancialStatementCategories");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.adFinancialStatementTypes", b =>
+                {
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FinStatementCateID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FinStatementTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("compID")
+                        .HasColumnType("int");
+
+                    b.ToTable("adFinancialStatementTypes");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.adGroupAccounts", b =>
+                {
+                    b.Property<int>("AccTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CateAccID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CompID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CtrlAccID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GroupAccID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MainGroupID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ParentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isChild")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isCoaItem")
+                        .HasColumnType("bit");
+
+                    b.ToTable("adGroupAccounts");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.adMainGroupAccounts", b =>
+                {
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CateAccID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CtrlAccID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MainGroupID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("compID")
+                        .HasColumnType("int");
+
+                    b.ToTable("adMainGroupAccounts");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.cdCompanies", b =>
+                {
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<int>("businessNatureID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("companyAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("companyCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("companyID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("companyLogo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("companyNTN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("companyPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("companySTN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("companyTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("corporateLogin")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("corporatePWD")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.ToTable("cdCompanies");
                 });
 #pragma warning restore 612, 618
         }

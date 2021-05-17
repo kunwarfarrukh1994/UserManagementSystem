@@ -11,12 +11,174 @@ namespace DataAccessLayer.Migrations
                 name: "dbo");
 
             migrationBuilder.CreateTable(
+                name: "adAccounts",
+                schema: "dbo",
+                columns: table => new
+                {
+                    AccID = table.Column<int>(type: "int", nullable: false),
+                    CateAccID = table.Column<int>(type: "int", nullable: false),
+                    CtrlAccID = table.Column<int>(type: "int", nullable: false),
+                    MainGroupID = table.Column<int>(type: "int", nullable: false),
+                    GroupAccID = table.Column<int>(type: "int", nullable: false),
+                    compID = table.Column<int>(type: "int", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AccFlexCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AccTypeID = table.Column<int>(type: "int", nullable: false),
+                    AccTransTypeID = table.Column<int>(type: "int", nullable: false),
+                    isDeptAcc = table.Column<bool>(type: "bit", nullable: false),
+                    isLocationAcc = table.Column<bool>(type: "bit", nullable: false),
+                    isAutoOpenBal = table.Column<bool>(type: "bit", nullable: false),
+                    isFreeze = table.Column<bool>(type: "bit", nullable: false),
+                    isActive = table.Column<bool>(type: "bit", nullable: false),
+                    accCodeID = table.Column<int>(type: "int", nullable: false),
+                    accCodeDr = table.Column<int>(type: "int", nullable: false),
+                    accCodeCr = table.Column<int>(type: "int", nullable: false),
+                    cityID = table.Column<int>(type: "int", nullable: false),
+                    areaID = table.Column<int>(type: "int", nullable: false),
+                    accAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    telephone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    stNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ntNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isNtnActive = table.Column<bool>(type: "bit", nullable: false),
+                    accOpenBal = table.Column<float>(type: "real", nullable: false),
+                    opBalType = table.Column<int>(type: "int", nullable: false),
+                    accCreditLimit = table.Column<float>(type: "real", nullable: false),
+                    accURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "adCategoryAccounts",
+                schema: "dbo",
+                columns: table => new
+                {
+                    CateAccID = table.Column<int>(type: "int", nullable: false),
+                    FinStatementTypeID = table.Column<int>(type: "int", nullable: false),
+                    compID = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    accHeadID = table.Column<int>(type: "int", nullable: false),
+                    accHeadName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "adControlAccounts",
+                schema: "dbo",
+                columns: table => new
+                {
+                    CtrlAccID = table.Column<int>(type: "int", nullable: false),
+                    CateAccID = table.Column<int>(type: "int", nullable: false),
+                    CompID = table.Column<int>(type: "int", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    accCodeId = table.Column<int>(type: "int", nullable: false),
+                    accCodeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "adFinancialStatementCategories",
+                schema: "dbo",
+                columns: table => new
+                {
+                    FinStatementCateID = table.Column<int>(type: "int", nullable: false),
+                    compID = table.Column<int>(type: "int", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "adFinancialStatementTypes",
+                schema: "dbo",
+                columns: table => new
+                {
+                    FinStatementTypeID = table.Column<int>(type: "int", nullable: false),
+                    compID = table.Column<int>(type: "int", nullable: false),
+                    FinStatementCateID = table.Column<int>(type: "int", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "adGroupAccounts",
+                schema: "dbo",
+                columns: table => new
+                {
+                    GroupAccID = table.Column<int>(type: "int", nullable: false),
+                    CateAccID = table.Column<int>(type: "int", nullable: false),
+                    CtrlAccID = table.Column<int>(type: "int", nullable: false),
+                    MainGroupID = table.Column<int>(type: "int", nullable: false),
+                    CompID = table.Column<int>(type: "int", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AccTypeID = table.Column<int>(type: "int", nullable: false),
+                    isChild = table.Column<bool>(type: "bit", nullable: false),
+                    ParentID = table.Column<int>(type: "int", nullable: false),
+                    isCoaItem = table.Column<bool>(type: "bit", nullable: false),
+                    isActive = table.Column<bool>(type: "bit", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "adMainGroupAccounts",
+                schema: "dbo",
+                columns: table => new
+                {
+                    MainGroupID = table.Column<int>(type: "int", nullable: false),
+                    CateAccID = table.Column<int>(type: "int", nullable: false),
+                    CtrlAccID = table.Column<int>(type: "int", nullable: false),
+                    compID = table.Column<int>(type: "int", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Agents",
                 schema: "dbo",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: true),
-                    CID = table.Column<float>(type: "real", nullable: false),
+                    CID = table.Column<int>(type: "int", nullable: false),
                     AgentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -27,6 +189,30 @@ namespace DataAccessLayer.Migrations
                     CompanyID = table.Column<int>(type: "int", nullable: false),
                     BranchID = table.Column<int>(type: "int", nullable: false),
                     OperatorID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "cdCompanies",
+                schema: "dbo",
+                columns: table => new
+                {
+                    companyID = table.Column<int>(type: "int", nullable: false),
+                    companyCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    companyTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    businessNatureID = table.Column<int>(type: "int", nullable: false),
+                    corporateLogin = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    corporatePWD = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    companyLogo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    companySTN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    companyNTN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    companyAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    companyPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isActive = table.Column<bool>(type: "bit", nullable: false),
                     Del = table.Column<int>(type: "int", nullable: false),
                     Sync = table.Column<int>(type: "int", nullable: false)
                 },
@@ -152,13 +338,13 @@ namespace DataAccessLayer.Migrations
                     EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CustomerCategory = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WhatsappNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CityID = table.Column<int>(type: "int", nullable: true),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AgentID1 = table.Column<int>(type: "int", nullable: false),
                     AgentID2 = table.Column<int>(type: "int", nullable: true),
@@ -372,39 +558,6 @@ namespace DataAccessLayer.Migrations
                 {
                 });
 
-            migrationBuilder.CreateTable(
-                name: "subAccount",
-                schema: "dbo",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: true),
-                    SAccID = table.Column<int>(type: "int", nullable: false),
-                    SAccName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FinID = table.Column<int>(type: "int", nullable: false),
-                    SAccDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AccCodeID = table.Column<int>(type: "int", nullable: false),
-                    AccCodeDr = table.Column<int>(type: "int", nullable: false),
-                    AccCodeCr = table.Column<int>(type: "int", nullable: false),
-                    CityID = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Tel = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Fax = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RegID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OpBal = table.Column<float>(type: "real", nullable: false),
-                    Baltype = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Active = table.Column<short>(type: "smallint", nullable: false),
-                    BranchID = table.Column<int>(type: "int", nullable: false),
-                    SAccNameU = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Area = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VendorCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AgentID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Agents_ID",
                 schema: "dbo",
@@ -508,20 +661,44 @@ namespace DataAccessLayer.Migrations
                 column: "ID",
                 unique: true,
                 filter: "[ID] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_subAccount_ID",
-                schema: "dbo",
-                table: "subAccount",
-                column: "ID",
-                unique: true,
-                filter: "[ID] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "adAccounts",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "adCategoryAccounts",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "adControlAccounts",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "adFinancialStatementCategories",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "adFinancialStatementTypes",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "adGroupAccounts",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "adMainGroupAccounts",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
                 name: "Agents",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "cdCompanies",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
@@ -570,10 +747,6 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "SaleSubWarehouse",
-                schema: "dbo");
-
-            migrationBuilder.DropTable(
-                name: "subAccount",
                 schema: "dbo");
         }
     }

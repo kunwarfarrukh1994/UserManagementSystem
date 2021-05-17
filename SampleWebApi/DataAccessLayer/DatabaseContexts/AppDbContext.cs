@@ -23,21 +23,26 @@ namespace DataAccessLayer
             model_builder.Entity<CodeCodingMain>().HasNoKey().HasIndex(S => S.ID).IsUnique();
             model_builder.Entity<CodeCodingProduction>().HasNoKey().HasIndex(S => S.ID).IsUnique();
             model_builder.Entity<CodeCodingWarehouse>().HasNoKey().HasIndex(S => S.ID).IsUnique();
-
             model_builder.Entity<GoDown>().HasNoKey().HasIndex(S => S.ID).IsUnique();
             model_builder.Entity<Pandi>().HasNoKey().HasIndex(S => S.ID).IsUnique();
-
             model_builder.Entity<SaleMain>().HasNoKey().HasIndex(S => S.ID).IsUnique();
             model_builder.Entity<SaleSub>().HasNoKey().HasIndex(S=> S.ID).IsUnique();
             model_builder.Entity<SaleSubWarehouse>().HasNoKey().HasIndex(S => S.ID).IsUnique();
             model_builder.Entity<SalesOutSourceItems>().HasNoKey().HasIndex(S => S.ID).IsUnique();
-
             model_builder.Entity<SaleParty>().HasNoKey().HasIndex(S => S.ID).IsUnique();
-
-
-            model_builder.Entity<SubAccount>().HasNoKey().HasIndex(S => S.ID).IsUnique();
             model_builder.Entity<Customers>().HasNoKey().HasIndex(S => S.ID).IsUnique();
             model_builder.Entity<City>().HasNoKey().HasIndex(S => S.ID).IsUnique();
+
+
+
+            model_builder.Entity<adAccounts>().HasNoKey();
+            model_builder.Entity<adCategoryAccounts>().HasNoKey();
+            model_builder.Entity<adControlAccounts>().HasNoKey();
+            model_builder.Entity<adFinancialStatementCategories>().HasNoKey();
+            model_builder.Entity<adFinancialStatementTypes>().HasNoKey();
+            model_builder.Entity<adGroupAccounts>().HasNoKey();
+            model_builder.Entity<adMainGroupAccounts>().HasNoKey();
+            model_builder.Entity<cdCompanies>().HasNoKey();
 
 
 
@@ -55,12 +60,18 @@ namespace DataAccessLayer
         public DbSet<SaleMain> SaleMain { get; set; }
         public DbSet<SaleSubWarehouse> SaleSubWarehouse { get; set; }
         public DbSet<SalesOutSourceItems> SalesOutSourceItems { get; set; }
-
-
         public DbSet<SaleParty> SaleParty  { get; set; }
-        public DbSet<SubAccount> subAccount { get; set; }
         public DbSet<Customers> Customers { get; set; }
         public DbSet<City> City { get; set; }
 
+
+        public DbSet<adAccounts> adAccounts { get; set; }
+        public DbSet<adCategoryAccounts> adCategoryAccounts { get; set; }
+        public DbSet<adControlAccounts> adControlAccounts { get; set; }
+        public DbSet<adFinancialStatementCategories> adFinancialStatementCategories { get; set; }
+        public DbSet<adFinancialStatementTypes> adFinancialStatementTypes { get; set; }
+        public DbSet<adGroupAccounts> adGroupAccounts { get; set; }
+        public DbSet<adMainGroupAccounts> adMainGroupAccounts { get; set; }
+        public DbSet<cdCompanies> cdCompanies { get; set; }
     }
 }

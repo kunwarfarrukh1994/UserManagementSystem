@@ -7,7 +7,7 @@ namespace BussinessModels.DBModels
     public class Agents
     {
         public int? ID { get; set; }
-        public Single CID { get; set; }
+        public int CID { get; set; }
         public string AgentName { get; set; }
         public string Category { get; set; }
         public string PhoneNumber { get; set; }

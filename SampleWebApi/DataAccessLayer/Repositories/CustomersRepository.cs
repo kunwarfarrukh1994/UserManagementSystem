@@ -2,9 +2,11 @@
 using DataAccessLayer.ReposiotryInterfaces;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +23,9 @@ namespace DataAccessLayer.Repositories
             this._context = context;
             initDT();
         }
+
+ 
+
         public void initDT()
         {
   
@@ -32,7 +37,7 @@ namespace DataAccessLayer.Repositories
             dtCustomers.Columns.Add("Email", typeof(string));
             dtCustomers.Columns.Add("PhoneNo", typeof(string));
             dtCustomers.Columns.Add("CustomerCategory", typeof(string));
-            dtCustomers.Columns.Add("WhatsappNo", typeof(Single));
+            dtCustomers.Columns.Add("WhatsappNo", typeof(string));
             dtCustomers.Columns.Add("CityID", typeof(int));
             dtCustomers.Columns.Add("Type", typeof(string));
             dtCustomers.Columns.Add("MailAddress", typeof(string));
@@ -48,6 +53,8 @@ namespace DataAccessLayer.Repositories
             
             
         }
+
+
         public async Task<string> SaveCustomers(CustomerVM customer)
         {
             if (dtCustomers.Rows.Count > 0)
@@ -126,24 +133,103 @@ namespace DataAccessLayer.Repositories
 
 
 
-            return "Enter Valid Data First";
+            
         }
 
-        public Task<string> DeleteCustomer(int Id)
+
+        public async Task<IList<CustomerVM>> GetAllCustomers()
         {
-            throw new NotImplementedException();
+            var list = await this._context.Customers.Where(x => x.Del == 0).ToListAsync();
+
+            string json = JsonConvert.SerializeObject(list);
+
+            IList<CustomerVM> customersList = JsonConvert.DeserializeObject<IList<CustomerVM>>(json);
+
+            return customersList;
         }
 
-        public Task<IList<CustomerVM>> GetAllCustomers()
+        public async Task<CustomerVM> GetCustomerByID(int Id)
         {
-            throw new NotImplementedException();
-        }
+            CustomerVM custObj = new CustomerVM();
 
-        public Task<CustomerVM> GetCustomerByID(int Id)
-        {
-            throw new NotImplementedException();
-        }
+
+            var mainCust = await this._context.Customers.Where(x => x.CID == Id).FirstOrDefaultAsync();
+
+            var mainjson = JsonConvert.SerializeObject(mainCust);
+
+            custObj = JsonConvert.DeserializeObject<CustomerVM>(mainjson);
 
     
+
+            return custObj;
+        }
+
+
+        public async Task<string> DeleteCustomer(int Id)
+        {
+            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            {
+
+                SqlCommand cmd = null;
+
+                cmd = new SqlCommand("dbo.Del_Customers", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = Id;
+
+                con.Open();
+                await cmd.ExecuteNonQueryAsync();
+
+                con.Close();
+
+
+                return "Record Deleted Successfully";
+
+
+
+            }
+
+        }
+
+
+        public async Task<CustomerLookUpsVM> GetLookUpsforCustomer()
+        {
+            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            {
+                SqlParameter[] @params =
+                    {
+                       new SqlParameter("@CityLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@AgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+                     
+
+                };
+
+
+                var sql = "EXEC[CustomersGetSearchLookUps] @CityLookUp OUTPUT, @AgentLookUp OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1]);
+
+
+
+                CustomerLookUpsVM lookups = new CustomerLookUpsVM();
+
+
+                lookups.customerCitylookup = JsonConvert.DeserializeObject<IList<CustomerCityLookUp>>(@params[0].Value.ToString());
+
+                lookups.customerAgentlookup = JsonConvert.DeserializeObject<IList<CustomerAgentLookUp>>(@params[1].Value.ToString());
+                
+                
+
+
+
+                con.Close();
+
+
+                return lookups;
+
+
+
+            }
+        }
+
     }
 }

@@ -14,5 +14,6 @@ namespace DataAccessLayer.ReposiotryInterfaces
         Task<string> SaveCustomers(CustomerVM customer);
 
         Task<string> DeleteCustomer(int Id);
+        Task<CustomerLookUpsVM> GetLookUpsforCustomer();
     }
 }

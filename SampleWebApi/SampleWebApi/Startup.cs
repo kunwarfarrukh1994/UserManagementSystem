@@ -181,10 +181,13 @@ namespace SampleWebApi
            // services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationHandler>();
            // services.AddTransient<IUserManagementService, UserManagementService>();
             services.AddTransient<ISalesRepository, SalesRepository >();
+            services.AddTransient<ICustomersRepository, CustomersRepository>();
+            services.AddTransient<ICompaniesRepository, CompaniesRepository>();
+            services.AddTransient<ICategoryAccRepository, CategoryAccRepository>();
 
 
 
-           // services.AddTransient<IDbLogger, DbLogger>();
+            // services.AddTransient<IDbLogger, DbLogger>();
             //swagger 
             services.AddSwaggerDocument();
 

@@ -24,5 +24,41 @@ namespace SampleWebApi.Controllers
             var result = await this._customersRepo.SaveCustomers(customers);
             return Ok(result);
         }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateCustomer(CustomerVM customers)
+        {
+            var result = await this._customersRepo.SaveCustomers(customers);
+            return Ok(result);
+        }
+
+        [HttpGet("GetAllCustomers")]
+        public async Task<IActionResult> GetAllSales()
+        {
+            var result = await this._customersRepo.GetAllCustomers();
+            return Ok(result);
+        }
+
+        [HttpGet("GetCustomerById/{id?}")]
+        public async Task<IActionResult> GetCustomerByID(int id)
+        {
+            var result = await this._customersRepo.GetCustomerByID(id);
+            return Ok(result);
+        }
+
+        [HttpDelete("Delete/{id?}")]
+        public async Task<IActionResult> DeleteCustomer(int Id)
+        {
+            var result = await this._customersRepo.DeleteCustomer(Id);
+            return Ok(result);
+        }
+
+        [HttpGet("GetCustomerlookUps")]
+        public async Task<IActionResult> GetLookUpsforSale()
+        {
+            var result = await this._customersRepo.GetLookUpsforCustomer();
+            return Ok(result);
+        }
+
     }
 }

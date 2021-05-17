@@ -296,10 +296,8 @@ namespace DataAccessLayer.Repositories
                 foreach (var subsaleitem in salemainobj.SaleDetail)
                 {
                     var house = await this._context.SaleSubWarehouse.Where(x => x.SSID == subsaleitem.SSID).ToListAsync();
-
                     var housejson = JsonConvert.SerializeObject(house);
                     subsaleitem.SaleDetailWarehouse = JsonConvert.DeserializeObject<IList<SaleSubWarehouseVM>>(housejson);
-
                 }
 
             }
@@ -339,7 +337,7 @@ namespace DataAccessLayer.Repositories
             {
                 SqlParameter[] @params =
                     {
-                       new SqlParameter("@SubAccountLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@CustomerLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@ItemLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@PandiLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@AddaLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
@@ -347,13 +345,12 @@ namespace DataAccessLayer.Repositories
                 };
 
                 
-                var sql = "EXEC[SalesGetSearchLookUps] @SubAccountLookUp OUTPUT, @ItemLookUp OUTPUT, @PandiLookUp OUTPUT, @AddaLookUp OUTPUT; ";
+                var sql = "EXEC[SalesGetSearchLookUps] @CustomerLookUp OUTPUT, @ItemLookUp OUTPUT, @PandiLookUp OUTPUT, @AddaLookUp OUTPUT; ";
                 await this._context.Database.ExecuteSqlRawAsync(sql,@params[0],@params[1], @params[2], @params[3]);
 
 
                 
                 SalesLookUpsVM lookups = new SalesLookUpsVM();
-
 
 
 
