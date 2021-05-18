@@ -12,5 +12,6 @@ namespace DataAccessLayer.ReposiotryInterfaces
         Task<cdCompaniesVM> GetCompanyByID(int Id);
         Task<string> SaveCompany(cdCompaniesVM company);
         Task<string> DeleteCompany(int Id);
+        Task<cdCompaniesLookUpsVM> GetLookUpsforCompany();
     }
 }

@@ -7,12 +7,14 @@ namespace BussinessModels.ViewModels
     public class CustomerLookUpsVM
     {
         public IList<CustomerCityLookUp> customerCitylookup { get; set; }
-        public IList<CustomerAgentLookUp> customerAgentlookup { get; set; }
+        public IList<CustomerRAgentLookUp> customerRAgentlookup { get; set; }
+        public IList<CustomerMAgentLookUp> customerMAgentlookup { get; set; }
 
         public CustomerLookUpsVM()
         {
             customerCitylookup = new List<CustomerCityLookUp>();
-            customerAgentlookup = new List<CustomerAgentLookUp>();
+            customerRAgentlookup = new List<CustomerRAgentLookUp>();
+            customerMAgentlookup = new List<CustomerMAgentLookUp>();
         }
     }
 }

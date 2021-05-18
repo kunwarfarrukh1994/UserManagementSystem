@@ -199,14 +199,15 @@ namespace DataAccessLayer.Repositories
                 SqlParameter[] @params =
                     {
                        new SqlParameter("@CityLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
-                       new SqlParameter("@AgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
-                     
+                       new SqlParameter("@RAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@MAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
 
                 };
 
 
-                var sql = "EXEC[CustomersGetSearchLookUps] @CityLookUp OUTPUT, @AgentLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1]);
+                var sql = "EXEC[CustomersGetSearchLookUps] @CityLookUp OUTPUT, @RAgentLookUp OUTPUT,@MAgentLookUp OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2]);
 
 
 
@@ -215,9 +216,10 @@ namespace DataAccessLayer.Repositories
 
                 lookups.customerCitylookup = JsonConvert.DeserializeObject<IList<CustomerCityLookUp>>(@params[0].Value.ToString());
 
-                lookups.customerAgentlookup = JsonConvert.DeserializeObject<IList<CustomerAgentLookUp>>(@params[1].Value.ToString());
-                
-                
+                lookups.customerRAgentlookup = JsonConvert.DeserializeObject<IList<CustomerRAgentLookUp>>(@params[1].Value.ToString());
+                lookups.customerMAgentlookup = JsonConvert.DeserializeObject<IList<CustomerMAgentLookUp>>(@params[2].Value.ToString());
+
+
 
 
 

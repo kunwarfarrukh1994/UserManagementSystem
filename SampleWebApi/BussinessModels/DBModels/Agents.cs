@@ -9,7 +9,7 @@ namespace BussinessModels.DBModels
         public int? ID { get; set; }
         public int CID { get; set; }
         public string AgentName { get; set; }
-        public string Category { get; set; }
+        public int Category { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string ReferBy { get; set; }

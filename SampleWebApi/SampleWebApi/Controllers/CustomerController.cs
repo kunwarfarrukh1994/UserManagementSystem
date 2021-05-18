@@ -54,7 +54,7 @@ namespace SampleWebApi.Controllers
         }
 
         [HttpGet("GetCustomerlookUps")]
-        public async Task<IActionResult> GetLookUpsforSale()
+        public async Task<IActionResult> GetLookUpsforCustomer()
         {
             var result = await this._customersRepo.GetLookUpsforCustomer();
             return Ok(result);

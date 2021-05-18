@@ -9,7 +9,7 @@ namespace BussinessModels.ViewModels
         public int CustomerID { get; set; }
         public string CustomerName { get; set; }
         public Single CreditLimit { get; set; }
-        public int Receiveable { get; set; }
+        public Single Receiveable { get; set; }
         public string WhatsAppNo { get; set; }
         public int AgentID { get; set; }
         SalePartyLookUp()

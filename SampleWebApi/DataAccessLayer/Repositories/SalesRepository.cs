@@ -352,7 +352,7 @@ namespace DataAccessLayer.Repositories
                 
                 SalesLookUpsVM lookups = new SalesLookUpsVM();
 
-
+                
 
                 lookups.salepartylookup = JsonConvert.DeserializeObject<IList<SalePartyLookUp>>(@params[0].Value.ToString());
                 lookups.saleitemlookup = JsonConvert.DeserializeObject<IList<SaleItemLookupVM>>(@params[1].Value.ToString());

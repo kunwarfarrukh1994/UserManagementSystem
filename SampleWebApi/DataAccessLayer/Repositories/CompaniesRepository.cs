@@ -51,7 +51,7 @@ namespace DataAccessLayer.Repositories
                 DataRow row = dtCompanies.NewRow();
 
             
-                row["companyCode"] = company.companyCode;
+                //row["companyCode"] = company.companyCode;
                 row["companyTitle"] = company.companyTitle;
                 row["businessNatureID"] = company.businessNatureID;
                 row["corporateLogin"] = company.corporateLogin;
@@ -158,6 +158,42 @@ namespace DataAccessLayer.Repositories
             }
 
         }
+
+        public async Task<cdCompaniesLookUpsVM> GetLookUpsforCompany()
+        {
+            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            {
+                SqlParameter[] @params =
+                    {
+                       new SqlParameter("@BNLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
+                };
+
+
+                var sql = "EXEC[CompanyGetSearchLookUps] @BNLookUp OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
+
+
+
+                cdCompaniesLookUpsVM lookups = new cdCompaniesLookUpsVM();
+
+
+
+                lookups.cdcompaniesBN = JsonConvert.DeserializeObject<IList<cdCompaniesBNVM>>(@params[0].Value.ToString());
+                
+
+
+
+                con.Close();
+
+
+                return lookups;
+
+
+
+            }
+        }
+
 
 
     }

@@ -2,6 +2,7 @@
 using DataAccessLayer.ReposiotryInterfaces;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,6 +22,7 @@ namespace DataAccessLayer.Repositories
             initDT();
         }
 
+      
         public void initDT()
         {
          
@@ -119,5 +121,60 @@ namespace DataAccessLayer.Repositories
             }
 
         }
+
+
+        public async Task<string> DeleteCategoryAcc(int Id)
+        {
+            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            {
+
+                SqlCommand cmd = null;
+
+                cmd = new SqlCommand("dbo.Del_CategoryAcc", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@CateAccID", SqlDbType.BigInt).Value = Id;
+
+                con.Open();
+                await cmd.ExecuteNonQueryAsync();
+
+                con.Close();
+
+
+                return "Record Deleted Successfully";
+
+
+
+            }
+        }
+
+        public async Task<IList<adCategoryAccountsVM>> GetAllCategoriesAcc()
+        {
+            var list = await this._context.adCategoryAccounts.Where(x => x.Del == 0).ToListAsync();
+
+            string json = JsonConvert.SerializeObject(list);
+
+            IList<adCategoryAccountsVM> categoriesList = JsonConvert.DeserializeObject<IList<adCategoryAccountsVM>>(json);
+
+            return categoriesList;
+        }
+
+        public async Task<adCategoryAccountsVM> GetCategoryAccyByID(int Id)
+        {
+            adCategoryAccountsVM cateObj = new adCategoryAccountsVM();
+
+
+            var mainComp = await this._context.adCategoryAccounts.Where(x => x.CateAccID == Id).FirstOrDefaultAsync();
+
+            var mainjson = JsonConvert.SerializeObject(mainComp);
+
+            cateObj = JsonConvert.DeserializeObject<adCategoryAccountsVM>(mainjson);
+
+
+
+            return cateObj;
+        }
+
+
     }
 }

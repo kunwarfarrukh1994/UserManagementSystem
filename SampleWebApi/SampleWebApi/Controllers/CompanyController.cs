@@ -53,5 +53,12 @@ namespace SampleWebApi.Controllers
             var result = await this._companyRepo.DeleteCompany(Id);
             return Ok(result);
         }
+
+        [HttpGet("GetCompanylookUps")]
+        public async Task<IActionResult> GetLookUpsforCompany()
+        {
+            var result = await this._companyRepo.GetLookUpsforCompany();
+            return Ok(result);
+        }
     }
 }

@@ -43,6 +43,7 @@ namespace DataAccessLayer
             model_builder.Entity<adGroupAccounts>().HasNoKey();
             model_builder.Entity<adMainGroupAccounts>().HasNoKey();
             model_builder.Entity<cdCompanies>().HasNoKey();
+            model_builder.Entity<BuisnessNature>().HasNoKey();
 
 
 
@@ -73,5 +74,6 @@ namespace DataAccessLayer
         public DbSet<adGroupAccounts> adGroupAccounts { get; set; }
         public DbSet<adMainGroupAccounts> adMainGroupAccounts { get; set; }
         public DbSet<cdCompanies> cdCompanies { get; set; }
+        public DbSet<BuisnessNature> BuisnessNature { get; set; }
     }
 }

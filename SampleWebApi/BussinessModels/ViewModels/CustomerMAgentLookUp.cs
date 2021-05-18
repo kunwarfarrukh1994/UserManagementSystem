@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BussinessModels.ViewModels
 {
-    public class CustomerAgentLookUp
+    public class CustomerMAgentLookUp
     {
         public int AgentID { get; set; }
         public string AgentName { get; set; }

@@ -170,10 +170,10 @@ D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\S
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.genruntimeconfig.cache
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\AutoMapper.dll
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\SampleWebApi.deps.json
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\appsettings.json
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\SampleWebApi.exe
-C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\SampleWebApi.deps.json
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\SampleWebApi.runtimeconfig.json
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\SampleWebApi.runtimeconfig.dev.json
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\SampleWebApi.dll
