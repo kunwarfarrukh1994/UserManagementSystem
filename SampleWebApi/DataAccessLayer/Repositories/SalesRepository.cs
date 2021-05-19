@@ -360,7 +360,6 @@ namespace DataAccessLayer.Repositories
                 lookups.saleaddalookup = JsonConvert.DeserializeObject<IList<SaleAddaLookUpVM>>(@params[3].Value.ToString());
                 
 
-
                 con.Close();
 
 
