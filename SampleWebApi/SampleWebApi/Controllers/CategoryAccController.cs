@@ -42,7 +42,7 @@ namespace SampleWebApi.Controllers
         [HttpGet("GetCategoryAccById/{id?}")]
         public async Task<IActionResult> GetCategoryAccByID(int id)
         {
-            var result = await this._categoryRepo.GetCategoryAccyByID(id);
+            var result = await this._categoryRepo.GetCategoryAccByID(id);
             return Ok(result);
         }
 

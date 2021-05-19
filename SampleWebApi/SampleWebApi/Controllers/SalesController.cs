@@ -60,5 +60,12 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetSaleInvoicelookUps")]
+        public async Task<IActionResult> GetLookUpsforSaleInvoice()
+        {
+            var result = await this._salesRepo.GetLookUpsforSalesInvoice();
+            return Ok(result);
+        }
+
     }
 }

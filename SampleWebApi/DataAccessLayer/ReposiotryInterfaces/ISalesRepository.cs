@@ -16,6 +16,7 @@ namespace DataAccessLayer.ReposiotryInterfaces
         Task <string> DeleteSale(int Id);
 
         Task <SalesLookUpsVM> GetLookUpsforSale();
+        Task<SalesLookUpsVM> GetLookUpsforSalesInvoice();
 
 
     }

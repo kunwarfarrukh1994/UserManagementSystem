@@ -159,7 +159,7 @@ namespace DataAccessLayer.Repositories
             return categoriesList;
         }
 
-        public async Task<adCategoryAccountsVM> GetCategoryAccyByID(int Id)
+        public async Task<adCategoryAccountsVM> GetCategoryAccByID(int Id)
         {
             adCategoryAccountsVM cateObj = new adCategoryAccountsVM();
 

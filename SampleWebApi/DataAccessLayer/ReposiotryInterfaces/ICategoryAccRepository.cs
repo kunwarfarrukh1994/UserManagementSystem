@@ -9,7 +9,7 @@ namespace DataAccessLayer.ReposiotryInterfaces
     public interface ICategoryAccRepository
     {
         Task<IList<adCategoryAccountsVM>> GetAllCategoriesAcc();
-        Task<adCategoryAccountsVM> GetCategoryAccyByID(int Id);
+        Task<adCategoryAccountsVM> GetCategoryAccByID(int Id);
         Task<string> SaveCategoryAcc(adCategoryAccountsVM categoryAcc);
         Task<string> DeleteCategoryAcc(int Id);
     }

@@ -371,5 +371,46 @@ namespace DataAccessLayer.Repositories
             }
         }
 
+
+        public async Task<SalesLookUpsVM> GetLookUpsforSalesInvoice()
+        {
+            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            {
+                SqlParameter[] @params =
+                    {
+                       new SqlParameter("@InvoiceLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@RAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@MAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@CustomerLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
+                };
+
+
+                var sql = "EXEC[SalesInvoiceGetSearchLookUps] @InvoiceLookUp OUTPUT, @RAgentLookUp OUTPUT, @MAgentLookUp OUTPUT, @CustomerLookUp OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3]);
+
+
+
+                SalesLookUpsVM lookups = new SalesLookUpsVM();
+
+
+
+                
+                lookups.saleinoiceInvoiceLookUp = JsonConvert.DeserializeObject<IList<SaleInoiceInvoiceLookUpVM>>(@params[0].Value.ToString());
+                lookups.customerRagentlookup = JsonConvert.DeserializeObject<IList<CustomerRAgentLookUp>>(@params[1].Value.ToString());
+                lookups.customerMagentlookup = JsonConvert.DeserializeObject<IList<CustomerMAgentLookUp>>(@params[2].Value.ToString());
+                lookups.salepartylookup = JsonConvert.DeserializeObject<IList<SalePartyLookUp>>(@params[3].Value.ToString());
+
+
+                con.Close();
+
+
+                return lookups;
+
+
+
+            }
+        }
+
     }
 }

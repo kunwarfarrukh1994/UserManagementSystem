@@ -184,6 +184,7 @@ namespace SampleWebApi
             services.AddTransient<ICustomersRepository, CustomersRepository>();
             services.AddTransient<ICompaniesRepository, CompaniesRepository>();
             services.AddTransient<ICategoryAccRepository, CategoryAccRepository>();
+            services.AddTransient<IControlAccRepository, ControlAccRepository>();
 
 
 
