@@ -18,7 +18,4 @@ namespace BussinessModels.DBModels
 		public int Sync { get; set; }
 	}
 
-	//FTID = 1  { 001,002,003,004,005}
-	//FTID = 2  { 001,002,003,004}
-	//FTID = 3  { 001,002,003,004}
 }
