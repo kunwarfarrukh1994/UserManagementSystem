@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.ReposiotryInterfaces;
+﻿using BussinessModels.ViewModels;
+using DataAccessLayer.ReposiotryInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,6 +23,13 @@ namespace SampleWebApi.Controllers
         public async Task<IActionResult> GetLookUpsforSale()
         {
             var result = await this._subAccRepo.GetLookUpsforSubAccount();
+            return Ok(result);
+        }
+
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateSales([FromBody] adAccountsVM subAcc)
+        {
+            var result = await this._subAccRepo.SaveSubAcc(subAcc);
             return Ok(result);
         }
     }

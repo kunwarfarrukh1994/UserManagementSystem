@@ -9,5 +9,6 @@ namespace DataAccessLayer.ReposiotryInterfaces
     public interface ISubAccountsRepository
     {
         Task<adAccountsLookUpsVm> GetLookUpsforSubAccount();
+        Task<string> SaveSubAcc(adAccountsVM subAcc);
     }
 }
