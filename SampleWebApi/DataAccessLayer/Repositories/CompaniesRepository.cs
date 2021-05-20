@@ -25,7 +25,7 @@ namespace DataAccessLayer.Repositories
         public void initDT()
         {
             dtCompanies = new DataTable();
-            dtCompanies.Columns.Add("companyCode", typeof(string));
+            
             dtCompanies.Columns.Add("companyTitle", typeof(string));
             dtCompanies.Columns.Add("businessNatureID", typeof(int));
             dtCompanies.Columns.Add("corporateLogin", typeof(string));
@@ -51,7 +51,7 @@ namespace DataAccessLayer.Repositories
                 DataRow row = dtCompanies.NewRow();
 
             
-                //row["companyCode"] = company.companyCode;
+                
                 row["companyTitle"] = company.companyTitle;
                 row["businessNatureID"] = company.businessNatureID;
                 row["corporateLogin"] = company.corporateLogin;

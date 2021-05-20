@@ -893,6 +893,52 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("SalesOutSourceItems");
                 });
 
+            modelBuilder.Entity("BussinessModels.DBModels.adAccountTransactionTypes", b =>
+                {
+                    b.Property<int>("AccTransTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("compID")
+                        .HasColumnType("int");
+
+                    b.ToTable("adAccountTransactionTypes");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.adAccountTypes", b =>
+                {
+                    b.Property<int>("AccTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("compID")
+                        .HasColumnType("int");
+
+                    b.ToTable("adAccountTypes");
+                });
+
             modelBuilder.Entity("BussinessModels.DBModels.adAccounts", b =>
                 {
                     b.Property<string>("AccFlexCode")
@@ -937,6 +983,10 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TitleU")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("accAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -945,9 +995,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("accCodeDr")
-                        .HasColumnType("int");
-
-                    b.Property<int>("accCodeID")
                         .HasColumnType("int");
 
                     b.Property<float>("accCreditLimit")

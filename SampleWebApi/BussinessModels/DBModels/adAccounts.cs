@@ -15,6 +15,7 @@ namespace BussinessModels.DBModels
 		public string Code { get; set; }
 		public string AccFlexCode { get; set; }
 		public string Title { get; set; }
+		public string TitleU { get; set; }
 		public int AccTypeID { get; set; }
 		public int AccTransTypeID { get; set; }
 		public bool isDeptAcc { get; set; }
@@ -22,7 +23,6 @@ namespace BussinessModels.DBModels
 		public bool isAutoOpenBal { get; set; }
 		public bool isFreeze { get; set; }
 		public bool isActive { get; set; }
-		public int accCodeID { get; set; }
 		public int accCodeDr { get; set; }
 		public int accCodeCr { get; set; }
 		public int cityID { get; set; }
