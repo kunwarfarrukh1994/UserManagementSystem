@@ -183,7 +183,7 @@ namespace DataAccessLayer.Repositories
                         srow["BranchID"] = detail.BranchID;
 
                         dtSalesSub.Rows.InsertAt(srow, i);
-                        
+                        int ss = dtSalesSub.Rows.Count;
 
                         for (int index = 0; index < detail.SaleDetailWarehouse.Count; index++)
                         {
