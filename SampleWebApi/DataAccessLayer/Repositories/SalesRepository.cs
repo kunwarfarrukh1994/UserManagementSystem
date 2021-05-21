@@ -91,6 +91,14 @@ namespace DataAccessLayer.Repositories
             {
                 dtSalesMain.Rows.Clear();
             }
+            if (dtSalesSub.Rows.Count > 0)
+            {
+                dtSalesSub.Rows.Clear();
+            }
+            if (dtSaleSubWarehouse.Rows.Count > 0)
+            {
+                dtSaleSubWarehouse.Rows.Clear();
+            }
             if (salesmain.SMID == 0) 
             {
                 maxSWID = this._context.SaleSubWarehouse.OrderByDescending(x => x.SWID).FirstOrDefault();
@@ -175,6 +183,7 @@ namespace DataAccessLayer.Repositories
                         srow["BranchID"] = detail.BranchID;
 
                         dtSalesSub.Rows.InsertAt(srow, i);
+                        
 
                         for (int index = 0; index < detail.SaleDetailWarehouse.Count; index++)
                         {
