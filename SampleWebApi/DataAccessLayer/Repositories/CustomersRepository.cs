@@ -68,13 +68,13 @@ namespace DataAccessLayer.Repositories
 
                 row["CustomerName"] = customer.CustomerName;
                 row["ContactPerson"] = customer.ContactPerson;
-                row["Name"] = customer.Name;
+                row["Name"] = customer.CName;
                 row["Email"] = customer.Email;
                 row["PhoneNo"] = customer.PhoneNo;
                 row["CustomerCategory"] = customer.CustomerCategory;
                 row["WhatsappNo"] = customer.WhatsappNo;
                 row["CityID"] = customer.CityID;
-                row["Type"] = customer.Type;
+                row["Type"] = customer.CustType;
                 row["MailAddress"] = customer.MailAddress;
                 row["AgentID1"] = customer.AgentID1;
                 row["AgentID2"] = customer.AgentID2;
@@ -200,14 +200,15 @@ namespace DataAccessLayer.Repositories
                     {
                        new SqlParameter("@CityLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@RAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
-                       new SqlParameter("@MAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+                       new SqlParameter("@MAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@CustomerLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
 
 
                 };
 
 
-                var sql = "EXEC[CustomersGetSearchLookUps] @CityLookUp OUTPUT, @RAgentLookUp OUTPUT,@MAgentLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2]);
+                var sql = "EXEC[CustomersGetSearchLookUps] @CityLookUp OUTPUT, @RAgentLookUp OUTPUT,@MAgentLookUp OUTPUT,@CustomerLookUp OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3]);
 
 
 
@@ -218,10 +219,7 @@ namespace DataAccessLayer.Repositories
 
                 lookups.customerRAgentlookup = JsonConvert.DeserializeObject<IList<CustomerRAgentLookUp>>(@params[1].Value.ToString());
                 lookups.customerMAgentlookup = JsonConvert.DeserializeObject<IList<CustomerMAgentLookUp>>(@params[2].Value.ToString());
-
-
-
-
+                lookups.customerallcustomerslookup = JsonConvert.DeserializeObject<IList<CustomerAllcustomersLookUpVM>>(@params[3].Value.ToString());
 
                 con.Close();
 

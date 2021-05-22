@@ -10,13 +10,13 @@ namespace BussinessModels.ViewModels
         public int CID { get; set; }
         public string CustomerName { get; set; }
         public string ContactPerson { get; set; }
-        public string Name { get; set; }
+        public string CName { get; set; }
         public string Email { get; set; }
         public string PhoneNo { get; set; }
         public string CustomerCategory { get; set; }
         public string WhatsappNo { get; set; }
         public int CityID { get; set; }
-        public string Type { get; set; }
+        public string CustType { get; set; }
         public string MailAddress { get; set; }
         public int AgentID1 { get; set; }
         public int AgentID2 { get; set; }
