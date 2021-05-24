@@ -2,6 +2,7 @@
 using DataAccessLayer.ReposiotryInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,13 @@ namespace SampleWebApi.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateCompany([FromBody] cdCompaniesVM company)
+        public async Task<IActionResult> CreateCompany([FromForm] dynamic companyobj)
         {
-            var result = await this._companyRepo.SaveCompany(company);
+            var files = HttpContext.Request.Form.Files;
+            var data = HttpContext.Request.Form["companyobj"];
+            var  companiesList = JsonConvert.DeserializeObject<cdCompaniesVM>(data);
+
+            var result = await this._companyRepo.SaveCompany(companyobj);
             return Ok(result);
         }
 
