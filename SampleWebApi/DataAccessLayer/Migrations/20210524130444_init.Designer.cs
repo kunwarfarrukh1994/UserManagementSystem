@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210518085817_changedatatypecategoryagentInt")]
-    partial class changedatatypecategoryagentInt
+    [Migration("20210524130444_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,36 @@ namespace DataAccessLayer.Migrations
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
+
+            modelBuilder.Entity("BussinessModels.DBModels.Adda", b =>
+                {
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OperatorID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleU")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("Adda");
+                });
 
             modelBuilder.Entity("BussinessModels.DBModels.Agents", b =>
                 {
@@ -77,6 +107,22 @@ namespace DataAccessLayer.Migrations
                         .HasFilter("[ID] IS NOT NULL");
 
                     b.ToTable("Agents");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.BuisnessNature", b =>
+                {
+                    b.Property<string>("BNCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BNID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BNTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("BuisnessNature");
                 });
 
             modelBuilder.Entity("BussinessModels.DBModels.City", b =>
@@ -419,6 +465,82 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("BussinessModels.DBModels.GenMain", b =>
+                {
+                    b.Property<float>("BCID")
+                        .HasColumnType("real");
+
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FinID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HeadID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Narat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.ToTable("GenMain");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.GenSub", b =>
+                {
+                    b.Property<string>("AccDesc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AccID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("BCID")
+                        .HasColumnType("real");
+
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("CrAmt")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<float>("DrAmt")
+                        .HasColumnType("real");
+
+                    b.Property<int>("FinID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Narat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.ToTable("GenSub");
+                });
+
             modelBuilder.Entity("BussinessModels.DBModels.GoDown", b =>
                 {
                     b.Property<int>("FinId")
@@ -443,6 +565,48 @@ namespace DataAccessLayer.Migrations
                         .HasFilter("[ID] IS NOT NULL");
 
                     b.ToTable("GoDown");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.Lot", b =>
+                {
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LotType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OperatorID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleU")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("Lot");
                 });
 
             modelBuilder.Entity("BussinessModels.DBModels.Pandi", b =>
@@ -879,6 +1043,146 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("SalesOutSourceItems");
                 });
 
+            modelBuilder.Entity("BussinessModels.DBModels.Schools", b =>
+                {
+                    b.Property<int>("AgentID1")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AgentID2")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CityID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContactPerson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("CreditLimit")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LocationID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("OpBal")
+                        .HasColumnType("real");
+
+                    b.Property<int>("OperatorID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhoneNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Principal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SAccID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SchlType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SchoolBranches")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SchoolName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SchoolStrength")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SessionStart")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WhatsappNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("Schools");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.adAccountTransactionTypes", b =>
+                {
+                    b.Property<int>("AccTransTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("compID")
+                        .HasColumnType("int");
+
+                    b.ToTable("adAccountTransactionTypes");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.adAccountTypes", b =>
+                {
+                    b.Property<int>("AccTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("compID")
+                        .HasColumnType("int");
+
+                    b.ToTable("adAccountTypes");
+                });
+
             modelBuilder.Entity("BussinessModels.DBModels.adAccounts", b =>
                 {
                     b.Property<string>("AccFlexCode")
@@ -910,6 +1214,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Del")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("GroupAccID")
                         .HasColumnType("int");
 
@@ -923,6 +1230,10 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TitleU")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("accAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -931,9 +1242,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("accCodeDr")
-                        .HasColumnType("int");
-
-                    b.Property<int>("accCodeID")
                         .HasColumnType("int");
 
                     b.Property<float>("accCreditLimit")
@@ -1006,6 +1314,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Del")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("FinStatementTypeID")
                         .HasColumnType("int");
 
@@ -1050,6 +1361,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Del")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Sync")
                         .HasColumnType("int");
 
@@ -1079,6 +1393,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Del")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("FinStatementCateID")
                         .HasColumnType("int");
 
@@ -1106,6 +1423,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<int>("Del")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("FinStatementCateID")
                         .HasColumnType("int");
@@ -1149,6 +1469,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<int>("Del")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("GroupAccID")
                         .HasColumnType("int");
@@ -1196,6 +1519,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Del")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("MainGroupID")
                         .HasColumnType("int");
 
@@ -1216,6 +1542,9 @@ namespace DataAccessLayer.Migrations
                 {
                     b.Property<int>("Del")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Sync")
                         .HasColumnType("int");

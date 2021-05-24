@@ -16,6 +16,7 @@ namespace DataAccessLayer.Migrations
                 columns: table => new
                 {
                     AccID = table.Column<int>(type: "int", nullable: false),
+                    EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CateAccID = table.Column<int>(type: "int", nullable: false),
                     CtrlAccID = table.Column<int>(type: "int", nullable: false),
                     MainGroupID = table.Column<int>(type: "int", nullable: false),
@@ -24,6 +25,7 @@ namespace DataAccessLayer.Migrations
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AccFlexCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TitleU = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AccTypeID = table.Column<int>(type: "int", nullable: false),
                     AccTransTypeID = table.Column<int>(type: "int", nullable: false),
                     isDeptAcc = table.Column<bool>(type: "bit", nullable: false),
@@ -31,7 +33,6 @@ namespace DataAccessLayer.Migrations
                     isAutoOpenBal = table.Column<bool>(type: "bit", nullable: false),
                     isFreeze = table.Column<bool>(type: "bit", nullable: false),
                     isActive = table.Column<bool>(type: "bit", nullable: false),
-                    accCodeID = table.Column<int>(type: "int", nullable: false),
                     accCodeDr = table.Column<int>(type: "int", nullable: false),
                     accCodeCr = table.Column<int>(type: "int", nullable: false),
                     cityID = table.Column<int>(type: "int", nullable: false),
@@ -54,11 +55,45 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "adAccountTransactionTypes",
+                schema: "dbo",
+                columns: table => new
+                {
+                    AccTransTypeID = table.Column<int>(type: "int", nullable: false),
+                    EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    compID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "adAccountTypes",
+                schema: "dbo",
+                columns: table => new
+                {
+                    AccTypeID = table.Column<int>(type: "int", nullable: false),
+                    EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    compID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
                 name: "adCategoryAccounts",
                 schema: "dbo",
                 columns: table => new
                 {
                     CateAccID = table.Column<int>(type: "int", nullable: false),
+                    EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FinStatementTypeID = table.Column<int>(type: "int", nullable: false),
                     compID = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -79,6 +114,7 @@ namespace DataAccessLayer.Migrations
                 columns: table => new
                 {
                     CtrlAccID = table.Column<int>(type: "int", nullable: false),
+                    EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CateAccID = table.Column<int>(type: "int", nullable: false),
                     CompID = table.Column<int>(type: "int", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -94,11 +130,30 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Adda",
+                schema: "dbo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: true),
+                    CID = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TitleU = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    OperatorID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
                 name: "adFinancialStatementCategories",
                 schema: "dbo",
                 columns: table => new
                 {
                     FinStatementCateID = table.Column<int>(type: "int", nullable: false),
+                    EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     compID = table.Column<int>(type: "int", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -116,6 +171,7 @@ namespace DataAccessLayer.Migrations
                 columns: table => new
                 {
                     FinStatementTypeID = table.Column<int>(type: "int", nullable: false),
+                    EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     compID = table.Column<int>(type: "int", nullable: false),
                     FinStatementCateID = table.Column<int>(type: "int", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -134,6 +190,7 @@ namespace DataAccessLayer.Migrations
                 columns: table => new
                 {
                     GroupAccID = table.Column<int>(type: "int", nullable: false),
+                    EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CateAccID = table.Column<int>(type: "int", nullable: false),
                     CtrlAccID = table.Column<int>(type: "int", nullable: false),
                     MainGroupID = table.Column<int>(type: "int", nullable: false),
@@ -159,6 +216,7 @@ namespace DataAccessLayer.Migrations
                 columns: table => new
                 {
                     MainGroupID = table.Column<int>(type: "int", nullable: false),
+                    EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CateAccID = table.Column<int>(type: "int", nullable: false),
                     CtrlAccID = table.Column<int>(type: "int", nullable: false),
                     compID = table.Column<int>(type: "int", nullable: false),
@@ -180,7 +238,7 @@ namespace DataAccessLayer.Migrations
                     ID = table.Column<int>(type: "int", nullable: true),
                     CID = table.Column<int>(type: "int", nullable: false),
                     AgentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Category = table.Column<int>(type: "int", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReferBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -197,11 +255,25 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BuisnessNature",
+                schema: "dbo",
+                columns: table => new
+                {
+                    BNID = table.Column<int>(type: "int", nullable: false),
+                    BNCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BNTitle = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
                 name: "cdCompanies",
                 schema: "dbo",
                 columns: table => new
                 {
                     companyID = table.Column<int>(type: "int", nullable: false),
+                    EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     companyCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     companyTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     businessNatureID = table.Column<int>(type: "int", nullable: false),
@@ -363,6 +435,47 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GenMain",
+                schema: "dbo",
+                columns: table => new
+                {
+                    CID = table.Column<int>(type: "int", nullable: false),
+                    CDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    HeadID = table.Column<int>(type: "int", nullable: false),
+                    Narat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FinID = table.Column<int>(type: "int", nullable: false),
+                    BCID = table.Column<float>(type: "real", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GenSub",
+                schema: "dbo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: true),
+                    CID = table.Column<int>(type: "int", nullable: false),
+                    AccID = table.Column<int>(type: "int", nullable: false),
+                    AccDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Narat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DrAmt = table.Column<float>(type: "real", nullable: false),
+                    CrAmt = table.Column<float>(type: "real", nullable: false),
+                    FinID = table.Column<int>(type: "int", nullable: false),
+                    BCID = table.Column<float>(type: "real", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
                 name: "GoDown",
                 schema: "dbo",
                 columns: table => new
@@ -372,6 +485,27 @@ namespace DataAccessLayer.Migrations
                     GoName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GoType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FinId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Lot",
+                schema: "dbo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: true),
+                    CID = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TitleU = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LotType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    OperatorID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -558,6 +692,42 @@ namespace DataAccessLayer.Migrations
                 {
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Schools",
+                schema: "dbo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: true),
+                    CID = table.Column<int>(type: "int", nullable: false),
+                    EDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SchoolName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Principal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WhatsappNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CityID = table.Column<int>(type: "int", nullable: true),
+                    SchlType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SchoolBranches = table.Column<int>(type: "int", nullable: false),
+                    SchoolStrength = table.Column<int>(type: "int", nullable: false),
+                    SessionStart = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AgentID1 = table.Column<int>(type: "int", nullable: false),
+                    AgentID2 = table.Column<int>(type: "int", nullable: true),
+                    OpBal = table.Column<float>(type: "real", nullable: false),
+                    CreditLimit = table.Column<float>(type: "real", nullable: false),
+                    SAccID = table.Column<int>(type: "int", nullable: true),
+                    LocationID = table.Column<int>(type: "int", nullable: true),
+                    CompanyID = table.Column<int>(type: "int", nullable: false),
+                    BranchID = table.Column<int>(type: "int", nullable: false),
+                    OperatorID = table.Column<int>(type: "int", nullable: false),
+                    Del = table.Column<int>(type: "int", nullable: false),
+                    Sync = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Agents_ID",
                 schema: "dbo",
@@ -670,11 +840,23 @@ namespace DataAccessLayer.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
+                name: "adAccountTransactionTypes",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "adAccountTypes",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
                 name: "adCategoryAccounts",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "adControlAccounts",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Adda",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
@@ -695,6 +877,10 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Agents",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "BuisnessNature",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
@@ -722,7 +908,19 @@ namespace DataAccessLayer.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
+                name: "GenMain",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "GenSub",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
                 name: "GoDown",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Lot",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
@@ -747,6 +945,10 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "SaleSubWarehouse",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Schools",
                 schema: "dbo");
         }
     }

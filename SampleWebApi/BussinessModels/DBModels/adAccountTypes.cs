@@ -7,6 +7,7 @@ namespace BussinessModels.DBModels
     public class adAccountTypes
     {
         public int AccTypeID { get; set; }
+        public DateTime EDate { get; set; }
         public string Code { get; set; }
         public string Title { get; set; }
         public int compID { get; set; }

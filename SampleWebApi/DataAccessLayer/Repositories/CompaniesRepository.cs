@@ -27,6 +27,7 @@ namespace DataAccessLayer.Repositories
             dtCompanies = new DataTable();
             
             dtCompanies.Columns.Add("companyTitle", typeof(string));
+            dtCompanies.Columns.Add("EDate", typeof(DateTime));
             dtCompanies.Columns.Add("businessNatureID", typeof(int));
             dtCompanies.Columns.Add("corporateLogin", typeof(string));
             dtCompanies.Columns.Add("corporatePWD", typeof(string));
@@ -48,11 +49,15 @@ namespace DataAccessLayer.Repositories
             }
             try
             {
+                
+
+
                 DataRow row = dtCompanies.NewRow();
 
             
                 
                 row["companyTitle"] = company.companyTitle;
+                row["EDate"] = company.EDate;
                 row["businessNatureID"] = company.businessNatureID;
                 row["corporateLogin"] = company.corporateLogin;
                 row["corporatePWD"] = company.corporatePWD;
@@ -68,6 +73,8 @@ namespace DataAccessLayer.Repositories
                 dtCompanies.Rows.InsertAt(row, 0);
 
 
+                
+
                 using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
                 {
                     
@@ -77,6 +84,7 @@ namespace DataAccessLayer.Repositories
                     cmd = new SqlCommand("dbo.Insert_Companies", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@Company", SqlDbType.Structured).Value = dtCompanies;
+                    //cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = company.EDate.Date;
                     cmd.Parameters.Add("@companyID", SqlDbType.BigInt).Value = company.companyID;
 
 
@@ -165,13 +173,14 @@ namespace DataAccessLayer.Repositories
             {
                 SqlParameter[] @params =
                     {
-                       new SqlParameter("@BNLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+                       new SqlParameter("@BNLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@AllCompaniesLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
 
                 };
 
 
-                var sql = "EXEC[CompanyGetSearchLookUps] @BNLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
+                var sql = "EXEC[CompanyGetSearchLookUps] @BNLookUp OUTPUT, @AllCompaniesLookUp OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1]);
 
 
 
@@ -180,7 +189,8 @@ namespace DataAccessLayer.Repositories
 
 
                 lookups.cdcompaniesBN = JsonConvert.DeserializeObject<IList<cdCompaniesBNVM>>(@params[0].Value.ToString());
-                
+                lookups.cdcompaniesallcompanieslookup = JsonConvert.DeserializeObject<IList<cdCompaniesAllCompaniesLookUpVM>>(@params[1].Value.ToString());
+
 
 
 

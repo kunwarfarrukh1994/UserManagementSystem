@@ -7,6 +7,7 @@ namespace BussinessModels.DBModels
     public class adFinancialStatementCategories
     {
         public int FinStatementCateID { get; set; }
+        public DateTime EDate { get; set; }
         public int compID { get; set; }
         public string Code { get; set; }
         public string Title { get; set; }

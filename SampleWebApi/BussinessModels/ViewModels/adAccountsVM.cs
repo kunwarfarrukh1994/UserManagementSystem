@@ -7,6 +7,7 @@ namespace BussinessModels.ViewModels
     public class adAccountsVM
     {
 		public int AccID { get; set; }            //0
+		public DateTime EDate { get; set; }
 		public int CateAccID { get; set; }        //CateID wrt CtrlAccID
 		public int CtrlAccID { get; set; }        // Dropdown
 		public int MainGroupID { get; set; }      // 0

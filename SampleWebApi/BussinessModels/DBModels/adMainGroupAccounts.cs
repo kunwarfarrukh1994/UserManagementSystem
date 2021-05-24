@@ -7,6 +7,7 @@ namespace BussinessModels.DBModels
     public class adMainGroupAccounts
     {
 		public int MainGroupID { get; set; }
+		public DateTime EDate { get; set; }
 		public int CateAccID { get; set; }
 		public int CtrlAccID { get; set; }
 		public int compID { get; set; }

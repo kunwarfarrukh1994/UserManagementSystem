@@ -7,6 +7,7 @@ namespace BussinessModels.ViewModels
     public class cdCompaniesVM
     {
 		public int companyID { get; set; }
+		public DateTime EDate { get; set; }
 		public string companyCode { get; set; }
 		public string companyTitle { get; set; }
 		public int businessNatureID { get; set; }

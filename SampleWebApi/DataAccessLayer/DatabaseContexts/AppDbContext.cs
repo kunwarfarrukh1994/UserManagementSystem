@@ -49,6 +49,15 @@ namespace DataAccessLayer
             model_builder.Entity<adAccountTransactionTypes>().HasNoKey();
 
 
+            model_builder.Entity<Adda>().HasNoKey();
+            model_builder.Entity<Lot>().HasNoKey();
+            model_builder.Entity<GenMain>().HasNoKey();
+            model_builder.Entity<GenSub>().HasNoKey();
+            model_builder.Entity<Schools>().HasNoKey();
+
+
+
+
 
 
 
@@ -81,5 +90,14 @@ namespace DataAccessLayer
 
         public DbSet<adAccountTransactionTypes> adAccountTransactionTypes { get; set; }
         public DbSet<adAccountTypes> adAccountTypes { get; set; }
+
+        public DbSet<Adda> Adda { get; set; }
+        public DbSet<Lot> Lot { get; set; }
+        public DbSet<GenMain> GenMain { get; set; }
+        public DbSet<GenSub> GenSub { get; set; }
+        public DbSet<Schools> Schools { get; set; }
+
+
+
     }
 }
