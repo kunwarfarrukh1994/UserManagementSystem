@@ -8,7 +8,11 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface ISubAccountsRepository
     {
+        Task<IList<adAccountsVM>> GetAllSubAccounts();
+        Task<adAccountsVM> GetSubAccountByID(int Id);
         Task<adAccountsLookUpsVm> GetLookUpsforSubAccount();
         Task<string> SaveSubAcc(adAccountsVM subAcc);
+
+        Task<string> DeleteSubAccount(int Id);
     }
 }

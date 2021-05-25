@@ -8,5 +8,10 @@ namespace BussinessModels.ViewModels
     {
         public int CustomerID { get; set; }
         public string CustomerName { get; set; }
+
+        public CustomerAllcustomersLookUpVM()
+        {
+
+        }
     }
 }

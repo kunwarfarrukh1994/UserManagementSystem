@@ -36,7 +36,9 @@ namespace BussinessModels.ViewModels
 		public Single accOpenBal { get; set; }	//D.opBAl
 		public int opBalType { get; set; }		//D.BallType
 		public Single accCreditLimit { get; set; }	//D.Credirlimit
-		public string accURL { get; set; }			//D.URL
+		public string accURL { get; set; }          //D.URL
+		public int CtrlAccIDDr { get; set; }
+		public int CtrlAccIDCr { get; set; }
 		public int BranchID { get; set; }			//D.BranchID
 		
 	}

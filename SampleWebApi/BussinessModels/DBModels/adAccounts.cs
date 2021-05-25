@@ -37,6 +37,8 @@ namespace BussinessModels.DBModels
 		public int opBalType { get; set; }
 		public Single accCreditLimit { get; set; }
 		public string accURL { get; set; }
+		public int CtrlAccIDDr { get; set; }
+		public int CtrlAccIDCr { get; set; }
 		public int BranchID { get; set; }
 		public int Del { get; set; }
 		public int Sync { get; set; }

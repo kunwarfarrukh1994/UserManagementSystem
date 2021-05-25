@@ -10,6 +10,7 @@ namespace BussinessModels.ViewModels
         public IList<adAccountsBalTypeLookUpVM> adaccountsbaltypelookup { get; set; }
         public IList<adAccountsCtrlAccLookUpVM> adaccountsctrlacclookup { get; set; }
         public IList<adAccountsCityLookUpVM> adaccountscitylookup { get; set; }
+        public IList<adAccountsAllAccountsLookUpVM> adaccountsallaccountslookup { get; set; }
 
 
         public adAccountsLookUpsVm()
@@ -18,6 +19,7 @@ namespace BussinessModels.ViewModels
             adaccountsbaltypelookup = new List<adAccountsBalTypeLookUpVM>();
             adaccountsctrlacclookup = new List<adAccountsCtrlAccLookUpVM>();
             adaccountscitylookup = new List<adAccountsCityLookUpVM>();
+            adaccountsallaccountslookup = new List<adAccountsAllAccountsLookUpVM>();
 
         }
     }

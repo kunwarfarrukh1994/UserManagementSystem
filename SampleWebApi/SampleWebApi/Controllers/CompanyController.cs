@@ -27,7 +27,7 @@ namespace SampleWebApi.Controllers
             var data = HttpContext.Request.Form["companyobj"];
             var  companiesList = JsonConvert.DeserializeObject<cdCompaniesVM>(data);
 
-            var result = await this._companyRepo.SaveCompany(companyobj);
+            var result = await this._companyRepo.SaveCompany(companiesList);
             return Ok(result);
         }
 

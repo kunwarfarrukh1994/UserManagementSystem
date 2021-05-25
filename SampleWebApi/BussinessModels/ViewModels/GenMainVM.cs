@@ -14,5 +14,12 @@ namespace BussinessModels.ViewModels
         public Single BCID { get; set; }
         public int BranchID { get; set; }
 
+        public List<GenSubVM> GenSub { get; set; }
+
+        public GenMainVM()
+        {
+            GenSub = new List<GenSubVM>();
+        }
+
     }
 }
