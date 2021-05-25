@@ -13,7 +13,7 @@ namespace BussinessModels.DBModels
 		public int businessNatureID { get; set; }
 		public string corporateLogin { get; set; }
 		public string corporatePWD { get; set; }
-        public string companyLogo { get; set; }
+        public byte[] companyLogo { get; set; }
         public string companySTN { get; set; }
 		public string companyNTN { get; set; }
 		public string companyAddress { get; set; }

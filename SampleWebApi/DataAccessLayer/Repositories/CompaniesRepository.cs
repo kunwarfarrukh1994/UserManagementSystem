@@ -31,7 +31,7 @@ namespace DataAccessLayer.Repositories
             dtCompanies.Columns.Add("businessNatureID", typeof(int));
             dtCompanies.Columns.Add("corporateLogin", typeof(string));
             dtCompanies.Columns.Add("corporatePWD", typeof(string));
-            dtCompanies.Columns.Add("companyLogo", typeof(string));
+            dtCompanies.Columns.Add("companyLogo", typeof(byte[]));
             dtCompanies.Columns.Add("companySTN", typeof(string));
             dtCompanies.Columns.Add("companyNTN", typeof(string));
             dtCompanies.Columns.Add("companyAddress", typeof(string));

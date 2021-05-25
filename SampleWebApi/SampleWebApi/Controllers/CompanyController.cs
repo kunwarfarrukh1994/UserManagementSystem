@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,10 +24,27 @@ namespace SampleWebApi.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> CreateCompany([FromForm] dynamic companyobj)
         {
-            var files = HttpContext.Request.Form.Files;
             var data = HttpContext.Request.Form["companyobj"];
-            var  companiesList = JsonConvert.DeserializeObject<cdCompaniesVM>(data);
+            var companiesList = JsonConvert.DeserializeObject<cdCompaniesVM>(data);
 
+            var files = HttpContext.Request.Form.Files;
+
+            IFormFile files1 = files[0];
+
+            var fileName = Path.GetFileName(files1.FileName);
+            var fileExtension = Path.GetExtension(fileName);
+            var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+
+            using (var target = new MemoryStream())
+            {
+                files1.CopyTo(target);
+                companiesList.companyLogo = target.ToArray();
+            }
+
+
+            
+
+            
             var result = await this._companyRepo.SaveCompany(companiesList);
             return Ok(result);
         }
