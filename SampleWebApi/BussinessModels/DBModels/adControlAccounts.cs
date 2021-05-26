@@ -12,6 +12,7 @@ namespace BussinessModels.DBModels
 		public int CompID { get; set; }
 		public string Code { get; set; }
 		public string Title { get; set; }
+		public string TitleU { get; set; }
 		public int accCodeId { get; set; }
 		public string accCodeName { get; set; }
 		public int BranchID { get; set; }

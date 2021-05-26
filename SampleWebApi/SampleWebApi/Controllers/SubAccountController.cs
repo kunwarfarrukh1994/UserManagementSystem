@@ -29,7 +29,7 @@ namespace SampleWebApi.Controllers
         [HttpPost("update")]
         public async Task<IActionResult> UpdateSubAccount(adAccountsVM subAcc)
         {
-            var result = await this._subAccRepo.SaveSubAcc(subAcc);
+            var result = await this._subAccRepo.UpdateSubAcc(subAcc);
             return Ok(result);
         }
 

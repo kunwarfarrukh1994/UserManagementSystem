@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BussinessModels.DBModels
+namespace BussinessModels.ViewModels
 {
-    public class adMainGroupAccounts
+    public class adMainGroupAccountsVM
     {
 		public int MainGroupID { get; set; }
-		public DateTime EDate { get; set; }
 		public int CateAccID { get; set; }
 		public int CtrlAccID { get; set; }
 		public int compID { get; set; }
@@ -15,7 +14,11 @@ namespace BussinessModels.DBModels
 		public string Title { get; set; }
 		public string TitleU { get; set; }
 		public int BranchID { get; set; }
-		public int Del { get; set; }
-		public int Sync { get; set; }
+		public int? tempCtrlAccID { get; set; }
+		public string? tempCode { get; set; }
+		public adMainGroupAccountsVM()
+        {
+
+        }
 	}
 }

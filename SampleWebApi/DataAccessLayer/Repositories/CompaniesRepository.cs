@@ -84,7 +84,6 @@ namespace DataAccessLayer.Repositories
                     cmd = new SqlCommand("dbo.Insert_Companies", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@Company", SqlDbType.Structured).Value = dtCompanies;
-                    //cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = company.EDate.Date;
                     cmd.Parameters.Add("@companyID", SqlDbType.BigInt).Value = company.companyID;
 
 

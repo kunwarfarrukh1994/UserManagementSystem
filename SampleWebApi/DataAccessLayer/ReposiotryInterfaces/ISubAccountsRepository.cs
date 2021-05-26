@@ -12,7 +12,7 @@ namespace DataAccessLayer.ReposiotryInterfaces
         Task<adAccountsVM> GetSubAccountByID(int Id);
         Task<adAccountsLookUpsVm> GetLookUpsforSubAccount();
         Task<string> SaveSubAcc(adAccountsVM subAcc);
-
+        Task<string> UpdateSubAcc(adAccountsVM subAcc);
         Task<string> DeleteSubAccount(int Id);
     }
 }

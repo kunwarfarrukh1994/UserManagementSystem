@@ -39,7 +39,10 @@ namespace BussinessModels.ViewModels
 		public string accURL { get; set; }          //D.URL
 		public int CtrlAccIDDr { get; set; }
 		public int CtrlAccIDCr { get; set; }
-		public int BranchID { get; set; }			//D.BranchID
-		
+		public int BranchID { get; set; }           //D.BranchID
+
+		public int? tempGrpAccID { get; set; }
+		public string? tempCode { get; set; }
+
 	}
 }

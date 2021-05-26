@@ -10,6 +10,7 @@ namespace BussinessModels.DBModels
 		public DateTime EDate { get; set; }
 		public string companyCode { get; set; }
 		public string companyTitle { get; set; }
+		public string companyTitleU { get; set; }
 		public int businessNatureID { get; set; }
 		public string corporateLogin { get; set; }
 		public string corporatePWD { get; set; }

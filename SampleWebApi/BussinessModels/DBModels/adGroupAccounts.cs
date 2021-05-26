@@ -14,6 +14,7 @@ namespace BussinessModels.DBModels
 		public int CompID { get; set; }
 		public string Code { get; set; }
 		public string Title { get; set; }
+		public string TitleU { get; set; }
 		public int AccTypeID { get; set; }
 		public bool isChild { get; set; }
 		public int ParentID { get; set; }

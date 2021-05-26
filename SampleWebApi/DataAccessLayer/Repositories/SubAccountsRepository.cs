@@ -84,13 +84,14 @@ namespace DataAccessLayer.Repositories
                        new SqlParameter("@BalTypeLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@CtrlAccLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@CityLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
-                       new SqlParameter("@AllAccountsLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+                       new SqlParameter("@AllAccountsLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@MainGroupAccLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
 
                 };
 
 
-                var sql = "EXEC[SubAccountGetSearchLookUps] @AccTypeLookUp OUTPUT, @BalTypeLookUp OUTPUT, @CtrlAccLookUp OUTPUT, @CityLookUp OUTPUT, @AllAccountsLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3], @params[4]);
+                var sql = "EXEC[SubAccountGetSearchLookUps] @AccTypeLookUp OUTPUT, @BalTypeLookUp OUTPUT, @CtrlAccLookUp OUTPUT, @CityLookUp OUTPUT, @AllAccountsLookUp OUTPUT, @MainGroupAccLookUp OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3], @params[4],@params[5]);
 
 
 
@@ -104,7 +105,7 @@ namespace DataAccessLayer.Repositories
                 lookups.adaccountsctrlacclookup = JsonConvert.DeserializeObject<IList<adAccountsCtrlAccLookUpVM>>(@params[2].Value.ToString());
                 lookups.adaccountscitylookup = JsonConvert.DeserializeObject<IList<adAccountsCityLookUpVM>>(@params[3].Value.ToString());
                 lookups.adaccountsallaccountslookup = JsonConvert.DeserializeObject<IList<adAccountsAllAccountsLookUpVM>>(@params[4].Value.ToString());
-
+                lookups.adaccountsmaingroupacclookup = JsonConvert.DeserializeObject<IList<adAccountsMainGroupAccLookUpVM>>(@params[5].Value.ToString());
                 con.Close();
 
 
@@ -123,49 +124,48 @@ namespace DataAccessLayer.Repositories
             }
             try 
             {
-                var maxMGID = new adMainGroupAccounts();
                 var maxGID = new adGroupAccounts();
-
-                int mgid = 0;
                 int gid = 0;
                 var maxCode = "";
-
-                maxMGID = await this._context.adMainGroupAccounts.OrderByDescending(x => x.MainGroupID).FirstOrDefaultAsync();
-                if (maxMGID == null)
+                if (subAcc.AccID == 0) 
                 {
-                    maxMGID = new adMainGroupAccounts();
-                    maxMGID.MainGroupID = 0;
+                    maxGID = await this._context.adGroupAccounts.OrderByDescending(x => x.GroupAccID).FirstOrDefaultAsync();
+                    if (maxGID == null)
+                    {
+                        maxGID = new adGroupAccounts();
+                        maxGID.GroupAccID = 0;
+                    }
+                    gid = maxGID.GroupAccID + 1;
+                    subAcc.GroupAccID = gid;
+                }
+                
+                if(subAcc.MainGroupID == subAcc.tempGrpAccID) 
+                {
+                    maxCode = subAcc.tempCode;
+                }
+                else 
+                {
+                    maxCode = this._context.adGroupAccounts.Where(x => x.MainGroupID == subAcc.MainGroupID).Max(x => x.Code);
+
+                    if (maxCode == null)
+                    {
+                        maxCode = "000";
+                    }
+                    int MC = Convert.ToInt32(maxCode.ToString()) + 1;
+                    if (Convert.ToString(MC).Length == 1)
+                        maxCode = "00" + MC.ToString();
+                    else if (Convert.ToString(MC).Length == 2)
+                        maxCode = "0" + MC.ToString();
+                    else
+                        maxCode = MC.ToString();
 
                 }
-                maxGID = await this._context.adGroupAccounts.OrderByDescending(x => x.GroupAccID).FirstOrDefaultAsync();
-                if (maxGID == null)
-                {
-                    maxGID = new adGroupAccounts();
-                    maxGID.GroupAccID = 0;
-                }
-
-                //maxCode = await this._context.adMainGroupAccounts.Where(x => x.Code == subAcc.Code).OrderByDescending(x => x.Code).Select(x => x.Code).FirstOrDefaultAsync();
-
-                maxCode = this._context.adMainGroupAccounts.Where(x => x.CtrlAccID == subAcc.CtrlAccID).Max(x => x.Code);
-
-                if (maxCode == null)
-                {
-                    maxCode = "000";
-                }
-                int MC = Convert.ToInt32(maxCode.ToString()) + 1;
-                if (Convert.ToString(MC).Length == 1)
-                    maxCode = "00" + MC.ToString();
-                else if (Convert.ToString(MC).Length == 2)
-                    maxCode = "0" + MC.ToString();
-                else
-                    maxCode = MC.ToString();
-
-                mgid = maxMGID.MainGroupID + 1;
-                gid = maxGID.GroupAccID + 1;
 
 
-                subAcc.MainGroupID = mgid;
-                subAcc.GroupAccID = gid;
+
+
+                
+                
 
                 subAcc.Code = maxCode;
 
@@ -225,7 +225,7 @@ namespace DataAccessLayer.Repositories
                     cmd = new SqlCommand("dbo.Insert_SubAccounts", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@adAccount", SqlDbType.Structured).Value = dtSubAcc;
-                    cmd.Parameters.Add("@MainGroupID", SqlDbType.BigInt).Value = subAcc.MainGroupID;
+                    //cmd.Parameters.Add("@MainGroupID", SqlDbType.BigInt).Value = subAcc.MainGroupID;
                     cmd.Parameters.Add("@GroupAccID", SqlDbType.BigInt).Value = subAcc.GroupAccID;
                     cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = subAcc.EDate;
                     cmd.Parameters.Add("@AccID", SqlDbType.BigInt).Value = subAcc.AccID;
@@ -255,6 +255,101 @@ namespace DataAccessLayer.Repositories
             }
            
         }
+
+
+        public async Task<string> UpdateSubAcc(adAccountsVM subAcc)
+        {
+            if (dtSubAcc.Rows.Count > 0)
+            {
+                dtSubAcc.Rows.Clear();
+            }
+            try
+            {
+              
+                DataRow row = dtSubAcc.NewRow();
+
+                row["EDate"] = subAcc.EDate;
+                row["CateAccID"] = subAcc.CateAccID;
+                row["CtrlAccID"] = subAcc.CtrlAccID;
+                row["MainGroupID"] = subAcc.MainGroupID;
+                row["GroupAccID"] = subAcc.GroupAccID;
+                row["compID"] = subAcc.compID;
+                row["Code"] = subAcc.Code;
+                row["AccFlexCode"] = subAcc.AccFlexCode;
+                row["Title"] = subAcc.Title;
+                row["TitleU"] = subAcc.TitleU;
+                row["AccTypeID"] = subAcc.AccTypeID;
+                row["AccTransTypeID"] = subAcc.AccTransTypeID;
+                row["isDeptAcc"] = subAcc.isDeptAcc;
+                row["isLocationAcc"] = subAcc.isLocationAcc;
+                row["isAutoOpenBal"] = subAcc.isAutoOpenBal;
+                row["isFreeze"] = subAcc.isFreeze;
+                row["isActive"] = subAcc.isActive;
+
+                row["accCodeDr"] = subAcc.accCodeDr;
+                row["accCodeCr"] = subAcc.accCodeCr;
+                row["cityID"] = subAcc.cityID;
+                row["areaID"] = subAcc.areaID;
+                row["accAddress"] = subAcc.accAddress;
+                row["telephone"] = subAcc.telephone;
+                row["stNumber"] = subAcc.stNumber;
+                row["ntNumber"] = subAcc.ntNumber;
+                row["isNtnActive"] = subAcc.isNtnActive;
+                row["accOpenBal"] = subAcc.accOpenBal;
+                row["opBalType"] = subAcc.opBalType;
+                row["accCreditLimit"] = subAcc.accCreditLimit;
+                row["accURL"] = subAcc.accURL;
+                row["CtrlAccIDDr"] = subAcc.CtrlAccIDDr;
+                row["CtrlAccIDCr"] = subAcc.CtrlAccIDCr;
+                row["BranchID"] = subAcc.BranchID;
+
+                dtSubAcc.Rows.InsertAt(row, 0);
+
+
+
+                using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+                {
+                    //string CS = @"Data Source=CYBERSPACE\EAS;Initial Catalog=Vanya-bak;Persist Security Info=True;User ID=sa;Password=risay";
+                    //SqlConnection cn = null;
+                    SqlCommand cmd = null;
+
+                    //cn = new SqlConnection(CS);
+
+
+                    cmd = new SqlCommand("dbo.Insert_SubAccounts", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@adAccount", SqlDbType.Structured).Value = dtSubAcc;
+                    cmd.Parameters.Add("@MainGroupID", SqlDbType.BigInt).Value = subAcc.MainGroupID;
+                    cmd.Parameters.Add("@GroupAccID", SqlDbType.BigInt).Value = subAcc.GroupAccID;
+                    cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = subAcc.EDate;
+                    cmd.Parameters.Add("@AccID", SqlDbType.BigInt).Value = subAcc.AccID;
+
+
+
+                    var returnParameter = cmd.Parameters.Add("@AccID", SqlDbType.BigInt);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    con.Open();
+                    await cmd.ExecuteNonQueryAsync();
+                    var result = returnParameter.Value;
+                    con.Close();
+
+
+                    return "Record Saved Successfully for ID:" + result;
+
+
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+
+                throw new Exception("Insert Failed");
+            }
+
+        }
+
 
 
 

@@ -11,6 +11,7 @@ namespace BussinessModels.DBModels
 		public int FinStatementTypeID { get; set; }
 		public int compID { get; set; }
 		public string Title { get; set; }
+		public string TitleU { get; set; }
 		public string Code { get; set; }
 		public int accHeadID { get; set; }
 		public string accHeadName { get; set; }
