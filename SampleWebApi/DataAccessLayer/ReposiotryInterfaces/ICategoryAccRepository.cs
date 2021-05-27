@@ -12,5 +12,6 @@ namespace DataAccessLayer.ReposiotryInterfaces
         Task<adCategoryAccountsVM> GetCategoryAccByID(int Id);
         Task<string> SaveCategoryAcc(adCategoryAccountsVM categoryAcc);
         Task<string> DeleteCategoryAcc(int Id);
+        Task<adCategoryAccountsLookUpsVM> GetLookUpsforCategory();
     }
 }

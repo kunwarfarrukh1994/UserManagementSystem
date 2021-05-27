@@ -10,7 +10,9 @@ namespace DataAccessLayer.ReposiotryInterfaces
     {
         Task<IList<adControlAccountsVM>> GetAllControlAcc();
         Task<adControlAccountsVM> GetControllAccByID(int Id);
-        Task<string> SaveControlAcc(adControlAccountsVM controlAcc, int lblCate);
+        Task<string> SaveControlAcc(adControlAccountsVM controlAcc);
         Task<string> DeleteControlAcc(int Id);
+
+        Task<adControlAccountsLookUpVM> GetLookUpsforCtrlAcc();
     }
 }

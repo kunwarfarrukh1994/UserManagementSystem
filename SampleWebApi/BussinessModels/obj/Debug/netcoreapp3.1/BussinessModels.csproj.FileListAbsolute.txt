@@ -32,3 +32,4 @@ C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\BussinessModels\
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.csproj.CoreCompileInputs.cache
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.dll
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.pdb
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\BussinessModels\obj\Debug\netcoreapp3.1\BussinessModels.csprojAssemblyReference.cache

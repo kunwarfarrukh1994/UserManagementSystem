@@ -25,8 +25,8 @@ namespace DataAccessLayer.Repositories
         public void initDT()
         {
             dtMainGroupAcc = new DataTable();
-         
-            
+
+            //dtMainGroupAcc.Columns.Add("EDate", typeof(DateTime));
             dtMainGroupAcc.Columns.Add("CateAccID", typeof(int));
             dtMainGroupAcc.Columns.Add("CtrlAccID", typeof(int));
             dtMainGroupAcc.Columns.Add("compID", typeof(int));
@@ -98,7 +98,7 @@ namespace DataAccessLayer.Repositories
                     cmd = new SqlCommand("dbo.Insert_MainGroupAcc", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@MainGroupAcc", SqlDbType.Structured).Value = dtMainGroupAcc;
-                    cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = DateTime.Now;
+                    cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = groupAcc.EDate;
                     cmd.Parameters.Add("@MainGroupID", SqlDbType.BigInt).Value = groupAcc.MainGroupID;
 
 

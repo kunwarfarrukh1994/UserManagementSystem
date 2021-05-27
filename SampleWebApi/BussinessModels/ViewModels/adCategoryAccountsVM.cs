@@ -11,8 +11,10 @@ namespace BussinessModels.ViewModels
 		public int FinStatementTypeID { get; set; }
 		public int compID { get; set; }
 		public string Title { get; set; }
+		public string TitleU { get; set; }
 		public string Code { get; set; }
 		public int BranchID { get; set; }
+		public int? tmpCompID { get; set; }
 		
 	}
 }

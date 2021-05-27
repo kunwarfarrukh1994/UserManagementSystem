@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SampleWebApi.Controllers
 {
-    [Route("api/ControllAcc")]
+    [Route("api/ControlAcc")]
     [ApiController]
     public class ControlAccController : ControllerBase
     {
@@ -20,17 +20,17 @@ namespace SampleWebApi.Controllers
             this._controlRepo = controlRepo;
         }
         [HttpPost("create")]
-        public async Task<IActionResult> CreateControlAcc([FromBody] adControlAccountsVM controlAcc, int cate)
+        public async Task<IActionResult> CreateControlAcc([FromBody] adControlAccountsVM controlAcc)
         {
             
-            var result = await this._controlRepo.SaveControlAcc(controlAcc,cate);
+            var result = await this._controlRepo.SaveControlAcc(controlAcc);
             return Ok(result);
         }
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateControlAcc(adControlAccountsVM controlAcc , int cate)
+        public async Task<IActionResult> UpdateControlAcc(adControlAccountsVM controlAcc)
         {
             
-            var result = await this._controlRepo.SaveControlAcc(controlAcc,cate);
+            var result = await this._controlRepo.SaveControlAcc(controlAcc);
             return Ok(result);
         }
 
@@ -52,6 +52,13 @@ namespace SampleWebApi.Controllers
         public async Task<IActionResult> DeleteControlAcc(int Id)
         {
             var result = await this._controlRepo.DeleteControlAcc(Id);
+            return Ok(result);
+        }
+
+        [HttpGet("GetControlAcclookUps")]
+        public async Task<IActionResult> GetLookUpsforControlAcc()
+        {
+            var result = await this._controlRepo.GetLookUpsforCtrlAcc();
             return Ok(result);
         }
     }

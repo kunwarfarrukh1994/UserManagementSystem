@@ -52,5 +52,12 @@ namespace SampleWebApi.Controllers
             var result = await this._categoryRepo.DeleteCategoryAcc(Id);
             return Ok(result);
         }
+
+        [HttpGet("GetCategoryAcclookUps")]
+        public async Task<IActionResult> GetLookUpsforCategoryAcc()
+        {
+            var result = await this._categoryRepo.GetLookUpsforCategory();
+            return Ok(result);
+        }
     }
 }

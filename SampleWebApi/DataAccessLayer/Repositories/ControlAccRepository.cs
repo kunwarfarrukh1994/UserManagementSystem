@@ -28,10 +28,12 @@ namespace DataAccessLayer.Repositories
         {
 
             dtControl = new DataTable();
+            dtControl.Columns.Add("EDate", typeof(DateTime));
             dtControl.Columns.Add("CateAccID", typeof(int));
             dtControl.Columns.Add("CompID", typeof(int));
             dtControl.Columns.Add("Code", typeof(string));
             dtControl.Columns.Add("Title", typeof(string));
+            dtControl.Columns.Add("TitleU", typeof(string));
             dtControl.Columns.Add("BranchID", typeof(int));
 
 
@@ -39,7 +41,7 @@ namespace DataAccessLayer.Repositories
 
 
 
-        public async  Task<string> SaveControlAcc(adControlAccountsVM controlAcc, int lblCate)
+        public async  Task<string> SaveControlAcc(adControlAccountsVM controlAcc)
         {
             if (dtControl.Rows.Count > 0)
             {
@@ -47,50 +49,39 @@ namespace DataAccessLayer.Repositories
             }
             try
             {
-                var list = "";
-                if (controlAcc.CtrlAccID == 0)
+                var maxCode = "";
+                if (controlAcc.CateAccID == controlAcc.tmpCateAccID)
+                {
+                    maxCode = controlAcc.Code;
+                }
+
+                else
                 {
 
-                    list = await this._context.adControlAccounts.Where(x => x.CateAccID == controlAcc.CateAccID).OrderByDescending(x => x.Code).Select(x => x.Code).FirstOrDefaultAsync();
-                    if (list == null)
+                    maxCode = this._context.adControlAccounts.Where(x => x.CateAccID == controlAcc.CateAccID).Max(x => x.Code);
+
+                    if (maxCode == null)
                     {
-                        list = "00";
+                        maxCode = "00";
                     }
-                    int MC = Convert.ToInt32(list.ToString()) + 1;
+                    int MC = Convert.ToInt32(maxCode.ToString()) + 1;
                     if (Convert.ToString(MC).Length == 1)
-                        list = "0" + MC.ToString();
-                    else
-                        list = MC.ToString();
-                }
-                else 
-                {
-                    if (controlAcc.CateAccID != lblCate)
-                    {
-                        list = await this._context.adControlAccounts.Where(x => x.CateAccID == controlAcc.CateAccID).OrderByDescending(x => x.Code).Select(x => x.Code).FirstOrDefaultAsync();
-                        if (list == null)
-                        {
-                            list = "00";
-                        }
-                        int MC = Convert.ToInt32(list.ToString()) + 1;
-                        if (Convert.ToString(MC).Length == 1)
-                            list = "0" + MC.ToString();
-                        else
-                            list = MC.ToString();
-                    }
+                        maxCode = "0" + MC.ToString();
                     else 
-                    {
-                        list = controlAcc.Code;
-                    }
+                        maxCode = MC.ToString();
                     
-                   
                 }
+
+                controlAcc.Code = maxCode;
 
                 DataRow row = dtControl.NewRow();
-          
+
+                row["EDate"] = controlAcc.EDate;
                 row["CateAccID"] = controlAcc.CateAccID;
                 row["CompID"] = controlAcc.CompID;
-                row["Code"] = list;
+                row["Code"] = controlAcc.Code;
                 row["Title"] = controlAcc.Title;
+                row["TitleU"] = controlAcc.TitleU;
                 row["BranchID"] = controlAcc.BranchID;
 
 
@@ -187,6 +178,42 @@ namespace DataAccessLayer.Repositories
             return cntrlObj;
         }
 
-    
+
+
+        public async Task<adControlAccountsLookUpVM> GetLookUpsforCtrlAcc()
+        {
+            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            {
+                SqlParameter[] @params =
+                    {
+                       new SqlParameter("@CateAccLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
+
+
+                };
+
+
+                var sql = "EXEC[GetSearchLookUpsControlAcc] @CateAccLookUp OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
+
+
+
+                adControlAccountsLookUpVM lookups = new adControlAccountsLookUpVM();
+
+
+                lookups.adcontrolaccountscategorylookup = JsonConvert.DeserializeObject<IList<adControlAccountsCategoryLookUpVM>>(@params[0].Value.ToString());
+
+
+                con.Close();
+
+
+                return lookups;
+
+
+
+            }
+        }
+
+
     }
 }

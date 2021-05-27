@@ -27,9 +27,11 @@ namespace DataAccessLayer.Repositories
         {
          
             dtCategory = new DataTable();
+            
             dtCategory.Columns.Add("FinStatementTypeID", typeof(int));
             dtCategory.Columns.Add("compID", typeof(int));
             dtCategory.Columns.Add("Title", typeof(string));
+            dtCategory.Columns.Add("TitleU", typeof(string));
             dtCategory.Columns.Add("Code", typeof(string));
             dtCategory.Columns.Add("BranchID", typeof(int));
 
@@ -45,38 +47,41 @@ namespace DataAccessLayer.Repositories
             }
             try
             {
-                var list = "";
-                if (category.CateAccID == 0)
+                var maxCode = "";
+                if (category.compID == category.tmpCompID)
                 {
-                    list = await this._context.adCategoryAccounts.Where(x => x.FinStatementTypeID == category.FinStatementTypeID).OrderByDescending(x => x.Code).Select(x => x.Code).FirstOrDefaultAsync();
-                    if (list == null) 
-                    {
-                        list = "000";
-                    }
-                    int MC = Convert.ToInt32(list.ToString())+1;
-                    if (Convert.ToString(MC).Length == 1)
-                        list = "00" + MC.ToString();
-                    else if (Convert.ToString(MC).Length == 2)
-                        list = "0" + MC.ToString();
-                    else
-                        list = MC.ToString();
+                    maxCode = category.Code;
                 }
+
+                else
+                {
+
+                    maxCode = this._context.adCategoryAccounts.Where(x => x.compID == category.compID).Max(x => x.Code);
+
+                    if (maxCode == null)
+                    {
+                        maxCode = "00";
+                    }
+                    int MC = Convert.ToInt32(maxCode.ToString()) + 1;
+                    if (Convert.ToString(MC).Length == 1)
+                        maxCode = "00" + MC.ToString();
+                    else if(Convert.ToString(MC).Length == 2)
+                        maxCode = "0" + MC.ToString();
+                    else
+                        maxCode = MC.ToString();
+
+                }
+
+                category.Code = maxCode;
 
                 DataRow row = dtCategory.NewRow();
 
+                
                 row["FinStatementTypeID"] = category.FinStatementTypeID;
                 row["compID"] = category.compID;
                 row["Title"] = category.Title;
-                if (category.CateAccID == 0)
-                {
-                    row["Code"] = list;
-                }
-                else
-                {
-                    row["Code"] = category.Code;
-                }
-                
-
+                row["TitleU"] = category.TitleU;
+                row["Code"] = category.Code;
                 row["BranchID"] = category.BranchID;
              
 
@@ -94,6 +99,7 @@ namespace DataAccessLayer.Repositories
                     cmd = new SqlCommand("dbo.Insert_CategoryAccounts", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@CategoryAcc", SqlDbType.Structured).Value = dtCategory;
+                    cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = category.EDate;
                     cmd.Parameters.Add("@CateAccID", SqlDbType.BigInt).Value = category.CateAccID;
 
 
@@ -175,6 +181,43 @@ namespace DataAccessLayer.Repositories
             return cateObj;
         }
 
+
+        public async Task<adCategoryAccountsLookUpsVM> GetLookUpsforCategory()
+        {
+            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            {
+                SqlParameter[] @params =
+                    {
+                       new SqlParameter("@CompanyLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                      
+
+                };
+
+
+                var sql = "EXEC[GetSearchLookUpsCategoryAcc] @CompanyLookUp OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
+
+
+
+                adCategoryAccountsLookUpsVM lookups = new adCategoryAccountsLookUpsVM();
+
+
+
+                lookups.adcategoryaccountscompanylookup = JsonConvert.DeserializeObject<IList<adCategoryAccountsCompanyLookUpVM>>(@params[0].Value.ToString());
+                
+
+
+
+
+                con.Close();
+
+
+                return lookups;
+
+
+
+            }
+        }
 
     }
 }
