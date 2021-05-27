@@ -11,7 +11,7 @@ namespace DataAccessLayer.ReposiotryInterfaces
         Task<IList<adMainGroupAccountsVM>> GetAllGroupAccounts();
         Task<string> SaveGroupAcc(adMainGroupAccountsVM groupAcc);
         Task<adMainGroupAccountsVM> GetGroupAccByID(int Id);
-
+        Task<string> DeleteGroupAcc(int Id);
         Task<adMainGroupAccountsLookUpsVM> GetLookUpsforGroupAcc();
 
     }

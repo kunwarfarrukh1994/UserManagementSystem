@@ -190,5 +190,31 @@ namespace DataAccessLayer.Repositories
             return mainGrpObj;
         }
 
+        public async Task<string> DeleteGroupAcc(int Id)
+        {
+            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            {
+
+                SqlCommand cmd = null;
+
+                cmd = new SqlCommand("dbo.Del_MainGroupAcc", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@MainGroupID", SqlDbType.BigInt).Value = Id;
+
+                con.Open();
+                await cmd.ExecuteNonQueryAsync();
+
+                con.Close();
+
+
+                return "Record Deleted Successfully";
+
+
+
+            }
+        }
+
+
     }
 }

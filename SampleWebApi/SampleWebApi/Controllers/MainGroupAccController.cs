@@ -46,6 +46,13 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
+        [HttpDelete("DeleteGroupAcc/{id?}")]
+        public async Task<IActionResult> DeleteGroupAcc(int Id)
+        {
+            var result = await this._groupAccRepo.DeleteGroupAcc(Id);
+            return Ok(result);
+        }
+
 
     }
 }
