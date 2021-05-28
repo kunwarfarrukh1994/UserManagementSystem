@@ -4,14 +4,16 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210528074729_addDateColumn")]
+    partial class addDateColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -550,29 +552,11 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("BussinessModels.DBModels.GoDown", b =>
                 {
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AddressU")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("BranchID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CompanyID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Del")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("EDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("FinId")
+                        .HasColumnType("int");
 
                     b.Property<int>("GoCid")
                         .HasColumnType("int");
@@ -581,28 +565,11 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GoNameU")
+                    b.Property<string>("GoType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OperatorID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PhoneNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShortName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Sync")
                         .HasColumnType("int");
 
                     b.HasIndex("ID")
@@ -659,13 +626,7 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("BussinessModels.DBModels.Pandi", b =>
                 {
-                    b.Property<int>("BranchID")
-                        .HasColumnType("int");
-
                     b.Property<int>("CID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CompanyID")
                         .HasColumnType("int");
 
                     b.Property<int>("Del")
@@ -677,17 +638,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<int?>("ID")
                         .HasColumnType("int");
 
-                    b.Property<int>("OperatorID")
-                        .HasColumnType("int");
-
                     b.Property<string>("PandiName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("PerPhaira")
-                        .HasColumnType("real");
-
-                    b.Property<string>("PhoneNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

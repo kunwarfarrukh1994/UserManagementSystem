@@ -8,9 +8,9 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface IAddaRepository
     {
-        //Task<IList<AddaVM>> GetAllAdda();
-        //Task<AddaVM> GetAddaByID(int Id);
-        //Task<string> SaveAdda(AddaVM adda);
-        //Task<string> DeleteAdda(int Id);
+        Task<IList<AddaVM>> GetAllAdda();
+        Task<AddaVM> GetAddaByID(int Id);
+        Task<string> SaveAdda(AddaVM adda);
+        Task<string> DeleteAdda(int Id);
     }
 }

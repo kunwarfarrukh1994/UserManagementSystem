@@ -8,6 +8,7 @@ namespace BussinessModels.DBModels
     {
         public int? ID { get; set; }
         public int CityId { get; set; }
+        public DateTime EDate { get; set; }
         public string CityName { get; set; }
         public int FinID { get; set; }
         public string CityNameU { get; set; }

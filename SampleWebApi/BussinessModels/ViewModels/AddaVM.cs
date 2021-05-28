@@ -7,6 +7,7 @@ namespace BussinessModels.ViewModels
     public class AddaVM
     {
         public int CID { get; set; }
+        public DateTime EDate { get; set; }
         public string Title { get; set; }
         public string TitleU { get; set; }
         public int BranchID { get; set; }

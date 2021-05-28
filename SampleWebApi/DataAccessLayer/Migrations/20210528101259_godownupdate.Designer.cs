@@ -4,14 +4,16 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210528101259_godownupdate")]
+    partial class godownupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -558,12 +560,6 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("BranchID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CompanyID")
-                        .HasColumnType("int");
-
                     b.Property<int>("Del")
                         .HasColumnType("int");
 
@@ -586,9 +582,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OperatorID")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNo")
@@ -659,13 +652,7 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("BussinessModels.DBModels.Pandi", b =>
                 {
-                    b.Property<int>("BranchID")
-                        .HasColumnType("int");
-
                     b.Property<int>("CID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CompanyID")
                         .HasColumnType("int");
 
                     b.Property<int>("Del")
@@ -677,17 +664,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<int?>("ID")
                         .HasColumnType("int");
 
-                    b.Property<int>("OperatorID")
-                        .HasColumnType("int");
-
                     b.Property<string>("PandiName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("PerPhaira")
-                        .HasColumnType("real");
-
-                    b.Property<string>("PhoneNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
