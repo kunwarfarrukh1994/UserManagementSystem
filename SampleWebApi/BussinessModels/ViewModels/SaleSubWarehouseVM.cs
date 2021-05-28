@@ -16,6 +16,8 @@ namespace BussinessModels.ViewModels
 		public Single Qty { get; set; }
 		public int CompanyID { get; set; }
 		public int BranchID { get; set; }
+
+		public Single QtyReq { get; set; }
 		
 	}
 }

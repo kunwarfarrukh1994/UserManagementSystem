@@ -237,7 +237,7 @@ namespace DataAccessLayer.Repositories
                         cmd.Parameters.Add("@SMain", SqlDbType.Structured).Value = dtSalesMain;
                         cmd.Parameters.Add("@SSub", SqlDbType.Structured).Value = dtSalesSub;
                         cmd.Parameters.Add("@SSubWarehouse", SqlDbType.Structured).Value = dtSaleSubWarehouse;
-                        cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = DateTime.Now;
+                        cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = salesmain.EDate;
                         cmd.Parameters.Add("@SmId", SqlDbType.BigInt).Value = salesmain.SMID;
 
 

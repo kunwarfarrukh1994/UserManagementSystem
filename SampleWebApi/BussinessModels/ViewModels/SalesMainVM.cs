@@ -4,9 +4,10 @@ using System.Text;
 
 namespace BussinessModels.ViewModels
 {
-    public class SalesMainVM
-    {
+	public class SalesMainVM
+	{
 		public int SMID { get; set; }
+		public DateTime EDate {get; set;}
 		public string BillNo { get; set; }
 		public int SAccID { get; set; }
 		public Single GSale { get; set; }
@@ -29,6 +30,7 @@ namespace BussinessModels.ViewModels
 		public int OperatorID { get; set; }
 		public int BranchID { get; set; }
 		public int LocationID { get; set; }
+		
 
 
 		public List<SaleSubVm> SaleDetail { get; set; }
