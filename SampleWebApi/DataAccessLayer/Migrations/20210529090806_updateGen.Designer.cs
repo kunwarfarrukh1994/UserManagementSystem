@@ -4,14 +4,16 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210529090806_updateGen")]
+    partial class updateGen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -480,6 +482,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("BranchID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("CID")
                         .HasColumnType("int");
 
@@ -488,9 +493,6 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<int>("Del")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("EDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("FinID")
                         .HasColumnType("int");
@@ -542,6 +544,9 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("real");
 
                     b.Property<int>("FinID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ID")
                         .HasColumnType("int");
 
                     b.Property<string>("Narat")

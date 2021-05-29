@@ -1,14 +1,17 @@
-﻿using System;
+﻿using BussinessModels.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface IGenRepository
     {
-        //Task<IList<GenMainVM>> GetAllGenmain();
-        //Task<GenMainVM> GetGenmainByID(int Id);
-        //Task<string> SaveGenmain(GenMainVM genmain);
-        //Task<string> DeleteGenmain(int Id);
+        Task<IList<GenMainVM>> GetAllGen();
+        Task<GenMainVM> GetGenByID(int Id);
+        Task<string> SaveGen(GenMainVM genmain);
+        Task<string> DeleteGen(int Id);
+        Task<GenLookUpsVM> GetLookUpsforGen();
     }
 }
