@@ -14,7 +14,8 @@ namespace BussinessModels.DBModels
         public string? CName { get; set; }
         public string? Email { get; set; }
         public string? PhoneNo { get; set; }
-        public string CustomerCategory { get; set; }
+        
+        public int MainGroupID { get; set; }
         public string WhatsappNo { get; set; }
         public int? CityID { get; set; }
         public string CustType { get; set; }

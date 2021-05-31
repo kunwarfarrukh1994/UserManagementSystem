@@ -65,71 +65,76 @@ namespace DataAccessLayer.Repositories
                     dtGenSub.Rows.Clear();
                 }
 
+              
+                    DataRow row = dtGenMain.NewRow();
 
-                DataRow row = dtGenMain.NewRow();
-
-                row["HeadID"] = genmain.HeadID;
-                row["Narat"] = genmain.Narat;
-                row["CompanyID"] = genmain.CompanyID;
-                row["BranchID"] = genmain.BranchID;
-                row["OpertorID"] = genmain.OpertorID;
-
-
-                dtGenMain.Rows.InsertAt(row, 0);
+                    row["HeadID"] = genmain.HeadID;
+                    row["Narat"] = genmain.Narat;
+                    row["CompanyID"] = genmain.CompanyID;
+                    row["BranchID"] = genmain.BranchID;
+                    row["OpertorID"] = genmain.OpertorID;
 
 
-
-                int i = 0;
-                foreach (var detail in genmain.GenSub)
-                {
-                    DataRow srow = dtGenSub.NewRow();
-
-                    srow["AccID"] = detail.AccID;
-                    srow["AccDesc"] = detail.AccDesc;
-                    srow["Narat"] = detail.Narat;
-                    srow["DrAmt"] = detail.DrAmt;
-                    srow["CrAmt"] = detail.CrAmt;
-                    srow["CompanyID"] = detail.CompanyID;
-                    srow["BranchID"] = detail.BranchID;
-                    srow["OpertorID"] = detail.OpertorID;
-
-                    dtGenSub.Rows.InsertAt(srow, i);
-
-                    i++;
-
-                }
-
-
-                using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
-                {
-                    
-                    SqlCommand cmd = null;
-
-                    cmd = new SqlCommand("dbo.Insert_Gen", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@GMain", SqlDbType.Structured).Value = dtGenMain;
-                    cmd.Parameters.Add("@GSub", SqlDbType.Structured).Value = dtGenSub;
-                    
-                    cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = genmain.EDate;
-                    
-                    cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = genmain.CID;
+                    dtGenMain.Rows.InsertAt(row, 0);
 
 
 
-                    var returnParameter = cmd.Parameters.Add("@CID", SqlDbType.BigInt);
-                    returnParameter.Direction = ParameterDirection.ReturnValue;
+                    int i = 0;
+                    foreach (var detail in genmain.dayBookSub)
+                    {
+                        DataRow srow = dtGenSub.NewRow();
 
-                    con.Open();
-                    await cmd.ExecuteNonQueryAsync();
-                    var result = returnParameter.Value;
-                    con.Close();
+                        srow["AccID"] = detail.AccID;
+                        srow["AccDesc"] = detail.AccDesc;
+                        srow["Narat"] = detail.Narat;
+                        srow["DrAmt"] = detail.DrAmt;
+                        srow["CrAmt"] = detail.CrAmt;
+                        srow["CompanyID"] = detail.CompanyID;
+                        srow["BranchID"] = detail.BranchID;
+                        srow["OpertorID"] = detail.OpertorID;
+
+                        dtGenSub.Rows.InsertAt(srow, i);
+
+                        i++;
+
+                    }
 
 
-                    return "Record Saved Successfully for ID:" + result;
+                    using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+                    {
+
+                        SqlCommand cmd = null;
+
+                        cmd = new SqlCommand("dbo.Insert_Gen", con);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@GMain", SqlDbType.Structured).Value = dtGenMain;
+                        cmd.Parameters.Add("@GSub", SqlDbType.Structured).Value = dtGenSub;
+
+                        cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = genmain.EDate;
+
+                        cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = genmain.CID;
 
 
 
-                }
+                        var returnParameter = cmd.Parameters.Add("@CID", SqlDbType.BigInt);
+                        returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                        con.Open();
+                        await cmd.ExecuteNonQueryAsync();
+                        var result = returnParameter.Value;
+                        con.Close();
+
+
+                        return "Record Saved Successfully for ID:" + result;
+
+
+
+                    }
+
+                
+
+
+             
             }
             catch (Exception ex)
             {
@@ -141,7 +146,7 @@ namespace DataAccessLayer.Repositories
 
         public async Task<IList<GenMainVM>> GetAllGen()
         {
-            var list = await this._context.SaleMain.Where(x => x.Del == 0).ToListAsync();
+            var list = await this._context.GenMain.Where(x => x.Del == 0).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -165,7 +170,7 @@ namespace DataAccessLayer.Repositories
             {
                 var subgen = await this._context.GenSub.Where(x => x.CID == genmainobj.CID).ToListAsync();
                 var subjson = JsonConvert.SerializeObject(subgen);
-                genmainobj.GenSub = JsonConvert.DeserializeObject<List<GenSubVM>>(subjson);
+                genmainobj.dayBookSub = JsonConvert.DeserializeObject<List<GenSubVM>>(subjson);
 
             }
 

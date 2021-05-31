@@ -241,7 +241,6 @@ C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\obj
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.AssemblyInfoInputs.cache
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.AssemblyInfo.cs
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.csproj.CoreCompileInputs.cache
-C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\staticwebassets\SampleWebApi.StaticWebAssets.Manifest.cache
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\staticwebassets\SampleWebApi.StaticWebAssets.xml
@@ -252,3 +251,4 @@ C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\obj
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\ref\SampleWebApi.dll
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.pdb
 C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.genruntimeconfig.cache
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\obj\Debug\net5.0\SampleWebApi.MvcApplicationPartsAssemblyInfo.cs

@@ -13,11 +13,11 @@ namespace BussinessModels.ViewModels
         public int CompanyID { get; set; }
         public int BranchID { get; set; }
         public int OpertorID { get; set; }
-        public List<GenSubVM> GenSub { get; set; }
+        public List<GenSubVM> dayBookSub { get; set; }
 
         public GenMainVM()
         {
-            GenSub = new List<GenSubVM>();
+            dayBookSub = new List<GenSubVM>();
         }
 
 

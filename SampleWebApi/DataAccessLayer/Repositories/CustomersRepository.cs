@@ -36,7 +36,7 @@ namespace DataAccessLayer.Repositories
             dtCustomers.Columns.Add("Name", typeof(string));
             dtCustomers.Columns.Add("Email", typeof(string));
             dtCustomers.Columns.Add("PhoneNo", typeof(string));
-            dtCustomers.Columns.Add("CustomerCategory", typeof(string));
+            dtCustomers.Columns.Add("MainGroupID", typeof(string));
             dtCustomers.Columns.Add("WhatsappNo", typeof(string));
             dtCustomers.Columns.Add("CityID", typeof(int));
             dtCustomers.Columns.Add("Type", typeof(string));
@@ -71,7 +71,7 @@ namespace DataAccessLayer.Repositories
                 row["Name"] = customer.CName;
                 row["Email"] = customer.Email;
                 row["PhoneNo"] = customer.PhoneNo;
-                row["CustomerCategory"] = customer.CustomerCategory;
+                row["MainGroupID"] = customer.MainGroupID;
                 row["WhatsappNo"] = customer.WhatsappNo;
                 row["CityID"] = customer.CityID;
                 row["Type"] = customer.CustType;
@@ -104,6 +104,7 @@ namespace DataAccessLayer.Repositories
                     cmd.Parameters.Add("@Customers", SqlDbType.Structured).Value = dtCustomers;
                     cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = DateTime.Now;
                     cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = customer.CID;
+                    
 
 
 
@@ -125,7 +126,7 @@ namespace DataAccessLayer.Repositories
             }
             catch (Exception ex)
             {
-
+                
                 throw new Exception("Insert Failed");
             }
 
@@ -201,14 +202,15 @@ namespace DataAccessLayer.Repositories
                        new SqlParameter("@CityLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@RAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@MAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
-                       new SqlParameter("@CustomerLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+                       new SqlParameter("@CustomerLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@MainGroupLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
 
 
                 };
 
 
-                var sql = "EXEC[CustomersGetSearchLookUps] @CityLookUp OUTPUT, @RAgentLookUp OUTPUT,@MAgentLookUp OUTPUT,@CustomerLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3]);
+                var sql = "EXEC[CustomersGetSearchLookUps] @CityLookUp OUTPUT, @RAgentLookUp OUTPUT,@MAgentLookUp OUTPUT,@CustomerLookUp OUTPUT, @MainGroupLookUp OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3],@params[4]);
 
 
 
@@ -220,6 +222,7 @@ namespace DataAccessLayer.Repositories
                 lookups.customerRAgentlookup = JsonConvert.DeserializeObject<IList<CustomerRAgentLookUp>>(@params[1].Value.ToString());
                 lookups.customerMAgentlookup = JsonConvert.DeserializeObject<IList<CustomerMAgentLookUp>>(@params[2].Value.ToString());
                 lookups.customerallcustomerslookup = JsonConvert.DeserializeObject<IList<CustomerAllcustomersLookUpVM>>(@params[3].Value.ToString());
+                lookups.customermaingrouplookup = JsonConvert.DeserializeObject<IList<CustomerMainGroupLookUpVM>>(@params[4].Value.ToString());
 
                 con.Close();
 

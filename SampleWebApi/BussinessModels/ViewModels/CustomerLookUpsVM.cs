@@ -10,6 +10,7 @@ namespace BussinessModels.ViewModels
         public IList<CustomerRAgentLookUp> customerRAgentlookup { get; set; }
         public IList<CustomerMAgentLookUp> customerMAgentlookup { get; set; }
         public IList<CustomerAllcustomersLookUpVM> customerallcustomerslookup { get; set; }
+        public IList<CustomerMainGroupLookUpVM> customermaingrouplookup { get; set; }
 
         public CustomerLookUpsVM()
         {
@@ -17,6 +18,7 @@ namespace BussinessModels.ViewModels
             customerRAgentlookup = new List<CustomerRAgentLookUp>();
             customerMAgentlookup = new List<CustomerMAgentLookUp>();
             customerallcustomerslookup = new List<CustomerAllcustomersLookUpVM>();
+            customermaingrouplookup = new List<CustomerMainGroupLookUpVM>();
         }
     }
 }
