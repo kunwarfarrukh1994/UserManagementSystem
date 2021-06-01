@@ -33,6 +33,7 @@ namespace DataAccessLayer.Repositories
             dtSchools.Columns.Add("Principal", typeof(string));
             dtSchools.Columns.Add("Email", typeof(string));
             dtSchools.Columns.Add("PhoneNo", typeof(string));
+            dtSchools.Columns.Add("MainGroupID", typeof(string));
             dtSchools.Columns.Add("WhatsappNo", typeof(string));
             dtSchools.Columns.Add("MailAddress", typeof(string));
             dtSchools.Columns.Add("CityID", typeof(int));
@@ -70,6 +71,7 @@ namespace DataAccessLayer.Repositories
                 row["Principal"] = school.Principal;
                 row["Email"] = school.Email;
                 row["PhoneNo"] = school.PhoneNo;
+                row["MainGroupID"] = school.MainGroupID;
                 row["WhatsappNo"] = school.WhatsappNo;
                 row["MailAddress"] = school.MailAddress;
                 row["CityID"] = school.CityID;
@@ -116,9 +118,15 @@ namespace DataAccessLayer.Repositories
                     var result = returnParameter.Value;
                     con.Close();
 
+                    if (Convert.ToInt32(result) > 0)
+                    {
+                        return result.ToString();
+                    }
 
-                    return "Record Saved Successfully for ID:" + result;
-
+                    else
+                    {
+                        return result.ToString();
+                    }
 
 
                 }
@@ -176,14 +184,15 @@ namespace DataAccessLayer.Repositories
                        new SqlParameter("@CityLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@RAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@MAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
-                       new SqlParameter("@SchoolLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+                       new SqlParameter("@SchoolLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@MainGroupLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
 
 
                 };
 
 
-                var sql = "EXEC[SchoolsGetSearchLookUps] @CityLookUp OUTPUT, @RAgentLookUp OUTPUT,@MAgentLookUp OUTPUT,@SchoolLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3]);
+                var sql = "EXEC[SchoolsGetSearchLookUps] @CityLookUp OUTPUT, @RAgentLookUp OUTPUT,@MAgentLookUp OUTPUT,@SchoolLookUp OUTPUT, @MainGroupLookUp OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3], @params[4]);
 
 
 
@@ -195,6 +204,7 @@ namespace DataAccessLayer.Repositories
                 lookups.customerRAgentlookup = JsonConvert.DeserializeObject<IList<CustomerRAgentLookUp>>(@params[1].Value.ToString());
                 lookups.customerMAgentlookup = JsonConvert.DeserializeObject<IList<CustomerMAgentLookUp>>(@params[2].Value.ToString());
                 lookups.schoolallschoollookup = JsonConvert.DeserializeObject<IList<SchoolAllSchoolLookUpVM>>(@params[3].Value.ToString());
+                lookups.customermaingrouplookup = JsonConvert.DeserializeObject<IList<CustomerMainGroupLookUpVM>>(@params[4].Value.ToString());
 
                 con.Close();
 

@@ -102,7 +102,7 @@ namespace DataAccessLayer.Repositories
                     cmd = new SqlCommand("dbo.Insert_Customers", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@Customers", SqlDbType.Structured).Value = dtCustomers;
-                    cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = DateTime.Now;
+                    cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = customer.EDate;
                     cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = customer.CID;
                     
 
@@ -116,8 +116,17 @@ namespace DataAccessLayer.Repositories
                     var result = returnParameter.Value;
                     con.Close();
 
+                    if(Convert.ToInt32(result) > 0) 
+                    {
+                        return  result.ToString();
+                    }
 
-                    return "Record Saved Successfully for ID:" + result;
+                    else 
+                    {
+                        return  result.ToString();
+                    }
+
+                    
 
 
 

@@ -8,6 +8,7 @@ namespace BussinessModels.ViewModels
     {
         
         public int CID { get; set; }
+        public DateTime EDate { get; set; }
         public string CustomerName { get; set; }
         public string ContactPerson { get; set; }
         public string CName { get; set; }

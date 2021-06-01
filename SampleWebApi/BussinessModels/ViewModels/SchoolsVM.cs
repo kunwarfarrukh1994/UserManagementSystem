@@ -13,6 +13,7 @@ namespace BussinessModels.ViewModels
         public string? Principal { get; set; }
         public string? Email { get; set; }
         public string? PhoneNo { get; set; }
+        public int MainGroupID { get; set; }
         public string WhatsappNo { get; set; }
         public string MailAddress { get; set; }
         public int? CityID { get; set; }
