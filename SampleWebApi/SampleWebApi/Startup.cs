@@ -192,6 +192,7 @@ namespace SampleWebApi
             services.AddTransient<IGodownRepository, GodownRpository>();
             services.AddTransient<IPandiRepository, PandiRepository>();
             services.AddTransient<IGenRepository, GenRepository>();
+            services.AddTransient<IAgentRepository, AgentRepository>();
 
 
 

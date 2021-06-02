@@ -35,6 +35,7 @@ namespace DataAccessLayer.Repositories
             dtAgents.Columns.Add("ReferBy", typeof(string));
             dtAgents.Columns.Add("UserName", typeof(string));
             dtAgents.Columns.Add("Password", typeof(string));
+            dtAgents.Columns.Add("IdCardNo", typeof(string));
             dtAgents.Columns.Add("CompanyID", typeof(int));
             dtAgents.Columns.Add("BranchID", typeof(int));
             dtAgents.Columns.Add("OperatorID", typeof(int));
@@ -61,6 +62,7 @@ namespace DataAccessLayer.Repositories
                 row["ReferBy"] = agent.ReferBy;
                 row["UserName"] = agent.UserName;
                 row["Password"] = agent.Password;
+                row["IdCardNo"] = agent.IdCardNo;
                 row["CompanyID"] = agent.CompanyID;
                 row["BranchID"] = agent.BranchID;
                 row["OperatorID"] = agent.OperatorID;
@@ -93,7 +95,7 @@ namespace DataAccessLayer.Repositories
                     con.Close();
 
 
-                    return "Record Saved Successfully for ID:" + result;
+                    return  result.ToString();
 
 
 
@@ -136,9 +138,9 @@ namespace DataAccessLayer.Repositories
         }
 
 
-        public async Task<IList<AgentsVM>> GetAllAgents()
+        public async Task<IList<AgentsVM>> GetAllMAgents()
         {
-            var list = await this._context.Agents.Where(x => x.Del == 0).ToListAsync();
+            var list = await this._context.Agents.Where(x => x.Del == 0 && x.Category == 1).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -146,6 +148,18 @@ namespace DataAccessLayer.Repositories
 
             return agentsList;
         }
+
+        public async Task<IList<AgentsVM>> GetAllRAgents()
+        {
+            var list = await this._context.Agents.Where(x => x.Del == 0 && x.Category == 2).ToListAsync();
+
+            string json = JsonConvert.SerializeObject(list);
+
+            IList<AgentsVM> agentsList = JsonConvert.DeserializeObject<IList<AgentsVM>>(json);
+
+            return agentsList;
+        }
+
 
         public async Task<AgentsVM> GetAgentByID(int Id)
         {
@@ -162,5 +176,21 @@ namespace DataAccessLayer.Repositories
 
             return agentObj;
         }
+
+        //public async Task<AgentsVM> GetRAgentByID(int Id)
+        //{
+        //    AgentsVM agentObj = new AgentsVM();
+
+
+        //    var mainAgent = await this._context.Agents.Where(x => x.CID == Id).FirstOrDefaultAsync();
+
+        //    var mainjson = JsonConvert.SerializeObject(mainAgent);
+
+        //    agentObj = JsonConvert.DeserializeObject<AgentsVM>(mainjson);
+
+
+
+        //    return agentObj;
+        //}
     }
 }

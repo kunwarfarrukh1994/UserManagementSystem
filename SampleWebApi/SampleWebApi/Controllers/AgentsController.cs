@@ -33,10 +33,17 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllAgents")]
-        public async Task<IActionResult> GetAllAgents()
+        [HttpGet("GetAllMAgents")]
+        public async Task<IActionResult> GetAllMAgents()
         {
-            var result = await this._agentsRepo.GetAllAgents();
+            var result = await this._agentsRepo.GetAllMAgents();
+            return Ok(result);
+        }
+
+        [HttpGet("GetAllRAgents")]
+        public async Task<IActionResult> GetAllRAgents()
+        {
+            var result = await this._agentsRepo.GetAllRAgents();
             return Ok(result);
         }
 
@@ -46,6 +53,13 @@ namespace SampleWebApi.Controllers
             var result = await this._agentsRepo.GetAgentByID(id);
             return Ok(result);
         }
+
+        //[HttpGet("GetRAgentById/{id?}")]
+        //public async Task<IActionResult> GetRAgentByID(int id)
+        //{
+        //    var result = await this._agentsRepo.GetRAgentByID(id);
+        //    return Ok(result);
+        //}
 
         [HttpDelete("Delete/{id?}")]
         public async Task<IActionResult> DeleteAgent(int Id)

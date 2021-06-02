@@ -8,9 +8,11 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface IAgentRepository
     {
-        Task<IList<AgentsVM>> GetAllAgents();
+        Task<IList<AgentsVM>> GetAllMAgents();
+        Task<IList<AgentsVM>> GetAllRAgents();
         Task<string> SaveAgent(AgentsVM agent);
         Task<AgentsVM> GetAgentByID(int Id);
+        //Task<AgentsVM> GetRAgentByID(int Id);
         Task<string> DeleteAgent(int Id);
         
     }
