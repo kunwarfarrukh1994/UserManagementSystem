@@ -19,6 +19,26 @@ namespace DataAccessLayer.Repositories
             this._context = context;
             initDT();
         }
+
+        public async  Task<SaleReturnMainVM> GetSaleReturnByID(int Id)
+        {
+            SqlParameter[] @outparams =
+                   {
+                       new SqlParameter("@SaleMainLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@SaleSubLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       
+                };
+            SqlParameter[] @inparams =
+                {
+                        //cmd.Parameters.Add("@SRID", SqlDbType.BigInt).Value = salereturnmain.SRID;
+
+                    new SqlParameter("@SMID", Id)
+                };
+            await DBMethods.EXECUTE_SP(@inparams, @outparams, "GetSaleDetailByID",this._context);
+            var dtt = new SaleReturnMainVM();
+            return dtt;
+        }
+
         public void initDT()
         {
             dtSaleReturnMain = new DataTable();

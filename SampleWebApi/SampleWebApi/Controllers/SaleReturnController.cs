@@ -25,5 +25,12 @@ namespace SampleWebApi.Controllers
             var result = await this._saleReturnRepo.SaveSaleReturn(saleReturn);
             return Ok(result);
         }
+
+        [HttpGet("GetSaleReturnById/{id?}")]
+        public async Task<IActionResult> GetSaleReturnByID(int id)
+        {
+            var result = await this._saleReturnRepo.GetSaleReturnByID(id);
+            return Ok(result);
+        }
     }
 }
