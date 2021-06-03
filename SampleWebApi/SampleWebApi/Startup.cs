@@ -194,6 +194,9 @@ namespace SampleWebApi
             services.AddTransient<IGenRepository, GenRepository>();
             services.AddTransient<IAgentRepository, AgentRepository>();
             services.AddTransient<ISaleReturnRepository, SaleReturnRepository>();
+            services.AddTransient<IClassTypeRepository, ClassTypeRepository>();
+            services.AddTransient<IClassRepository, ClassRepository>();
+
 
 
 

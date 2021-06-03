@@ -57,6 +57,10 @@ namespace DataAccessLayer
             model_builder.Entity<SaleReturnMain>().HasNoKey();
             model_builder.Entity<SaleReturnSub>().HasNoKey();
 
+            model_builder.Entity<mClassMain>().HasNoKey();
+            model_builder.Entity<mClassSub>().HasNoKey();
+            model_builder.Entity<mClassType>().HasNoKey();
+
 
 
 
@@ -100,6 +104,10 @@ namespace DataAccessLayer
         public DbSet<Schools> Schools { get; set; }
         public DbSet<SaleReturnMain> SaleReturnMain { get; set; }
         public DbSet<SaleReturnSub> SaleReturnSub { get; set; }
+
+        public DbSet<mClassMain> mClassMain { get; set; }
+        public DbSet<mClassSub> mClassSub { get; set; }
+        public DbSet<mClassType> mClassType { get; set; }
 
 
 

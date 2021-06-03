@@ -1818,6 +1818,101 @@ namespace DataAccessLayer.Migrations
 
                     b.ToTable("cdCompanies");
                 });
+
+            modelBuilder.Entity("BussinessModels.DBModels.mClassMain", b =>
+                {
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClassName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OperatorID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.ToTable("mClassMain");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.mClassSub", b =>
+                {
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClassTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.ToTable("mClassSub");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.mClassType", b =>
+                {
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClassType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OperatorID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.ToTable("mClassType");
+                });
 #pragma warning restore 612, 618
         }
     }
