@@ -61,6 +61,8 @@ namespace DataAccessLayer
             model_builder.Entity<mClassSub>().HasNoKey();
             model_builder.Entity<mClassType>().HasNoKey();
 
+            model_builder.Entity<Ledger>().HasNoKey();
+
 
 
 
@@ -108,6 +110,7 @@ namespace DataAccessLayer
         public DbSet<mClassMain> mClassMain { get; set; }
         public DbSet<mClassSub> mClassSub { get; set; }
         public DbSet<mClassType> mClassType { get; set; }
+        public DbSet<Ledger> Ledger { get; set; }
 
 
 

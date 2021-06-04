@@ -2,6 +2,7 @@
 using DataAccessLayer.ReposiotryInterfaces;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,7 +21,7 @@ namespace DataAccessLayer.Repositories
             initDT();
         }
 
-        public async  Task<SaleReturnMainVM> GetSaleReturnByID(int Id)
+        public async  Task<SaleReturnLookUpsVM> GetSaleReturnByID(int Id)
         {
             SqlParameter[] @outparams =
                    {
@@ -30,13 +31,16 @@ namespace DataAccessLayer.Repositories
                 };
             SqlParameter[] @inparams =
                 {
-                        //cmd.Parameters.Add("@SRID", SqlDbType.BigInt).Value = salereturnmain.SRID;
-
                     new SqlParameter("@SMID", Id)
                 };
             await DBMethods.EXECUTE_SP(@inparams, @outparams, "GetSaleDetailByID",this._context);
-            var dtt = new SaleReturnMainVM();
-            return dtt;
+
+            SaleReturnLookUpsVM lookups = new SaleReturnLookUpsVM();
+            lookups.salereturnmainlookup = JsonConvert.DeserializeObject<IList<SaleReturnMainLookUpVM>>(@outparams[0].Value.ToString());
+            lookups.salereturnsublookup = JsonConvert.DeserializeObject<IList<SaleReturnSubLookUpVM>>(@outparams[1].Value.ToString());
+
+
+            return lookups;
         }
 
         public void initDT()
