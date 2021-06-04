@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {}
+    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {}
   },
   "projects": {
-    "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {
+    "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
+        "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
         "projectName": "BussinessModels",
-        "projectPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
-        "packagesPath": "C:\\Users\\EAS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessModels\\obj\\",
+        "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj",
+        "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
+        "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\EAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

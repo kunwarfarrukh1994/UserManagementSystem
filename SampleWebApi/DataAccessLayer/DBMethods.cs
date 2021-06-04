@@ -20,6 +20,7 @@ namespace DataAccessLayer
             {
                 foreach (var inparams in in_params)
                 {
+                    
                     //EXEC[SalesGetSearchLookUps] @CustomerLookUp OUTPUT, @ItemLookUp OUTPUT, @PandiLookUp OUTPUT, @AddaLookUp OUTPUT;
                     inparamsstr = inparamsstr + inparams.ParameterName + "=" + inparams.Value + ",";
                 }
