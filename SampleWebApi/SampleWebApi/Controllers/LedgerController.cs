@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.ReposiotryInterfaces;
+﻿using BussinessModels.ViewModels;
+using DataAccessLayer.ReposiotryInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,10 +19,10 @@ namespace SampleWebApi.Controllers
             this._ledgerRepo = ledgerRepo;
         }
 
-        [HttpGet("GetAllLedgers")]
-        public async Task<IActionResult> GetAllLedgers(int accCode, DateTime fDate, DateTime tDate,int branchID, string lg_Type )
+        [HttpPost("GetAllLedgers")]
+        public async Task<IActionResult> GetAllLedgers([FromBody] LedgerAllInputs LedInputs )
         {
-            var result = await this._ledgerRepo.GetLedgerDetail(accCode, fDate, tDate,branchID,lg_Type);
+            var result = await this._ledgerRepo.GetLedgerDetail(LedInputs);
             return Ok(result);
         }
 

@@ -8,7 +8,9 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface ILedgerRepository
     {
-        Task <string> GetLedgerDetail(int accCode, DateTime fDate, DateTime tDate, int branchID, string lg_Type);
+        //Task <LedgerVM> GetLedgerDetail(int accCode, DateTime fDate, DateTime tDate, int branchID, string lg_Type);
+        Task<LedgerLookUpVM> GetLedgerDetail(LedgerAllInputs ledInputs);
+
         Task<LedgerLookUpVM> GetLookUpsforLedger();
     }
 }
