@@ -8,6 +8,9 @@ namespace BussinessModels.ViewModels
     {
         public int AccID { get; set; }
         public string Title { get; set; }
+        public string accAddress { get; set; }
+        public string telephone { get; set; }
+
         public LedgerAccountsLookUpVM()
         {
 
