@@ -1,0 +1,15 @@
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Release\netcoreapp3.1\DataAccessLayer.deps.json
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Release\netcoreapp3.1\DataAccessLayer.runtimeconfig.json
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Release\netcoreapp3.1\DataAccessLayer.runtimeconfig.dev.json
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Release\netcoreapp3.1\DataAccessLayer.dll
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Release\netcoreapp3.1\DataAccessLayer.pdb
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Release\netcoreapp3.1\BussinessModels.dll
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\bin\Release\netcoreapp3.1\BussinessModels.pdb
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Release\netcoreapp3.1\DataAccessLayer.csprojAssemblyReference.cache
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Release\netcoreapp3.1\DataAccessLayer.AssemblyInfoInputs.cache
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Release\netcoreapp3.1\DataAccessLayer.AssemblyInfo.cs
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Release\netcoreapp3.1\DataAccessLayer.csproj.CoreCompileInputs.cache
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Release\netcoreapp3.1\DataAccessLayer.csproj.CopyComplete
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Release\netcoreapp3.1\DataAccessLayer.dll
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Release\netcoreapp3.1\DataAccessLayer.pdb
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\DataAccessLayer\obj\Release\netcoreapp3.1\DataAccessLayer.genruntimeconfig.cache

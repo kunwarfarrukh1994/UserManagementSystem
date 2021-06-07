@@ -1,0 +1,17 @@
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\bin\Release\net5.0\BussinessLogicLayer.deps.json
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\bin\Release\net5.0\BussinessLogicLayer.dll
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\bin\Release\net5.0\ref\BussinessLogicLayer.dll
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\bin\Release\net5.0\BussinessLogicLayer.pdb
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\bin\Release\net5.0\BussinessModels.dll
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\bin\Release\net5.0\DataAccessLayer.dll
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\bin\Release\net5.0\DataAccessLayer.pdb
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\bin\Release\net5.0\BussinessModels.pdb
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\obj\Release\net5.0\BussinessLogicLayer.csprojAssemblyReference.cache
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\obj\Release\net5.0\BussinessLogicLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\obj\Release\net5.0\BussinessLogicLayer.AssemblyInfoInputs.cache
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\obj\Release\net5.0\BussinessLogicLayer.AssemblyInfo.cs
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\obj\Release\net5.0\BussinessLogicLayer.csproj.CoreCompileInputs.cache
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\obj\Release\net5.0\BussinessLogicLayer.csproj.CopyComplete
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\obj\Release\net5.0\BussinessLogicLayer.dll
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\obj\Release\net5.0\ref\BussinessLogicLayer.dll
+D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\BussinessLogicLayer\obj\Release\net5.0\BussinessLogicLayer.pdb
