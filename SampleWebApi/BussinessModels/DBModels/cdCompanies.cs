@@ -6,6 +6,7 @@ namespace BussinessModels.DBModels
 {
     public class cdCompanies
     {
+		public int? ID { get; set; }
 		public int companyID { get; set; }
 		public DateTime EDate { get; set; }
 		public string companyCode { get; set; }
@@ -14,12 +15,12 @@ namespace BussinessModels.DBModels
 		public int businessNatureID { get; set; }
 		public string corporateLogin { get; set; }
 		public string corporatePWD { get; set; }
-        public byte[] companyLogo { get; set; }
-        public string companySTN { get; set; }
-		public string companyNTN { get; set; }
-		public string companyAddress { get; set; }
+        public byte[]? companyLogo { get; set; }
+        public string? companySTN { get; set; }
+		public string? companyNTN { get; set; }
+		public string? companyAddress { get; set; }
 		public string companyPhone { get; set; }
-		public bool isActive { get; set; }
+		public bool? isActive { get; set; }
 		public int Del { get; set; }
 		public int Sync { get; set; }
 	}

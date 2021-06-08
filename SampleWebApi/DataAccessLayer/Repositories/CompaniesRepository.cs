@@ -27,6 +27,7 @@ namespace DataAccessLayer.Repositories
             dtCompanies = new DataTable();
             
             dtCompanies.Columns.Add("companyTitle", typeof(string));
+            dtCompanies.Columns.Add("companyTitleU", typeof(string));
             dtCompanies.Columns.Add("EDate", typeof(DateTime));
             dtCompanies.Columns.Add("businessNatureID", typeof(int));
             dtCompanies.Columns.Add("corporateLogin", typeof(string));
@@ -57,6 +58,7 @@ namespace DataAccessLayer.Repositories
             
                 
                 row["companyTitle"] = company.companyTitle;
+                row["companyTitleU"] = company.companyTitle;
                 row["EDate"] = company.EDate;
                 row["businessNatureID"] = company.businessNatureID;
                 row["corporateLogin"] = company.corporateLogin;
@@ -97,7 +99,7 @@ namespace DataAccessLayer.Repositories
                     con.Close();
 
 
-                    return "Company Saved Successfully for ID:" + result;
+                    return  result.ToString();
 
 
 

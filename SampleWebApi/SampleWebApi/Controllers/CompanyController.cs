@@ -21,36 +21,36 @@ namespace SampleWebApi.Controllers
             this._companyRepo = companyRepo;
         }
 
+        //[HttpPost("create")]
+        //public async Task<IActionResult> CreateCompany([FromForm] dynamic companyobj)
+        //{
+        //    var data = HttpContext.Request.Form["companyobj"];
+        //    var companiesList = JsonConvert.DeserializeObject<cdCompaniesVM>(data);
+
+        //    var files = HttpContext.Request.Form.Files;
+
+        //    IFormFile files1 = files[0];
+
+        //    var fileName = Path.GetFileName(files1.FileName);
+        //    var fileExtension = Path.GetExtension(fileName);
+        //    var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+
+        //    using (var target = new MemoryStream())
+        //    {
+        //        files1.CopyTo(target);
+        //        companiesList.companyLogo = target.ToArray();
+        //    }
+
+
+            
+
+            
+        //    var result = await this._companyRepo.SaveCompany(companiesList);
+        //    return Ok(result);
+        //}
+
         [HttpPost("create")]
-        public async Task<IActionResult> CreateCompany([FromForm] dynamic companyobj)
-        {
-            var data = HttpContext.Request.Form["companyobj"];
-            var companiesList = JsonConvert.DeserializeObject<cdCompaniesVM>(data);
-
-            var files = HttpContext.Request.Form.Files;
-
-            IFormFile files1 = files[0];
-
-            var fileName = Path.GetFileName(files1.FileName);
-            var fileExtension = Path.GetExtension(fileName);
-            var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
-
-            using (var target = new MemoryStream())
-            {
-                files1.CopyTo(target);
-                companiesList.companyLogo = target.ToArray();
-            }
-
-
-            
-
-            
-            var result = await this._companyRepo.SaveCompany(companiesList);
-            return Ok(result);
-        }
-
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateCompany(cdCompaniesVM company)
+        public async Task<IActionResult> CreateCompany([FromBody] cdCompaniesVM company)
         {
             var result = await this._companyRepo.SaveCompany(company);
             return Ok(result);

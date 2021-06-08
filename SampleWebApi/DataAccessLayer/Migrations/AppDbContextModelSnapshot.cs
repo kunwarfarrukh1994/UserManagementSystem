@@ -164,158 +164,79 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("BussinessModels.DBModels.CodeCodingMain", b =>
                 {
-                    b.Property<float>("BCID")
+                    b.Property<float?>("AdminMinRate")
                         .HasColumnType("real");
 
                     b.Property<string>("Barcode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("BatchFile")
-                        .HasColumnType("int");
+                    b.Property<float?>("BoraQty")
+                        .HasColumnType("real");
 
-                    b.Property<int>("Block")
-                        .HasColumnType("int");
+                    b.Property<float?>("BoxQty")
+                        .HasColumnType("real");
 
                     b.Property<int>("BranchID")
                         .HasColumnType("int");
 
+                    b.Property<float?>("BundleQty")
+                        .HasColumnType("real");
+
                     b.Property<float>("CID")
                         .HasColumnType("real");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CodeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Colours")
+                    b.Property<float?>("CommRate")
+                        .HasColumnType("real");
+
+                    b.Property<int>("CompanyID")
                         .HasColumnType("int");
 
-                    b.Property<float>("CommPer")
-                        .HasColumnType("real");
-
-                    b.Property<float>("CommRS")
-                        .HasColumnType("real");
-
-                    b.Property<float>("CostRate")
+                    b.Property<float?>("CostRate")
                         .HasColumnType("real");
 
                     b.Property<int>("Del")
                         .HasColumnType("int");
 
-                    b.Property<string>("DesignNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("DiscountPer")
-                        .HasColumnType("real");
-
-                    b.Property<float>("DiscountRs")
-                        .HasColumnType("real");
-
-                    b.Property<float>("DpttCID")
-                        .HasColumnType("real");
-
                     b.Property<DateTime>("EDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("FinID")
-                        .HasColumnType("int");
-
-                    b.Property<float>("GRNCID")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("GRNDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("ID")
                         .HasColumnType("int");
 
-                    b.Property<string>("IRange")
-                        .IsRequired()
+                    b.Property<string>("ItemDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Ignore")
-                        .HasColumnType("int");
-
-                    b.Property<float>("ItemCID")
+                    b.Property<float?>("MinRate")
                         .HasColumnType("real");
-
-                    b.Property<string>("MadeIn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("OpenQty")
-                        .HasColumnType("real");
-
-                    b.Property<short>("OpeningBit")
-                        .HasColumnType("smallint");
 
                     b.Property<int>("OperatorID")
                         .HasColumnType("int");
 
-                    b.Property<float>("PCostRate")
-                        .HasColumnType("real");
-
-                    b.Property<float>("PSaleRate")
-                        .HasColumnType("real");
-
-                    b.Property<int>("Packet")
+                    b.Property<int?>("OptionsID")
                         .HasColumnType("int");
 
-                    b.Property<float>("PacketQty")
-                        .HasColumnType("real");
+                    b.Property<int>("PCateID")
+                        .HasColumnType("int");
 
-                    b.Property<float>("PartyID")
-                        .HasColumnType("real");
+                    b.Property<int>("PTypeID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("PurchaseType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Qty")
-                        .HasColumnType("real");
-
-                    b.Property<float>("ReOrderLevel")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Remarks")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("SaleRate")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Season")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SizeRange")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("SubCategoryCID")
-                        .HasColumnType("real");
-
-                    b.Property<float>("SuitLength")
+                    b.Property<float?>("SaleRate")
                         .HasColumnType("real");
 
                     b.Property<int>("Sync")
                         .HasColumnType("int");
-
-                    b.Property<string>("T1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("T2")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VendorCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("VolumeCID")
-                        .HasColumnType("real");
 
                     b.HasIndex("ID")
                         .IsUnique()
@@ -326,37 +247,40 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("BussinessModels.DBModels.CodeCodingProduction", b =>
                 {
-                    b.Property<float>("Astar")
+                    b.Property<float?>("Astar")
                         .HasColumnType("real");
+
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
 
                     b.Property<float>("CID")
                         .HasColumnType("real");
 
-                    b.Property<float>("CPID")
-                        .HasColumnType("real");
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int");
 
                     b.Property<int>("Del")
                         .HasColumnType("int");
 
-                    b.Property<float>("Gatta")
+                    b.Property<float?>("Gatta")
                         .HasColumnType("real");
 
                     b.Property<int?>("ID")
                         .HasColumnType("int");
 
-                    b.Property<float>("InnerMaterial")
+                    b.Property<float?>("InnerMaterial")
                         .HasColumnType("real");
 
-                    b.Property<float>("Pages")
+                    b.Property<float?>("Pages")
                         .HasColumnType("real");
 
-                    b.Property<float>("Printing")
+                    b.Property<float?>("Printing")
                         .HasColumnType("real");
 
                     b.Property<int>("Sync")
                         .HasColumnType("int");
 
-                    b.Property<float>("TitleMaterial")
+                    b.Property<float?>("TitleMaterial")
                         .HasColumnType("real");
 
                     b.HasIndex("ID")
@@ -368,20 +292,29 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("BussinessModels.DBModels.CodeCodingWarehouse", b =>
                 {
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
                     b.Property<float>("CID")
                         .HasColumnType("real");
 
-                    b.Property<float>("CWID")
-                        .HasColumnType("real");
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int");
 
-                    b.Property<int>("GodownID")
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("GodownID")
                         .HasColumnType("int");
 
                     b.Property<int?>("ID")
                         .HasColumnType("int");
 
-                    b.Property<float>("Qty")
+                    b.Property<float?>("Qty")
                         .HasColumnType("real");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
 
                     b.HasIndex("ID")
                         .IsUnique()
@@ -1833,6 +1766,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<DateTime>("EDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
                     b.Property<int>("Sync")
                         .HasColumnType("int");
 
@@ -1840,7 +1776,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("companyAddress")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("companyCode")
@@ -1851,11 +1786,9 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<byte[]>("companyLogo")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("companyNTN")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("companyPhone")
@@ -1863,7 +1796,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("companySTN")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("companyTitle")
@@ -1882,7 +1814,7 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isActive")
+                    b.Property<bool?>("isActive")
                         .HasColumnType("bit");
 
                     b.ToTable("cdCompanies");
