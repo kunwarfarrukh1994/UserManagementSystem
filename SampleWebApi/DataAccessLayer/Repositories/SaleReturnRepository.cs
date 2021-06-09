@@ -161,27 +161,7 @@ namespace DataAccessLayer.Repositories
 
 
 
-            
-        //public Task<string> DeleteSaleReurn(int Id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public Task<IList<SaleReturnMainVM>> GetAllSaleReturns()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public Task<SaleReturnLookUpVM> GetLookUpsforSaleReturn()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public Task<SaleReturnMainVM> GetSaleReturnByID(int Id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
+     
       
     }
 }

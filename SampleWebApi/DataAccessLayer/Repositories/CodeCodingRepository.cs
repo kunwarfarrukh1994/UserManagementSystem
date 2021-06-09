@@ -2,9 +2,11 @@
 using DataAccessLayer.ReposiotryInterfaces;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -124,23 +126,24 @@ namespace DataAccessLayer.Repositories
                 }
 
 
-                int ii = 0;
-                foreach (var production in codemain.CodeProduction)
-                {
-                    DataRow prow = dtCodeProduction.NewRow();
+                DataRow prow = dtCodeProduction.NewRow();
 
-                    prow["Gatta"] = production.Gatta;
-                    prow["TitleMaterial"] = production.TitleMaterial;
-                    prow["Astar"] = production.Astar;
-                    prow["InnerMaterial"] = production.InnerMaterial;
-                    prow["Pages"] = production.Pages;
-                    prow["Printing"] = production.Printing;
-                    prow["CompanyID"] = production.CompanyID;
-                    prow["BranchID"] = production.BranchID;
+                prow["Gatta"] = codemain.CodeProduction.Gatta;
+                prow["TitleMaterial"] = codemain.CodeProduction.TitleMaterial;
+                prow["Astar"] = codemain.CodeProduction.Astar;
+                prow["InnerMaterial"] = codemain.CodeProduction.InnerMaterial;
+                prow["Pages"] = codemain.CodeProduction.Pages;
+                prow["Printing"] = codemain.CodeProduction.Printing;
+                prow["CompanyID"] = codemain.CodeProduction.CompanyID;
+                prow["BranchID"] = codemain.CodeProduction.BranchID;
 
-                    dtCodeProduction.Rows.InsertAt(prow, ii);
+                dtCodeProduction.Rows.InsertAt(prow, 0);
 
-                }
+
+
+
+
+
 
 
                 using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
@@ -148,7 +151,7 @@ namespace DataAccessLayer.Repositories
                   
                     SqlCommand cmd = null;
 
-                    cmd = new SqlCommand("dbo.Insert_SaleReturn", con);
+                    cmd = new SqlCommand("dbo.Insert_CodeCoding", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@CMain", SqlDbType.Structured).Value = dtCodeMain;
                     cmd.Parameters.Add("@CWarehouse", SqlDbType.Structured).Value = dtCodeWareHouse;
@@ -188,27 +191,173 @@ namespace DataAccessLayer.Repositories
 
 
 
-
-        public Task<string> DeleteProduct(int Id)
+        public async Task<string> DeleteProduct(int Id)
         {
-            throw new NotImplementedException();
+            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            {
+
+                SqlCommand cmd = null;
+
+                cmd = new SqlCommand("dbo.Del_CodeCoding", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = Id;
+
+                con.Open();
+                await cmd.ExecuteNonQueryAsync();
+
+                con.Close();
+
+
+                return "Record Deleted Successfully";
+
+            }
         }
 
-        public Task<IList<CodeCodingMainVM>> GetAllProducts()
+
+
+
+        public async Task<IList<CodeCodingMainVM>> GetAllProducts()
         {
-            throw new NotImplementedException();
+            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            {
+                SqlParameter[] @params =
+                    {
+                       new SqlParameter("@CodeCodingMain", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
+                };
+
+
+                var sql = "EXEC[Get_AllCodeCodings] @CodeCodingMain OUTPUT; ";
+                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
+
+
+                IList<CodeCodingMainVM> codeList = JsonConvert.DeserializeObject<IList<CodeCodingMainVM>>(@params[0].Value.ToString());
+
+                
+               
+
+                con.Close();
+
+
+                return codeList;
+
+
+
+            }
         }
 
-        public Task<CodeCodingLookUpsVM> GetLookUpsforProduct()
+        public async Task<CodeCodingLookUpsVM> GetLookUpsforProduct()
         {
-            throw new NotImplementedException();
+            SqlParameter[] @params =
+                  {
+                       new SqlParameter("@CategoryLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@TypeLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@OptionsLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@ClassLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@GodownLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
+                };
+
+            await DBMethods.EXECUTE_SP(new SqlParameter[0], @params, "Get_SearchLookUpsCodeCoding", this._context);
+
+            CodeCodingLookUpsVM lookups = new CodeCodingLookUpsVM();
+
+            lookups.categorylookup = JsonConvert.DeserializeObject<IList<CodeCodingCategoryLookUpVM>>(@params[0].Value.ToString());
+            lookups.typelookup = JsonConvert.DeserializeObject<IList<CodeCodingTypeLookUpVM>>(@params[1].Value.ToString());
+            lookups.optionslookup = JsonConvert.DeserializeObject<IList<CodeCodingOptionsLookUpVM>>(@params[2].Value.ToString());
+            lookups.classlookup = JsonConvert.DeserializeObject<IList<CodeCodingClassLookUpVM>>(@params[3].Value.ToString());
+            lookups.classlookup = JsonConvert.DeserializeObject<IList<CodeCodingClassLookUpVM>>(@params[3].Value.ToString());
+
+            return lookups;
         }
 
-        public Task<CodeCodingMainVM> GetProductByID(int Id)
+        public async Task<CodeCodingMainVM> GetProductByID(int Id)
         {
-            throw new NotImplementedException();
-        }
+            CodeCodingMainVM codemainobj = new CodeCodingMainVM();
 
-       
+
+            var maincode = this._context.CodeCodingMain.Where(x => x.CID == Id).FirstOrDefault();
+
+            var mainjson = JsonConvert.SerializeObject(maincode);
+
+            codemainobj = JsonConvert.DeserializeObject<CodeCodingMainVM>(mainjson);
+
+            if (codemainobj != null)
+            {
+                var codewarehouse = await this._context.CodeCodingWarehouse.Where(x => x.CID == codemainobj.CID).ToListAsync();
+                var subjson = JsonConvert.SerializeObject(codewarehouse);
+                codemainobj.CodeWarehouse = JsonConvert.DeserializeObject<List<CodeCodingWarehouseVM>>(subjson);
+
+
+                var codeproduction = await this._context.CodeCodingProduction.Where(x => x.CID == codemainobj.CID).FirstOrDefaultAsync();
+                var prodjson = JsonConvert.SerializeObject(codeproduction);
+                codemainobj.CodeProduction = JsonConvert.DeserializeObject<CodeCodingProductionVM>(prodjson);
+
+
+
+            }
+
+            return codemainobj;
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+//public async Task<CodeCodingMainVM> GetProductByID(int Id)
+//{
+//    //CodeCodingMainVM codeMain = new CodeCodingMainVM();
+
+//    //var maincode = this._context.CodeCodingMain.Where(x => x.CID == Id).FirstOrDefault();
+
+//    //var mainjson = JsonConvert.SerializeObject(maincode);
+
+//    //codeMain = JsonConvert.DeserializeObject<CodeCodingMainVM>(mainjson);
+
+//    SqlParameter[] @outparams =
+//           {
+//               new SqlParameter("@CodeCodingMain", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+//               new SqlParameter("@CodeCodingWarehouse", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+//               new SqlParameter("@CodeCodingProduction", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+
+//        };
+//    SqlParameter[] @inparams =
+//        {
+//            new SqlParameter("@CID", Id)
+//        };
+//    await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_CodeCodingByID", this._context);
+
+
+//    CodeCodingMainVM codeMain = new CodeCodingMainVM();
+//    var mainjson = @outparams[0].Value.ToString();
+
+
+//    codeMain = JsonConvert.DeserializeObject<CodeCodingMainVM>(mainjson);
+//    if (codeMain != null) 
+//    {
+//        //List<CodeCodingWarehouseVM> codewarehouse = JsonConvert.DeserializeObject<List<CodeCodingWarehouseVM>>(@outparams[1].Value.ToString());
+//        //List<CodeCodingProductionVM> codeproduction = JsonConvert.DeserializeObject<List<CodeCodingProductionVM>>(@outparams[2].Value.ToString());
+
+
+//        codeMain.CodeWarehouse = JsonConvert.DeserializeObject<List<CodeCodingWarehouseVM>>(@outparams[0].Value.ToString());
+//        codeMain.CodeProduction = JsonConvert.DeserializeObject<CodeCodingProductionVM>(@outparams[1].Value.ToString());
+
+//    }
+
+
+
+
+
+
+
+//    return codeMain;
+//}

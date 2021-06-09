@@ -63,6 +63,10 @@ namespace DataAccessLayer
 
             model_builder.Entity<Ledger>().HasNoKey();
 
+            model_builder.Entity<CodeCodingCategory>().HasNoKey();
+            model_builder.Entity<CodeCodingOptions>().HasNoKey();
+            model_builder.Entity<CodeCodingProductType>().HasNoKey();
+
 
 
 
@@ -111,6 +115,10 @@ namespace DataAccessLayer
         public DbSet<mClassSub> mClassSub { get; set; }
         public DbSet<mClassType> mClassType { get; set; }
         public DbSet<Ledger> Ledger { get; set; }
+
+        public DbSet<CodeCodingCategory> CodeCodingCategory { get; set; }
+        public DbSet<CodeCodingOptions> CodeCodingOptions { get; set; }
+        public DbSet<CodeCodingProductType> CodeCodingProductType { get; set; }
 
 
 

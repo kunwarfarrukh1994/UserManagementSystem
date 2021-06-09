@@ -10,5 +10,15 @@ namespace BussinessModels.ViewModels
         public Single? Qty { get; set; }
         public int CompanyID { get; set; }
         public int BranchID { get; set; }
+
+        // ................ NULL COLUMNS FOR API ....../////////////////
+
+        public string? GodownName { get; set; }
+
+
+        public CodeCodingWarehouseVM()
+        {
+
+        }
     }
 }

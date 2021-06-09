@@ -28,13 +28,20 @@ namespace BussinessModels.ViewModels
 		public int BranchID { get; set; }
 		public int OperatorID { get; set; }
 
-		public List<CodeCodingProductionVM> CodeProduction { get; set; }
+		//........    NULL COLUMNS For API PURPOSE........./////
+		public string? PCateName { get; set; }
+		public string? OptionName { get; set; }
+		public string? PacketQty { get; set; }
+
+
+
+		public CodeCodingProductionVM CodeProduction { get; set; }
 		public List<CodeCodingWarehouseVM> CodeWarehouse { get; set; }
 
 
         public CodeCodingMainVM()
         {
-			CodeProduction = new List<CodeCodingProductionVM>();
+			CodeProduction = new CodeCodingProductionVM();
 			CodeWarehouse = new List<CodeCodingWarehouseVM>();
 
 		}

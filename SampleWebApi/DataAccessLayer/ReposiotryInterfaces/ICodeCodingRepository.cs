@@ -9,7 +9,7 @@ namespace DataAccessLayer.ReposiotryInterfaces
     public interface ICodeCodingRepository
     {
         Task<IList<CodeCodingMainVM>> GetAllProducts();
-        Task<CodeCodingMainVM> GetProductByID(int Id);
+        Task <CodeCodingMainVM> GetProductByID(int Id);
 
         Task<string> SaveProduct(CodeCodingMainVM codemain);
 
