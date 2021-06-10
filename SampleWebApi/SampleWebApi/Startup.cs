@@ -19,7 +19,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using SampleWebApi.AuthorizationHandlers;
-
+using UserManagement.DBContext;
+using UserManagement.UserModels;
+using UserManagement.Interfaces;
+using UserManagement.Services;
 
 namespace SampleWebApi
 {
@@ -87,10 +90,10 @@ namespace SampleWebApi
 
             // database context
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-           // services.AddDbContext<UsersDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<UsersDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
            //identity
-           // services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<UsersDBContext>().AddDefaultTokenProviders();  //   bridge to connect identity with our database.AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<UsersDBContext>().AddDefaultTokenProviders();  //   bridge to connect identity with our database.AddDefaultTokenProviders();
             services.Configure<IdentityOptions>(options =>
             {
 
@@ -177,9 +180,9 @@ namespace SampleWebApi
 
             // dependency injection
             services.AddScoped<IAuthorizationHandler, UserAuthorizationHandler>();
-           // services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
-           // services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationHandler>();
-           // services.AddTransient<IUserManagementService, UserManagementService>();
+          //  services.AddTransient<IGenericRepository<Employee>, GenericRepository<Employee>>();
+          //  services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationHandler>();
+            services.AddTransient<IUserManagementService, UserManagementService>();
             services.AddTransient<ISalesRepository, SalesRepository >();
             services.AddTransient<ICustomersRepository, CustomersRepository>();
             services.AddTransient<ICompaniesRepository, CompaniesRepository>();
@@ -204,7 +207,7 @@ namespace SampleWebApi
 
 
 
-            // services.AddTransient<IDbLogger, DbLogger>();
+             services.AddTransient<IDbLogger, DbLogger>();
             //swagger 
             services.AddSwaggerDocument();
 

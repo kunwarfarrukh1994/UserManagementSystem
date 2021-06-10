@@ -15,6 +15,7 @@ using System.Net.Mail;
 using System.Linq;
 using System.Web;
 using UserManagement.DBContext;
+using System.Net;
 
 namespace UserManagement.Services
 {
@@ -73,12 +74,17 @@ namespace UserManagement.Services
 
                         SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
 
+                        
+                        client.UseDefaultCredentials = false;
+
                         client.Credentials = new System.Net.NetworkCredential()
                         {
                             UserName = this._configuration["Email:UserName"],
                             Password = this._configuration["Email:Password"]
                         };
+
                         client.EnableSsl = true;
+                        //client.UseDefaultCredentials = true;
                         await client.SendMailAsync(mailMessage);
 
 
