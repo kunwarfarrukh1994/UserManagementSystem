@@ -261,3 +261,12 @@ D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\M
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\UserManagement.dll
 D:\AZUREDEVOPS\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\UserManagement.pdb
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.Design.dll
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\UserManagement.dll
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\SampleWebApi\bin\Debug\net5.0\UserManagement.pdb

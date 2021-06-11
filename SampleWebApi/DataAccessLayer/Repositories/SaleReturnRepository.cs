@@ -21,27 +21,7 @@ namespace DataAccessLayer.Repositories
             initDT();
         }
 
-        public async  Task<SaleReturnLookUpsVM> GetSaleReturnByID(int Id)
-        {
-            SqlParameter[] @outparams =
-                   {
-                       new SqlParameter("@SaleMainLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
-                       new SqlParameter("@SaleSubLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
-                       
-                };
-            SqlParameter[] @inparams =
-                {
-                    new SqlParameter("@SMID", Id)
-                };
-            await DBMethods.EXECUTE_SP(@inparams, @outparams, "GetSaleDetailByID",this._context);
-
-            SaleReturnLookUpsVM lookups = new SaleReturnLookUpsVM();
-            lookups.salereturnmainlookup = JsonConvert.DeserializeObject<IList<SaleReturnMainLookUpVM>>(@outparams[0].Value.ToString());
-            lookups.salereturnsublookup = JsonConvert.DeserializeObject<IList<SaleReturnSubLookUpVM>>(@outparams[1].Value.ToString());
-
-
-            return lookups;
-        }
+     
 
         public void initDT()
         {
@@ -70,6 +50,30 @@ namespace DataAccessLayer.Repositories
 
 
 
+        }
+
+        public async Task<SaleReturnLookUpsVM> GetSaleReturnByID(int Id)
+        {
+            SqlParameter[] @outparams =
+                   {
+                       new SqlParameter("@SaleMainLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@SaleSubLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+
+                };
+            SqlParameter[] @inparams =
+                {
+                    new SqlParameter("@SMID", Id)
+                };
+            await DBMethods.EXECUTE_SP(@inparams, @outparams, "GetSaleDetailByID", this._context);
+
+            SaleReturnMainVM SRMain = new SaleReturnMainVM();
+            SaleReturnLookUpsVM lookups = new SaleReturnLookUpsVM();
+            lookups.salereturnmainlookup = JsonConvert.DeserializeObject<IList<SaleReturnMainLookUpVM>>(@outparams[0].Value.ToString());
+            lookups.salereturnsublookup = JsonConvert.DeserializeObject<IList<SaleReturnSubLookUpVM>>(@outparams[1].Value.ToString());
+
+            
+
+            return lookups;
         }
 
         public async Task<string> SaveSaleReturn(SaleReturnMainVM salereturnmain)
@@ -161,7 +165,12 @@ namespace DataAccessLayer.Repositories
 
 
 
-     
-      
+    
+
+
+
+
+
+
     }
 }
