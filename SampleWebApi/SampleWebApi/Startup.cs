@@ -201,13 +201,14 @@ namespace SampleWebApi
             services.AddTransient<IClassRepository, ClassRepository>();
             services.AddTransient<ILedgerRepository, LedgerRepository>();
             services.AddTransient<ICodeCodingRepository, CodeCodingRepository>();
+            services.AddTransient<ILoginRepository, LoginRepository>();
 
 
 
 
 
 
-             services.AddTransient<IDbLogger, DbLogger>();
+            services.AddTransient<IDbLogger, DbLogger>();
             //swagger 
             services.AddSwaggerDocument();
 

@@ -58,6 +58,7 @@ namespace DataAccessLayer.Repositories
                    {
                        new SqlParameter("@SaleMainLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@SaleSubLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@GodownLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
 
                 };
             SqlParameter[] @inparams =
@@ -70,8 +71,8 @@ namespace DataAccessLayer.Repositories
             SaleReturnLookUpsVM lookups = new SaleReturnLookUpsVM();
             lookups.salereturnmainlookup = JsonConvert.DeserializeObject<IList<SaleReturnMainLookUpVM>>(@outparams[0].Value.ToString());
             lookups.salereturnsublookup = JsonConvert.DeserializeObject<IList<SaleReturnSubLookUpVM>>(@outparams[1].Value.ToString());
+            lookups.salereturngodownlookup = JsonConvert.DeserializeObject<IList<SaleReturnGodownLookUpVM>>(@outparams[2].Value.ToString());
 
-            
 
             return lookups;
         }
