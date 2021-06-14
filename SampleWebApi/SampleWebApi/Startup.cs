@@ -202,6 +202,10 @@ namespace SampleWebApi
             services.AddTransient<ILedgerRepository, LedgerRepository>();
             services.AddTransient<ICodeCodingRepository, CodeCodingRepository>();
             services.AddTransient<ILoginRepository, LoginRepository>();
+            services.AddTransient<ICodeCodingProductTypeRepository, CodeCodingProductTypeRepository>();
+            services.AddTransient<ICodeCodingCategoryRepository, CodeCodingCategoryRepository>();
+            services.AddTransient<ICodeCodingOptionsRepository, CodeCodingOptionsRepository>();
+            services.AddTransient<ICityRepository, CityRepository>();
 
 
 

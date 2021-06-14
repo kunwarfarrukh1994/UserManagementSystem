@@ -140,7 +140,7 @@ namespace DataAccessLayer.Repositories
 
         public async Task<IList<AgentsVM>> GetAllMAgents()
         {
-            var list = await this._context.Agents.Where(x => x.Del == 0 && x.Category == 1).ToListAsync();
+            var list = await this._context.Agents.Where(x => x.Del == 0).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -150,8 +150,8 @@ namespace DataAccessLayer.Repositories
         }
 
         public async Task<IList<AgentsVM>> GetAllRAgents()
-        {
-            var list = await this._context.Agents.Where(x => x.Del == 0 && x.Category == 2).ToListAsync();
+         {
+            var list = await this._context.Agents.Where(x => x.Del == 0).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 

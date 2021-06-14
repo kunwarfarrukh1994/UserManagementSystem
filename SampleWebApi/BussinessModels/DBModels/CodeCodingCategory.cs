@@ -8,6 +8,7 @@ namespace BussinessModels.DBModels
     {
         public int? ID { get; set; }
         public int CateID { get; set; }
+        public DateTime EDate { get; set; }
         public string Title { get; set; }
         public string TitleU { get; set; }
         public int CompanyID { get; set; }

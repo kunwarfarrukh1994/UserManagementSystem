@@ -10,9 +10,13 @@ namespace BussinessModels.DBModels
         public int CityId { get; set; }
         public DateTime EDate { get; set; }
         public string CityName { get; set; }
-        public int FinID { get; set; }
         public string CityNameU { get; set; }
-        
-        
+        public string CityCode { get; set; }
+        public int CompanyID { get; set; }
+        public int Del { get; set; }
+        public int sync { get; set; }
+
+
+
     }
 }

@@ -19,5 +19,6 @@ namespace BussinessModels.ViewModels
         public int CompanyID { get; set; }
         public int BranchID { get; set; }
         public int OperatorID { get; set; }
+        
     }
 }

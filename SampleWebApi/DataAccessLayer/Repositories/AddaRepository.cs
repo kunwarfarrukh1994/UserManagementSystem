@@ -94,26 +94,35 @@ namespace DataAccessLayer.Repositories
 
         public async Task<string> DeleteAdda(int Id)
         {
-            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            try 
+            {
+                using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+                {
+
+                    SqlCommand cmd = null;
+
+                    cmd = new SqlCommand("dbo.Del_Adda", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = Id;
+
+                    con.Open();
+                    await cmd.ExecuteNonQueryAsync();
+
+                    con.Close();
+
+
+                    return "Record Deleted Successfully";
+
+
+
+                }
+            }
+          
+             catch (Exception ex)
             {
 
-                SqlCommand cmd = null;
-
-                cmd = new SqlCommand("dbo.Del_Adda", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = Id;
-
-                con.Open();
-                await cmd.ExecuteNonQueryAsync();
-
-                con.Close();
-
-
-                return "Record Deleted Successfully";
-
-
-
+                throw new Exception("Delete Failed");
             }
         }
 
