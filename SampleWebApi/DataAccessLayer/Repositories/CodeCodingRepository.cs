@@ -267,7 +267,7 @@ namespace DataAccessLayer.Repositories
             lookups.typelookup = JsonConvert.DeserializeObject<IList<CodeCodingTypeLookUpVM>>(@params[1].Value.ToString());
             lookups.optionslookup = JsonConvert.DeserializeObject<IList<CodeCodingOptionsLookUpVM>>(@params[2].Value.ToString());
             lookups.classlookup = JsonConvert.DeserializeObject<IList<CodeCodingClassLookUpVM>>(@params[3].Value.ToString());
-            lookups.classlookup = JsonConvert.DeserializeObject<IList<CodeCodingClassLookUpVM>>(@params[3].Value.ToString());
+            lookups.godownlookup = JsonConvert.DeserializeObject<IList<CodeCodingGodownLookUpVM>>(@params[4].Value.ToString());
 
             return lookups;
         }

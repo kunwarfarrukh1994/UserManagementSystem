@@ -16,7 +16,7 @@ namespace DataAccessLayer.Repositories
     {
         private readonly AppDbContext _context;
 
-        DataTable dtCustomers;
+        DataTable dtCustomers, dtCustomerDetail;
 
         public CustomersRepository(AppDbContext context)
         {
@@ -50,12 +50,22 @@ namespace DataAccessLayer.Repositories
             dtCustomers.Columns.Add("CompanyID", typeof(int));
             dtCustomers.Columns.Add("BranchID", typeof(int));
             dtCustomers.Columns.Add("OperatorID", typeof(int));
-            
-            
-        }
 
 
-        public async Task<string> SaveCustomers(CustomerVM customer)
+            dtCustomerDetail = new DataTable();
+            dtCustomerDetail.Columns.Add("ContactName", typeof(string));
+            dtCustomerDetail.Columns.Add("ContactNo", typeof(string));
+            dtCustomerDetail.Columns.Add("Designation", typeof(int));
+            dtCustomerDetail.Columns.Add("CompanyID", typeof(int));
+            dtCustomerDetail.Columns.Add("BranchID", typeof(int));
+
+
+
+
+    }
+
+
+    public async Task<string> SaveCustomers(CustomerVM customer)
         {
             if (dtCustomers.Rows.Count > 0)
             {
@@ -90,6 +100,20 @@ namespace DataAccessLayer.Repositories
                 dtCustomers.Rows.InsertAt(row, 0);
 
 
+                int i = 0;
+                foreach (var detail in customer.customerContact)
+                {
+                    DataRow srow = dtCustomerDetail.NewRow();
+                    srow["ContactName"] = detail.ContactName;
+                    srow["ContactNo"] = detail.ContactNo;
+                    srow["Designation"] = detail.ContactName;
+                    srow["CompanyID"] = detail.ContactName;
+                    srow["BranchID"] = detail.ContactName;
+
+                    dtCustomerDetail.Rows.InsertAt(srow, i);
+                }
+
+
                 using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
                 {
                     //string CS = @"Data Source=CYBERSPACE\EAS;Initial Catalog=Vanya-bak;Persist Security Info=True;User ID=sa;Password=risay";
@@ -102,6 +126,7 @@ namespace DataAccessLayer.Repositories
                     cmd = new SqlCommand("dbo.Insert_Customers", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@Customers", SqlDbType.Structured).Value = dtCustomers;
+                    cmd.Parameters.Add("@CContacts", SqlDbType.Structured).Value = dtCustomerDetail;
                     cmd.Parameters.Add("@EDate", SqlDbType.DateTime).Value = customer.EDate;
                     cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = customer.CID;
                     

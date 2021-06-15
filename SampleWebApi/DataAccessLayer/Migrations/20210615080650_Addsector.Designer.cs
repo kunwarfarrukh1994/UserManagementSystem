@@ -4,14 +4,16 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210615080650_Addsector")]
+    partial class Addsector
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -446,41 +448,6 @@ namespace DataAccessLayer.Migrations
                         .HasFilter("[ID] IS NOT NULL");
 
                     b.ToTable("CodeCodingWarehouse");
-                });
-
-            modelBuilder.Entity("BussinessModels.DBModels.CustomerContacts", b =>
-                {
-                    b.Property<int>("BranchID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CompanyID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ContactName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Del")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Designation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Sync")
-                        .HasColumnType("int");
-
-                    b.ToTable("CustomerContacts");
                 });
 
             modelBuilder.Entity("BussinessModels.DBModels.Customers", b =>
@@ -1459,9 +1426,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("SchoolStrength")
                         .HasColumnType("int");
 
-                    b.Property<string>("Sector")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Sector")
+                        .HasColumnType("int");
 
                     b.Property<string>("SessionStart")
                         .IsRequired()

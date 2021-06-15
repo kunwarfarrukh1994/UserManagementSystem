@@ -19,6 +19,7 @@ namespace BussinessModels.DBModels
         public string MailAddress { get; set; }
         public int? CityID { get; set; }
         public string SchlType { get; set; }
+        public string Sector { get; set; }
         public int SchoolBranches { get; set; }
         public int SchoolStrength { get; set; }
         public string SessionStart { get; set; }

@@ -29,7 +29,12 @@ namespace BussinessModels.ViewModels
         public int BranchID { get; set; }
         public int OperatorID { get; set; }
 
+        public List<CustomerContactsVm> customerContact { get; set; }
 
+        public CustomerVM()
+        {
+            CustomerDetail = new List<CustomerContactsVm>();
+        }
 
     }
 }

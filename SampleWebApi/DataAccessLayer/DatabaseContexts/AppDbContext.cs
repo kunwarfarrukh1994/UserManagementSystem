@@ -66,7 +66,7 @@ namespace DataAccessLayer
             model_builder.Entity<CodeCodingCategory>().HasNoKey();
             model_builder.Entity<CodeCodingOptions>().HasNoKey();
             model_builder.Entity<CodeCodingProductType>().HasNoKey();
-
+            model_builder.Entity<CustomerContacts>().HasNoKey();
 
 
 
@@ -87,6 +87,7 @@ namespace DataAccessLayer
         public DbSet<SalesOutSourceItems> SalesOutSourceItems { get; set; }
         public DbSet<SaleParty> SaleParty  { get; set; }
         public DbSet<Customers> Customers { get; set; }
+        public DbSet<CustomerContacts> CustomerContacts { get; set; }
         public DbSet<City> City { get; set; }
 
 

@@ -38,6 +38,7 @@ namespace DataAccessLayer.Repositories
             dtSchools.Columns.Add("MailAddress", typeof(string));
             dtSchools.Columns.Add("CityID", typeof(int));
             dtSchools.Columns.Add("SchlType", typeof(string));
+            dtSchools.Columns.Add("Sector", typeof(string));
             dtSchools.Columns.Add("SchoolBranches", typeof(int));
             dtSchools.Columns.Add("SchoolStrength", typeof(int));
             dtSchools.Columns.Add("SessionStart", typeof(string));
@@ -76,6 +77,7 @@ namespace DataAccessLayer.Repositories
                 row["MailAddress"] = school.MailAddress;
                 row["CityID"] = school.CityID;
                 row["SchlType"] = school.SchlType;
+                row["Sector"] = school.Sector;
                 row["SchoolBranches"] = school.SchoolBranches;
                 row["SchoolStrength"] = school.SchoolStrength;
                 row["SessionStart"] = school.SessionStart;
@@ -166,13 +168,39 @@ namespace DataAccessLayer.Repositories
 
         public async Task<IList<SchoolsVM>> GetAllSchools()
         {
-            var list = await this._context.Schools.Where(x => x.Del == 0).ToListAsync();
+            try
+            {
+                SqlParameter[] @outparams =
+               {
+                       new SqlParameter("@SchoolsLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
 
-            string json = JsonConvert.SerializeObject(list);
 
-            IList<SchoolsVM> schoolsList = JsonConvert.DeserializeObject<IList<SchoolsVM>>(json);
+                };
+                SqlParameter[] @inparams =
+                    {
 
-            return schoolsList;
+                };
+                await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_AllSchools", this._context);
+
+                IList<SchoolsVM> schoolsList = JsonConvert.DeserializeObject<IList<SchoolsVM>>(@outparams[0].Value.ToString());
+
+                return schoolsList;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Get All Schools Failed");
+            }
+
+
+
+            //var list = await this._context.Schools.Where(x => x.Del == 0).ToListAsync();
+
+            //string json = JsonConvert.SerializeObject(list);
+
+            //IList<SchoolsVM> schoolsList = JsonConvert.DeserializeObject<IList<SchoolsVM>>(json);
+
+            //return schoolsList;
         }
 
         public async Task<SchoolLookUpsVM> GetLookUpsforSchool()
