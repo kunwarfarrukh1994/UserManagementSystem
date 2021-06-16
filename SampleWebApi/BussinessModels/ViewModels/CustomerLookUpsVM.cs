@@ -11,6 +11,8 @@ namespace BussinessModels.ViewModels
         public IList<CustomerMAgentLookUp> customerMAgentlookup { get; set; }
         public IList<CustomerAllcustomersLookUpVM> customerallcustomerslookup { get; set; }
         public IList<CustomerMainGroupLookUpVM> customermaingrouplookup { get; set; }
+        public IList<CustomerNumberLookUpVM> customernumberlookup { get; set; }
+        public IList<CustomerMainNumberLookUpVM> customermainnumberlookup { get; set; }
 
         public CustomerLookUpsVM()
         {
@@ -19,6 +21,8 @@ namespace BussinessModels.ViewModels
             customerMAgentlookup = new List<CustomerMAgentLookUp>();
             customerallcustomerslookup = new List<CustomerAllcustomersLookUpVM>();
             customermaingrouplookup = new List<CustomerMainGroupLookUpVM>();
+            customernumberlookup = new List<CustomerNumberLookUpVM>();
+            customermainnumberlookup = new List<CustomerMainNumberLookUpVM>();
         }
     }
 }

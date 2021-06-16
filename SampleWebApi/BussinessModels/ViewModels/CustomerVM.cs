@@ -28,12 +28,15 @@ namespace BussinessModels.ViewModels
         public int CompanyID { get; set; }
         public int BranchID { get; set; }
         public int OperatorID { get; set; }
+        public string? MarketingAgent { get; set; }
+        public string? RecoveryAgent { get; set; }
+        public string? CityName { get; set; }
 
         public List<CustomerContactsVm> customerContact { get; set; }
 
         public CustomerVM()
         {
-            CustomerDetail = new List<CustomerContactsVm>();
+            customerContact = new List<CustomerContactsVm>();
         }
 
     }

@@ -34,9 +34,12 @@ namespace BussinessModels.ViewModels
         public string? MarketingAgent { get; set; }
         public string? RecoveryAgent { get; set; }
         public string? CityName { get; set; }
-        
 
 
+        public SchoolsVM()
+        {
+
+        }
 
     }
 }
