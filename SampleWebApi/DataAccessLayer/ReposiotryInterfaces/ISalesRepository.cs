@@ -8,8 +8,8 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface ISalesRepository
     {
-        Task <IList<SalesMainVM>> GetAllSales();
-        Task<SalesMainVM> GetSaleByID(int Id);
+        Task <IList<SalesMainVM>> GetAllSales(int CompanyID, int BranchID);
+        Task<SalesMainVM> GetSaleByID(int Id, int CompanyID, int BranchID);
 
         Task<string> SaveSales(SalesMainVM salesmain);
 

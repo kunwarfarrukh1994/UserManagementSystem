@@ -9209,23 +9209,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\EAS\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Farrukh khan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\SampleWebApi\\SampleWebApi.csproj",
+      "projectUniqueName": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\SampleWebApi\\SampleWebApi.csproj",
       "projectName": "SampleWebApi",
-      "projectPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\SampleWebApi\\SampleWebApi.csproj",
-      "packagesPath": "C:\\Users\\EAS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\SampleWebApi\\obj\\",
+      "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\SampleWebApi\\SampleWebApi.csproj",
+      "packagesPath": "C:\\Users\\Farrukh khan\\.nuget\\packages\\",
+      "outputPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\SampleWebApi\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\EAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Farrukh khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9239,17 +9235,17 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj": {
-              "projectPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj"
+            "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj": {
+              "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessLogicLayer\\BussinessLogicLayer.csproj"
             },
-            "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {
-              "projectPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj"
+            "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj": {
+              "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\BussinessModels\\BussinessModels.csproj"
             },
-            "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj"
+            "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\DataAccessLayer\\DataAccessLayer.csproj"
             },
-            "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj": {
-              "projectPath": "C:\\Users\\EAS\\Documents\\GitHub\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj"
+            "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj": {
+              "projectPath": "D:\\AZUREDEVOPS\\UserManagementSystem\\SampleWebApi\\UserManagement\\UserManagement.csproj"
             }
           }
         }
@@ -9321,7 +9317,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   },

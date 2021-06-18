@@ -32,17 +32,17 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllSales")]
-        public async Task<IActionResult> GetAllSales() 
+        [HttpGet("GetAllSales/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetAllSales(int CompanyId, int BranchId) 
         {
-            var result = await this._salesRepo.GetAllSales();
+            var result = await this._salesRepo.GetAllSales(CompanyId, BranchId);
             return Ok(result) ;
         }
 
-        [HttpGet("GetSaleById/{id?}")]
-        public async Task<IActionResult> GetSaleByID(int id)
+        [HttpGet("GetSaleById/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetSaleByID(int id, int CompanyId, int BranchId)
         {
-            var result = await this._salesRepo.GetSaleByID(id);
+            var result = await this._salesRepo.GetSaleByID(id,CompanyId,BranchId);
             return Ok(result);
         }
 

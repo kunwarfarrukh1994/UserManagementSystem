@@ -274,9 +274,9 @@ namespace DataAccessLayer.Repositories
 
         }
 
-        public async Task<IList<SalesMainVM>> GetAllSales()
+        public async Task<IList<SalesMainVM>> GetAllSales(int CompanyID, int BranchID)
         {
-            var list=  await this._context.SaleMain.Where(x => x.Del == 0).ToListAsync();
+            var list=  await this._context.SaleMain.Where(x => x.Del == 0 && x.CompanyID == CompanyID && x.BranchID == BranchID).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -285,12 +285,12 @@ namespace DataAccessLayer.Repositories
             return salesList;
         }
 
-        public async Task<SalesMainVM> GetSaleByID(int Id) 
+        public async Task<SalesMainVM> GetSaleByID(int Id, int CompanyID, int BranchID) 
         {
             SalesMainVM salemainobj = new SalesMainVM();
 
            
-            var mainsale  = this._context.SaleMain.Where(x => x.SMID == Id).FirstOrDefault();
+            var mainsale  = this._context.SaleMain.Where(x => x.SMID == Id && x.CompanyID == CompanyID && x.BranchID == BranchID).FirstOrDefault();
 
             var mainjson = JsonConvert.SerializeObject(mainsale);
 
@@ -298,13 +298,13 @@ namespace DataAccessLayer.Repositories
 
             if (salemainobj != null)
             {
-                var subsale = await  this._context.SaleSub.Where(x => x.SMID == salemainobj.SMID).ToListAsync();
+                var subsale = await  this._context.SaleSub.Where(x => x.SMID == salemainobj.SMID && x.CompanyID == CompanyID && x.BranchID == BranchID).ToListAsync();
                 var subjson = JsonConvert.SerializeObject(subsale);
                 salemainobj.SaleDetail = JsonConvert.DeserializeObject<List<SaleSubVm>>(subjson);
 
                 foreach (var subsaleitem in salemainobj.SaleDetail)
                 {
-                    var house = await this._context.SaleSubWarehouse.Where(x => x.SSID == subsaleitem.SSID).ToListAsync();
+                    var house = await this._context.SaleSubWarehouse.Where(x => x.SSID == subsaleitem.SSID && x.CompanyID == CompanyID && x.BranchID == BranchID).ToListAsync();
                     var housejson = JsonConvert.SerializeObject(house);
                     subsaleitem.SaleDetailWarehouse = JsonConvert.DeserializeObject<IList<SaleSubWarehouseVM>>(housejson);
                 }
