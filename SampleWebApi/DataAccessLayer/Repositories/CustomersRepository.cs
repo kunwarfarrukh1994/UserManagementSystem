@@ -141,17 +141,19 @@ namespace DataAccessLayer.Repositories
                     var result = returnParameter.Value;
                     con.Close();
 
-                    if(Convert.ToInt32(result) > 0) 
-                    {
-                        return  result.ToString();
-                    }
+                    return result.ToString();
 
-                    else 
-                    {
-                        return  result.ToString();
-                    }
+                    //if(Convert.ToInt32(result) > 0) 
+                    //{
+                    //    return  result.ToString();
+                    //}
 
-                    
+                    //else 
+                    //{
+                    //    return  result.ToString();
+                    //}
+
+
 
 
 

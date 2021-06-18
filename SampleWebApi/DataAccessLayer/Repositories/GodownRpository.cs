@@ -100,7 +100,8 @@ namespace DataAccessLayer.Repositories
                     con.Close();
 
 
-                    return "Record Saved Successfully for ID:" + result;
+                    return result.ToString();
+                    //return "Record Saved Successfully for ID:" + result;
 
 
 

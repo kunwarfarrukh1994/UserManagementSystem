@@ -112,8 +112,8 @@ namespace DataAccessLayer.Repositories
                     var result = returnParameter.Value;
                     con.Close();
 
-
-                    return "Category Saved Successfully for ID:" + result;
+                    return result.ToString();
+                    //return "Category Saved Successfully for ID:" + result;
 
 
 

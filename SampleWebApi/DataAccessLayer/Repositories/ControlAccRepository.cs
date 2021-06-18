@@ -111,8 +111,8 @@ namespace DataAccessLayer.Repositories
                     var result = returnParameter.Value;
                     con.Close();
 
-
-                    return "Control Account Saved Successfully for ID:" + result;
+                    return result.ToString();
+                    //return "Control Account Saved Successfully for ID:" + result;
 
 
 

@@ -1,0 +1,9 @@
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\UserManagement\bin\Release\netstandard2.1\UserManagement.deps.json
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\UserManagement\bin\Release\netstandard2.1\UserManagement.dll
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\UserManagement\bin\Release\netstandard2.1\UserManagement.pdb
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\UserManagement\obj\Release\netstandard2.1\UserManagement.csprojAssemblyReference.cache
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\UserManagement\obj\Release\netstandard2.1\UserManagement.AssemblyInfoInputs.cache
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\UserManagement\obj\Release\netstandard2.1\UserManagement.AssemblyInfo.cs
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\UserManagement\obj\Release\netstandard2.1\UserManagement.csproj.CoreCompileInputs.cache
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\UserManagement\obj\Release\netstandard2.1\UserManagement.dll
+C:\Users\EAS\Documents\GitHub\UserManagementSystem\SampleWebApi\UserManagement\obj\Release\netstandard2.1\UserManagement.pdb

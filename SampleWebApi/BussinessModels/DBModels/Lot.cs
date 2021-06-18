@@ -14,6 +14,7 @@ namespace BussinessModels.DBModels
         public string LotType { get; set; }
         public string Number { get; set; }
         public string Description { get; set; }
+        public int CompanyID { get; set; }
         public int BranchID { get; set; }
         public int OperatorID { get; set; }
         public int Del { get; set; }

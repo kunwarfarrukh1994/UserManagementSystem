@@ -794,6 +794,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("CID")
                         .HasColumnType("int");
 
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int");
+
                     b.Property<int>("Del")
                         .HasColumnType("int");
 
@@ -2077,6 +2080,46 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.ToTable("mClassType");
+                });
+
+            modelBuilder.Entity("BussinessModels.DBModels.mSeries", b =>
+                {
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Del")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OperatorID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SeriesName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SeriesNameU")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sync")
+                        .HasColumnType("int");
+
+                    b.ToTable("mSeries");
                 });
 #pragma warning restore 612, 618
         }

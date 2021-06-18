@@ -8,10 +8,10 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface ILotRepository
     {
-        //Task<IList<LotVM>> GetAllLot();
-        //Task<LotVM> GetLotByID(int Id);
-        //Task<string> SaveLot(LotVM lot);
-        //Task<string> DeleteLot(int Id);
+        Task<IList<LotVM>> GetAllLots();
+        Task<LotVM> GetLotByID(int Id);
+        Task<string> SaveLot(LotVM lot);
+        Task<string> DeleteLot(int Id);
 
     }
 }

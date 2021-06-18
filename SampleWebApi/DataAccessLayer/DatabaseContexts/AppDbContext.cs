@@ -68,6 +68,8 @@ namespace DataAccessLayer
             model_builder.Entity<CodeCodingProductType>().HasNoKey();
             model_builder.Entity<CustomerContacts>().HasNoKey();
 
+            model_builder.Entity<mSeries>().HasNoKey();
+
 
 
 
@@ -120,6 +122,8 @@ namespace DataAccessLayer
         public DbSet<CodeCodingCategory> CodeCodingCategory { get; set; }
         public DbSet<CodeCodingOptions> CodeCodingOptions { get; set; }
         public DbSet<CodeCodingProductType> CodeCodingProductType { get; set; }
+        public DbSet<mSeries> mSeries { get; set; }
+        
 
 
 

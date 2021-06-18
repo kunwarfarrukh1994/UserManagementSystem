@@ -124,12 +124,13 @@ namespace DataAccessLayer.Repositories
                         var result = returnParameter.Value;
                         con.Close();
 
+                         return result.ToString();
 
-                        return "Record Saved Successfully for ID:" + result;
+                    //return "Record Saved Successfully for ID:" + result;
 
 
 
-                    }
+                }
 
                 
 

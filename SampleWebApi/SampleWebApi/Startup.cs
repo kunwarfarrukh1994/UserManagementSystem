@@ -206,6 +206,8 @@ namespace SampleWebApi
             services.AddTransient<ICodeCodingCategoryRepository, CodeCodingCategoryRepository>();
             services.AddTransient<ICodeCodingOptionsRepository, CodeCodingOptionsRepository>();
             services.AddTransient<ICityRepository, CityRepository>();
+            services.AddTransient<ISeriesRepository, SeriesRepository>();
+            services.AddTransient<ILotRepository, LotRepository>();
 
 
 
