@@ -9,7 +9,7 @@ namespace DataAccessLayer.ReposiotryInterfaces
     public interface ISaleReturnRepository
     {
         //Task<IList<SaleReturnMainVM>> GetAllSaleReturns();
-        Task<SaleReturnLookUpsVM> GetSaleReturnByID(int Id);
+        Task<SaleReturnLookUpsVM> GetSaleReturnByID(int Id, int CompanyID, int BranchID);
 
         Task<string> SaveSaleReturn(SaleReturnMainVM salereturnmain);
 

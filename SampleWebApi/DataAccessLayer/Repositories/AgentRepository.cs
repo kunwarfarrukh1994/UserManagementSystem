@@ -112,7 +112,7 @@ namespace DataAccessLayer.Repositories
         }
 
 
-        public async Task<string> DeleteAgent(int Id)
+        public async Task<string> DeleteAgent(int Id, int CompanyId, int BranchId)
         {
             using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
             {
@@ -123,24 +123,25 @@ namespace DataAccessLayer.Repositories
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = Id;
+                cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+                cmd.Parameters.Add("@BranchId", SqlDbType.BigInt).Value = BranchId;
+
+                var returnParameter = cmd.Parameters.Add("@CID", SqlDbType.BigInt);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
 
                 con.Open();
                 await cmd.ExecuteNonQueryAsync();
-
+                var result = returnParameter.Value;
                 con.Close();
 
-
-                return "Record Deleted Successfully";
-
-
-
+                return result.ToString();
             }
         }
 
 
-        public async Task<IList<AgentsVM>> GetAllMAgents()
+        public async Task<IList<AgentsVM>> GetAllMAgents(int CompanyID, int BranchID)
         {
-            var list = await this._context.Agents.Where(x => x.Del == 0).ToListAsync();
+            var list = await this._context.Agents.Where(x => x.Del == 0 && x.CompanyID == CompanyID && x.BranchID == BranchID).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -149,9 +150,9 @@ namespace DataAccessLayer.Repositories
             return agentsList;
         }
 
-        public async Task<IList<AgentsVM>> GetAllRAgents()
+        public async Task<IList<AgentsVM>> GetAllRAgents(int CompanyID, int BranchID)
          {
-            var list = await this._context.Agents.Where(x => x.Del == 0).ToListAsync();
+            var list = await this._context.Agents.Where(x => x.Del == 0 && x.CompanyID == CompanyID && x.BranchID == BranchID).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -161,12 +162,12 @@ namespace DataAccessLayer.Repositories
         }
 
 
-        public async Task<AgentsVM> GetAgentByID(int Id)
+        public async Task<AgentsVM> GetAgentByID(int Id, int CompanyID, int BranchID)
         {
             AgentsVM agentObj = new AgentsVM();
 
 
-            var mainAgent = await this._context.Agents.Where(x => x.CID == Id).FirstOrDefaultAsync();
+            var mainAgent = await this._context.Agents.Where(x => x.CID == Id && x.CompanyID == CompanyID && x.BranchID == BranchID).FirstOrDefaultAsync();
 
             var mainjson = JsonConvert.SerializeObject(mainAgent);
 

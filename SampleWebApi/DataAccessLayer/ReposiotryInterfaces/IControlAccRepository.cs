@@ -8,11 +8,11 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface IControlAccRepository
     {
-        Task<IList<adControlAccountsVM>> GetAllControlAcc();
-        Task<adControlAccountsVM> GetControllAccByID(int Id);
+        Task<IList<adControlAccountsVM>> GetAllControlAcc(int CompanyId);
+        Task<adControlAccountsVM> GetControllAccByID(int Id, int CompanyId);
         Task<string> SaveControlAcc(adControlAccountsVM controlAcc);
-        Task<string> DeleteControlAcc(int Id);
+        Task<string> DeleteControlAcc(int Id, int CompanyId);
 
-        Task<adControlAccountsLookUpVM> GetLookUpsforCtrlAcc();
+        Task<adControlAccountsLookUpVM> GetLookUpsforCtrlAcc(int CompanyId);
     }
 }

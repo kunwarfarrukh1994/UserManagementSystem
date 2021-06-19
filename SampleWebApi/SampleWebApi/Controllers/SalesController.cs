@@ -46,24 +46,24 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeleteSale(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> DeleteSale(int Id, int CompanyId, int BranchId)
         {
-            var result = await this._salesRepo.DeleteSale(Id);
+            var result = await this._salesRepo.DeleteSale(Id, CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpGet("GetSalelookUps")]
-        public async Task<IActionResult> GetLookUpsforSale()
+        [HttpGet("GetSalelookUps/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetLookUpsforSale(int CompanyId, int BranchId)
         {
-            var result = await this._salesRepo.GetLookUpsforSale();
+            var result = await this._salesRepo.GetLookUpsforSale(CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpGet("GetSaleInvoicelookUps")]
-        public async Task<IActionResult> GetLookUpsforSaleInvoice()
+        [HttpGet("GetSaleInvoicelookUps/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetLookUpsforSaleInvoice(int CompanyId, int BranchId)
         {
-            var result = await this._salesRepo.GetLookUpsforSalesInvoice();
+            var result = await this._salesRepo.GetLookUpsforSalesInvoice(CompanyId, BranchId);
             return Ok(result);
         }
 

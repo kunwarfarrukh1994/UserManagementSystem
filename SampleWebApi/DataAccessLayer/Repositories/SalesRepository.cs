@@ -276,7 +276,7 @@ namespace DataAccessLayer.Repositories
 
         public async Task<IList<SalesMainVM>> GetAllSales(int CompanyID, int BranchID)
         {
-            var list=  await this._context.SaleMain.Where(x => x.Del == 0 && x.CompanyID == CompanyID && x.BranchID == BranchID).ToListAsync();
+            var list=  await this._context.SaleMain.Where(x => x.Del == 0 && x.CompanyID == CompanyID && x.BranchID == BranchID).OrderBy(x=> x.SMID).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -314,61 +314,152 @@ namespace DataAccessLayer.Repositories
             return salemainobj;
         }
 
-        public async Task<string> DeleteSale(int Id)
+        public async Task<string> DeleteSale(int Id, int CompanyId, int BranchId)
         {
-            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            try 
             {
-              
-                SqlCommand cmd = null;
+                using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+                {
 
-                cmd = new SqlCommand("dbo.Del_Sales", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-              
-                cmd.Parameters.Add("@SmId", SqlDbType.BigInt).Value = Id;
+                    SqlCommand cmd = null;
 
-                con.Open();
-                await cmd.ExecuteNonQueryAsync();
-                
-                con.Close();
+                    cmd = new SqlCommand("dbo.Del_Sales", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-
-                return "Record Deleted Successfully";
+                    cmd.Parameters.Add("@SmId", SqlDbType.BigInt).Value = Id;
+                    cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+                    cmd.Parameters.Add("@BranchId", SqlDbType.BigInt).Value = BranchId;
 
 
+                    var returnParameter = cmd.Parameters.Add("@SmId", SqlDbType.BigInt);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
 
+                    con.Open();
+                    await cmd.ExecuteNonQueryAsync();
+                    var result = returnParameter.Value;
+                    con.Close();
+
+                    return result.ToString();
+
+
+
+
+                    //con.Open();
+                    //await cmd.ExecuteNonQueryAsync();
+
+                    //con.Close();
+
+
+                    //return "Record Deleted Successfully";
+
+
+                }
             }
-        
+            catch (Exception ex)
+            {
+
+                throw new Exception("Delete Failed");
+            }
+
+
         }
      
-        public async  Task<SalesLookUpsVM> GetLookUpsforSale()
+        public async  Task<SalesLookUpsVM> GetLookUpsforSale(int CompanyID, int BranchID)
         {
-            SqlParameter[] @params =
-                    {
+            SqlParameter[] @outparams =
+                  {
                        new SqlParameter("@CustomerLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@ItemLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@PandiLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@AddaLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
 
                 };
+            SqlParameter[] @inparams =
+                {
+                    new SqlParameter("@CompanyID", CompanyID),
+                    new SqlParameter("@BranchID", BranchID)
+                };
+            await DBMethods.EXECUTE_SP(@inparams, @outparams, "SalesGetSearchLookUps", this._context);
 
-            await DBMethods.EXECUTE_SP(new SqlParameter[0], @params, "SalesGetSearchLookUps",this._context);
+            SalesLookUpsVM lookups = new SalesLookUpsVM();
 
-                SalesLookUpsVM lookups = new SalesLookUpsVM();
-
-            lookups.salepartylookup = JsonConvert.DeserializeObject<IList<SalePartyLookUp>>(@params[0].Value.ToString());
-            lookups.saleitemlookup = JsonConvert.DeserializeObject<IList<SaleItemLookupVM>>(@params[1].Value.ToString());
-            lookups.salepandilookup = JsonConvert.DeserializeObject<IList<SalePandiLookUpVM>>(@params[2].Value.ToString());
-            lookups.saleaddalookup = JsonConvert.DeserializeObject<IList<SaleAddaLookUpVM>>(@params[3].Value.ToString());
+            lookups.salepartylookup = JsonConvert.DeserializeObject<IList<SalePartyLookUp>>(@outparams[0].Value.ToString());
+            lookups.saleitemlookup = JsonConvert.DeserializeObject<IList<SaleItemLookupVM>>(@outparams[1].Value.ToString());
+            lookups.salepandilookup = JsonConvert.DeserializeObject<IList<SalePandiLookUpVM>>(@outparams[2].Value.ToString());
+            lookups.saleaddalookup = JsonConvert.DeserializeObject<IList<SaleAddaLookUpVM>>(@outparams[3].Value.ToString());
             return lookups;
+
+
+
+
+
+            //SqlParameter[] @params =
+            //        {
+            //           new SqlParameter("@CustomerLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@ItemLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@PandiLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@AddaLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
+            //    };
+
+            //await DBMethods.EXECUTE_SP(new SqlParameter[0], @params, "SalesGetSearchLookUps",this._context);
+
+            //    SalesLookUpsVM lookups = new SalesLookUpsVM();
+
+            //lookups.salepartylookup = JsonConvert.DeserializeObject<IList<SalePartyLookUp>>(@params[0].Value.ToString());
+            //lookups.saleitemlookup = JsonConvert.DeserializeObject<IList<SaleItemLookupVM>>(@params[1].Value.ToString());
+            //lookups.salepandilookup = JsonConvert.DeserializeObject<IList<SalePandiLookUpVM>>(@params[2].Value.ToString());
+            //lookups.saleaddalookup = JsonConvert.DeserializeObject<IList<SaleAddaLookUpVM>>(@params[3].Value.ToString());
+            //return lookups;
+
+        }
+
+
+        public async Task<SalesLookUpsVM> GetLookUpsforSalesInvoice(int CompanyID, int BranchID)
+        {
+            SqlParameter[] @outparams =
+           {
+                       new SqlParameter("@InvoiceLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@RAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@MAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+                       new SqlParameter("@CustomerLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
+                };
+            SqlParameter[] @inparams =
+                {
+                    new SqlParameter("@CompanyID", CompanyID),
+                    new SqlParameter("@BranchID", BranchID)
+                };
+            await DBMethods.EXECUTE_SP(@inparams, @outparams, "SalesInvoiceGetSearchLookUps", this._context);
+
+            SalesLookUpsVM lookups = new SalesLookUpsVM();
+
+            lookups.saleinoiceInvoiceLookUp = JsonConvert.DeserializeObject<IList<SaleInoiceInvoiceLookUpVM>>(@outparams[0].Value.ToString());
+            lookups.customerRagentlookup = JsonConvert.DeserializeObject<IList<CustomerRAgentLookUp>>(@outparams[1].Value.ToString());
+            lookups.customerMagentlookup = JsonConvert.DeserializeObject<IList<CustomerMAgentLookUp>>(@outparams[2].Value.ToString());
+            lookups.salepartylookup = JsonConvert.DeserializeObject<IList<SalePartyLookUp>>(@outparams[3].Value.ToString());
+
+
+            return lookups;
+
+
+
 
 
             //using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
             //{
+            //    SqlParameter[] @params =
+            //        {
+            //           new SqlParameter("@InvoiceLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@RAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@MAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@CustomerLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
+            //    };
 
 
-
-            //    var sql = "EXEC[SalesGetSearchLookUps] @CustomerLookUp OUTPUT, @ItemLookUp OUTPUT, @PandiLookUp OUTPUT, @AddaLookUp OUTPUT; ";
-            //    await this._context.Database.ExecuteSqlRawAsync(sql,@params[0],@params[1], @params[2], @params[3]);
+            //    var sql = "EXEC[SalesInvoiceGetSearchLookUps] @InvoiceLookUp OUTPUT, @RAgentLookUp OUTPUT, @MAgentLookUp OUTPUT, @CustomerLookUp OUTPUT; ";
+            //    await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3]);
 
 
 
@@ -376,10 +467,11 @@ namespace DataAccessLayer.Repositories
 
 
 
-            //    lookups.salepartylookup = JsonConvert.DeserializeObject<IList<SalePartyLookUp>>(@params[0].Value.ToString());
-            //    lookups.saleitemlookup = JsonConvert.DeserializeObject<IList<SaleItemLookupVM>>(@params[1].Value.ToString());
-            //    lookups.salepandilookup = JsonConvert.DeserializeObject<IList<SalePandiLookUpVM>>(@params[2].Value.ToString());
-            //    lookups.saleaddalookup = JsonConvert.DeserializeObject<IList<SaleAddaLookUpVM>>(@params[3].Value.ToString());
+                
+            //    lookups.saleinoiceInvoiceLookUp = JsonConvert.DeserializeObject<IList<SaleInoiceInvoiceLookUpVM>>(@params[0].Value.ToString());
+            //    lookups.customerRagentlookup = JsonConvert.DeserializeObject<IList<CustomerRAgentLookUp>>(@params[1].Value.ToString());
+            //    lookups.customerMagentlookup = JsonConvert.DeserializeObject<IList<CustomerMAgentLookUp>>(@params[2].Value.ToString());
+            //    lookups.salepartylookup = JsonConvert.DeserializeObject<IList<SalePartyLookUp>>(@params[3].Value.ToString());
 
 
             //    con.Close();
@@ -390,50 +482,6 @@ namespace DataAccessLayer.Repositories
 
 
             //}
-
-
-
-        }
-
-
-        public async Task<SalesLookUpsVM> GetLookUpsforSalesInvoice()
-        {
-            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
-            {
-                SqlParameter[] @params =
-                    {
-                       new SqlParameter("@InvoiceLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
-                       new SqlParameter("@RAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
-                       new SqlParameter("@MAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
-                       new SqlParameter("@CustomerLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
-
-                };
-
-
-                var sql = "EXEC[SalesInvoiceGetSearchLookUps] @InvoiceLookUp OUTPUT, @RAgentLookUp OUTPUT, @MAgentLookUp OUTPUT, @CustomerLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3]);
-
-
-
-                SalesLookUpsVM lookups = new SalesLookUpsVM();
-
-
-
-                
-                lookups.saleinoiceInvoiceLookUp = JsonConvert.DeserializeObject<IList<SaleInoiceInvoiceLookUpVM>>(@params[0].Value.ToString());
-                lookups.customerRagentlookup = JsonConvert.DeserializeObject<IList<CustomerRAgentLookUp>>(@params[1].Value.ToString());
-                lookups.customerMagentlookup = JsonConvert.DeserializeObject<IList<CustomerMAgentLookUp>>(@params[2].Value.ToString());
-                lookups.salepartylookup = JsonConvert.DeserializeObject<IList<SalePartyLookUp>>(@params[3].Value.ToString());
-
-
-                con.Close();
-
-
-                return lookups;
-
-
-
-            }
         }
 
     }

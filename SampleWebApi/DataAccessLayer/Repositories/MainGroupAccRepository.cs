@@ -128,44 +128,64 @@ namespace DataAccessLayer.Repositories
         }
 
 
-        public async Task<adMainGroupAccountsLookUpsVM> GetLookUpsforGroupAcc()
+        public async Task<adMainGroupAccountsLookUpsVM> GetLookUpsforGroupAcc(int CompanyId, int BranchId)
         {
-            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
-            {
-                SqlParameter[] @params =
-                    {
+            SqlParameter[] @outparams =
+             {
                        new SqlParameter("@CtrlAccLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+                };
+            SqlParameter[] @inparams =
+                {
+                    new SqlParameter("@CompanyID", CompanyId),
+                    new SqlParameter("@BranchID", CompanyId)
+                };
+            await DBMethods.EXECUTE_SP(@inparams, @outparams, "MainGroupAccGetSearchLookUps", this._context);
+
+            adMainGroupAccountsLookUpsVM lookups = new adMainGroupAccountsLookUpsVM();
+
+
+            lookups.admaingroupaccountsctrlacclookup = JsonConvert.DeserializeObject<IList<adMainGroupAccountsCtrlAccLookUpVM>>(@outparams[0].Value.ToString());
+
+            return lookups;
+
+
+
+            //using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            //{
+            //    SqlParameter[] @params =
+            //        {
+            //           new SqlParameter("@CtrlAccLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
                        
 
 
-                };
+            //    };
 
 
-                var sql = "EXEC[MainGroupAccGetSearchLookUps] @CtrlAccLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
+            //    var sql = "EXEC[MainGroupAccGetSearchLookUps] @CtrlAccLookUp OUTPUT; ";
+            //    await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
 
 
 
-                adMainGroupAccountsLookUpsVM lookups = new adMainGroupAccountsLookUpsVM();
+            //    adMainGroupAccountsLookUpsVM lookups = new adMainGroupAccountsLookUpsVM();
 
 
-                lookups.admaingroupaccountsctrlacclookup = JsonConvert.DeserializeObject<IList<adMainGroupAccountsCtrlAccLookUpVM>>(@params[0].Value.ToString());
+            //    lookups.admaingroupaccountsctrlacclookup = JsonConvert.DeserializeObject<IList<adMainGroupAccountsCtrlAccLookUpVM>>(@params[0].Value.ToString());
 
              
-                con.Close();
+            //    con.Close();
 
 
-                return lookups;
+            //    return lookups;
 
 
 
-            }
+            //}
         }
 
 
-        public async Task<IList<adMainGroupAccountsVM>> GetAllGroupAccounts()
+        public async Task<IList<adMainGroupAccountsVM>> GetAllGroupAccounts(int CompanyId, int BranchId)
         {
-            var list = await this._context.adMainGroupAccounts.Where(x => x.Del == 0).ToListAsync();
+            var list = await this._context.adMainGroupAccounts.Where(x => x.Del == 0 && x.compID == CompanyId && x.BranchID == BranchId).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -174,12 +194,12 @@ namespace DataAccessLayer.Repositories
             return grpAccList;
         }
 
-        public async Task<adMainGroupAccountsVM> GetGroupAccByID(int Id)
+        public async Task<adMainGroupAccountsVM> GetGroupAccByID(int Id, int CompanyId, int BranchId)
         {
             adMainGroupAccountsVM mainGrpObj = new adMainGroupAccountsVM();
 
 
-            var mainSchool = await this._context.adMainGroupAccounts.Where(x => x.MainGroupID == Id).FirstOrDefaultAsync();
+            var mainSchool = await this._context.adMainGroupAccounts.Where(x => x.MainGroupID == Id && x.compID == CompanyId && x.BranchID == BranchId).FirstOrDefaultAsync();
 
             var mainjson = JsonConvert.SerializeObject(mainSchool);
 
@@ -190,7 +210,7 @@ namespace DataAccessLayer.Repositories
             return mainGrpObj;
         }
 
-        public async Task<string> DeleteGroupAcc(int Id)
+        public async Task<string> DeleteGroupAcc(int Id, int CompanyId, int BranchId)
         {
             using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
             {
@@ -201,14 +221,19 @@ namespace DataAccessLayer.Repositories
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@MainGroupID", SqlDbType.BigInt).Value = Id;
+                cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+                cmd.Parameters.Add("@BranchId", SqlDbType.BigInt).Value = BranchId;
+
+                var returnParameter = cmd.Parameters.Add("@MainGroupID", SqlDbType.BigInt);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
 
                 con.Open();
                 await cmd.ExecuteNonQueryAsync();
-
+                var result = returnParameter.Value;
                 con.Close();
 
+                return result.ToString();
 
-                return "Record Deleted Successfully";
 
 
 

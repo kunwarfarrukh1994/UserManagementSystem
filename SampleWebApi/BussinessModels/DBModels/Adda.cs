@@ -11,6 +11,7 @@ namespace BussinessModels.DBModels
         public DateTime EDate { get; set; }
         public string Title { get; set; }
         public string? TitleU { get; set; }
+        public int CompanyID { get; set; }
         public int BranchID { get; set; }
         public int OperatorID { get; set; }
         public int Del { get; set; }

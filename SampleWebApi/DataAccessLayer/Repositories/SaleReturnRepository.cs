@@ -52,7 +52,7 @@ namespace DataAccessLayer.Repositories
 
         }
 
-        public async Task<SaleReturnLookUpsVM> GetSaleReturnByID(int Id)
+        public async Task<SaleReturnLookUpsVM> GetSaleReturnByID(int Id, int CompanyID, int BranchID)
         {
             SqlParameter[] @outparams =
                    {
@@ -63,7 +63,9 @@ namespace DataAccessLayer.Repositories
                 };
             SqlParameter[] @inparams =
                 {
-                    new SqlParameter("@SMID", Id)
+                    new SqlParameter("@SMID", Id),
+                    new SqlParameter("@CompanyID", CompanyID),
+                    new SqlParameter("@BranchID", BranchID)
                 };
             await DBMethods.EXECUTE_SP(@inparams, @outparams, "GetSaleDetailByID", this._context);
 

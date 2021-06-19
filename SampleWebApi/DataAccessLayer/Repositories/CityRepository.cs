@@ -104,15 +104,19 @@ namespace DataAccessLayer.Repositories
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@CityId", SqlDbType.BigInt).Value = Id;
+                  
+             
+
+                    var returnParameter = cmd.Parameters.Add("@CityId", SqlDbType.BigInt);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
 
                     con.Open();
                     await cmd.ExecuteNonQueryAsync();
-
+                    var result = returnParameter.Value;
                     con.Close();
 
-
-                    return "Record Deleted Successfully";
-
+                    return result.ToString();
+                   
 
 
                 }
@@ -135,8 +139,8 @@ namespace DataAccessLayer.Repositories
 
                 };
                 SqlParameter[] @inparams =
-                    {
-
+                {
+                    
                 };
                 await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_AllCities", this._context);
 

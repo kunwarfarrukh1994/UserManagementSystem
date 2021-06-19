@@ -32,31 +32,31 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllGens")]
-        public async Task<IActionResult> GetAllGen()
+        [HttpGet("GetAllGens/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetAllGen(int CompanyId, int BranchId)
         {
-            var result = await this._genRepo.GetAllGen();
+            var result = await this._genRepo.GetAllGen(CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpGet("GetGenById/{id?}")]
-        public async Task<IActionResult> GetGenByID(int id)
+        [HttpGet("GetGenById/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetGenByID(int id, int CompanyId, int BranchId)
         {
-            var result = await this._genRepo.GetGenByID(id);
+            var result = await this._genRepo.GetGenByID(id, CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeleteGen(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> DeleteGen(int Id, int CompanyId, int BranchId)
         {
-            var result = await this._genRepo.DeleteGen(Id);
+            var result = await this._genRepo.DeleteGen(Id, CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpGet("GetGenlookUps")]
-        public async Task<IActionResult> GetLookUpsforGen()
+        [HttpGet("GetGenlookUps/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetLookUpsforGen(int CompanyId, int BranchId)
         {
-            var result = await this._genRepo.GetLookUpsforGen();
+            var result = await this._genRepo.GetLookUpsforGen(CompanyId, BranchId);
             return Ok(result);
         }
     }

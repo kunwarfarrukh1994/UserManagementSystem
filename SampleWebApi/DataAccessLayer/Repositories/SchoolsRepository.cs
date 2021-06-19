@@ -143,7 +143,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<string> DeleteSchool(int Id)
+        public async Task<string> DeleteSchool(int Id, int CompanyId, int BranchId)
         {
             using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
             {
@@ -154,21 +154,25 @@ namespace DataAccessLayer.Repositories
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = Id;
+                cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+                cmd.Parameters.Add("@BranchId", SqlDbType.BigInt).Value = BranchId;
+
+                var returnParameter = cmd.Parameters.Add("@CID", SqlDbType.BigInt);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
 
                 con.Open();
                 await cmd.ExecuteNonQueryAsync();
-
+                var result = returnParameter.Value;
                 con.Close();
 
-
-                return "Record Deleted Successfully";
+                return result.ToString();
 
 
 
             }
         }
 
-        public async Task<IList<SchoolsVM>> GetAllSchools()
+        public async Task<IList<SchoolsVM>> GetAllSchools(int CompanyID, int BranchID)
         {
             try
             {
@@ -179,8 +183,9 @@ namespace DataAccessLayer.Repositories
 
                 };
                 SqlParameter[] @inparams =
-                    {
-
+                {
+                    new SqlParameter("@CompanyID", CompanyID),
+                    new SqlParameter("@BranchID", BranchID)
                 };
                 await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_AllSchools", this._context);
 
@@ -205,12 +210,10 @@ namespace DataAccessLayer.Repositories
             //return schoolsList;
         }
 
-        public async Task<SchoolLookUpsVM> GetLookUpsforSchool()
+        public async Task<SchoolLookUpsVM> GetLookUpsforSchool(int CompanyID, int BranchID)
         {
-            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
-            {
-                SqlParameter[] @params =
-                    {
+            SqlParameter[] @outparams =
+                 {
                        new SqlParameter("@CityLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@RAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@MAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
@@ -219,39 +222,69 @@ namespace DataAccessLayer.Repositories
 
 
                 };
+            SqlParameter[] @inparams =
+                {
+                    new SqlParameter("@CompanyID", CompanyID),
+                    new SqlParameter("@BranchID", BranchID)
+                };
+            await DBMethods.EXECUTE_SP(@inparams, @outparams, "SchoolsGetSearchLookUps", this._context);
+
+            SchoolLookUpsVM lookups = new SchoolLookUpsVM();
 
 
-                var sql = "EXEC[SchoolsGetSearchLookUps] @CityLookUp OUTPUT, @RAgentLookUp OUTPUT,@MAgentLookUp OUTPUT,@SchoolLookUp OUTPUT, @MainGroupLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3], @params[4]);
+            lookups.customerCitylookup = JsonConvert.DeserializeObject<IList<CustomerCityLookUp>>(@outparams[0].Value.ToString());
+            lookups.customerRAgentlookup = JsonConvert.DeserializeObject<IList<CustomerRAgentLookUp>>(@outparams[1].Value.ToString());
+            lookups.customerMAgentlookup = JsonConvert.DeserializeObject<IList<CustomerMAgentLookUp>>(@outparams[2].Value.ToString());
+            lookups.schoolallschoollookup = JsonConvert.DeserializeObject<IList<SchoolAllSchoolLookUpVM>>(@outparams[3].Value.ToString());
+            lookups.customermaingrouplookup = JsonConvert.DeserializeObject<IList<CustomerMainGroupLookUpVM>>(@outparams[4].Value.ToString());
+
+            return lookups;
+
+            //using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            //{
+            //    SqlParameter[] @params =
+            //        {
+            //           new SqlParameter("@CityLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@RAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@MAgentLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@SchoolLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@MainGroupLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
+
+            //    };
+
+
+            //    var sql = "EXEC[SchoolsGetSearchLookUps] @CityLookUp OUTPUT, @RAgentLookUp OUTPUT,@MAgentLookUp OUTPUT,@SchoolLookUp OUTPUT, @MainGroupLookUp OUTPUT; ";
+            //    await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3], @params[4]);
 
 
 
-                SchoolLookUpsVM lookups = new SchoolLookUpsVM();
+            //    SchoolLookUpsVM lookups = new SchoolLookUpsVM();
 
 
-                lookups.customerCitylookup = JsonConvert.DeserializeObject<IList<CustomerCityLookUp>>(@params[0].Value.ToString());
+            //    lookups.customerCitylookup = JsonConvert.DeserializeObject<IList<CustomerCityLookUp>>(@params[0].Value.ToString());
 
-                lookups.customerRAgentlookup = JsonConvert.DeserializeObject<IList<CustomerRAgentLookUp>>(@params[1].Value.ToString());
-                lookups.customerMAgentlookup = JsonConvert.DeserializeObject<IList<CustomerMAgentLookUp>>(@params[2].Value.ToString());
-                lookups.schoolallschoollookup = JsonConvert.DeserializeObject<IList<SchoolAllSchoolLookUpVM>>(@params[3].Value.ToString());
-                lookups.customermaingrouplookup = JsonConvert.DeserializeObject<IList<CustomerMainGroupLookUpVM>>(@params[4].Value.ToString());
+            //    lookups.customerRAgentlookup = JsonConvert.DeserializeObject<IList<CustomerRAgentLookUp>>(@params[1].Value.ToString());
+            //    lookups.customerMAgentlookup = JsonConvert.DeserializeObject<IList<CustomerMAgentLookUp>>(@params[2].Value.ToString());
+            //    lookups.schoolallschoollookup = JsonConvert.DeserializeObject<IList<SchoolAllSchoolLookUpVM>>(@params[3].Value.ToString());
+            //    lookups.customermaingrouplookup = JsonConvert.DeserializeObject<IList<CustomerMainGroupLookUpVM>>(@params[4].Value.ToString());
 
-                con.Close();
-
-
-                return lookups;
+            //    con.Close();
 
 
+            //    return lookups;
 
-            }
+
+
+            //}
         }
 
-        public async Task<SchoolsVM> GetSchoolByID(int Id)
+        public async Task<SchoolsVM> GetSchoolByID(int Id, int CompanyID, int BranchID)
         {
             SchoolsVM schoolObj = new SchoolsVM();
 
 
-            var mainSchool = await this._context.Schools.Where(x => x.CID == Id).FirstOrDefaultAsync();
+            var mainSchool = await this._context.Schools.Where(x => x.CID == Id && x.CompanyID == CompanyID && x.BranchID == BranchID).FirstOrDefaultAsync();
 
             var mainjson = JsonConvert.SerializeObject(mainSchool);
 

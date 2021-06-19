@@ -8,13 +8,13 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface ISchoolsRepository
     {
-        Task<IList<SchoolsVM>> GetAllSchools();
+        Task<IList<SchoolsVM>> GetAllSchools(int CompanyID, int BranchID);
 
-        Task<SchoolsVM> GetSchoolByID(int Id);
+        Task<SchoolsVM> GetSchoolByID(int Id, int CompanyID, int BranchID);
 
         Task<string> SaveSchools(SchoolsVM school);
 
-        Task<string> DeleteSchool(int Id);
-        Task<SchoolLookUpsVM> GetLookUpsforSchool();
+        Task<string> DeleteSchool(int Id, int CompanyID, int BranchID);
+        Task<SchoolLookUpsVM> GetLookUpsforSchool(int CompanyID, int BranchID);
     }
 }

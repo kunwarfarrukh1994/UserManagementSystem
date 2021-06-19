@@ -32,32 +32,32 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllSchools")]
-        public async Task<IActionResult> GetAllCustomers()
+        [HttpGet("GetAllSchools/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetAllCustomers(int CompanyId, int BranchId)
         {
-            var result = await this._schoolsRepo.GetAllSchools();
+            var result = await this._schoolsRepo.GetAllSchools(CompanyId, BranchId);
             return Ok(result);
         }
 
 
-        [HttpGet("GetSchoolById/{id?}")]
-        public async Task<IActionResult> GetSchoolByID(int id)
+        [HttpGet("GetSchoolById/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetSchoolByID(int id, int CompanyId, int BranchId)
         {
-            var result = await this._schoolsRepo.GetSchoolByID(id);
+            var result = await this._schoolsRepo.GetSchoolByID(id, CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeleteSchool(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> DeleteSchool(int Id, int CompanyId, int BranchId)
         {
-            var result = await this._schoolsRepo.DeleteSchool(Id);
+            var result = await this._schoolsRepo.DeleteSchool(Id, CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpGet("GetSchoollookUps")]
-        public async Task<IActionResult> GetLookUpsforSchool()
+        [HttpGet("GetSchoollookUps/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetLookUpsforSchool(int CompanyId, int BranchId)
         {
-            var result = await this._schoolsRepo.GetLookUpsforSchool();
+            var result = await this._schoolsRepo.GetLookUpsforSchool(CompanyId, BranchId);
             return Ok(result);
         }
     }

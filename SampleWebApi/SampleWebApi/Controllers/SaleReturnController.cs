@@ -26,10 +26,10 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetSaleReturnById/{id?}")]
-        public async Task<IActionResult> GetSaleReturnByID(int id)
+        [HttpGet("GetSaleReturnById/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetSaleReturnByID(int id, int CompanyId, int BranchId)
         {
-            var result = await this._saleReturnRepo.GetSaleReturnByID(id);
+            var result = await this._saleReturnRepo.GetSaleReturnByID(id, CompanyId, BranchId);
             return Ok(result);
         }
     }

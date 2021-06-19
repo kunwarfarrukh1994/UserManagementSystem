@@ -32,31 +32,31 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllCategoriesAcc")]
-        public async Task<IActionResult> GetAllCategoriesAcc()
+        [HttpGet("GetAllCategoriesAcc/{CompanyId}")]
+        public async Task<IActionResult> GetAllCategoriesAcc(int CompanyId)
         {
-            var result = await this._categoryRepo.GetAllCategoriesAcc();
+            var result = await this._categoryRepo.GetAllCategoriesAcc(CompanyId);
             return Ok(result);
         }
 
-        [HttpGet("GetCategoryAccById/{id?}")]
-        public async Task<IActionResult> GetCategoryAccByID(int id)
+        [HttpGet("GetCategoryAccById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetCategoryAccByID(int id, int CompanyId)
         {
-            var result = await this._categoryRepo.GetCategoryAccByID(id);
+            var result = await this._categoryRepo.GetCategoryAccByID(id, CompanyId);
             return Ok(result);
         }
 
-        [HttpDelete("DeleteCategoryAcc/{id?}")]
-        public async Task<IActionResult> DeleteCategoryAcc(int Id)
+        [HttpDelete("DeleteCategoryAcc/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeleteCategoryAcc(int Id, int CompanyId)
         {
-            var result = await this._categoryRepo.DeleteCategoryAcc(Id);
+            var result = await this._categoryRepo.DeleteCategoryAcc(Id, CompanyId);
             return Ok(result);
         }
 
-        [HttpGet("GetCategoryAcclookUps")]
-        public async Task<IActionResult> GetLookUpsforCategoryAcc()
+        [HttpGet("GetCategoryAcclookUps/{CompanyId}")]
+        public async Task<IActionResult> GetLookUpsforCategoryAcc(int CompanyId)
         {
-            var result = await this._categoryRepo.GetLookUpsforCategory();
+            var result = await this._categoryRepo.GetLookUpsforCategory(CompanyId);
             return Ok(result);
         }
     }

@@ -26,30 +26,30 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetGroupAcclookUps")]
-        public async Task<IActionResult> GetLookUpsforGroupAcc()
+        [HttpGet("GetGroupAcclookUps/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetLookUpsforGroupAcc(int CompanyId, int BranchId)
         {
-            var result = await this._groupAccRepo.GetLookUpsforGroupAcc();
+            var result = await this._groupAccRepo.GetLookUpsforGroupAcc(CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpGet("GetAllGroupAccounts")]
-        public async Task<IActionResult> GetAllCustomers()
+        [HttpGet("GetAllGroupAccounts/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetAllCustomers(int CompanyId, int BranchId)
         {
-            var result = await this._groupAccRepo.GetAllGroupAccounts();
+            var result = await this._groupAccRepo.GetAllGroupAccounts(CompanyId, BranchId);
             return Ok(result);
         }
-        [HttpGet("GetGroupAccById/{id?}")]
-        public async Task<IActionResult> GetGroupAccByID(int id)
+        [HttpGet("GetGroupAccById/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetGroupAccByID(int id, int CompanyId, int BranchId)
         {
-            var result = await this._groupAccRepo.GetGroupAccByID(id);
+            var result = await this._groupAccRepo.GetGroupAccByID(id, CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpDelete("DeleteGroupAcc/{id?}")]
-        public async Task<IActionResult> DeleteGroupAcc(int Id)
+        [HttpDelete("DeleteGroupAcc/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> DeleteGroupAcc(int Id, int CompanyId, int BranchId)
         {
-            var result = await this._groupAccRepo.DeleteGroupAcc(Id);
+            var result = await this._groupAccRepo.DeleteGroupAcc(Id, CompanyId, BranchId);
             return Ok(result);
         }
 

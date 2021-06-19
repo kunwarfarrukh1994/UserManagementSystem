@@ -74,12 +74,10 @@ namespace DataAccessLayer.Repositories
 
 
 
-            public async Task<adAccountsLookUpsVm> GetLookUpsforSubAccount()
-            {
-            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
-            {
-                SqlParameter[] @params =
-                    {
+        public async Task<adAccountsLookUpsVm> GetLookUpsforSubAccount(int CompanyID, int BranchID)
+        {
+            SqlParameter[] @outparams =
+                 {
                        new SqlParameter("@AccTypeLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@BalTypeLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@CtrlAccLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
@@ -88,32 +86,73 @@ namespace DataAccessLayer.Repositories
                        new SqlParameter("@MainGroupAccLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
 
                 };
+            SqlParameter[] @inparams =
+                {
+                    new SqlParameter("@CompanyID", CompanyID),
+                    new SqlParameter("@BranchID", BranchID)
+                };
+            await DBMethods.EXECUTE_SP(@inparams, @outparams, "SubAccountGetSearchLookUps", this._context);
 
-
-                var sql = "EXEC[SubAccountGetSearchLookUps] @AccTypeLookUp OUTPUT, @BalTypeLookUp OUTPUT, @CtrlAccLookUp OUTPUT, @CityLookUp OUTPUT, @AllAccountsLookUp OUTPUT, @MainGroupAccLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3], @params[4],@params[5]);
-
-
-
-                adAccountsLookUpsVm lookups = new adAccountsLookUpsVm();
-
-
-
-
-                lookups.adaccountsacctypelookup = JsonConvert.DeserializeObject<IList<adAccountsAccTypeLookUpVM>>(@params[0].Value.ToString());
-                lookups.adaccountsbaltypelookup = JsonConvert.DeserializeObject<IList<adAccountsBalTypeLookUpVM>>(@params[1].Value.ToString());
-                lookups.adaccountsctrlacclookup = JsonConvert.DeserializeObject<IList<adAccountsCtrlAccLookUpVM>>(@params[2].Value.ToString());
-                lookups.adaccountscitylookup = JsonConvert.DeserializeObject<IList<adAccountsCityLookUpVM>>(@params[3].Value.ToString());
-                lookups.adaccountsallaccountslookup = JsonConvert.DeserializeObject<IList<adAccountsAllAccountsLookUpVM>>(@params[4].Value.ToString());
-                lookups.adaccountsmaingroupacclookup = JsonConvert.DeserializeObject<IList<adAccountsMainGroupAccLookUpVM>>(@params[5].Value.ToString());
-                con.Close();
-
-
-                return lookups;
+            adAccountsLookUpsVm lookups = new adAccountsLookUpsVm();
 
 
 
-            }
+
+            lookups.adaccountsacctypelookup = JsonConvert.DeserializeObject<IList<adAccountsAccTypeLookUpVM>>(@outparams[0].Value.ToString());
+            lookups.adaccountsbaltypelookup = JsonConvert.DeserializeObject<IList<adAccountsBalTypeLookUpVM>>(@outparams[1].Value.ToString());
+            lookups.adaccountsctrlacclookup = JsonConvert.DeserializeObject<IList<adAccountsCtrlAccLookUpVM>>(@outparams[2].Value.ToString());
+            lookups.adaccountscitylookup = JsonConvert.DeserializeObject<IList<adAccountsCityLookUpVM>>(@outparams[3].Value.ToString());
+            lookups.adaccountsallaccountslookup = JsonConvert.DeserializeObject<IList<adAccountsAllAccountsLookUpVM>>(@outparams[4].Value.ToString());
+            lookups.adaccountsmaingroupacclookup = JsonConvert.DeserializeObject<IList<adAccountsMainGroupAccLookUpVM>>(@outparams[5].Value.ToString());
+
+            return lookups;
+
+
+
+
+
+
+
+
+            //using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            //{
+            //    SqlParameter[] @params =
+            //        {
+            //           new SqlParameter("@AccTypeLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@BalTypeLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@CtrlAccLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@CityLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@AllAccountsLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@MainGroupAccLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
+            //    };
+
+
+            //    var sql = "EXEC[SubAccountGetSearchLookUps] @AccTypeLookUp OUTPUT, @BalTypeLookUp OUTPUT, @CtrlAccLookUp OUTPUT, @CityLookUp OUTPUT, @AllAccountsLookUp OUTPUT, @MainGroupAccLookUp OUTPUT; ";
+            //    await this._context.Database.ExecuteSqlRawAsync(sql, @params[0], @params[1], @params[2], @params[3], @params[4],@params[5]);
+
+
+
+            //    adAccountsLookUpsVm lookups = new adAccountsLookUpsVm();
+
+
+
+
+            //    lookups.adaccountsacctypelookup = JsonConvert.DeserializeObject<IList<adAccountsAccTypeLookUpVM>>(@params[0].Value.ToString());
+            //    lookups.adaccountsbaltypelookup = JsonConvert.DeserializeObject<IList<adAccountsBalTypeLookUpVM>>(@params[1].Value.ToString());
+            //    lookups.adaccountsctrlacclookup = JsonConvert.DeserializeObject<IList<adAccountsCtrlAccLookUpVM>>(@params[2].Value.ToString());
+            //    lookups.adaccountscitylookup = JsonConvert.DeserializeObject<IList<adAccountsCityLookUpVM>>(@params[3].Value.ToString());
+            //    lookups.adaccountsallaccountslookup = JsonConvert.DeserializeObject<IList<adAccountsAllAccountsLookUpVM>>(@params[4].Value.ToString());
+            //    lookups.adaccountsmaingroupacclookup = JsonConvert.DeserializeObject<IList<adAccountsMainGroupAccLookUpVM>>(@params[5].Value.ToString());
+                
+            //    con.Close();
+
+
+            //    return lookups;
+
+
+
+            //}
         }
 
         public async Task<string> SaveSubAcc(adAccountsVM subAcc)
@@ -354,9 +393,9 @@ namespace DataAccessLayer.Repositories
 
 
 
-        public async Task<IList<adAccountsVM>> GetAllSubAccounts()
+        public async Task<IList<adAccountsVM>> GetAllSubAccounts(int CompanyID, int BranchID)
         {
-            var list = await this._context.adAccounts.Where(x => x.Del == 0).ToListAsync();
+            var list = await this._context.adAccounts.Where(x => x.Del == 0 && x.compID == CompanyID && x.BranchID == BranchID).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -365,12 +404,12 @@ namespace DataAccessLayer.Repositories
             return accountsList;
         }
 
-        public async Task<adAccountsVM> GetSubAccountByID(int Id)
+        public async Task<adAccountsVM> GetSubAccountByID(int Id, int CompanyID, int BranchID)
         {
             adAccountsVM subAccObj = new adAccountsVM();
 
 
-            var mainSchool = await this._context.adAccounts.Where(x => x.AccID == Id).FirstOrDefaultAsync();
+            var mainSchool = await this._context.adAccounts.Where(x => x.AccID == Id && x.compID == CompanyID && x.BranchID == BranchID).FirstOrDefaultAsync();
 
             var mainjson = JsonConvert.SerializeObject(mainSchool);
 
@@ -381,7 +420,7 @@ namespace DataAccessLayer.Repositories
             return subAccObj;
         }
 
-        public async Task<string> DeleteSubAccount(int Id)
+        public async Task<string> DeleteSubAccount(int Id, int CompanyID, int BranchID)
         {
             using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
             {
@@ -392,14 +431,18 @@ namespace DataAccessLayer.Repositories
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@AccID", SqlDbType.BigInt).Value = Id;
+                cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyID;
+                cmd.Parameters.Add("@BranchId", SqlDbType.BigInt).Value = BranchID;
+
+                var returnParameter = cmd.Parameters.Add("@AccID", SqlDbType.BigInt);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
 
                 con.Open();
                 await cmd.ExecuteNonQueryAsync();
-
+                var result = returnParameter.Value;
                 con.Close();
 
-
-                return "Record Deleted Successfully";
+                return result.ToString();
 
 
 

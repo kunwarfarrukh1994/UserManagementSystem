@@ -32,31 +32,31 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllCustomers")]
-        public async Task<IActionResult> GetAllSales()
+        [HttpGet("GetAllCustomers/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetAllSales(int CompanyId, int BranchId)
         {
-            var result = await this._customersRepo.GetAllCustomers();
+            var result = await this._customersRepo.GetAllCustomers(CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpGet("GetCustomerById/{id?}")]
-        public async Task<IActionResult> GetCustomerByID(int id)
+        [HttpGet("GetCustomerById/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetCustomerByID(int id, int CompanyId, int BranchId)
         {
-            var result = await this._customersRepo.GetCustomerByID(id);
+            var result = await this._customersRepo.GetCustomerByID(id, CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeleteCustomer(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> DeleteCustomer(int Id, int CompanyId, int BranchId)
         {
-            var result = await this._customersRepo.DeleteCustomer(Id);
+            var result = await this._customersRepo.DeleteCustomer(Id, CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpGet("GetCustomerlookUps")]
-        public async Task<IActionResult> GetLookUpsforCustomer()
+        [HttpGet("GetCustomerlookUps/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetLookUpsforCustomer(int CompanyId, int BranchId)
         {
-            var result = await this._customersRepo.GetLookUpsforCustomer();
+            var result = await this._customersRepo.GetLookUpsforCustomer(CompanyId, BranchId);
             return Ok(result);
         }
 

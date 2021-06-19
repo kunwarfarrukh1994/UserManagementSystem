@@ -8,12 +8,12 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface ICustomersRepository
     {
-        Task<IList<CustomerVM>> GetAllCustomers();
-        Task<CustomerVM> GetCustomerByID(int Id);
+        Task<IList<CustomerVM>> GetAllCustomers(int CompanyId, int BranchId);
+        Task<CustomerVM> GetCustomerByID(int Id, int CompanyId, int BranchId);
 
         Task<string> SaveCustomers(CustomerVM customer);
 
-        Task<string> DeleteCustomer(int Id);
-        Task<CustomerLookUpsVM> GetLookUpsforCustomer();
+        Task<string> DeleteCustomer(int Id, int CompanyId, int BranchId);
+        Task<CustomerLookUpsVM> GetLookUpsforCustomer(int CompanyId, int BranchId);
     }
 }

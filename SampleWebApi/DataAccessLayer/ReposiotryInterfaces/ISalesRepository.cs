@@ -13,10 +13,10 @@ namespace DataAccessLayer.ReposiotryInterfaces
 
         Task<string> SaveSales(SalesMainVM salesmain);
 
-        Task <string> DeleteSale(int Id);
+        Task <string> DeleteSale(int Id, int CompanyId, int BranchId);
 
-        Task <SalesLookUpsVM> GetLookUpsforSale();
-        Task<SalesLookUpsVM> GetLookUpsforSalesInvoice();
+        Task <SalesLookUpsVM> GetLookUpsforSale(int CompanyID, int BranchID);
+        Task<SalesLookUpsVM> GetLookUpsforSalesInvoice(int CompanyID, int BranchID);
 
 
     }

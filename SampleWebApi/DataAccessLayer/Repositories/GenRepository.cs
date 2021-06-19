@@ -145,9 +145,9 @@ namespace DataAccessLayer.Repositories
         }
 
 
-        public async Task<IList<GenMainVM>> GetAllGen()
+        public async Task<IList<GenMainVM>> GetAllGen(int CompanyID, int BranchID)
         {
-            var list = await this._context.GenMain.Where(x => x.Del == 0).ToListAsync();
+            var list = await this._context.GenMain.Where(x => x.Del == 0 && x.CompanyID == CompanyID && x.BranchID == BranchID).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -156,12 +156,12 @@ namespace DataAccessLayer.Repositories
             return genList;
         }
 
-        public async Task<GenMainVM> GetGenByID(int Id)
+        public async Task<GenMainVM> GetGenByID(int Id, int CompanyID, int BranchID)
         {
             GenMainVM genmainobj = new GenMainVM();
 
 
-            var maingen = await this._context.GenMain.Where(x => x.CID == Id).FirstOrDefaultAsync();
+            var maingen = await this._context.GenMain.Where(x => x.CID == Id && x.CompanyID == CompanyID && x.BranchID == BranchID).FirstOrDefaultAsync();
 
             var mainjson = JsonConvert.SerializeObject(maingen);
 
@@ -169,7 +169,7 @@ namespace DataAccessLayer.Repositories
 
             if (genmainobj != null)
             {
-                var subgen = await this._context.GenSub.Where(x => x.CID == genmainobj.CID).ToListAsync();
+                var subgen = await this._context.GenSub.Where(x => x.CID == genmainobj.CID && x.CompanyID == CompanyID && x.BranchID == BranchID).ToListAsync();
                 var subjson = JsonConvert.SerializeObject(subgen);
                 genmainobj.dayBookSub = JsonConvert.DeserializeObject<List<GenSubVM>>(subjson);
 
@@ -178,7 +178,7 @@ namespace DataAccessLayer.Repositories
             return genmainobj;
         }
 
-        public async Task<string> DeleteGen(int Id)
+        public async Task<string> DeleteGen(int Id, int CompanyID, int BranchID)
         {
             using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
             {
@@ -189,14 +189,18 @@ namespace DataAccessLayer.Repositories
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = Id;
+                cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyID;
+                cmd.Parameters.Add("@BranchId", SqlDbType.BigInt).Value = BranchID;
+
+                var returnParameter = cmd.Parameters.Add("@CID", SqlDbType.BigInt);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
 
                 con.Open();
                 await cmd.ExecuteNonQueryAsync();
-
+                var result = returnParameter.Value;
                 con.Close();
 
-
-                return "Record Deleted Successfully";
+                return result.ToString();
 
 
 
@@ -204,30 +208,52 @@ namespace DataAccessLayer.Repositories
         }
 
 
-        public async Task<GenLookUpsVM> GetLookUpsforGen()
+        public async Task<GenLookUpsVM> GetLookUpsforGen(int CompanyID, int BranchID)
         {
-            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
-            {
-                SqlParameter[] @params =
-                    {
+            SqlParameter[] @outparams =
+                  {
                        new SqlParameter("@AccountLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
-                      
                 };
+            SqlParameter[] @inparams =
+                {
+                    new SqlParameter("@CompanyID", CompanyID),
+                    new SqlParameter("@BranchID", BranchID)
+                };
+            await DBMethods.EXECUTE_SP(@inparams, @outparams, "GetSearchLookUpsGen", this._context);
 
-                var sql = "EXEC[GetSearchLookUpsGen] @AccountLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
+            GenLookUpsVM lookups = new GenLookUpsVM();
 
-                GenLookUpsVM lookups = new GenLookUpsVM();
-
-                lookups.genaccountslookup = JsonConvert.DeserializeObject<IList<GenAccountsLookUpVM>>(@params[0].Value.ToString());
-
-                con.Close();
-
-                return lookups;
-
+            lookups.genaccountslookup = JsonConvert.DeserializeObject<IList<GenAccountsLookUpVM>>(@outparams[0].Value.ToString());
 
 
-            }
+            return lookups;
+
+
+
+
+
+            //using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            //{
+            //    SqlParameter[] @params =
+            //        {
+            //           new SqlParameter("@AccountLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+                      
+            //    };
+
+            //    var sql = "EXEC[GetSearchLookUpsGen] @AccountLookUp OUTPUT; ";
+            //    await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
+
+            //    GenLookUpsVM lookups = new GenLookUpsVM();
+
+            //    lookups.genaccountslookup = JsonConvert.DeserializeObject<IList<GenAccountsLookUpVM>>(@params[0].Value.ToString());
+
+            //    con.Close();
+
+            //    return lookups;
+
+
+
+            //}
         }
 
     }

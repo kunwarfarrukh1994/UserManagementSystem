@@ -31,14 +31,14 @@ namespace SampleWebApi.Controllers
             var result = await this._cityRepo.GetAllCities();
             return Ok(result);
         }
-        [HttpGet("GetCityById/{id?}")]
+        [HttpGet("GetCityById/{id}")]
         public async Task<IActionResult> GetCityByID(int id)
         {
             var result = await this._cityRepo.GetCityByID(id);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteCity(int Id)
         {
             var result = await this._cityRepo.DeleteCity(Id);

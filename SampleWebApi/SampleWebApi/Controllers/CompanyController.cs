@@ -63,14 +63,14 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetCompanyById/{id?}")]
+        [HttpGet("GetCompanyById/{id}")]
         public async Task<IActionResult> GetCompanyByID(int id)
         {
             var result = await this._companyRepo.GetCompanyByID(id);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteCompany(int Id)
         {
             var result = await this._companyRepo.DeleteCompany(Id);

@@ -34,31 +34,31 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllControlAcc")]
-        public async Task<IActionResult> GetAllControlAcc()
+        [HttpGet("GetAllControlAcc/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetAllControlAcc(int CompanyId, int BranchId)
         {
-            var result = await this._controlRepo.GetAllControlAcc();
+            var result = await this._controlRepo.GetAllControlAcc(CompanyId, BranchId);
             return Ok(result);
         }
-        [HttpGet("GetControlAccById/{id?}")]
-        public async Task<IActionResult> GetControlAccByID(int id)
+        [HttpGet("GetControlAccById/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetControlAccByID(int id, int CompanyId, int BranchId)
         {
         
-            var result = await this._controlRepo.GetControllAccByID(id);
+            var result = await this._controlRepo.GetControllAccByID(id, CompanyId, BranchId);
             
             return Ok(result);
         }
-        [HttpDelete("DeleteControlAcc/{id?}")]
-        public async Task<IActionResult> DeleteControlAcc(int Id)
+        [HttpDelete("DeleteControlAcc/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> DeleteControlAcc(int Id, int CompanyId, int BranchId)
         {
-            var result = await this._controlRepo.DeleteControlAcc(Id);
+            var result = await this._controlRepo.DeleteControlAcc(Id, CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpGet("GetControlAcclookUps")]
-        public async Task<IActionResult> GetLookUpsforControlAcc()
+        [HttpGet("GetControlAcclookUps/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetLookUpsforControlAcc(int CompanyId, int BranchId)
         {
-            var result = await this._controlRepo.GetLookUpsforCtrlAcc();
+            var result = await this._controlRepo.GetLookUpsforCtrlAcc(CompanyId, BranchId);
             return Ok(result);
         }
     }

@@ -8,10 +8,10 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface ICategoryAccRepository
     {
-        Task<IList<adCategoryAccountsVM>> GetAllCategoriesAcc();
-        Task<adCategoryAccountsVM> GetCategoryAccByID(int Id);
+        Task<IList<adCategoryAccountsVM>> GetAllCategoriesAcc(int CompanyId);
+        Task<adCategoryAccountsVM> GetCategoryAccByID(int Id, int CompanyId);
         Task<string> SaveCategoryAcc(adCategoryAccountsVM categoryAcc);
-        Task<string> DeleteCategoryAcc(int Id);
-        Task<adCategoryAccountsLookUpsVM> GetLookUpsforCategory();
+        Task<string> DeleteCategoryAcc(int Id, int CompanyId);
+        Task<adCategoryAccountsLookUpsVM> GetLookUpsforCategory(int CompanyId);
     }
 }

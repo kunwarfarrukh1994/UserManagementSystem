@@ -126,7 +126,7 @@ namespace DataAccessLayer.Repositories
             }
 
         }
-        public async Task<string> DeleteControlAcc(int Id)
+        public async Task<string> DeleteControlAcc(int Id, int CompanyId)
         {
             using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
             {
@@ -137,23 +137,25 @@ namespace DataAccessLayer.Repositories
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@CtrlAccID", SqlDbType.BigInt).Value = Id;
+                cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+                
+
+                var returnParameter = cmd.Parameters.Add("@CtrlAccID", SqlDbType.BigInt);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
 
                 con.Open();
                 await cmd.ExecuteNonQueryAsync();
-
+                var result = returnParameter.Value;
                 con.Close();
 
-
-                return "Record Deleted Successfully";
-
-
+                return result.ToString();
 
             }
         }
 
-        public async Task<IList<adControlAccountsVM>> GetAllControlAcc()
+        public async Task<IList<adControlAccountsVM>> GetAllControlAcc(int CompanyID)
         {
-            var list = await this._context.adControlAccounts.Where(x => x.Del == 0).ToListAsync();
+            var list = await this._context.adControlAccounts.Where(x => x.Del == 0 && x.CompID == CompanyID).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -162,12 +164,12 @@ namespace DataAccessLayer.Repositories
             return controlAccList;
         }
 
-        public async Task<adControlAccountsVM> GetControllAccByID(int Id)
+        public async Task<adControlAccountsVM> GetControllAccByID(int Id, int CompanyID)
         {
             adControlAccountsVM cntrlObj = new adControlAccountsVM();
 
 
-            var mainComp = await this._context.adControlAccounts.Where(x => x.CtrlAccID == Id).FirstOrDefaultAsync();
+            var mainComp = await this._context.adControlAccounts.Where(x => x.CtrlAccID == Id && x.CompID == CompanyID ).FirstOrDefaultAsync();
 
             var mainjson = JsonConvert.SerializeObject(mainComp);
 
@@ -180,38 +182,56 @@ namespace DataAccessLayer.Repositories
 
 
 
-        public async Task<adControlAccountsLookUpVM> GetLookUpsforCtrlAcc()
+        public async Task<adControlAccountsLookUpVM> GetLookUpsforCtrlAcc(int CompanyID)
         {
-            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
-            {
-                SqlParameter[] @params =
-                    {
+            SqlParameter[] @outparams =
+                {
                        new SqlParameter("@CateAccLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
-
-
-
                 };
+            SqlParameter[] @inparams =
+                {
+                    new SqlParameter("@CompanyID", CompanyID)
+                    
+                };
+            await DBMethods.EXECUTE_SP(@inparams, @outparams, "GetSearchLookUpsControlAcc", this._context);
+
+            adControlAccountsLookUpVM lookups = new adControlAccountsLookUpVM();
 
 
-                var sql = "EXEC[GetSearchLookUpsControlAcc] @CateAccLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
+            lookups.adcontrolaccountscategorylookup = JsonConvert.DeserializeObject<IList<adControlAccountsCategoryLookUpVM>>(@outparams[0].Value.ToString());
+
+            return lookups;
+
+            //using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            //{
+            //    SqlParameter[] @params =
+            //        {
+            //           new SqlParameter("@CateAccLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
 
 
 
-                adControlAccountsLookUpVM lookups = new adControlAccountsLookUpVM();
+            //    };
 
 
-                lookups.adcontrolaccountscategorylookup = JsonConvert.DeserializeObject<IList<adControlAccountsCategoryLookUpVM>>(@params[0].Value.ToString());
-
-
-                con.Close();
-
-
-                return lookups;
+            //    var sql = "EXEC[GetSearchLookUpsControlAcc] @CateAccLookUp OUTPUT; ";
+            //    await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
 
 
 
-            }
+            //    adControlAccountsLookUpVM lookups = new adControlAccountsLookUpVM();
+
+
+            //    lookups.adcontrolaccountscategorylookup = JsonConvert.DeserializeObject<IList<adControlAccountsCategoryLookUpVM>>(@params[0].Value.ToString());
+
+
+            //    con.Close();
+
+
+            //    return lookups;
+
+
+
+            //}
         }
 
 

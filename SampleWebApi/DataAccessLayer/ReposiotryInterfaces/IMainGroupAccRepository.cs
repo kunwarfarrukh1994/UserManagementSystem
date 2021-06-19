@@ -8,11 +8,11 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface IMainGroupAccRepository
     {
-        Task<IList<adMainGroupAccountsVM>> GetAllGroupAccounts();
+        Task<IList<adMainGroupAccountsVM>> GetAllGroupAccounts(int CompanyId, int BranchId);
         Task<string> SaveGroupAcc(adMainGroupAccountsVM groupAcc);
-        Task<adMainGroupAccountsVM> GetGroupAccByID(int Id);
-        Task<string> DeleteGroupAcc(int Id);
-        Task<adMainGroupAccountsLookUpsVM> GetLookUpsforGroupAcc();
+        Task<adMainGroupAccountsVM> GetGroupAccByID(int Id, int CompanyId, int BranchId);
+        Task<string> DeleteGroupAcc(int Id, int CompanyId, int BranchId);
+        Task<adMainGroupAccountsLookUpsVM> GetLookUpsforGroupAcc(int CompanyId, int BranchId);
 
     }
 }

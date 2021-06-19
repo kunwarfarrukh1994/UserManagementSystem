@@ -33,24 +33,24 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllMAgents")]
-        public async Task<IActionResult> GetAllMAgents()
+        [HttpGet("GetAllMAgents/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetAllMAgents(int CompanyId, int BranchId)
         {
-            var result = await this._agentsRepo.GetAllMAgents();
+            var result = await this._agentsRepo.GetAllMAgents(CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpGet("GetAllRAgents")]
-        public async Task<IActionResult> GetAllRAgents()
+        [HttpGet("GetAllRAgents/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetAllRAgents(int CompanyId, int BranchId)
         {
-            var result = await this._agentsRepo.GetAllRAgents();
+            var result = await this._agentsRepo.GetAllRAgents(CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpGet("GetAgentById/{id?}")]
-        public async Task<IActionResult> GetAgentByID(int id)
+        [HttpGet("GetAgentById/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetAgentByID(int id, int CompanyId, int BranchId)
         {
-            var result = await this._agentsRepo.GetAgentByID(id);
+            var result = await this._agentsRepo.GetAgentByID(id, CompanyId, BranchId);
             return Ok(result);
         }
 
@@ -61,10 +61,10 @@ namespace SampleWebApi.Controllers
         //    return Ok(result);
         //}
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeleteAgent(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> DeleteAgent(int Id, int CompanyId, int BranchId)
         {
-            var result = await this._agentsRepo.DeleteAgent(Id);
+            var result = await this._agentsRepo.DeleteAgent(Id, CompanyId, BranchId);
             return Ok(result);
         }
 
