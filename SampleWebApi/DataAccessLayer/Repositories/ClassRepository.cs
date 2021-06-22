@@ -115,7 +115,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<string> DeleteClass(int Id)
+        public async Task<string> DeleteClass(int Id, int CompanyId)
         {
             using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
             {
@@ -126,23 +126,26 @@ namespace DataAccessLayer.Repositories
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = Id;
+                cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+
+                var returnParameter = cmd.Parameters.Add("@CID", SqlDbType.BigInt);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
 
                 con.Open();
                 await cmd.ExecuteNonQueryAsync();
-
+                var result = returnParameter.Value;
                 con.Close();
 
-
-                return "Record Deleted Successfully";
+                return result.ToString();
 
 
 
             }
         }
 
-        public async Task<IList<mClassMainVM>> GetAllClasses()
+        public async Task<IList<mClassMainVM>> GetAllClasses(int CompanyID)
         {
-            var list = await this._context.mClassMain.Where(x => x.Del == 0).ToListAsync();
+            var list = await this._context.mClassMain.Where(x => x.Del == 0 && x.CompanyID == CompanyID).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -151,12 +154,12 @@ namespace DataAccessLayer.Repositories
             return classList;
         }
 
-        public async Task<mClassMainVM> GetClassByID(int Id)
+        public async Task<mClassMainVM> GetClassByID(int Id, int CompanyID)
         {
             mClassMainVM classMainobj = new mClassMainVM();
 
 
-            var mainClass = await this._context.mClassMain.Where(x => x.CID == Id).FirstOrDefaultAsync();
+            var mainClass = await this._context.mClassMain.Where(x => x.CID == Id && x.CompanyID == CompanyID).FirstOrDefaultAsync();
 
             var mainjson = JsonConvert.SerializeObject(mainClass);
 
@@ -164,7 +167,7 @@ namespace DataAccessLayer.Repositories
 
             if (classMainobj != null)
             {
-                var subClass = await this._context.mClassSub.Where(x => x.CID == classMainobj.CID).ToListAsync();
+                var subClass = await this._context.mClassSub.Where(x => x.CID == classMainobj.CID && x.CompanyID == CompanyID).ToListAsync();
                 var subjson = JsonConvert.SerializeObject(subClass);
                 classMainobj.ClassDetail = JsonConvert.DeserializeObject<List<mClassSubVM>>(subjson);
 
@@ -174,30 +177,59 @@ namespace DataAccessLayer.Repositories
         }
 
 
-        public async Task<mClassLookUpsVM> GetLookUpsforClass()
+        public async Task<mClassLookUpsVM> GetLookUpsforClass(int CompanyID)
         {
-            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            try
             {
-                SqlParameter[] @params =
-                    {
+                SqlParameter[] @outparams =
+               {
                        new SqlParameter("@ClassTypeLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
 
-                };
 
-                var sql = "EXEC[GetSearchLookUpsClass] @ClassTypeLookUp OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
+                };
+                SqlParameter[] @inparams =
+                {
+                    new SqlParameter("@CompanyID", CompanyID)
+                };
+                await DBMethods.EXECUTE_SP(@inparams, @outparams, "GetSearchLookUpsClass", this._context);
 
                 mClassLookUpsVM lookups = new mClassLookUpsVM();
 
-                lookups.mclassclasstypelookup = JsonConvert.DeserializeObject<IList<mClassClassTypeLookUpVM>>(@params[0].Value.ToString());
-
-                con.Close();
+                lookups.mclassclasstypelookup = JsonConvert.DeserializeObject<IList<mClassClassTypeLookUpVM>>(@outparams[0].Value.ToString());
 
                 return lookups;
-
-
-
             }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Get Class Lookups Failed");
+            }
+
+
+
+
+            //using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            //{
+            //    SqlParameter[] @params =
+            //        {
+            //           new SqlParameter("@ClassTypeLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
+            //    };
+
+            //    var sql = "EXEC[GetSearchLookUpsClass] @ClassTypeLookUp OUTPUT; ";
+            //    await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
+
+            //    mClassLookUpsVM lookups = new mClassLookUpsVM();
+
+            //    lookups.mclassclasstypelookup = JsonConvert.DeserializeObject<IList<mClassClassTypeLookUpVM>>(@params[0].Value.ToString());
+
+            //    con.Close();
+
+            //    return lookups;
+
+
+
+            //}
         }
 
 

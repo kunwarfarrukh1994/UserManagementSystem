@@ -19,7 +19,7 @@ namespace DataAccessLayer.Repositories
             this._context = context;
         }
       
-        public async Task<string> GetLogin(LoginVM login)
+        public async Task<IList<LoginVM>> GetLogin(string CorporateLogin, string CorporatePWD)
         {
             //SqlParameter[] @outparams =
             //  {
@@ -42,36 +42,78 @@ namespace DataAccessLayer.Repositories
             //return companyID;
 
 
-
-
-
-
-
-            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            try
             {
-                SqlCommand cmd = null;
-
-                cmd = new SqlCommand("dbo.Get_Login", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@CLogin", SqlDbType.VarChar).Value = login.corporateLogin;
-                cmd.Parameters.Add("@CPassword", SqlDbType.VarChar).Value = login.corporatePWD;
-                cmd.Parameters.Add("@CompanyID", SqlDbType.VarChar).Value = "";
+               SqlParameter[] @outparams =
+               {
+                       new SqlParameter("@CDetail", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
 
 
-                var returnParameter = cmd.Parameters.Add("@CompanyID", SqlDbType.VarChar);
-                returnParameter.Direction = ParameterDirection.ReturnValue;
+                };
 
-                con.Open();
-                await cmd.ExecuteNonQueryAsync();
-                var result = returnParameter.Value;
-                con.Close();
+                SqlParameter pVarchar = new SqlParameter
+                {
+                    ParameterName = "CLogin",
+                    SqlDbType = System.Data.SqlDbType.VarChar,
+                    Value = CorporateLogin
+                };
+                SqlParameter tVarchar = new SqlParameter
+                {
+                    ParameterName = "CPassword",
+                    SqlDbType = System.Data.SqlDbType.VarChar,
+                    Value = CorporatePWD
+                };
+                SqlParameter[] @inparams =
+                {
+                    pVarchar,
+                    tVarchar
+                    //new SqlParameter("@CLogin", CorporateLogin),
+                    //new SqlParameter("@CPassword",SqlDbType.NVarChar,-1, CorporatePWD)
+                };
+                await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_Login", this._context);
 
+                IList<LoginVM> login = JsonConvert.DeserializeObject<IList<LoginVM>>(@outparams[0].Value.ToString());
 
-                return result.ToString();
-
-
-
+                return login;
             }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Get All Failed");
+            }
+
+
+
+
+
+
+
+
+            //using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            //{
+            //    SqlCommand cmd = null;
+
+            //    cmd = new SqlCommand("dbo.Get_Login", con);
+            //    cmd.CommandType = CommandType.StoredProcedure;
+            //    cmd.Parameters.Add("@CLogin", SqlDbType.VarChar).Value = login.corporateLogin;
+            //    cmd.Parameters.Add("@CPassword", SqlDbType.VarChar).Value = login.corporatePWD;
+            //    cmd.Parameters.Add("@CompanyID", SqlDbType.VarChar).Value = "";
+
+
+            //    var returnParameter = cmd.Parameters.Add("@CompanyID", SqlDbType.VarChar);
+            //    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+            //    con.Open();
+            //    await cmd.ExecuteNonQueryAsync();
+            //    var result = returnParameter.Value;
+            //    con.Close();
+
+
+            //    return result.ToString();
+
+
+
+            //}
 
 
         }

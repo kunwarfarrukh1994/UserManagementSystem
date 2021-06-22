@@ -8,9 +8,9 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface IGodownRepository
     {
-        Task<IList<GoDownVM>> GetAllGodowns();
-        Task<GoDownVM> GetGodownByID(int Id);
+        Task<IList<GoDownVM>> GetAllGodowns(int CompanyId, int BranchId);
+        Task<GoDownVM> GetGodownByID(int Id, int CompanyId, int BranchId);
         Task<string> SaveGodowns(GoDownVM godown);
-        Task<string> DeleteGodown(int Id);
+        Task<string> DeleteGodown(int Id, int CompanyId, int BranchId);
     }
 }

@@ -33,24 +33,24 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllPandi")]
-        public async Task<IActionResult> GetAllPandi()
+        [HttpGet("GetAllPandi/{CompanyId}")]
+        public async Task<IActionResult> GetAllPandi(int CompanyId)
         {
-            var result = await this._pandiRepo.GetAllPandi();
+            var result = await this._pandiRepo.GetAllPandi(CompanyId);
             return Ok(result);
         }
 
-        [HttpGet("GetPandiById/{id?}")]
-        public async Task<IActionResult> GetPandiByID(int id)
+        [HttpGet("GetPandiById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetPandiByID(int id, int CompanyId)
         {
-            var result = await this._pandiRepo.GetPandiByID(id);
+            var result = await this._pandiRepo.GetPandiByID(id, CompanyId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeletePandi(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeletePandi(int Id, int CompanyId)
         {
-            var result = await this._pandiRepo.DeletePandi(Id);
+            var result = await this._pandiRepo.DeletePandi(Id, CompanyId);
             return Ok(result);
         }
     }

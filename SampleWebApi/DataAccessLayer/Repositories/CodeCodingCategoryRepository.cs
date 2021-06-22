@@ -91,7 +91,7 @@ namespace DataAccessLayer.Repositories
         }
 
 
-        public async Task<string> DeleteCategory(int Id)
+        public async Task<string> DeleteCategory(int Id, int CompanyId)
         {
             try
             {
@@ -104,16 +104,17 @@ namespace DataAccessLayer.Repositories
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@CateID", SqlDbType.BigInt).Value = Id;
+                    cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+
+                    var returnParameter = cmd.Parameters.Add("@CateID", SqlDbType.BigInt);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
 
                     con.Open();
                     await cmd.ExecuteNonQueryAsync();
-
+                    var result = returnParameter.Value;
                     con.Close();
 
-
-                    return "Record Deleted Successfully";
-
-
+                    return result.ToString();
 
                 }
             }
@@ -124,7 +125,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<IList<CodeCodingCategoryVM>> GetAllCategories()
+        public async Task<IList<CodeCodingCategoryVM>> GetAllCategories(int CompanyID)
         {
             try
             {
@@ -135,8 +136,8 @@ namespace DataAccessLayer.Repositories
 
                 };
                 SqlParameter[] @inparams =
-                    {
-
+                {
+                     new SqlParameter("@CompanyID", CompanyID)
                 };
                 await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_AllCodeCodingCategories", this._context);
 
@@ -151,14 +152,14 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<CodeCodingCategoryVM> GetCategoryByID(int Id)
+        public async Task<CodeCodingCategoryVM> GetCategoryByID(int Id, int CompanyID)
         {
             try
             {
                 CodeCodingCategoryVM pCateObj = new CodeCodingCategoryVM();
 
 
-                var mainCate = await this._context.CodeCodingCategory.Where(x => x.CateID == Id).FirstOrDefaultAsync();
+                var mainCate = await this._context.CodeCodingCategory.Where(x => x.CateID == Id && x.CompanyID == CompanyID).FirstOrDefaultAsync();
 
                 var mainjson = JsonConvert.SerializeObject(mainCate);
 

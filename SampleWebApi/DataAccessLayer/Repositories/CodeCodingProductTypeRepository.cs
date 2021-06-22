@@ -92,7 +92,7 @@ namespace DataAccessLayer.Repositories
 
 
 
-        public async Task<string> DeleteProductType(int Id)
+        public async Task<string> DeleteProductType(int Id, int CompanyId)
         {
             try 
             {
@@ -105,16 +105,17 @@ namespace DataAccessLayer.Repositories
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@TypeID", SqlDbType.BigInt).Value = Id;
+                    cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+
+                    var returnParameter = cmd.Parameters.Add("@TypeID", SqlDbType.BigInt);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
 
                     con.Open();
                     await cmd.ExecuteNonQueryAsync();
-
+                    var result = returnParameter.Value;
                     con.Close();
 
-
-                    return "Record Deleted Successfully";
-
-
+                    return result.ToString();
 
                 }
             }
@@ -126,7 +127,7 @@ namespace DataAccessLayer.Repositories
 
         }
 
-        public async Task<IList<CodeCodingProductTypeVM>> GetAllProductTypes()
+        public async Task<IList<CodeCodingProductTypeVM>> GetAllProductTypes(int CompanyId)
         {
             try 
             {
@@ -137,8 +138,8 @@ namespace DataAccessLayer.Repositories
 
                 };
                 SqlParameter[] @inparams =
-                    {
-                    
+                {
+                    new SqlParameter("@CompanyID", CompanyId)
                 };
                 await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_AllCodeCodingProductType", this._context);
 
@@ -165,14 +166,14 @@ namespace DataAccessLayer.Repositories
             //return pTypeList;
         }
 
-        public async Task<CodeCodingProductTypeVM> GetProductTypeByID(int Id)
+        public async Task<CodeCodingProductTypeVM> GetProductTypeByID(int Id, int CompanyId)
         {
             try 
             {
                 CodeCodingProductTypeVM pTypeObj = new CodeCodingProductTypeVM();
 
 
-                var mainPType = await this._context.CodeCodingProductType.Where(x => x.TypeID == Id).FirstOrDefaultAsync();
+                var mainPType = await this._context.CodeCodingProductType.Where(x => x.TypeID == Id && x.CompanyID == CompanyId).FirstOrDefaultAsync();
 
                 var mainjson = JsonConvert.SerializeObject(mainPType);
 

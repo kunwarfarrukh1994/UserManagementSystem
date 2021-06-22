@@ -91,7 +91,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<string> DeleteSeries(int Id)
+        public async Task<string> DeleteSeries(int Id, int CompanyId)
         {
             try
             {
@@ -104,16 +104,18 @@ namespace DataAccessLayer.Repositories
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@SID", SqlDbType.BigInt).Value = Id;
+                    cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+                   
+
+                    var returnParameter = cmd.Parameters.Add("@SID", SqlDbType.BigInt);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
 
                     con.Open();
                     await cmd.ExecuteNonQueryAsync();
-
+                    var result = returnParameter.Value;
                     con.Close();
 
-
-                    return "Record Deleted Successfully";
-
-
+                    return result.ToString();
 
                 }
             }
@@ -125,7 +127,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<IList<mSeriesVM>> GetAllSeries()
+        public async Task<IList<mSeriesVM>> GetAllSeries(int CompanyId)
         {
             try
             {
@@ -136,8 +138,8 @@ namespace DataAccessLayer.Repositories
 
                 };
                 SqlParameter[] @inparams =
-                    {
-
+                {
+                     new SqlParameter("@CompanyID", CompanyId)
                 };
                 await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_AllSeries", this._context);
 
@@ -152,14 +154,14 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<mSeriesVM> GetSeriesByID(int Id)
+        public async Task<mSeriesVM> GetSeriesByID(int Id, int CompanyId)
         {
             try
             {
                 mSeriesVM seriesObj = new mSeriesVM();
 
 
-                var mainSeries = await this._context.mSeries.Where(x => x.SID == Id).FirstOrDefaultAsync();
+                var mainSeries = await this._context.mSeries.Where(x => x.SID == Id && x.CompanyID == CompanyId).FirstOrDefaultAsync();
 
                 var mainjson = JsonConvert.SerializeObject(mainSeries);
 

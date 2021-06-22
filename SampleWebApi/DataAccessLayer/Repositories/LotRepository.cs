@@ -107,7 +107,7 @@ namespace DataAccessLayer.Repositories
 
 
 
-        public async Task<string> DeleteLot(int Id)
+        public async Task<string> DeleteLot(int Id, int CompanyId)
         {
             try
             {
@@ -120,15 +120,17 @@ namespace DataAccessLayer.Repositories
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = Id;
+                    cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+
+                    var returnParameter = cmd.Parameters.Add("@CID", SqlDbType.BigInt);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
 
                     con.Open();
                     await cmd.ExecuteNonQueryAsync();
-
+                    var result = returnParameter.Value;
                     con.Close();
 
-
-                    return "Record Deleted Successfully";
-
+                    return result.ToString();
 
 
                 }
@@ -140,7 +142,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<IList<LotVM>> GetAllLots()
+        public async Task<IList<LotVM>> GetAllLots(int CompanyID)
         {
             try
             {
@@ -151,7 +153,8 @@ namespace DataAccessLayer.Repositories
 
                 };
                 SqlParameter[] @inparams =
-                    {
+                {
+                     new SqlParameter("@CompanyID", CompanyID)
 
                 };
                 await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_AllLots", this._context);
@@ -167,14 +170,14 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<LotVM> GetLotByID(int Id)
+        public async Task<LotVM> GetLotByID(int Id, int CompanyID)
         {
             try
             {
                 LotVM lotObj = new LotVM();
 
 
-                var mainlot = await this._context.Lot.Where(x => x.CID == Id).FirstOrDefaultAsync();
+                var mainlot = await this._context.Lot.Where(x => x.CID == Id && x.CompanyID == CompanyID).FirstOrDefaultAsync();
 
                 var mainjson = JsonConvert.SerializeObject(mainlot);
 

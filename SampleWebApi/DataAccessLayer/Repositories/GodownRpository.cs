@@ -22,12 +22,6 @@ namespace DataAccessLayer.Repositories
             initDT();
         }
 
-      
-
-      
-
-        
-
         public void initDT()
         {
          
@@ -116,9 +110,9 @@ namespace DataAccessLayer.Repositories
 
         }
 
-        public async Task<IList<GoDownVM>> GetAllGodowns()
+        public async Task<IList<GoDownVM>> GetAllGodowns(int CompanyID, int BranchID)
         {
-            var list = await this._context.GoDown.Where(x => x.Del == 0).ToListAsync();
+            var list = await this._context.GoDown.Where(x => x.Del == 0 && x.CompanyID == CompanyID && x.BranchID == BranchID).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -127,12 +121,12 @@ namespace DataAccessLayer.Repositories
             return godownList;
         }
 
-        public async Task<GoDownVM> GetGodownByID(int Id)
+        public async Task<GoDownVM> GetGodownByID(int Id, int CompanyID, int BranchID)
         {
             GoDownVM godownObj = new GoDownVM();
 
 
-            var mainGodown = await this._context.GoDown.Where(x => x.GoCid == Id).FirstOrDefaultAsync();
+            var mainGodown = await this._context.GoDown.Where(x => x.GoCid == Id && x.CompanyID == CompanyID && x.BranchID == BranchID).FirstOrDefaultAsync();
 
             var mainjson = JsonConvert.SerializeObject(mainGodown);
 
@@ -143,7 +137,7 @@ namespace DataAccessLayer.Repositories
             return godownObj;
         }
 
-        public async Task<string> DeleteGodown(int Id)
+        public async Task<string> DeleteGodown(int Id, int CompanyID, int BranchID)
         {
             using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
             {
@@ -154,15 +148,18 @@ namespace DataAccessLayer.Repositories
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@GoCid", SqlDbType.BigInt).Value = Id;
+                cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyID;
+                cmd.Parameters.Add("@BranchId", SqlDbType.BigInt).Value = BranchID;
+
+                var returnParameter = cmd.Parameters.Add("@GoCid", SqlDbType.BigInt);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
 
                 con.Open();
                 await cmd.ExecuteNonQueryAsync();
-
+                var result = returnParameter.Value;
                 con.Close();
 
-
-                return "Record Deleted Successfully";
-
+                return result.ToString();
 
 
             }

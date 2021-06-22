@@ -32,32 +32,32 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllClasses")]
-        public async Task<IActionResult> GetAllClasses()
+        [HttpGet("GetAllClasses/{CompanyId}")]
+        public async Task<IActionResult> GetAllClasses(int CompanyId)
         {
-            var result = await this._classRepo.GetAllClasses();
+            var result = await this._classRepo.GetAllClasses(CompanyId);
             return Ok(result);
         }
 
 
-        [HttpGet("GetClassById/{id?}")]
-        public async Task<IActionResult> GetClassByID(int id)
+        [HttpGet("GetClassById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetClassByID(int id, int CompanyId)
         {
-            var result = await this._classRepo.GetClassByID(id);
+            var result = await this._classRepo.GetClassByID(id, CompanyId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeleteClass(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeleteClass(int Id, int CompanyId)
         {
-            var result = await this._classRepo.DeleteClass(Id);
+            var result = await this._classRepo.DeleteClass(Id, CompanyId);
             return Ok(result);
         }
 
-        [HttpGet("GetClasslookUps")]
-        public async Task<IActionResult> GetLookUpsforClass()
+        [HttpGet("GetClasslookUps/{CompanyId}")]
+        public async Task<IActionResult> GetLookUpsforClass(int CompanyId)
         {
-            var result = await this._classRepo.GetLookUpsforClass();
+            var result = await this._classRepo.GetLookUpsforClass(CompanyId);
             return Ok(result);
         }
     }

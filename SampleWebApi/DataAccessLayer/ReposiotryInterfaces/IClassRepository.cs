@@ -8,11 +8,11 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface IClassRepository
     {
-        Task<IList<mClassMainVM>> GetAllClasses();
-        Task<mClassMainVM> GetClassByID(int Id);
+        Task<IList<mClassMainVM>> GetAllClasses(int CompanyId);
+        Task<mClassMainVM> GetClassByID(int Id, int CompanyId);
         Task<string> SaveClass(mClassMainVM classes);
-        Task<string> DeleteClass(int Id);
+        Task<string> DeleteClass(int Id, int CompanyId);
 
-        Task<mClassLookUpsVM> GetLookUpsforClass();
+        Task<mClassLookUpsVM> GetLookUpsforClass(int CompanyId);
     }
 }

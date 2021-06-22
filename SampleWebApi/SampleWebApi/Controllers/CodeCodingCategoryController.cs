@@ -25,23 +25,23 @@ namespace SampleWebApi.Controllers
             var result = await this._cateRepo.SaveCategory(cate);
             return Ok(result);
         }
-        [HttpGet("GetAllCategories")]
-        public async Task<IActionResult> GetAllCategories()
+        [HttpGet("GetAllCategories/{CompanyId}")]
+        public async Task<IActionResult> GetAllCategories(int CompanyId)
         {
-            var result = await this._cateRepo.GetAllCategories();
+            var result = await this._cateRepo.GetAllCategories(CompanyId);
             return Ok(result);
         }
-        [HttpGet("GetCateById/{id?}")]
-        public async Task<IActionResult> GetCateByID(int id)
+        [HttpGet("GetCateById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetCateByID(int id, int CompanyId)
         {
-            var result = await this._cateRepo.GetCategoryByID(id);
+            var result = await this._cateRepo.GetCategoryByID(id, CompanyId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeleteCate(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeleteCate(int Id, int CompanyId)
         {
-            var result = await this._cateRepo.DeleteCategory(Id);
+            var result = await this._cateRepo.DeleteCategory(Id, CompanyId);
             return Ok(result);
         }
     }

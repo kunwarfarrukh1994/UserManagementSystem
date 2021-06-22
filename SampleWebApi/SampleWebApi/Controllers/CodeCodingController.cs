@@ -27,33 +27,33 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllCodeCodings")]
-        public async Task<IActionResult> GetAllCodeCodings()
+        [HttpGet("GetAllCodeCodings/{CompanyId}")]
+        public async Task<IActionResult> GetAllCodeCodings(int CompanyId)
         {
-            var result = await this._codeRepo.GetAllProducts();
+            var result = await this._codeRepo.GetAllProducts(CompanyId);
             return Ok(result);
         }
 
-        [HttpGet("GetCodeCodingById/{id?}")]
-        public async Task<IActionResult> GetCodeCodingById(int id)
+        [HttpGet("GetCodeCodingById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetCodeCodingById(int id, int CompanyId)
         {
 
-            var result = await this._codeRepo.GetProductByID(id);
+            var result = await this._codeRepo.GetProductByID(id, CompanyId);
 
             return Ok(result);
         }
 
-        [HttpDelete("DeleteCodeCoding/{id?}")]
-        public async Task<IActionResult> DeleteCodeCoding(int Id)
+        [HttpDelete("DeleteCodeCoding/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeleteCodeCoding(int Id, int CompanyId)
         {
-            var result = await this._codeRepo.DeleteProduct(Id);
+            var result = await this._codeRepo.DeleteProduct(Id, CompanyId);
             return Ok(result);
         }
 
-        [HttpGet("GetCodeCodinglookUps")]
-        public async Task<IActionResult> GetLookUpsforCodeCoding()
+        [HttpGet("GetCodeCodinglookUps/{CompanyId}")]
+        public async Task<IActionResult> GetLookUpsforCodeCoding(int CompanyId)
         {
-            var result = await this._codeRepo.GetLookUpsforProduct();
+            var result = await this._codeRepo.GetLookUpsforProduct(CompanyId);
             return Ok(result);
         }
 

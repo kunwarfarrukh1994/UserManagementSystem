@@ -97,7 +97,7 @@ namespace DataAccessLayer.Repositories
 
         }
 
-        public async Task<string> DeletePandi(int Id)
+        public async Task<string> DeletePandi(int Id, int CompanyId)
         {
             using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
             {
@@ -108,23 +108,25 @@ namespace DataAccessLayer.Repositories
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = Id;
+                cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+                
+
+                var returnParameter = cmd.Parameters.Add("@CID", SqlDbType.BigInt);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
 
                 con.Open();
                 await cmd.ExecuteNonQueryAsync();
-
+                var result = returnParameter.Value;
                 con.Close();
 
-
-                return "Record Deleted Successfully";
-
-
+                return result.ToString();
 
             }
         }
 
-        public async Task<IList<PandiVM>> GetAllPandi()
+        public async Task<IList<PandiVM>> GetAllPandi(int CompanyId)
         {
-            var list = await this._context.Pandi.Where(x => x.Del == 0).ToListAsync();
+            var list = await this._context.Pandi.Where(x => x.Del == 0 && x.CompanyID == CompanyId).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -133,12 +135,12 @@ namespace DataAccessLayer.Repositories
             return pandiList;
         }
 
-        public async Task<PandiVM> GetPandiByID(int Id)
+        public async Task<PandiVM> GetPandiByID(int Id, int CompanyId)
         {
             PandiVM pandiObj = new PandiVM();
 
 
-            var mainPandi = await this._context.Pandi.Where(x => x.CID == Id).FirstOrDefaultAsync();
+            var mainPandi = await this._context.Pandi.Where(x => x.CID == Id && x.CompanyID == CompanyId).FirstOrDefaultAsync();
 
             var mainjson = JsonConvert.SerializeObject(mainPandi);
 

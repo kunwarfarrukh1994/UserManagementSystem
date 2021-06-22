@@ -25,23 +25,23 @@ namespace SampleWebApi.Controllers
             var result = await this._pTypeRepo.SaveProductType(pType);
             return Ok(result);
         }
-        [HttpGet("GetAllPTypes")]
-        public async Task<IActionResult> GetAllPTypes()
+        [HttpGet("GetAllPTypes/{CompanyId}")]
+        public async Task<IActionResult> GetAllPTypes(int CompanyId)
         {
-            var result = await this._pTypeRepo.GetAllProductTypes();
+            var result = await this._pTypeRepo.GetAllProductTypes(CompanyId);
             return Ok(result);
         }
-        [HttpGet("GetPTypeById/{id?}")]
-        public async Task<IActionResult> GetPTypeByID(int id)
+        [HttpGet("GetPTypeById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetPTypeByID(int id, int CompanyId)
         {
-            var result = await this._pTypeRepo.GetProductTypeByID(id);
+            var result = await this._pTypeRepo.GetProductTypeByID(id, CompanyId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeletePType(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeletePType(int Id, int CompanyId)
         {
-            var result = await this._pTypeRepo.DeleteProductType(Id);
+            var result = await this._pTypeRepo.DeleteProductType(Id, CompanyId);
             return Ok(result);
         }
     }

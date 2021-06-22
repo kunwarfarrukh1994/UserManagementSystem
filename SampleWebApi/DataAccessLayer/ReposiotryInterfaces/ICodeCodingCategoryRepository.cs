@@ -8,9 +8,9 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface ICodeCodingCategoryRepository
     {
-        Task<IList<CodeCodingCategoryVM>> GetAllCategories();
-        Task<CodeCodingCategoryVM> GetCategoryByID(int Id);
+        Task<IList<CodeCodingCategoryVM>> GetAllCategories(int CompanyId);
+        Task<CodeCodingCategoryVM> GetCategoryByID(int Id, int CompanyId);
         Task<string> SaveCategory(CodeCodingCategoryVM pCate);
-        Task<string> DeleteCategory(int Id);
+        Task<string> DeleteCategory(int Id, int CompanyId);
     }
 }

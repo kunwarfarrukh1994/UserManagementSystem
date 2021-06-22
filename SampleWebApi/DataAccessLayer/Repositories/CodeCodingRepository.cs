@@ -191,7 +191,7 @@ namespace DataAccessLayer.Repositories
 
 
 
-        public async Task<string> DeleteProduct(int Id)
+        public async Task<string> DeleteProduct(int Id, int CompanyId)
         {
             using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
             {
@@ -202,14 +202,18 @@ namespace DataAccessLayer.Repositories
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = Id;
+                cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+
+                var returnParameter = cmd.Parameters.Add("@CID", SqlDbType.BigInt);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
 
                 con.Open();
                 await cmd.ExecuteNonQueryAsync();
-
+                var result = returnParameter.Value;
                 con.Close();
 
+                return result.ToString();
 
-                return "Record Deleted Successfully";
 
             }
         }
@@ -217,67 +221,111 @@ namespace DataAccessLayer.Repositories
 
 
 
-        public async Task<IList<CodeCodingMainVM>> GetAllProducts()
+        public async Task<IList<CodeCodingMainVM>> GetAllProducts(int CompanyID)
         {
-            using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
-            {
-                SqlParameter[] @params =
-                    {
+            SqlParameter[] @outparams =
+                {
                        new SqlParameter("@CodeCodingMain", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
 
                 };
+            SqlParameter[] @inparams =
+                {
+                    new SqlParameter("@CompanyID", CompanyID)
 
 
-                var sql = "EXEC[Get_AllCodeCodings] @CodeCodingMain OUTPUT; ";
-                await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
+                };
+            await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_AllCodeCodings", this._context);
+
+            IList<CodeCodingMainVM> codeList = JsonConvert.DeserializeObject<IList<CodeCodingMainVM>>(@outparams[0].Value.ToString());
 
 
-                IList<CodeCodingMainVM> codeList = JsonConvert.DeserializeObject<IList<CodeCodingMainVM>>(@params[0].Value.ToString());
+            return codeList;
+
+            //using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
+            //{
+            //    SqlParameter[] @params =
+            //        {
+            //           new SqlParameter("@CodeCodingMain", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
+            //    };
+
+
+            //    var sql = "EXEC[Get_AllCodeCodings] @CodeCodingMain OUTPUT; ";
+            //    await this._context.Database.ExecuteSqlRawAsync(sql, @params[0]);
+
+
+            //    IList<CodeCodingMainVM> codeList = JsonConvert.DeserializeObject<IList<CodeCodingMainVM>>(@params[0].Value.ToString());
 
                 
                
 
-                con.Close();
+            //    con.Close();
 
 
-                return codeList;
+            //    return codeList;
 
 
 
-            }
+            //}
         }
 
-        public async Task<CodeCodingLookUpsVM> GetLookUpsforProduct()
+        public async Task<CodeCodingLookUpsVM> GetLookUpsforProduct(int CompanyID)
         {
-            SqlParameter[] @params =
-                  {
-                       new SqlParameter("@CategoryLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            SqlParameter[] @outparams =
+                 {
+                        new SqlParameter("@CategoryLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@TypeLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@OptionsLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@ClassLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
                        new SqlParameter("@GodownLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
 
                 };
-
-            await DBMethods.EXECUTE_SP(new SqlParameter[0], @params, "Get_SearchLookUpsCodeCoding", this._context);
+            SqlParameter[] @inparams =
+                {
+                    new SqlParameter("@CompanyID", CompanyID)
+                };
+            await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_SearchLookUpsCodeCoding", this._context);
 
             CodeCodingLookUpsVM lookups = new CodeCodingLookUpsVM();
 
-            lookups.categorylookup = JsonConvert.DeserializeObject<IList<CodeCodingCategoryLookUpVM>>(@params[0].Value.ToString());
-            lookups.typelookup = JsonConvert.DeserializeObject<IList<CodeCodingTypeLookUpVM>>(@params[1].Value.ToString());
-            lookups.optionslookup = JsonConvert.DeserializeObject<IList<CodeCodingOptionsLookUpVM>>(@params[2].Value.ToString());
-            lookups.classlookup = JsonConvert.DeserializeObject<IList<CodeCodingClassLookUpVM>>(@params[3].Value.ToString());
-            lookups.godownlookup = JsonConvert.DeserializeObject<IList<CodeCodingGodownLookUpVM>>(@params[4].Value.ToString());
+            lookups.categorylookup = JsonConvert.DeserializeObject<IList<CodeCodingCategoryLookUpVM>>(@outparams[0].Value.ToString());
+            lookups.typelookup = JsonConvert.DeserializeObject<IList<CodeCodingTypeLookUpVM>>(@outparams[1].Value.ToString());
+            lookups.optionslookup = JsonConvert.DeserializeObject<IList<CodeCodingOptionsLookUpVM>>(@outparams[2].Value.ToString());
+            lookups.classlookup = JsonConvert.DeserializeObject<IList<CodeCodingClassLookUpVM>>(@outparams[3].Value.ToString());
+            lookups.godownlookup = JsonConvert.DeserializeObject<IList<CodeCodingGodownLookUpVM>>(@outparams[4].Value.ToString());
 
             return lookups;
+
+
+            //SqlParameter[] @params =
+            //      {
+            //           new SqlParameter("@CategoryLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@TypeLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@OptionsLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@ClassLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+            //           new SqlParameter("@GodownLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+
+            //    };
+
+            //await DBMethods.EXECUTE_SP(new SqlParameter[0], @params, "Get_SearchLookUpsCodeCoding", this._context);
+
+            //CodeCodingLookUpsVM lookups = new CodeCodingLookUpsVM();
+
+            //lookups.categorylookup = JsonConvert.DeserializeObject<IList<CodeCodingCategoryLookUpVM>>(@params[0].Value.ToString());
+            //lookups.typelookup = JsonConvert.DeserializeObject<IList<CodeCodingTypeLookUpVM>>(@params[1].Value.ToString());
+            //lookups.optionslookup = JsonConvert.DeserializeObject<IList<CodeCodingOptionsLookUpVM>>(@params[2].Value.ToString());
+            //lookups.classlookup = JsonConvert.DeserializeObject<IList<CodeCodingClassLookUpVM>>(@params[3].Value.ToString());
+            //lookups.godownlookup = JsonConvert.DeserializeObject<IList<CodeCodingGodownLookUpVM>>(@params[4].Value.ToString());
+
+            //return lookups;
         }
 
-        public async Task<CodeCodingMainVM> GetProductByID(int Id)
+        public async Task<CodeCodingMainVM> GetProductByID(int Id, int CompanyID)
         {
             CodeCodingMainVM codemainobj = new CodeCodingMainVM();
 
 
-            var maincode = this._context.CodeCodingMain.Where(x => x.CID == Id).FirstOrDefault();
+            var maincode = this._context.CodeCodingMain.Where(x => x.CID == Id && x.CompanyID == CompanyID).FirstOrDefault();
 
             var mainjson = JsonConvert.SerializeObject(maincode);
 
@@ -285,12 +333,12 @@ namespace DataAccessLayer.Repositories
 
             if (codemainobj != null)
             {
-                var codewarehouse = await this._context.CodeCodingWarehouse.Where(x => x.CID == codemainobj.CID).ToListAsync();
+                var codewarehouse = await this._context.CodeCodingWarehouse.Where(x => x.CID == codemainobj.CID && x.CompanyID == CompanyID).ToListAsync();
                 var subjson = JsonConvert.SerializeObject(codewarehouse);
                 codemainobj.CodeWarehouse = JsonConvert.DeserializeObject<List<CodeCodingWarehouseVM>>(subjson);
 
 
-                var codeproduction = await this._context.CodeCodingProduction.Where(x => x.CID == codemainobj.CID).FirstOrDefaultAsync();
+                var codeproduction = await this._context.CodeCodingProduction.Where(x => x.CID == codemainobj.CID && x.CompanyID == CompanyID).FirstOrDefaultAsync();
                 var prodjson = JsonConvert.SerializeObject(codeproduction);
                 codemainobj.CodeProduction = JsonConvert.DeserializeObject<CodeCodingProductionVM>(prodjson);
 

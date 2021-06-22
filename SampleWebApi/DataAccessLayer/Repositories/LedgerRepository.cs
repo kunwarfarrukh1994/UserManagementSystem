@@ -152,7 +152,7 @@ namespace DataAccessLayer.Repositories
             string qry = "exec rpt_Ledger " + ledInputs.accountCode + ",'" + ledInputs.fromDate.Date + "','" + ledInputs.toDate.Date + "'," + ledInputs.branchID + ",'" + ledInputs.lg_Type + "'";
 
             dt = ExecuteDataTable(qry);
-            if (dt.Rows.Count > 0) 
+            if (dt.Rows.Count > 0)
             {
                 string json = dt.Rows[0][0].ToString();
                 lookups.ledgeralllookup = JsonConvert.DeserializeObject<IList<LedgerAllLookUpVM>>(json);
@@ -160,7 +160,7 @@ namespace DataAccessLayer.Repositories
 
 
 
-            else 
+            else
             {
                 lookups = new LedgerLookUpVM();
             }
@@ -168,11 +168,36 @@ namespace DataAccessLayer.Repositories
             return lookups;
 
         }
+        //public async Task<LedgerLookUpVM> GetLedgerDetail(int accCode, DateTime fDate, DateTime tDate, string lg_type, int branchId)
+        //{
+        //    LedgerLookUpVM lookups = new LedgerLookUpVM();
+        //    DataTable dt = new DataTable();
+        //    //string qry = "exec rpt_Ledger 1,'01-01-2020','01-01-2022',4,'JVAC'";
 
-       
-     
+        //    string qry = "exec rpt_Ledger " + accCode + ",'" + fDate + "','" + tDate + "'," + lg_type + ",'" + branchId + "'";
 
-        public async Task<LedgerLookUpVM> GetLookUpsforLedger()
+        //    dt = ExecuteDataTable(qry);
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        string json = dt.Rows[0][0].ToString();
+        //        lookups.ledgeralllookup = JsonConvert.DeserializeObject<IList<LedgerAllLookUpVM>>(json);
+        //    }
+
+
+
+        //    else
+        //    {
+        //        lookups = new LedgerLookUpVM();
+        //    }
+
+        //    return lookups;
+
+        //}
+
+
+
+
+        public async Task<LedgerLookUpVM> GetLookUpsforLedger(int CompanyID, int BranchID)
         {
             SqlParameter[] @outparams =
                   {
@@ -181,7 +206,8 @@ namespace DataAccessLayer.Repositories
                 };
             SqlParameter[] @inparams =
                 {
-                 
+                    new SqlParameter("@CompanyID", CompanyID),
+                    new SqlParameter("@BranchID", BranchID)
 
                 };
             await DBMethods.EXECUTE_SP(@inparams, @outparams, "GetSearchLookUpsLedger", this._context);

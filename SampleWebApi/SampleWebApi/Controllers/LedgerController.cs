@@ -19,17 +19,24 @@ namespace SampleWebApi.Controllers
             this._ledgerRepo = ledgerRepo;
         }
 
+        //[HttpGet("GetAllLedgers/{AccountCode}/{FromDate}/{ToDate}/{Lg_Type}/{BranchID}")]
+        //public async Task<IActionResult> GetAllLedgers(int accCode, DateTime fDate, DateTime tDate, string lg_type, int branchId)
+        //{
+        //    var result = await this._ledgerRepo.GetLedgerDetail(accCode, fDate, tDate, lg_type, branchId);
+        //    return Ok(result);
+        //}
+
         [HttpPost("GetAllLedgers")]
-        public async Task<IActionResult> GetAllLedgers([FromBody] LedgerAllInputs LedInputs )
+        public async Task<IActionResult> GetAllLedgers([FromBody] LedgerAllInputs LedInputs)
         {
             var result = await this._ledgerRepo.GetLedgerDetail(LedInputs);
             return Ok(result);
         }
 
-        [HttpGet("GetLedgerlookUps")]
-        public async Task<IActionResult> GetLookUpsforLedger()
+        [HttpGet("GetLedgerlookUps/{CompanyID}/{BranchID}")]
+        public async Task<IActionResult> GetLookUpsforLedger(int CompanyID, int BranchID)
         {
-            var result = await this._ledgerRepo.GetLookUpsforLedger();
+            var result = await this._ledgerRepo.GetLookUpsforLedger(CompanyID, BranchID);
             return Ok(result);
         }
 

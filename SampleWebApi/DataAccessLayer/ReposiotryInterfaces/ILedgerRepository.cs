@@ -10,7 +10,8 @@ namespace DataAccessLayer.ReposiotryInterfaces
     {
         //Task <LedgerVM> GetLedgerDetail(int accCode, DateTime fDate, DateTime tDate, int branchID, string lg_Type);
         Task<LedgerLookUpVM> GetLedgerDetail(LedgerAllInputs ledInputs);
+        //Task<LedgerLookUpVM> GetLedgerDetail(int accCode, DateTime fDate, DateTime tDate, string lg_type, int branchId);
 
-        Task<LedgerLookUpVM> GetLookUpsforLedger();
+        Task<LedgerLookUpVM> GetLookUpsforLedger(int CompanyID, int BranchID);
     }
 }

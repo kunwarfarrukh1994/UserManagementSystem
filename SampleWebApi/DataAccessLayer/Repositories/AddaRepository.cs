@@ -92,7 +92,7 @@ namespace DataAccessLayer.Repositories
 
         }
 
-        public async Task<string> DeleteAdda(int Id)
+        public async Task<string> DeleteAdda(int Id, int CompanyId)
         {
             try 
             {
@@ -105,16 +105,18 @@ namespace DataAccessLayer.Repositories
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = Id;
+                    cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+                    
+
+                    var returnParameter = cmd.Parameters.Add("@CID", SqlDbType.BigInt);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
 
                     con.Open();
                     await cmd.ExecuteNonQueryAsync();
-
+                    var result = returnParameter.Value;
                     con.Close();
 
-
-                    return "Record Deleted Successfully";
-
-
+                    return result.ToString();
 
                 }
             }
@@ -126,9 +128,9 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<IList<AddaVM>> GetAllAdda()
+        public async Task<IList<AddaVM>> GetAllAdda(int CompanyID)
         {
-            var list = await this._context.Adda.Where(x => x.Del == 0).ToListAsync();
+            var list = await this._context.Adda.Where(x => x.Del == 0 && x.CompanyID == CompanyID).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -138,12 +140,12 @@ namespace DataAccessLayer.Repositories
         }
 
 
-        public async Task<AddaVM> GetAddaByID(int Id)
+        public async Task<AddaVM> GetAddaByID(int Id, int CompanyID)
         {
             AddaVM addaObj = new AddaVM();
 
 
-            var mainAdda = await this._context.Adda.Where(x => x.CID == Id).FirstOrDefaultAsync();
+            var mainAdda = await this._context.Adda.Where(x => x.CID == Id && x.CompanyID == CompanyID).FirstOrDefaultAsync();
 
             var mainjson = JsonConvert.SerializeObject(mainAdda);
 

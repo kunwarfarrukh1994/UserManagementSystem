@@ -21,11 +21,34 @@ namespace DataAccessLayer
             {
                 foreach (var inparams in in_params)
                 {
-                    
+                    //if(inparams.SqlDbType == System.Data.SqlDbType.VarChar) 
+                    //{
+                    //    inparamsstr = inparamsstr + inparams.ParameterName + "='" + inparams.Value + "',";
+
+                    //}
+                    //else
+                    //{
+
+                    //    inparamsstr = inparamsstr + inparams.ParameterName + "=" + inparams.Value + ",";
+
+                    //}
+                    if (inparams.SqlDbType == System.Data.SqlDbType.VarChar)
+                    {
+                        inparamsstr = inparamsstr + "'" + inparams.Value + "',";
+
+                    }
+                    else
+                    {
+
+                        inparamsstr = inparamsstr  + inparams.Value + ",";
+
+                    }
                     //EXEC[SalesGetSearchLookUps] @CustomerLookUp OUTPUT, @ItemLookUp OUTPUT, @PandiLookUp OUTPUT, @AddaLookUp OUTPUT;
-                    inparamsstr = inparamsstr + inparams.ParameterName + "=" + inparams.Value + ",";
+
+
                 }
                 inparamsstr = inparamsstr.Remove(inparamsstr.Length - 1, 1);
+
 
 
 

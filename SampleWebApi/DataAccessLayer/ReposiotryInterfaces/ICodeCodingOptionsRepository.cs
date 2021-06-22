@@ -8,9 +8,9 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public  interface ICodeCodingOptionsRepository
     {
-        Task<IList<CodeCodingOptionsVM>> GetAllOptions();
-        Task<CodeCodingOptionsVM> GetOptionByID(int Id);
+        Task<IList<CodeCodingOptionsVM>> GetAllOptions(int CompanyId);
+        Task<CodeCodingOptionsVM> GetOptionByID(int Id, int CompanyId);
         Task<string> SaveOption(CodeCodingOptionsVM pOption);
-        Task<string> DeleteOption(int Id);
+        Task<string> DeleteOption(int Id, int CompanyId);
     }
 }

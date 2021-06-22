@@ -34,24 +34,24 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllAddas")]
-        public async Task<IActionResult> GetAllAddas()
+        [HttpGet("GetAllAddas/{CompanyId}")]
+        public async Task<IActionResult> GetAllAddas(int CompanyId)
         {
-            var result = await this._addaRepo.GetAllAdda();
+            var result = await this._addaRepo.GetAllAdda(CompanyId);
             return Ok(result);
         }
 
-        [HttpGet("GetAddaById/{id?}")]
-        public async Task<IActionResult> GetAddaByID(int id)
+        [HttpGet("GetAddaById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetAddaByID(int id, int CompanyId)
         {
-            var result = await this._addaRepo.GetAddaByID(id);
+            var result = await this._addaRepo.GetAddaByID(id, CompanyId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeleteAdda(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeleteAdda(int Id, int CompanyId)
         {
-            var result = await this._addaRepo.DeleteAdda(Id);
+            var result = await this._addaRepo.DeleteAdda(Id, CompanyId);
             return Ok(result);
         }
     }

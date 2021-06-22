@@ -19,10 +19,10 @@ namespace SampleWebApi.Controllers
             this._loginRepo = loginRepo;
         }
 
-        [HttpPost("GetLogin")]
-        public async Task<IActionResult> GetLogin([FromBody] LoginVM login)
+        [HttpGet("GetLogin/{CorporateLogin}/{CorporatePWD}")]
+        public async Task<IActionResult> GetLogin(string CorporateLogin, string CorporatePWD)
         {
-            var result = await this._loginRepo.GetLogin(login);
+            var result = await this._loginRepo.GetLogin(CorporateLogin, CorporatePWD);
             return Ok(result);
         }
     }

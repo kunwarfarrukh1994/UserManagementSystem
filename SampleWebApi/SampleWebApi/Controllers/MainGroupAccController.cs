@@ -26,30 +26,30 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetGroupAcclookUps/{CompanyId}/{BranchId}")]
-        public async Task<IActionResult> GetLookUpsforGroupAcc(int CompanyId, int BranchId)
+        [HttpGet("GetGroupAcclookUps/{CompanyId}")]
+        public async Task<IActionResult> GetLookUpsforGroupAcc(int CompanyId)
         {
-            var result = await this._groupAccRepo.GetLookUpsforGroupAcc(CompanyId, BranchId);
+            var result = await this._groupAccRepo.GetLookUpsforGroupAcc(CompanyId);
             return Ok(result);
         }
 
-        [HttpGet("GetAllGroupAccounts/{CompanyId}/{BranchId}")]
-        public async Task<IActionResult> GetAllCustomers(int CompanyId, int BranchId)
+        [HttpGet("GetAllGroupAccounts/{CompanyId}")]
+        public async Task<IActionResult> GetAllCustomers(int CompanyId)
         {
-            var result = await this._groupAccRepo.GetAllGroupAccounts(CompanyId, BranchId);
+            var result = await this._groupAccRepo.GetAllGroupAccounts(CompanyId);
             return Ok(result);
         }
-        [HttpGet("GetGroupAccById/{id}/{CompanyId}/{BranchId}")]
-        public async Task<IActionResult> GetGroupAccByID(int id, int CompanyId, int BranchId)
+        [HttpGet("GetGroupAccById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetGroupAccByID(int id, int CompanyId)
         {
-            var result = await this._groupAccRepo.GetGroupAccByID(id, CompanyId, BranchId);
+            var result = await this._groupAccRepo.GetGroupAccByID(id, CompanyId);
             return Ok(result);
         }
 
-        [HttpDelete("DeleteGroupAcc/{id}/{CompanyId}/{BranchId}")]
-        public async Task<IActionResult> DeleteGroupAcc(int Id, int CompanyId, int BranchId)
+        [HttpDelete("DeleteGroupAcc/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeleteGroupAcc(int Id, int CompanyId)
         {
-            var result = await this._groupAccRepo.DeleteGroupAcc(Id, CompanyId, BranchId);
+            var result = await this._groupAccRepo.DeleteGroupAcc(Id, CompanyId);
             return Ok(result);
         }
 

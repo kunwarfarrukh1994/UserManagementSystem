@@ -34,31 +34,31 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllControlAcc/{CompanyId}/{BranchId}")]
-        public async Task<IActionResult> GetAllControlAcc(int CompanyId, int BranchId)
+        [HttpGet("GetAllControlAcc/{CompanyId}")]
+        public async Task<IActionResult> GetAllControlAcc(int CompanyId)
         {
-            var result = await this._controlRepo.GetAllControlAcc(CompanyId, BranchId);
+            var result = await this._controlRepo.GetAllControlAcc(CompanyId);
             return Ok(result);
         }
-        [HttpGet("GetControlAccById/{id}/{CompanyId}/{BranchId}")]
-        public async Task<IActionResult> GetControlAccByID(int id, int CompanyId, int BranchId)
+        [HttpGet("GetControlAccById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetControlAccByID(int id, int CompanyId)
         {
         
-            var result = await this._controlRepo.GetControllAccByID(id, CompanyId, BranchId);
+            var result = await this._controlRepo.GetControllAccByID(id, CompanyId);
             
             return Ok(result);
         }
-        [HttpDelete("DeleteControlAcc/{id}/{CompanyId}/{BranchId}")]
-        public async Task<IActionResult> DeleteControlAcc(int Id, int CompanyId, int BranchId)
+        [HttpDelete("DeleteControlAcc/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeleteControlAcc(int Id, int CompanyId)
         {
-            var result = await this._controlRepo.DeleteControlAcc(Id, CompanyId, BranchId);
+            var result = await this._controlRepo.DeleteControlAcc(Id, CompanyId);
             return Ok(result);
         }
 
-        [HttpGet("GetControlAcclookUps/{CompanyId}/{BranchId}")]
-        public async Task<IActionResult> GetLookUpsforControlAcc(int CompanyId, int BranchId)
+        [HttpGet("GetControlAcclookUps/{CompanyId}")]
+        public async Task<IActionResult> GetLookUpsforControlAcc(int CompanyId)
         {
-            var result = await this._controlRepo.GetLookUpsforCtrlAcc(CompanyId, BranchId);
+            var result = await this._controlRepo.GetLookUpsforCtrlAcc(CompanyId);
             return Ok(result);
         }
     }

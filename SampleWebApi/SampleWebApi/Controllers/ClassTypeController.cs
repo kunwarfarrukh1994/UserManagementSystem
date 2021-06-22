@@ -26,24 +26,24 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllClassTypes")]
-        public async Task<IActionResult> GetAllClassTypes()
+        [HttpGet("GetAllClassTypes/{CompanyId}")]
+        public async Task<IActionResult> GetAllClassTypes(int CompanyId)
         {
-            var result = await this._classTypeRepo.GetAllClassTypes();
+            var result = await this._classTypeRepo.GetAllClassTypes(CompanyId);
             return Ok(result);
         }
 
-        [HttpGet("GetClassTypeById/{id?}")]
-        public async Task<IActionResult> GetClassTypeById(int id)
+        [HttpGet("GetClassTypeById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetClassTypeById(int id, int CompanyId)
         {
-            var result = await this._classTypeRepo.GetClassTypeByID(id);
+            var result = await this._classTypeRepo.GetClassTypeByID(id, CompanyId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeleteClassType(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeleteClassType(int Id, int CompanyId)
         {
-            var result = await this._classTypeRepo.DeleteClassType(Id);
+            var result = await this._classTypeRepo.DeleteClassType(Id, CompanyId);
             return Ok(result);
         }
 

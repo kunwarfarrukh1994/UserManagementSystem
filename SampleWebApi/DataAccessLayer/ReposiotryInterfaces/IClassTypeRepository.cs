@@ -9,8 +9,8 @@ namespace DataAccessLayer.ReposiotryInterfaces
     public interface IClassTypeRepository
     {
         Task<string> SaveClassType(mClassTypeVM classtype);
-        Task<IList<mClassTypeVM>> GetAllClassTypes();
-        Task<mClassTypeVM> GetClassTypeByID(int Id);
-        Task<string> DeleteClassType(int Id);
+        Task<IList<mClassTypeVM>> GetAllClassTypes(int CompanyId);
+        Task<mClassTypeVM> GetClassTypeByID(int Id, int CompanyId);
+        Task<string> DeleteClassType(int Id, int CompanyId);
     }
 }

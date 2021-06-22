@@ -26,23 +26,23 @@ namespace SampleWebApi.Controllers
             var result = await this._optRepo.SaveOption(opt);
             return Ok(result);
         }
-        [HttpGet("GetAllOptions")]
-        public async Task<IActionResult> GetAllOptions()
+        [HttpGet("GetAllOptions/{CompanyId}")]
+        public async Task<IActionResult> GetAllOptions(int CompanyId)
         {
-            var result = await this._optRepo.GetAllOptions();
+            var result = await this._optRepo.GetAllOptions(CompanyId);
             return Ok(result);
         }
-        [HttpGet("GetOptionById/{id?}")]
-        public async Task<IActionResult> GetOptionByID(int id)
+        [HttpGet("GetOptionById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetOptionByID(int id, int CompanyId)
         {
-            var result = await this._optRepo.GetOptionByID(id);
+            var result = await this._optRepo.GetOptionByID(id, CompanyId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeleteOption(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeleteOption(int Id, int CompanyId)
         {
-            var result = await this._optRepo.DeleteOption(Id);
+            var result = await this._optRepo.DeleteOption(Id, CompanyId);
             return Ok(result);
         }
     }

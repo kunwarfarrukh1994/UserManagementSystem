@@ -25,24 +25,24 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllSeries")]
-        public async Task<IActionResult> GetAllSeries()
+        [HttpGet("GetAllSeries/{CompanyId}")]
+        public async Task<IActionResult> GetAllSeries(int CompanyId)
         {
-            var result = await this._seriesRepo.GetAllSeries();
+            var result = await this._seriesRepo.GetAllSeries(CompanyId);
             return Ok(result);
         }
 
-        [HttpGet("GetSeriesById/{id?}")]
-        public async Task<IActionResult> GetSeriesById(int id)
+        [HttpGet("GetSeriesById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetSeriesById(int id, int CompanyId)
         {
-            var result = await this._seriesRepo.GetSeriesByID(id);
+            var result = await this._seriesRepo.GetSeriesByID(id, CompanyId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeleteSeries(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeleteSeries(int Id, int CompanyId)
         {
-            var result = await this._seriesRepo.DeleteSeries(Id);
+            var result = await this._seriesRepo.DeleteSeries(Id, CompanyId);
             return Ok(result);
         }
 

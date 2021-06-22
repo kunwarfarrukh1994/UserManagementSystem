@@ -8,9 +8,9 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface IPandiRepository
     {
-        Task<IList<PandiVM>> GetAllPandi();
-        Task<PandiVM> GetPandiByID(int Id);
+        Task<IList<PandiVM>> GetAllPandi(int CompanyId);
+        Task<PandiVM> GetPandiByID(int Id, int CompanyId);
         Task<string> SavePandi(PandiVM adda);
-        Task<string> DeletePandi(int Id);
+        Task<string> DeletePandi(int Id, int CompanyId);
     }
 }

@@ -8,9 +8,9 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface ICodeCodingProductTypeRepository
     {
-        Task<IList<CodeCodingProductTypeVM>> GetAllProductTypes();
-        Task<CodeCodingProductTypeVM> GetProductTypeByID(int Id);
+        Task<IList<CodeCodingProductTypeVM>> GetAllProductTypes(int CompanyId);
+        Task<CodeCodingProductTypeVM> GetProductTypeByID(int Id, int CompanyId);
         Task<string> SaveProductType(CodeCodingProductTypeVM pType);
-        Task<string> DeleteProductType(int Id);
+        Task<string> DeleteProductType(int Id, int CompanyId);
     }
 }

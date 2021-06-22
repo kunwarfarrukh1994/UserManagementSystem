@@ -8,6 +8,7 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface ILoginRepository
     {
-        Task<string> GetLogin(LoginVM login);
+        //Task<string> GetLogin(LoginVM login);
+       Task<IList<LoginVM>> GetLogin(string CorporateLogin, string CorporatePWD);
     }
 }

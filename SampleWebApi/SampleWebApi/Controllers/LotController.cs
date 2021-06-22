@@ -26,23 +26,23 @@ namespace SampleWebApi.Controllers
             var result = await this._lotRepo.SaveLot(lot);
             return Ok(result);
         }
-        [HttpGet("GetAllLots")]
-        public async Task<IActionResult> GetAllLots()
+        [HttpGet("GetAllLots/{CompanyId}")]
+        public async Task<IActionResult> GetAllLots(int CompanyId)
         {
-            var result = await this._lotRepo.GetAllLots();
+            var result = await this._lotRepo.GetAllLots(CompanyId);
             return Ok(result);
         }
-        [HttpGet("GetLotById/{id?}")]
-        public async Task<IActionResult> GetLotById(int id)
+        [HttpGet("GetLotById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetLotById(int id, int CompanyId)
         {
-            var result = await this._lotRepo.GetLotByID(id);
+            var result = await this._lotRepo.GetLotByID(id, CompanyId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeleteLot(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeleteLot(int Id, int CompanyId)
         {
-            var result = await this._lotRepo.DeleteLot(Id);
+            var result = await this._lotRepo.DeleteLot(Id, CompanyId);
             return Ok(result);
         }
     }

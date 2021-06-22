@@ -33,24 +33,24 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllGodowns")]
-        public async Task<IActionResult> GetAllGodowns()
+        [HttpGet("GetAllGodowns/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetAllGodowns(int CompanyId, int BranchId)
         {
-            var result = await this._godownRepo.GetAllGodowns();
+            var result = await this._godownRepo.GetAllGodowns(CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpGet("GetGodownById/{id?}")]
-        public async Task<IActionResult> GetGodownByID(int id)
+        [HttpGet("GetGodownById/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetGodownByID(int id, int CompanyId, int BranchId)
         {
-            var result = await this._godownRepo.GetGodownByID(id);
+            var result = await this._godownRepo.GetGodownByID(id, CompanyId, BranchId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id?}")]
-        public async Task<IActionResult> DeleteGodown(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> DeleteGodown(int Id, int CompanyId, int BranchId)
         {
-            var result = await this._godownRepo.DeleteGodown(Id);
+            var result = await this._godownRepo.DeleteGodown(Id, CompanyId, BranchId);
             return Ok(result);
         }
 

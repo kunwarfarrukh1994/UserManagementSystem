@@ -90,9 +90,9 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<IList<mClassTypeVM>> GetAllClassTypes()
+        public async Task<IList<mClassTypeVM>> GetAllClassTypes(int CompanyId)
         {
-            var list = await this._context.mClassType.Where(x => x.Del == 0).ToListAsync();
+            var list = await this._context.mClassType.Where(x => x.Del == 0 && x.CompanyID == CompanyId).ToListAsync();
 
             string json = JsonConvert.SerializeObject(list);
 
@@ -103,12 +103,12 @@ namespace DataAccessLayer.Repositories
 
 
 
-        public async Task<mClassTypeVM> GetClassTypeByID(int Id)
+        public async Task<mClassTypeVM> GetClassTypeByID(int Id, int CompanyId)
         {
             mClassTypeVM classTypeObj = new mClassTypeVM();
 
 
-            var mainClassType = await this._context.mClassType.Where(x => x.CID == Id).FirstOrDefaultAsync();
+            var mainClassType = await this._context.mClassType.Where(x => x.CID == Id && x.CompanyID == CompanyId).FirstOrDefaultAsync();
 
             var mainjson = JsonConvert.SerializeObject(mainClassType);
 
@@ -119,7 +119,7 @@ namespace DataAccessLayer.Repositories
             return classTypeObj;
         }
 
-        public async Task<string> DeleteClassType(int Id)
+        public async Task<string> DeleteClassType(int Id, int CompanyId)
         {
             using (var con = new SqlConnection(this._context.Database.GetConnectionString()))
             {
@@ -130,15 +130,17 @@ namespace DataAccessLayer.Repositories
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@CID", SqlDbType.BigInt).Value = Id;
+                cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+
+                var returnParameter = cmd.Parameters.Add("@CID", SqlDbType.BigInt);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
 
                 con.Open();
                 await cmd.ExecuteNonQueryAsync();
-
+                var result = returnParameter.Value;
                 con.Close();
 
-
-                return "Record Deleted Successfully";
-
+                return result.ToString();
 
 
             }

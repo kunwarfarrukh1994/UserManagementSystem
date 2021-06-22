@@ -8,9 +8,9 @@ namespace DataAccessLayer.ReposiotryInterfaces
 {
     public interface ISeriesRepository
     {
-        Task<IList<mSeriesVM>> GetAllSeries();
-        Task<mSeriesVM> GetSeriesByID(int Id);
+        Task<IList<mSeriesVM>> GetAllSeries(int CompanyId);
+        Task<mSeriesVM> GetSeriesByID(int Id, int CompanyId);
         Task<string> SaveSeries(mSeriesVM series);
-        Task<string> DeleteSeries(int Id);
+        Task<string> DeleteSeries(int Id, int CompanyId);
     }
 }

@@ -93,7 +93,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<string> DeleteOption(int Id)
+        public async Task<string> DeleteOption(int Id, int CompanyId)
         {
             try
             {
@@ -106,14 +106,18 @@ namespace DataAccessLayer.Repositories
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@OptionID", SqlDbType.BigInt).Value = Id;
+                    cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+
+                    var returnParameter = cmd.Parameters.Add("@OptionID", SqlDbType.BigInt);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
 
                     con.Open();
                     await cmd.ExecuteNonQueryAsync();
-
+                    var result = returnParameter.Value;
                     con.Close();
 
+                    return result.ToString();
 
-                    return "Record Deleted Successfully";
 
 
 
@@ -131,7 +135,7 @@ namespace DataAccessLayer.Repositories
 
 
 
-        public async Task<IList<CodeCodingOptionsVM>> GetAllOptions()
+        public async Task<IList<CodeCodingOptionsVM>> GetAllOptions(int CompanyID)
         {
             try
             {
@@ -142,7 +146,8 @@ namespace DataAccessLayer.Repositories
 
                 };
                 SqlParameter[] @inparams =
-                    {
+                {
+                     new SqlParameter("@CompanyID", CompanyID)
 
                 };
                 await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_AllCodeCodingOptions", this._context);
@@ -158,14 +163,14 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<CodeCodingOptionsVM> GetOptionByID(int Id)
+        public async Task<CodeCodingOptionsVM> GetOptionByID(int Id, int CompanyID)
         {
             try
             {
                 CodeCodingOptionsVM pOptionObj = new CodeCodingOptionsVM();
 
 
-                var mainOption = await this._context.CodeCodingOptions.Where(x => x.OptionID == Id).FirstOrDefaultAsync();
+                var mainOption = await this._context.CodeCodingOptions.Where(x => x.OptionID == Id && x.CompanyID == CompanyID).FirstOrDefaultAsync();
 
                 var mainjson = JsonConvert.SerializeObject(mainOption);
 
