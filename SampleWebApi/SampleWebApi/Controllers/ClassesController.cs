@@ -32,7 +32,7 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetAllClasses/{CompanyId}")]
+        [HttpGet("GetAllClassescc")]
         public async Task<IActionResult> GetAllClasses(int CompanyId)
         {
             var result = await this._classRepo.GetAllClasses(CompanyId);

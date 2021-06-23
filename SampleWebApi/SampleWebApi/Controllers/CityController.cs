@@ -25,23 +25,23 @@ namespace SampleWebApi.Controllers
             var result = await this._cityRepo.SaveCity(city);
             return Ok(result);
         }
-        [HttpGet("GetAllCities")]
-        public async Task<IActionResult> GetAllCities()
+        [HttpGet("GetAllCities/{CompanyId}")]
+        public async Task<IActionResult> GetAllCities(int CompanyId)
         {
-            var result = await this._cityRepo.GetAllCities();
+            var result = await this._cityRepo.GetAllCities(CompanyId);
             return Ok(result);
         }
-        [HttpGet("GetCityById/{id}")]
-        public async Task<IActionResult> GetCityByID(int id)
+        [HttpGet("GetCityById/{id}/{CompanyId}")]
+        public async Task<IActionResult> GetCityByID(int id, int CompanyId)
         {
-            var result = await this._cityRepo.GetCityByID(id);
+            var result = await this._cityRepo.GetCityByID(id, CompanyId);
             return Ok(result);
         }
 
-        [HttpDelete("Delete/{id}")]
-        public async Task<IActionResult> DeleteCity(int Id)
+        [HttpDelete("Delete/{id}/{CompanyId}")]
+        public async Task<IActionResult> DeleteCity(int Id, int CompanyId)
         {
-            var result = await this._cityRepo.DeleteCity(Id);
+            var result = await this._cityRepo.DeleteCity(Id, CompanyId);
             return Ok(result);
         }
     }

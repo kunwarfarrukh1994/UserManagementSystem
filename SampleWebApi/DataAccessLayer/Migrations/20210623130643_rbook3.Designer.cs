@@ -4,14 +4,16 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210623130643_rbook3")]
+    partial class rbook3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -902,8 +904,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<float>("Cid")
                         .HasColumnType("real");
 
-                    b.Property<int>("CompanyID")
-                        .HasColumnType("int");
+                    b.Property<string>("CompanyID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Del")
                         .HasColumnType("int");
@@ -921,8 +924,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<float>("N2")
                         .HasColumnType("real");
 
-                    b.Property<int>("OperatorID")
-                        .HasColumnType("int");
+                    b.Property<string>("OperatorID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("SAccId")
                         .HasColumnType("real");

@@ -4,14 +4,16 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210623130410_rbook")]
+    partial class rbook
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -902,8 +904,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<float>("Cid")
                         .HasColumnType("real");
 
-                    b.Property<int>("CompanyID")
-                        .HasColumnType("int");
+                    b.Property<string>("CompanyID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Del")
                         .HasColumnType("int");
@@ -921,8 +924,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<float>("N2")
                         .HasColumnType("real");
 
-                    b.Property<int>("OperatorID")
-                        .HasColumnType("int");
+                    b.Property<string>("OperatorID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("SAccId")
                         .HasColumnType("real");
@@ -934,22 +938,22 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("id")
-                        .HasColumnType("int");
+                    b.Property<float>("id")
+                        .HasColumnType("real");
 
                     b.ToTable("RBookMain");
                 });
 
             modelBuilder.Entity("BussinessModels.DBModels.RBookSub", b =>
                 {
-                    b.Property<float>("Amount")
-                        .HasColumnType("real");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("BranchID")
                         .HasColumnType("int");
 
-                    b.Property<float>("CID")
-                        .HasColumnType("real");
+                    b.Property<decimal>("CID")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ChqBank")
                         .IsRequired()
@@ -977,25 +981,25 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("EType")
                         .HasColumnType("int");
 
-                    b.Property<float>("N2")
-                        .HasColumnType("real");
+                    b.Property<decimal>("N2")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Narat")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("PCID")
-                        .HasColumnType("real");
+                    b.Property<decimal>("PCID")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("RecAgainst")
-                        .HasColumnType("real");
+                    b.Property<decimal>("RecAgainst")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Remarks")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("SaccId")
-                        .HasColumnType("real");
+                    b.Property<decimal>("SaccId")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Sync")
                         .HasColumnType("int");
@@ -1012,14 +1016,14 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("TCQty")
-                        .HasColumnType("real");
+                    b.Property<decimal>("TCQty")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("TCRate")
-                        .HasColumnType("real");
+                    b.Property<decimal>("TCRate")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("id")
-                        .HasColumnType("int");
+                    b.Property<decimal>("id")
+                        .HasColumnType("decimal(18,2)");
 
                     b.ToTable("RBookSub");
                 });

@@ -91,7 +91,7 @@ namespace DataAccessLayer.Repositories
 
 
 
-        public async Task<string> DeleteCity(int Id)
+        public async Task<string> DeleteCity(int Id, int CompanyId)
         {
             try
             {
@@ -104,8 +104,8 @@ namespace DataAccessLayer.Repositories
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@CityId", SqlDbType.BigInt).Value = Id;
-                  
-             
+                    cmd.Parameters.Add("@CompanyId", SqlDbType.BigInt).Value = CompanyId;
+
 
                     var returnParameter = cmd.Parameters.Add("@CityId", SqlDbType.BigInt);
                     returnParameter.Direction = ParameterDirection.ReturnValue;
@@ -116,6 +116,7 @@ namespace DataAccessLayer.Repositories
                     con.Close();
 
                     return result.ToString();
+
                    
 
 
@@ -128,7 +129,7 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<IList<CityVM>> GetAllCities()
+        public async Task<IList<CityVM>> GetAllCities(int CompanyId)
         {
             try
             {
@@ -140,7 +141,7 @@ namespace DataAccessLayer.Repositories
                 };
                 SqlParameter[] @inparams =
                 {
-                    
+                    new SqlParameter("@CompanyID", CompanyId)
                 };
                 await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_AllCities", this._context);
 
@@ -156,14 +157,14 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public async Task<CityVM> GetCityByID(int Id)
+        public async Task<CityVM> GetCityByID(int Id, int CompanyId)
         {
             try
             {
                 CityVM cityObj = new CityVM();
 
 
-                var mainCity = await this._context.City.Where(x => x.CityId == Id).FirstOrDefaultAsync();
+                var mainCity = await this._context.City.Where(x => x.CityId == Id && x.CompanyID == CompanyId).FirstOrDefaultAsync();
 
                 var mainjson = JsonConvert.SerializeObject(mainCity);
 

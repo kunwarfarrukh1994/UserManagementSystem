@@ -70,6 +70,9 @@ namespace DataAccessLayer
 
             model_builder.Entity<mSeries>().HasNoKey();
 
+            model_builder.Entity<RBookMain>().HasNoKey();
+            model_builder.Entity<RBookSub>().HasNoKey();
+
 
 
 
@@ -123,7 +126,9 @@ namespace DataAccessLayer
         public DbSet<CodeCodingOptions> CodeCodingOptions { get; set; }
         public DbSet<CodeCodingProductType> CodeCodingProductType { get; set; }
         public DbSet<mSeries> mSeries { get; set; }
-        
+        public DbSet<RBookMain> RBookMain { get; set; }
+        public DbSet<RBookSub> RBookSub { get; set; }
+
 
 
 
