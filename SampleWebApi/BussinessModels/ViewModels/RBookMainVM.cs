@@ -17,9 +17,9 @@ namespace BussinessModels.ViewModels
 		public Single Discount { get; set; }
 		public string T1 { get; set; }
 		public Single N2 { get; set; }
-		public string CompanyID { get; set; }
+		public int CompanyID { get; set; }
 		public int BranchID { get; set; }
-		public string OperatorID { get; set; }
+		public int OperatorID { get; set; }
 
 		public List<RBookSubVM> RBookDetail { get; set; }
 

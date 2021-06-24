@@ -883,6 +883,9 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("BussinessModels.DBModels.RBookMain", b =>
                 {
+                    b.Property<float>("Bank")
+                        .HasColumnType("real");
+
                     b.Property<float>("BookNo")
                         .HasColumnType("real");
 

@@ -100,30 +100,30 @@ namespace DataAccessLayer.Repositories
 
 
                     int i = 0;
-                    foreach (var rboosub in rbookmain.RBookDetail)
+                    foreach (var rbooksub in rbookmain.RBookDetail)
                     {
                         DataRow srow = dtRBookSub.NewRow();
-                        srow["SaccId"] = rboosub.SaccId;
-                        srow["Narat"] = rboosub.Narat;
-                        srow["EType"] = rboosub.EType;
-                        srow["Amount"] = rboosub.Amount;
-                        srow["PCID"] = rboosub.PCID;
-                        srow["ChqBank"] = rboosub.ChqBank;
-                        srow["ChqNo"] = rboosub.ChqNo;
-                        srow["ChqDate"] = rboosub.ChqDate;
-                        srow["TC"] = rboosub.TC;
+                        srow["SaccId"] = rbooksub.SaccId;
+                        srow["Narat"] = rbooksub.Narat;
+                        srow["EType"] = rbooksub.EType;
+                        srow["Amount"] = rbooksub.Amount;
+                        srow["PCID"] = rbooksub.PCID;
+                        srow["ChqBank"] = rbooksub.ChqBank;
+                        srow["ChqNo"] = rbooksub.ChqNo;
+                        srow["ChqDate"] = rbooksub.ChqDate;
+                        srow["TC"] = rbooksub.TC;
 
-                        srow["TCBank"] = rboosub.TCBank;
-                        srow["TCQty"] = rboosub.TCQty;
-                        srow["TCRate"] = rboosub.TCRate;
-                        srow["RecAgainst"] = rboosub.RecAgainst;
-                        srow["ChqSr"] = rboosub.ChqSr;
-                        srow["ChqNoS"] = rboosub.ChqNoS;
-                        srow["Remarks"] = rboosub.Remarks;
-                        srow["T2"] = rboosub.T2;
-                        srow["N2"] = rboosub.N2;
-                        srow["CompanyID"] = rboosub.CompanyID;
-                        srow["BranchID"] = rboosub.BranchID;
+                        srow["TCBank"] = rbooksub.TCBank;
+                        srow["TCQty"] = rbooksub.TCQty;
+                        srow["TCRate"] = rbooksub.TCRate;
+                        srow["RecAgainst"] = rbooksub.RecAgainst;
+                        srow["ChqSr"] = rbooksub.ChqSr;
+                        srow["ChqNoS"] = rbooksub.ChqNoS;
+                        srow["Remarks"] = rbooksub.Remarks;
+                        srow["T2"] = rbooksub.T2;
+                        srow["N2"] = rbooksub.N2;
+                        srow["CompanyID"] = rbooksub.CompanyID;
+                        srow["BranchID"] = rbooksub.BranchID;
 
                         dtRBookSub.Rows.InsertAt(srow, i);
 
@@ -207,7 +207,7 @@ namespace DataAccessLayer.Repositories
         {
             SqlParameter[] @outparams =
               {
-                       new SqlParameter("@RBook", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
+                       new SqlParameter("@RBookLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
 
                 };
             SqlParameter[] @inparams =

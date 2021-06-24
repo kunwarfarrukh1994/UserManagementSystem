@@ -6,7 +6,6 @@ namespace BussinessModels.ViewModels
 {
     public class RBookSubVM
     {
-		public Single CID { get; set; }
 		public Single SaccId { get; set; }
 		public string Narat { get; set; }
 		public int EType { get; set; }

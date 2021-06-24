@@ -208,6 +208,7 @@ namespace SampleWebApi
             services.AddTransient<ICityRepository, CityRepository>();
             services.AddTransient<ISeriesRepository, SeriesRepository>();
             services.AddTransient<ILotRepository, LotRepository>();
+            services.AddTransient<IRBookRepository, RBookRepository>();
 
 
 

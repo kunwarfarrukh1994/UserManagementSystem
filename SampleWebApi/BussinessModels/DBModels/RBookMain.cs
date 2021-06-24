@@ -15,6 +15,7 @@ namespace BussinessModels.DBModels
 		public string Descriptions { get; set; }
 		public Single Cheques { get; set; }
 		public Single Cash { get; set; }
+		public Single Bank { get; set; }
 		public Single Discount { get; set; }
 		public string T1 { get; set; }
 		public Single N2 { get; set; }
