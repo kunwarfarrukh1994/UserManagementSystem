@@ -9,7 +9,8 @@ namespace BussinessModels.ViewModels
         public string Barcode { get; set; }
         public Single ItemID { get; set; }
         public string ItemDescription { get; set; }
-        public Single CostRate { get; set; }
+        public Single SaleRate { get; set; }
+        public Single BoraQty { get; set; }
         //public int GodownID { get; set; }
         //public int Qty { get; set; }
 

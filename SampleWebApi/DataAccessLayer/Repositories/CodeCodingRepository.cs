@@ -39,6 +39,7 @@ namespace DataAccessLayer.Repositories
             dtCodeMain.Columns.Add("CostRate", typeof(Single));
             dtCodeMain.Columns.Add("BoxQty", typeof(Single));
             dtCodeMain.Columns.Add("MinRate", typeof(Single));
+            dtCodeMain.Columns.Add("AgentMinRate", typeof(Single));
             dtCodeMain.Columns.Add("BoraQty", typeof(Single));
             dtCodeMain.Columns.Add("AdminMinRate", typeof(Single));
             dtCodeMain.Columns.Add("BundleQty", typeof(Single));
@@ -101,6 +102,7 @@ namespace DataAccessLayer.Repositories
                 row["CostRate"] = codemain.CostRate;
                 row["BoxQty"] = codemain.BoxQty;
                 row["MinRate"] = codemain.MinRate;
+                row["AgentMinRate"] = codemain.AgentMinRate;
                 row["BoraQty"] = codemain.BoraQty;
                 row["AdminMinRate"] = codemain.AdminMinRate;
                 row["BundleQty"] = codemain.BundleQty;

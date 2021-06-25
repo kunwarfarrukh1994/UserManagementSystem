@@ -20,6 +20,7 @@ namespace BussinessModels.ViewModels
 		public Single CostRate { get; set; }
 		public Single BoxQty { get; set; }
 		public Single MinRate { get; set; }
+		public Single? AgentMinRate { get; set; }
 		public Single BoraQty { get; set; }
 		public Single AdminMinRate { get; set; }
 		public Single BundleQty { get; set; }

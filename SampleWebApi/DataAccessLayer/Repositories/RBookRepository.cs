@@ -29,11 +29,12 @@ namespace DataAccessLayer.Repositories
             dtRBookMain.Columns.Add("BookSerial", typeof(string));
             dtRBookMain.Columns.Add("BookNo", typeof(Single));
             dtRBookMain.Columns.Add("SAccId", typeof(Single));
-            dtRBookMain.Columns.Add("Descriptions", typeof(Single));
+            dtRBookMain.Columns.Add("Descriptions", typeof(string));
             dtRBookMain.Columns.Add("Cheques", typeof(Single));
             dtRBookMain.Columns.Add("Cash", typeof(Single));
+            dtRBookMain.Columns.Add("Bank", typeof(Single));
             dtRBookMain.Columns.Add("Discount", typeof(Single));
-            dtRBookMain.Columns.Add("T1", typeof(Single));
+            dtRBookMain.Columns.Add("T1", typeof(string));
             dtRBookMain.Columns.Add("N2", typeof(Single));
             dtRBookMain.Columns.Add("CompanyID", typeof(int));
             dtRBookMain.Columns.Add("BranchID", typeof(int));
@@ -75,7 +76,7 @@ namespace DataAccessLayer.Repositories
             {
                 dtRBookSub.Rows.Clear();
             }
-            if (dtRBookSub.Rows.Count > 0)
+            if (rbookmain.RBookDetail.Count > 0)
             {
                 try
                 {
@@ -89,6 +90,7 @@ namespace DataAccessLayer.Repositories
                     row["Descriptions"] = rbookmain.Descriptions;
                     row["Cheques"] = rbookmain.Cheques;
                     row["Cash"] = rbookmain.Cash;
+                    row["Bank"] = rbookmain.Bank;
                     row["Discount"] = rbookmain.Discount;
                     row["T1"] = rbookmain.T1;
                     row["N2"] = rbookmain.N2;
