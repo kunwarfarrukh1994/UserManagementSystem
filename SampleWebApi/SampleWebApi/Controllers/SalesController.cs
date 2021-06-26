@@ -67,5 +67,12 @@ namespace SampleWebApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetSaleWarehouselookUp/{ItemID}/{CompanyId}/{BranchId}")]
+        public async Task<IActionResult> GetSaleWarehouselookUp(int ItemID,int CompanyId, int BranchId)
+        {
+            var result = await this._salesRepo.GetLookUpsforSaleWarehouse(ItemID,CompanyId, BranchId);
+            return Ok(result);
+        }
+
     }
 }

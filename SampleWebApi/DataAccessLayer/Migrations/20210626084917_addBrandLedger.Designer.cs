@@ -4,14 +4,16 @@ using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210626084917_addBrandLedger")]
+    partial class addBrandLedger
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,42 +124,42 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("BussinessModels.DBModels.BrandLedger", b =>
                 {
-                    b.Property<float>("BCID")
-                        .HasColumnType("real");
+                    b.Property<decimal>("BCID")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Barcode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("BrancID")
-                        .HasColumnType("real");
+                    b.Property<decimal>("BrancID")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("BrandId")
-                        .HasColumnType("real");
+                    b.Property<decimal>("BrandId")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("CommPer")
-                        .HasColumnType("real");
+                    b.Property<decimal>("CommPer")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("CommRS")
-                        .HasColumnType("real");
+                    b.Property<decimal>("CommRS")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("CompanyID")
                         .HasColumnType("int");
 
-                    b.Property<float>("Cost")
-                        .HasColumnType("real");
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Del")
                         .HasColumnType("int");
 
-                    b.Property<float>("FinID")
-                        .HasColumnType("real");
+                    b.Property<decimal>("FinID")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("ItemDiscount")
-                        .HasColumnType("real");
+                    b.Property<decimal>("ItemDiscount")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("LG_Code")
-                        .HasColumnType("real");
+                    b.Property<decimal>("LG_Code")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("LG_Date")
                         .HasColumnType("datetime2");
@@ -166,35 +168,35 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("ManagerID")
-                        .HasColumnType("real");
+                    b.Property<decimal>("ManagerID")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Narat")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("PartyID")
-                        .HasColumnType("real");
+                    b.Property<decimal>("PartyID")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("QtyIn")
-                        .HasColumnType("real");
+                    b.Property<decimal>("QtyIn")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("QtyOut")
-                        .HasColumnType("real");
+                    b.Property<decimal>("QtyOut")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("SaleManID")
-                        .HasColumnType("real");
+                    b.Property<decimal>("SaleManID")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("SalePrice")
-                        .HasColumnType("real");
+                    b.Property<decimal>("SalePrice")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("StoreID")
-                        .HasColumnType("real");
+                    b.Property<decimal>("StoreID")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Sync")
                         .HasColumnType("int");
 
-                    b.Property<int?>("id")
+                    b.Property<int>("id")
                         .HasColumnType("int");
 
                     b.ToTable("BrandLedger");

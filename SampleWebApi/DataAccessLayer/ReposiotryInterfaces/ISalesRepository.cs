@@ -17,6 +17,9 @@ namespace DataAccessLayer.ReposiotryInterfaces
 
         Task <SalesLookUpsVM> GetLookUpsforSale(int CompanyID, int BranchID);
         Task<SalesLookUpsVM> GetLookUpsforSalesInvoice(int CompanyID, int BranchID);
+        Task<IList<SaleGodownLookUpVM>> GetLookUpsforSaleWarehouse(int ItemID, int CompanyID, int BranchID);
+
+        
 
 
     }

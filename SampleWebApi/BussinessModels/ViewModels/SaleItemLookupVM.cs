@@ -11,13 +11,11 @@ namespace BussinessModels.ViewModels
         public string ItemDescription { get; set; }
         public Single SaleRate { get; set; }
         public Single BoraQty { get; set; }
-        //public int GodownID { get; set; }
-        //public int Qty { get; set; }
+     
 
-        public List<SaleGodownLookUpVM> w { get; set; }
         public SaleItemLookupVM()
         {
-            w = new List<SaleGodownLookUpVM>();
+          
         }
 
     }

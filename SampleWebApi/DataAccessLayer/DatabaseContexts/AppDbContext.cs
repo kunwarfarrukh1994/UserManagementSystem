@@ -73,6 +73,8 @@ namespace DataAccessLayer
             model_builder.Entity<RBookMain>().HasNoKey();
             model_builder.Entity<RBookSub>().HasNoKey();
 
+            model_builder.Entity<BrandLedger>().HasNoKey();
+
 
 
 
@@ -128,6 +130,8 @@ namespace DataAccessLayer
         public DbSet<mSeries> mSeries { get; set; }
         public DbSet<RBookMain> RBookMain { get; set; }
         public DbSet<RBookSub> RBookSub { get; set; }
+
+        public DbSet<BrandLedger> BrandLedger  { get; set; }
 
 
 

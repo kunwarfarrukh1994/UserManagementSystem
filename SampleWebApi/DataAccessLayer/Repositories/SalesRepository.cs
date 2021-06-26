@@ -391,26 +391,30 @@ namespace DataAccessLayer.Repositories
 
 
 
+        }
+
+        public async Task<IList<SaleGodownLookUpVM>> GetLookUpsforSaleWarehouse(int ItemID, int CompanyID, int BranchID)
+        {
+            SqlParameter[] @outparams =
+                  {
+                       new SqlParameter("@WarehouseStockLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
+
+                };
+            SqlParameter[] @inparams =
+                {
+                    new SqlParameter("@ItemID", ItemID),
+                    new SqlParameter("@CompanyID", CompanyID),
+                    new SqlParameter("@BranchID", BranchID)
+                };
+            await DBMethods.EXECUTE_SP(@inparams, @outparams, "Get_SaleWarehouseStock", this._context);
+
+            IList<SaleGodownLookUpVM> lookup = new List<SaleGodownLookUpVM>();
+            
+            lookup = JsonConvert.DeserializeObject<IList<SaleGodownLookUpVM>>(@outparams[0].Value.ToString());
+            
+            return lookup;
 
 
-            //SqlParameter[] @params =
-            //        {
-            //           new SqlParameter("@CustomerLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
-            //           new SqlParameter("@ItemLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
-            //           new SqlParameter("@PandiLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output},
-            //           new SqlParameter("@AddaLookUp", SqlDbType.NVarChar,-1) {Direction = ParameterDirection.Output}
-
-            //    };
-
-            //await DBMethods.EXECUTE_SP(new SqlParameter[0], @params, "SalesGetSearchLookUps",this._context);
-
-            //    SalesLookUpsVM lookups = new SalesLookUpsVM();
-
-            //lookups.salepartylookup = JsonConvert.DeserializeObject<IList<SalePartyLookUp>>(@params[0].Value.ToString());
-            //lookups.saleitemlookup = JsonConvert.DeserializeObject<IList<SaleItemLookupVM>>(@params[1].Value.ToString());
-            //lookups.salepandilookup = JsonConvert.DeserializeObject<IList<SalePandiLookUpVM>>(@params[2].Value.ToString());
-            //lookups.saleaddalookup = JsonConvert.DeserializeObject<IList<SaleAddaLookUpVM>>(@params[3].Value.ToString());
-            //return lookups;
 
         }
 
